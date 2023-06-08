@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\SendSchoolVerificationMail;
 use App\Models\School;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,8 @@ class SchoolService
             $school->image_url = $data['image_url'];
             $school->verification_token = md5($data['email']).Str::random();
             $school->save();
-            
+
+            dispatch(new SendSchoolVerificationMail($school->name, $school->email, $school->verification_token));
 
             //@todo we fire other actions after registration
         });

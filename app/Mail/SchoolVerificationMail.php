@@ -16,7 +16,7 @@ class SchoolVerificationMail extends Mailable
      *
      * @return void
      */
-    public function __construct($school_name, $email, $token)
+    public function __construct(protected $school_name, protected $token)
     {
         
     }
@@ -28,6 +28,6 @@ class SchoolVerificationMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('emails.schoolVerificationEmail')->with(['school_name'=>$this->school_name, 'token'=>$this->token]);
     }
 }
