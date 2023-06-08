@@ -27,7 +27,7 @@ class UserLoginController extends Controller
      */
     public function __invoke(LoginRequest $request): JsonResponse
     {
-  
+        
         $user = $this->authenticateUser($request);
 
         $ip = $request->ip();
