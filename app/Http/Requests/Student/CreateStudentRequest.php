@@ -32,7 +32,7 @@ class CreateStudentRequest extends FormRequest
             'school_id' => ['sometimes', 'string'],
             'image_url' => ['sometimes', 'string'],
             'language' => ['required', 'string'],
-            'phone_number'=>['required', 'string'],
+            'phone_number'=>['sometimes', 'string'],
             'age'=> ['required', 'integer'],
             'country' => ['required', 'string'],
             'marital_status' => ['sometimes', 'string'],

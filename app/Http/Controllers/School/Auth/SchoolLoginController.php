@@ -25,7 +25,7 @@ class SchoolLoginController extends Controller
         $user_agent = $request->userAgent();
         $token = $this->service->createTokenSchool(
             $school,
-            $data['device_name'] ?? 'test_device',
+            'test_device',
             $ip,
             $user_agent
         );

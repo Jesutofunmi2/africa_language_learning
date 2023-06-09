@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminLogoutController;
 use App\Http\Controllers\Admin\AdminRegisterController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,13 +21,6 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::get('/', function () {
     return redirect()->route('admin.login.get');
 });
-
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
- 
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
-
 
 Route::prefix('admin')->name('admin.')
     ->group(function () {

@@ -20,14 +20,13 @@ class StudentLoginController extends Controller
    
     public function __invoke(StudentLoginRequest $request): JsonResponse
     {
-        
         $student = $this->authenticateUser($request);
 
         $ip = $request->ip();
         $user_agent = $request->userAgent();
         $token = $this->service->createTokenStudent(
             $student,
-            $data['device_name'] ?? 'test_device',
+            'test_device',
             $ip,
             $user_agent
         );
@@ -44,14 +43,23 @@ class StudentLoginController extends Controller
     {
         $data = $request->validated();
 
-        $student = Student::where('email', $data['email'])->first();
+        if (!filter_var($data['login_id'], FILTER_VALIDATE_EMAIL)) {
 
-        abort_if(is_null($student), 401, 'Incorrect login details');
+            $student = Student::where('student_id', $data['login_id'])->first();
+            abort_if(is_null($student), 401, 'Incorrect login details');
 
-        if(! Hash::check($data['password'], $student->password)) {
-            abort(401, 'Incorrect login details');
-        }
+            if(! Hash::check($data['password'], $student->password)) {
+                abort(401, 'Incorrect login details');
+            }
+          }else{
+            $student = Student::where('email', $data['login_id'])->first();
+            abort_if(is_null($student), 401, 'Incorrect login details');
 
+            if(! Hash::check($data['password'], $student->password)) {
+                abort(401, 'Incorrect login details');
+            }
+          }
+       
         return $student;
     }
 }
