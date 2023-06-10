@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Http\Request;
-use App\Http\Services\UserService;
+use App\Services\UserService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -43,8 +43,9 @@ class AdminRegisterController extends Controller
      */
     public function register(RegisterUserRequest $request): RedirectResponse
     {
-  
+       
         $user = $this->userService->createAdnin($request->validated());
+
         auth()->login($user);
 
         return redirect()->route('admin.dashboard');
