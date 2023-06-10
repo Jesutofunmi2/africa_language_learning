@@ -37,7 +37,7 @@ class UserRegisterController extends Controller
         $ip = $request->ip();
         $user_agent = $request->userAgent();
 
-        $token = $this->tokenService->createToken($user, $userData['device_name'] ?? 'test', $ip, $user_agent);
+        $token = $this->tokenService->createTokenAdmin($user, $userData['device_name'] ?? 'test', $ip, $user_agent);
 
         return response()->json([
             'message' => 'Registration successful.',

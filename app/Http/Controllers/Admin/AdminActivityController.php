@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateActivityRequest;
 use App\Http\Requests\EditActivityRequest;
-use App\Http\Services\ActivityService;
+use App\Services\ActivityService;
 use App\Models\Activity;
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -85,7 +85,7 @@ class AdminActivityController extends Controller
      */
     public function show(Activity $activity): View
     {
-        $users = User::where('is_admin', false)->get();
+        $users = Admin::where('is_admin', false)->get();
         $types = Activity::TYPES;
         
         return view('pages.edit-activity')->with([

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -11,9 +11,9 @@ class UserService
     /**
      * Create a user account.
      */
-    public function createUser(array $data): User
+    public function createUser(array $data): Admin
     {
-        $user = new User;
+        $user = new Admin;
 
         DB::transaction(function() use (&$user, $data) {
 
@@ -32,9 +32,9 @@ class UserService
     /**
      * Create a admin account.
      */
-    public function createAdnin(array $data): User
+    public function createAdnin(array $data): Admin
     {
-        $user = new User;
+        $user = new Admin;
 
         DB::transaction(function() use (&$user, $data) {
 
