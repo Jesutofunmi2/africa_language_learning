@@ -5,11 +5,10 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Student extends Authenticatable
+class Language extends Model
 {
     use HasApiTokens, HasFactory, Notifiable
     {
@@ -22,17 +21,7 @@ class Student extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'country',
-        'phone_number',
-        'gendar',
-        'language',
-        'email',
-        'age',
-        'marital_status',
-        'password',
-        'school_id',
+        'name',
     ];
 
     /**
@@ -41,8 +30,6 @@ class Student extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
     ];
 
     /**
@@ -56,7 +43,7 @@ class Student extends Authenticatable
 
     public function getFullnameAttribute()
     {
-        return $this->first_name.' '.$this->last_name;
+        return $this->name;
     }
 
     public static function factory(...$parameters): UserFactory

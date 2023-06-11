@@ -24,7 +24,12 @@ class CreateAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'firstname' => ['required','string', 'max:254'],
+            'lastname' => ['required','string', 'max:254'],
+            'email' => ['required','email', 'min:5', 'max:100', 'unique:admins,email'],
+            'password' => ['required','string', 'min:4', 'max:50'],
+            'confirm_password' => ['required', 'same:password'],
+            'device_name' => ['sometimes', 'string']
         ];
     }
 }

@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\ActivityType;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
-use App\Models\User;
+use App\Models\Admin;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Language;
 
 class AdminDashboardController extends Controller
 {
@@ -29,9 +31,11 @@ class AdminDashboardController extends Controller
      */
     public function index(Request $request): View
     {
-        $users = User::where('is_admin', false)->get();
+        $users = Admin::where('is_admin', true)->get();
         $types = Activity::TYPES;
+        $languages = Language::count();
+        $courses = Course::count();
 
-        return view('pages.dashboard', ['users' => $users, 'types' => $types]);
+        return view('pages.dashboard', ['users' => $users, 'types' => $types, 'languages' => $languages, 'courses'=> $courses]);
     }
 }

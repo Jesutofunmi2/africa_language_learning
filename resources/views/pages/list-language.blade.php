@@ -18,20 +18,11 @@
                     <table class="table">
                         <thead class="text-primary">
                             <th>
-                                Title
+                                Language Name
                             </th>
-                            <th>
-                                Type
-                            </th>
-                            <th>
+                             <th>
                                 Date
-                            </th>
-                            <th>
-                                User
-                            </th>
-                            <th>
-                                Image
-                            </th>
+                             </th>
                             <th>
                                 Action
                             </th>
@@ -41,28 +32,20 @@
                         </thead>
                         <tbody>
                             
-                            @foreach ($activities as $activity)
+                            @foreach ($languages as $language)
                                 <tr>
                                     <td>
-                                        {{ $activity->title }}
+                                        {{ $language->name }}
                                     </td>
                                     <td>
-                                        {{ $activity->type }}
+                                        {{ $language->created_at->diffForHumans() }}
+                                    </td>
+                              
+                                    <td>
+                                        <a href="{{ route('admin.language.show', $language->id) }}" class="btn">Edit</a>
                                     </td>
                                     <td>
-                                        {{ $activity->date }}
-                                    </td>
-                                    <td>
-                                        {{ $activity->user ? $activity->admin->fullname : ''  }}
-                                    </td>
-                                    <td>
-                                        <img src="{{ asset($activity->image_url) }}" width="40px" height="40px" />
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('admin.activity.show', $activity->id) }}" class="btn">Edit</a>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('admin.activity.destroy', $activity->id) }}" onsubmit="return confirm('Are you sure you want to delete activity?')" method="post">
+                                        <form action="{{ route('admin.language.destroy', $language->id) }}" onsubmit="return confirm('Are you sure you want to delete language?')" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger" type="submit">Delete</button>

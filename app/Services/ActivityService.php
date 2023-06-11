@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\Activity;
+use App\Models\Language;
 use App\Models\User;
+use App\Models\Course;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -39,7 +41,7 @@ class ActivityService
         $activity->type = $data['type'];
         $activity->date = $data['date'];
         $activity->image_url = $url;
-        $activity->user_id = $data['user_id'] ?? null;
+        $activity->admin_id = $data['admin_id'] ?? null;
         $activity->save();
 
         return $activity;
@@ -93,6 +95,41 @@ class ActivityService
         return $activity;
     }
 
+    /**
+     * Create Language.
+     * 
+     */
+
+     public function createLanguage(array $data){
+        $language = new Language;
+        $language->name = $data['name'];
+        $language->save();
+     }
+     
+      /**
+     * Create Course.
+     * 
+     */
+     public function createCourse(array $data){
+        $course = new Course;
+        $course->name = $data['name'];
+        $course->language = $data['language_id'];
+        $course->save();
+     }
+    
+   /**
+     * Delete a language.
+     * 
+     */
+     public function deleteLanguage(Language $language): void
+     {
+         $language->delete();
+     }
+     
+     public function deleteCourse(Course $course): void
+     {
+         $course->delete();
+     }
     /**
      * Delete an activity.
      * 
