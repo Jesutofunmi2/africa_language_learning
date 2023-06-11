@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminLogoutController;
 use App\Http\Controllers\Admin\AdminRegisterController;
+use App\Http\Controllers\Admin\CreateLanguageController;
+use App\Http\Controllers\Admin\CreateCourseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +43,23 @@ Route::prefix('admin')->name('admin.')
             Route::get('activity/{activity}', [AdminActivityController::class, 'show'])->name('activity.show');
             Route::put('activity/{activity}', [AdminActivityController::class, 'update'])->name('activity.update');
             Route::delete('activity/{activity}', [AdminActivityController::class, 'destroy'])->name('activity.destroy');
+            
+            Route::get('language/create', [CreateLanguageController::class, 'index'])->name('language.index');
+            Route::post('language/create', [CreateLanguageController::class, 'create'])->name('language.create');
+            Route::get('languages', [CreateLanguageController::class, 'list'])->name('language.list');
+            Route::put('language/{language}', [CreateLanguageController::class, 'show'])->name('language.show');
+            Route::delete('language/{language}', [CreateLanguageController::class, 'destroy'])->name('language.destroy');
+
+            Route::get('course/create', [CreateCourseController::class, 'index'])->name('course.index');
+            Route::post('course/create', [CreateCourseController::class, 'create'])->name('course.create');
+            Route::get('courses', [CreateCourseController::class, 'list'])->name('course.list');
+            Route::put('course/{course}', [CreateCourseController::class, 'show'])->name('course.show');
+            Route::delete('course/{course}', [CreateCourseController::class, 'destroy'])->name('course.destroy');
+
+
+
+
+            
 
             Route::post('logout', [AdminLogoutController::class, 'index'])->name('logout');
         });

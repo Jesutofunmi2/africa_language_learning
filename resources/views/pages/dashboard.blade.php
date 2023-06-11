@@ -18,7 +18,7 @@
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
                                             <p class="card-category">Languages</p>
-                                            <p class="card-title">150
+                                            <p class="card-title">{{$languages}}
                                                 <p>
                                         </div>
                                     </div>
@@ -43,8 +43,8 @@
                                     </div>
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <p class="card-category">Schools</p>
-                                            <p class="card-title"> 345
+                                            <p class="card-category">Courses</p>
+                                            <p class="card-title"> {{$courses}}
                                                 <p>
                                         </div>
                                     </div>
@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <p class="card-category">Teachers</p>
+                                            <p class="card-category">Schools</p>
                                             <p class="card-title">45
                                                 <p>
                                         </div>

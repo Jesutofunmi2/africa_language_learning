@@ -18,14 +18,27 @@
                     <p>{{ __('Dashboard') }}</p>
                 </a>
             </li>
-           
-            <li class="{{ $elementActive == 'index' ? 'active' : '' }}">
-                <a href="{{ route('admin.activity.index') }}">
+
+            <li class="{{ $elementActive == 'language' ? 'active' : '' }}">
+                <a href="{{ route('admin.language.index') }}">
                     <i class="nc-icon nc-pin-3"></i>
-                    <p>{{ __('List Activities') }}</p>
+                    <p>{{ __('Create Language') }}</p>
+                </a>
+            </li>
+           
+            <li class="{{ $elementActive == 'course' ? 'active' : '' }}">
+                <a href="{{ route('admin.course.index') }}">
+                    <i class="nc-icon nc-app"></i>
+                    <p>{{ __('Create Course') }}</p>
                 </a>
             </li>
 
+            <li class="{{ $elementActive == 'activity' ? 'active' : '' }}">
+                <a href="{{ route('admin.activity.index') }}">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Create Activity') }}</p>
+                </a>
+            </li>
             <li class="{{ $elementActive == 'list' ? 'active' : '' }}">
                 <a href="{{ route('admin.activity.list') }}">
                     <i class="nc-icon nc-pin-3"></i>
@@ -33,31 +46,36 @@
                 </a>
             </li>
 
-            <li class="{{ $elementActive == 'language' || $elementActive == 'lang' ? 'active' : '' }}">
-                <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples">
-                    <i class="nc-icon nc-single-02"></i>
-                    <p>
-                            {{ __('Languages Upload') }}
-                        <b class="caret"></b>
-                    </p>
+            <li class="{{ $elementActive == 'question' ? 'active' : '' }}">
+                <a href="">
+                    <i class="nc-icon nc-badge"></i>
+                    <p>{{ __('Create Question') }}</p>
                 </a>
-                <div class="collapse show" id="laravelExamples">
-                    <ul class="nav">
-                        <li class="{{ $elementActive == 'yoruba' ? 'active' : '' }}">
-                            <a href="">
-                                <i class="nc-icon nc-single-02"></i>
-                                <span class="sidebar-normal">{{ __(' Yoruba ') }}</span>
-                            </a>
-                        </li>
-                        <li class="{{ $elementActive == 'igbo' ? 'active' : '' }}">
-                            <a href="">
-                                <i class="nc-icon nc-single-02"></i>
-                                <span class="sidebar-normal">{{ __(' Igbo') }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </li>
+
+            <li class="{{ $elementActive == 'answere' ? 'active' : '' }}">
+                <a href="">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Create Answere') }}</p>
+                </a>
+            </li>
+            
+            <li class="{{ $elementActive == 'school' ? 'active' : '' }}">
+                <a href="">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Create School') }}</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'student' ? 'active' : '' }}">
+                <a href="">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Create Student') }}</p>
+                </a>
+            </li>
+
+
+            
+
 
         </ul>
     </div>
