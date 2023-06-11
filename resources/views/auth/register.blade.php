@@ -15,7 +15,7 @@
                             
                         </div>
                         <div class="card-body ">
-                            <form class="form" method="POST" action="#">
+                            <form class="form" method="POST" action="{{ route('admin.register.post') }}">
                                 @csrf
                                 <div class="input-group{{ $errors->has('firstname') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">

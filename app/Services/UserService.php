@@ -32,7 +32,7 @@ class UserService
     /**
      * Create a admin account.
      */
-    public function createAdnin(array $data): Admin
+    public function createAdmin(array $data): Admin
     {
         $user = new Admin;
 

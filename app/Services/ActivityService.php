@@ -39,7 +39,7 @@ class ActivityService
         $activity->type = $data['type'];
         $activity->date = $data['date'];
         $activity->image_url = $url;
-        $activity->user_id = $data['user_id'] ?? null;
+        $activity->admin_id = $data['admin_id'] ?? null;
         $activity->save();
 
         return $activity;

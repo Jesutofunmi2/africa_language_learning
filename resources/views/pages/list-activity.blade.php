@@ -40,6 +40,7 @@
                             </th>
                         </thead>
                         <tbody>
+                            
                             @foreach ($activities as $activity)
                                 <tr>
                                     <td>
@@ -52,7 +53,7 @@
                                         {{ $activity->date }}
                                     </td>
                                     <td>
-                                        {{ $activity->user ? $activity->user->fullname : ''  }}
+                                        {{ $activity->user ? $activity->admin->fullname : ''  }}
                                     </td>
                                     <td>
                                         <img src="{{ asset($activity->image_url) }}" width="40px" height="40px" />

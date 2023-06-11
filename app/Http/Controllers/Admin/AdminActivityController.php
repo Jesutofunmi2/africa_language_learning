@@ -30,7 +30,9 @@ class AdminActivityController extends Controller
      */
     public function index(Request $request): View
     {
-        return view('pages.create-activity');
+        $users = Admin::where('is_admin', true)->get();
+        $types = Activity::TYPES;
+        return view('pages.create-activity',  ['users' => $users, 'types' => $types]);
     }
 
 
@@ -70,7 +72,6 @@ class AdminActivityController extends Controller
     public function list(Request $request): View
     {
         $activities = Activity::paginate();
-
         return view('pages.list-activity')->with('activities', $activities);
     }
 
@@ -83,9 +84,10 @@ class AdminActivityController extends Controller
      * @return \Illuminate\View\View
      * 
      */
+
     public function show(Activity $activity): View
     {
-        $users = Admin::where('is_admin', false)->get();
+        $users = Admin::where('is_admin', true)->get();
         $types = Activity::TYPES;
         
         return view('pages.edit-activity')->with([

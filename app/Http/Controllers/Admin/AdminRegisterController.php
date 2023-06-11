@@ -6,6 +6,7 @@ use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CreateAdminRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -41,10 +42,10 @@ class AdminRegisterController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * 
      */
-    public function register(RegisterUserRequest $request): RedirectResponse
+    public function register(CreateAdminRequest $request): RedirectResponse
     {
        
-        $user = $this->userService->createAdnin($request->validated());
+        $user = $this->userService->createAdmin($request->validated());
 
         auth()->login($user);
 

@@ -2,7 +2,7 @@
  
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Services\TokenService;
+use App\Services\TokenService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;

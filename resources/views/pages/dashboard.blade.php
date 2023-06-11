@@ -4,160 +4,186 @@
 ])
 
 @section('content')
-    <div class="content">
-        <div class="row">
-            @if (session('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div class="alert alert-danger" role="alert">
-                    {{ session('error') }}
-                </div>
-            @endif
-            <div class="col-lg-8 col-md-8 offset-2 col-sm-12">
-                <h4 class="title">{{ __('Create Activity') }}</h4>
-                <h6 class="title">{{ __('select a date to create activity') }}</h6>
-                <div id="cal-wrap">
-                    <!-- (A) PERIOD SELECTOR -->
-                    <div id="cal-date">
-                      <select id="cal-mth"></select>
-                      <select id="cal-yr"></select>
-                    </div>
-              
-                    <!-- (B) CALENDAR -->
-                    <div id="cal-container"></div>
-              
-                    <!-- (C) EVENT FORM -->
-                    <div id="form-body" class="invisible">
-                        <p>
-                        </p>
-                        <form class="col-md-12" action="{{ route('admin.activity.create') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div id="form-container" class="card">
-                               
-                                <div class="card-body">
-                                    <h5>User(s) Activity Date is: <span id="evt-date">{{ old('date') }}</span></h5>
-                                    <div class="row">
-                                        <label class="col-md-3 col-form-label">{{ __('Date') }}</label>
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <input type="date" readonly id="a_date" name="date" value="{{ old('date') }}" class="form-control" required>
-                                            </div>
-                                            @if ($errors->has('date'))
-                                                <span class="invalid-feedback" style="display: block;" role="alert">
-                                                    <strong>{{ $errors->first('date') }}</strong>
-                                                </span>
-                                            @endif
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="nc-icon nc-globe text-warning"></i>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <label class="col-md-3 col-form-label">{{ __('Title') }}</label>
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="Activity title" required>
-                                            </div>
-                                            @if ($errors->has('title'))
-                                                <span class="invalid-feedback" style="display: block;" role="alert">
-                                                    <strong>{{ $errors->first('title') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <label class="col-md-3 col-form-label">{{ __('User') }}</label>
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <select name="user_id" class="form-control">
-                                                    <option value="{{ old('user_id') }}">Select User</option>
-                                                    @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->firstname }} {{ $user->lastname }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <small>Note: leave blank for global activity</small>
-                                            </div>
-                                            @if ($errors->has('user_id'))
-                                                <span class="invalid-feedback" style="display: block;" role="alert">
-                                                    <strong>{{ $errors->first('user_id') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-md-3 col-form-label">{{ __('Type') }}</label>
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <select name="type" class="form-control">
-                                                    <option value="{{ old('type') }}">Select Type</option>
-                                                    @foreach ($types as $type)
-                                                        <option value="{{ $type }}">{{ $type }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            @if ($errors->has('type'))
-                                                <span class="invalid-feedback" style="display: block;" role="alert">
-                                                    <strong>{{ $errors->first('type') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <input type="file" value="{{ old('image') }}" name="image" accept="image/*" class="form-control" />
-                                            </div>
-                                            @if ($errors->has('image'))
-                                                <span class="invalid-feedback" style="display: block;" role="alert">
-                                                    <strong>{{ $errors->first('image') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-md-3 col-form-label">{{ __('Description') }}</label>
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <textarea name="description" class="form-control" placeholder="Description"> {{ old('description') }}</textarea>
-                                            </div>
-                                            @if ($errors->has('description'))
-                                                <span class="invalid-feedback" style="display: block;" role="alert">
-                                                    <strong>{{ $errors->first('description') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer ">
-                                    <div class="row">
-                                        <div class="col-md-12 text-center">
-                                            <button type="submit" class="btn btn-info btn-round">{{ __('Create Activity') }}</button>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <p class="card-category">Languages</p>
+                                            <p class="card-title">150
+                                                <p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-refresh"></i> Update Now
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <form id="cal-event" class="invisible">
-                      <h1 id="evt-head"></h1>
-                      
-                      <input id="evt-close" type="button" value="Close"/>
-                      <input id="evt-del" type="button" value="Delete"/>
-                      <input id="evt-save" type="submit" value="Save"/>
-                    </form>
-                  </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="nc-icon nc-money-coins text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <p class="card-category">Schools</p>
+                                            <p class="card-title"> 345
+                                                <p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-calendar-o"></i> Last day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="nc-icon nc-vector text-danger"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <p class="card-category">Students</p>
+                                            <p class="card-title">23
+                                                <p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-clock-o"></i> In the last hour
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="nc-icon nc-favourite-28 text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <p class="card-category">Teachers</p>
+                                            <p class="card-title">45
+                                                <p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-refresh"></i> Update now
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card ">
+                            <div class="card-header ">
+                                <h5 class="card-title">Users Behavior</h5>
+                                <p class="card-category">24 Hours performance</p>
+                            </div>
+                            <div class="card-body ">
+                                <canvas id=chartHours width="400" height="100"></canvas>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-history"></i> Updated 3 minutes ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card ">
+                            <div class="card-header ">
+                                <h5 class="card-title">Email Statistics</h5>
+                                <p class="card-category">Last Campaign Performance</p>
+                            </div>
+                            <div class="card-body ">
+                                <canvas id="chartEmail"></canvas>
+                            </div>
+                            <div class="card-footer ">
+                                <div class="legend">
+                                    <i class="fa fa-circle text-primary"></i> Opened
+                                    <i class="fa fa-circle text-warning"></i> Read
+                                    <i class="fa fa-circle text-danger"></i> Deleted
+                                    <i class="fa fa-circle text-gray"></i> Unopened
+                                </div>
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-calendar"></i> Number of emails sent
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h5 class="card-title">Schools</h5>
+                                <p class="card-category">Line Chart with Points</p>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="speedChart" width="400" height="100"></canvas>
+                            </div>
+                            <div class="card-footer">
+                                <div class="chart-legend">
+                                    <i class="fa fa-circle text-info"></i> Tesla Model S
+                                    <i class="fa fa-circle text-warning"></i> BMW 5 Series
+                                </div>
+                                <hr />
+                                <div class="card-stats">
+                                    <i class="fa fa-check"></i> Data information certified
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    @if (count($errors) > 0)
-        <script>
-            document.getElementById('form-body').classList.remove('invisible');
-            document.getElementById("form-container").scrollIntoView(true);
-        </script>
-    @endif
+       
+            @push('scripts')
+            <script>
+                $(document).ready(function() {
+                    // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+                    demo.initChartsPages();
+                });
+            </script>
+        @endpush
 @endsection

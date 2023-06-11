@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\ActivityType;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -29,7 +29,7 @@ class AdminDashboardController extends Controller
      */
     public function index(Request $request): View
     {
-        $users = User::where('is_admin', false)->get();
+        $users = Admin::where('is_admin', true)->get();
         $types = Activity::TYPES;
 
         return view('pages.dashboard', ['users' => $users, 'types' => $types]);
