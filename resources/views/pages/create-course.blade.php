@@ -13,7 +13,7 @@
                             <h4 class="card-title">{{ __('Create Course') }}</h4>
                         </div>
                         <div class="card-body ">
-                            <form class="form" method="POST" action="{{ route('admin.course.create') }}">
+                            <form class="form" method="POST" action="{{ route('admin.course.create') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
@@ -21,30 +21,55 @@
                                             <i class="nc-icon nc-box-2"></i>
                                         </span>
                                     </div>
-                                    <input name="name" type="text" class="form-control" placeholder="Course name" value="{{ old('name') }}" required autofocus>
-                                    @if ($errors->has('name'))
+                                    <input name="title" type="text" class="form-control" placeholder="Course name" value="{{ old('title') }}" required autofocus>
+                                    @if ($errors->has('title'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
+                                            <strong>{{ $errors->first('title') }}</strong>
                                         </span>
                                     @endif
                                 </div>
 
+                                <div class="row">
+                                    <label class="col-md-3 col-form-label">{{ __('Description') }}</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <textarea name="description" class="form-control" placeholder="Description"> {{ old('description') }}</textarea>
+                                        </div>
+                                        @if ($errors->has('description'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('description') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="file" value="{{ old('image') }}" name="image" accept="image/*" class="form-control" />
+                                        </div>
+                                        @if ($errors->has('image'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('image') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
 
                                 <div class="row-12">
                                         <div class="form-group">
-                                            <select name="language_id" class="form-control">
-                                                <option value="{{ old('language_id') }}">Select Language</option>
-                                                @foreach ($languages as $language)
-                                                <option value="{{ $language->id }}">{{ $language->name }}</option>
-                                                @endforeach
+                                            <select name="status" class="form-control">
+                                                <option value="">Select Status</option>
+                                                <option value="true">Active</option>
+                                                <option value="false">In Active</option>
                                             </select>
-                                            <small>Note: don't leave blank language </small>
+                                            <small>Note: don't leave blank </small>
                                         </div>
-                                        @if ($errors->has('language_id'))
+                                        @if ($errors->has('status'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
-                                                <strong>{{ $errors->first('language_id') }}</strong>
+                                                <strong>{{ $errors->first('status') }}</strong>
                                             </span>
-                                        @endif
+                                       @endif 
                                 </div>
 
                                 <div class="card-footer ">
@@ -57,4 +82,10 @@
              </div>
         </div>
      </div> 
+     @if (count($errors) > 0)
+     <script>
+         document.getElementById('form-body').classList.remove('invisible');
+         document.getElementById("form-container").scrollIntoView(true);
+     </script>
+ @endif
 @endsection
