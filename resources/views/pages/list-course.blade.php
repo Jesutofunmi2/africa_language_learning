@@ -21,7 +21,10 @@
                                 Course Name
                             </th>
                              <th>
-                                Language Name
+                                Description
+                             </th>
+                             <th>
+                                Image
                              </th>
                              <th>
                                 Date
@@ -38,7 +41,13 @@
                             @foreach ($courses as $course)
                                 <tr>
                                     <td>
-                                        {{ $course->name }}
+                                        {{ $course->title }}
+                                    </td>
+                                    <td>
+                                        {{ $course->description }}
+                                    </td>
+                                    <td>
+                                        <img src="{{ asset($course->image) }}" width="40px" height="40px" />
                                     </td>
                                     <td>
                                         {{ $course->created_at->diffForHumans() }}

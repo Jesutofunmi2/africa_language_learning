@@ -17,7 +17,7 @@
                                     </div>
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <p class="card-category">Languages</p>
+                                            <a href="{{ route('admin.language.list') }}">  <p class="card-category">Languages</p> </a>
                                             <p class="card-title">{{$languages}}
                                                 <p>
                                         </div>
@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <p class="card-category">Courses</p>
+                                            <a href="{{ route('admin.course.list') }}"> <p class="card-category">Courses</p></a>
                                             <p class="card-title"> {{$courses}}
                                                 <p>
                                         </div>

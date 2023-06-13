@@ -100,7 +100,8 @@ class ActivityService
      * 
      */
 
-     public function createLanguage(array $data){
+     public function createLanguage(array $data):void
+     {
         $language = new Language;
         $language->name = $data['name'];
         $language->save();
@@ -110,10 +111,16 @@ class ActivityService
      * Create Course.
      * 
      */
-     public function createCourse(array $data){
+     public function createCourse(array $data):void
+     {
+        $mediaService = new MediaService;
+        $mediaUrl = $mediaService->uploadImage($data['image']);
+
         $course = new Course;
-        $course->name = $data['name'];
-        $course->language = $data['language_id'];
+        $course->title = $data['title'];
+        $course->description = $data['description'];
+        $course->image = $mediaUrl;
+        $course->status = $data['status'];
         $course->save();
      }
     
