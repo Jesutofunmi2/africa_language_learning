@@ -53,4 +53,11 @@ Route::prefix('/v1')
             ->group(function () {
                 Route::get('/language', [LanguageController::class, 'list'])->name('language.list');
             });
+
+        Route::prefix('/activity')
+            ->middleware('auth:sanctum')
+            ->name('activity.')
+            ->group(function () {
+                Route::get('/', UserActivityController::class)->name('activities');
+            });
     });

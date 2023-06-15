@@ -103,11 +103,11 @@ class ActivityService
      public function createLanguage(array $data):void
      {
         $mediaService = new MediaService;
-        $mediaUrl = $mediaService->uploadImage($data['image']);
+        $mediaUrl = $mediaService->uploadImage($data['image_url']);
 
         $language = new Language;
         $language->name = $data['name'];
-        $language->image = $mediaUrl;
+        $language->image_url = $mediaUrl;
         $language->save();
      }
      
@@ -118,7 +118,7 @@ class ActivityService
      public function createCourse(array $data):void
      {
         $mediaService = new MediaService;
-        $mediaUrl = $mediaService->uploadImage($data['image']);
+        $mediaUrl = $mediaService->uploadImage($data['image_url']);
 
         $course = new Course;
         $course->title = $data['title'];
