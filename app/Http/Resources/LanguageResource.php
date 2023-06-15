@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LoginResource extends JsonResource
+class LanguageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,8 +15,9 @@ class LoginResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'token' => gettype($token = $this->currentAccessToken()) === 'string' ? $token : null,
-            
+           'id'=> $this->id,
+           'name' => $this->name,
+           'image_url' => $this->image_url
         ];
     }
 }
