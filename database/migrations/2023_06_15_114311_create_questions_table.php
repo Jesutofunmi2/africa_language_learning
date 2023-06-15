@@ -14,15 +14,16 @@ class CreateQuestionsTable extends Migration
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->uuid('question_id')->primary();
-            $table->string('question_title');
+            $table->uuid('id')->primary();
+            $table->string('title');
+            $table->mediumText('instruction')->nullable();
             $table->unsignedBigInteger('language_id');
             $table->unsignedBigInteger('course_id');
             $table->enum('answered_type', ['single', 'multiple', 'text', 'puzzle']);
-            $table->integer('next_question_id');
-            $table->string('media_type');
-            $table->string('media_url');
-            $table->softDeletes();
+            $table->integer('next_question_id')->nullable();
+            $table->enum('media_type', ['image', 'video', 'audio','doc'])->nullable();
+            $table->string('media_url')->nullable();
+            $table->softDeletes()->nullable();
             $table->timestamps();
             
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');

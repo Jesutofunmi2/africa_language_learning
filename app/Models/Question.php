@@ -2,33 +2,40 @@
 
 namespace App\Models;
 
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use App\Traits\UUID;
+use App\Models\Course;
+use App\Models\Language;
+use Laravel\Sanctum\HasApiTokens;
+use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Question extends Model
-{ 
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, UUID
-    {
+{
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, UUID {
         HasFactory::factory as traitFactory;
     }
-     
-    public function Course(){
 
-        return $this->belongsTo(App\Model\Course::class);
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
     }
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'question_title',
-        'question_instruction',
+        'title',
+        'instruction',
         'language_id',
         'course_id',
         'answered_type',
@@ -42,17 +49,14 @@ class Question extends Model
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-    ];
+    protected $hidden = [];
 
     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        
-    ];
+    protected $casts = [];
 
     public function getFullnameAttribute()
     {

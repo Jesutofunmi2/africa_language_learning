@@ -10,7 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class CreateLanguageController extends Controller
+class LanguageController extends Controller
 {
     public function __construct(protected ActivityService $service)
     {
@@ -34,6 +34,8 @@ class CreateLanguageController extends Controller
     $language = Language::paginate();
     return view('pages.list-language')->with('languages', $language);
    }
+
+
   
 
    public function destroy(Language $language): RedirectResponse

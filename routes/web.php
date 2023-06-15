@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminLogoutController;
 use App\Http\Controllers\Admin\AdminRegisterController;
-use App\Http\Controllers\Admin\CreateLanguageController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\CreateCourseController;
 use App\Http\Controllers\Admin\CreateQuestionController;
 use Illuminate\Support\Facades\Route;
@@ -45,11 +45,11 @@ Route::prefix('admin')->name('admin.')
             Route::put('activity/{activity}', [AdminActivityController::class, 'update'])->name('activity.update');
             Route::delete('activity/{activity}', [AdminActivityController::class, 'destroy'])->name('activity.destroy');
             
-            Route::get('language/create', [CreateLanguageController::class, 'index'])->name('language.index');
-            Route::post('language/create', [CreateLanguageController::class, 'create'])->name('language.create');
-            Route::get('languages', [CreateLanguageController::class, 'list'])->name('language.list');
-            Route::put('language/{language}', [CreateLanguageController::class, 'show'])->name('language.show');
-            Route::delete('language/{language}', [CreateLanguageController::class, 'destroy'])->name('language.destroy');
+            Route::get('language/create', [LanguageController::class, 'index'])->name('language.index');
+            Route::post('language/create', [LanguageController::class, 'create'])->name('language.create');
+            Route::get('languages', [LanguageController::class, 'list'])->name('language.list');
+            Route::put('language/{language}', [LanguageController::class, 'show'])->name('language.show');
+            Route::delete('language/{language}', [LanguageController::class, 'destroy'])->name('language.destroy');
 
             Route::get('course/create', [CreateCourseController::class, 'index'])->name('course.index');
             Route::post('course/create', [CreateCourseController::class, 'create'])->name('course.create');

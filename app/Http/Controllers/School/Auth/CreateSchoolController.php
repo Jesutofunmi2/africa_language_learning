@@ -5,6 +5,7 @@ namespace App\Http\Controllers\School\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\School\CreateSchoolRequest;
 use App\Http\Resources\LoginResource;
+use App\Http\Resources\SchoolResource;
 use App\Services\TokenService;
 use App\Services\SchoolService;
 use Illuminate\Http\JsonResponse;
@@ -20,12 +21,14 @@ class CreateSchoolController extends Controller
        
         $ip = $request->ip();
         $user_agent = $request->userAgent();
+        $data = SchoolResource::make($school);
 
         $token = $this->tokenService->createTokenSchool($school, 'test', $ip, $user_agent);
 
         return response()->json([
             'message' => 'Registration successful.',
-            'data' => LoginResource::make($school->withAccessToken($token))],
+            'data' =>  $data,
+            'token' => LoginResource::make($school->withAccessToken($token))],
             status: 201
         );
     }

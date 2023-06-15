@@ -9,7 +9,7 @@ use App\Http\Controllers\School\Auth\SchoolLoginController;
 use App\Http\Controllers\School\Auth\SchoolLogoutController;
 use App\Http\Controllers\Student\Auth\CreateStudentController;
 use App\Http\Controllers\Student\Auth\StudentLoginController;
-use App\Http\Controllers\Admin\CreateLanguageController;
+use App\Http\Controllers\Api\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,27 +31,26 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/v1')
     ->group(function () {
 
-    Route::prefix('auth')->name('auth.')
-        ->group(function () {
-            Route::post('/login', UserLoginController::class)->name('login');
-            Route::post('/register', UserRegisterController::class)->name('register');
+        Route::prefix('auth')->name('auth.')
+            ->group(function () {
+                Route::post('/login', UserLoginController::class)->name('login');
+                Route::post('/register', UserRegisterController::class)->name('register');
 
-            //schoool endpoint
-            Route::post('/createSchool', CreateSchoolController::class)->name('createSchool');
-            Route::post('/schoolLogin', SchoolLoginController::class)->name('schoolLogin');
-            Route::post('/schoolLogout', SchoolLogoutController::class)->middleware('auth:sanctum')->name('logout_for_school');
+                //schoool endpoint
+                Route::post('/createSchool', CreateSchoolController::class)->name('createSchool');
+                Route::post('/schoolLogin', SchoolLoginController::class)->name('schoolLogin');
+                Route::post('/schoolLogout', SchoolLogoutController::class)->middleware('auth:sanctum')->name('logout_for_school');
 
-            //student endpoint
-            Route::post('/createStudent', CreateStudentController::class)->name('createStudent');
-            Route::post('/studentLogin', StudentLoginController::class)->name('studentLogin');
+                //student endpoint
+                Route::post('/createStudent', CreateStudentController::class)->name('createStudent');
+                Route::post('/studentLogin', StudentLoginController::class)->name('studentLogin');
 
-            Route::post('/logout', UserLogoutController::class)->middleware('auth:sanctum')->name('logout');
+
+                Route::post('/logout', UserLogoutController::class)->middleware('auth:sanctum')->name('logout');
+            });
+
+        Route::middleware('auth:sanctum')
+            ->group(function () {
+                Route::get('/language', [LanguageController::class, 'list'])->name('language.list');
+            });
     });
-
-    Route::prefix('/activity')
-        ->middleware('auth:sanctum')
-        ->name('activity.')
-        ->group(function() {
-            Route::get('/', UserActivityController::class)->name('activities');  
-    });
-});

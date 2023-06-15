@@ -14,7 +14,7 @@ class Course extends Model
     {
         HasFactory::factory as traitFactory;
     }
-    public function Questions(){
+    public function questions(){
 
         return $this->hasMany(App\Model\Question::class);
     }
