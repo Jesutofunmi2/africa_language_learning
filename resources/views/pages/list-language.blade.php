@@ -21,6 +21,9 @@
                                 Language Name
                             </th>
                              <th>
+                                Image
+                             </th>
+                             <th>
                                 Date
                              </th>
                             <th>
@@ -36,6 +39,9 @@
                                 <tr>
                                     <td>
                                         {{ $language->name }}
+                                    </td>
+                                    <td>
+                                        <img src="{{ asset($language->image) }}" width="40px" height="40px" />
                                     </td>
                                     <td>
                                         {{ $language->created_at->diffForHumans() }}

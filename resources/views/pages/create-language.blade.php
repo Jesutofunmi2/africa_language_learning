@@ -13,7 +13,7 @@
                             <h4 class="card-title">{{ __('Create Language') }}</h4>
                         </div>
                         <div class="card-body ">
-                            <form class="form" method="POST" action="{{ route('admin.language.create') }}">
+                            <form class="form" method="POST" action="{{ route('admin.language.create') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
@@ -27,6 +27,20 @@
                                             <strong>{{ $errors->first('name') }}</strong>
                                         </span>
                                     @endif
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="file" value="{{ old('image') }}" name="image" accept="image/*" class="form-control" />
+                                        </div>
+                                        @if ($errors->has('image'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('image') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="card-footer ">
                                     <button type="submit" class="btn btn-info btn-round">{{ __('Save') }}</button>

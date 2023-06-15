@@ -30,10 +30,9 @@
                                 </div>
 
                                 <div class="row">
-                                    <label class="col-md-3 col-form-label">{{ __('Description') }}</label>
-                                    <div class="col-md-9">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="description" class="form-control" placeholder="Description"> {{ old('description') }}</textarea>
+                                            <textarea name="description" class="form-control" placeholder="Description"> {{ old('description') }} Course Descrption</textarea>
                                         </div>
                                         @if ($errors->has('description'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -42,6 +41,7 @@
                                         @endif
                                     </div>
                                 </div>
+                                
                                 <div class="row">
                                     <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
                                     <div class="col-md-9">

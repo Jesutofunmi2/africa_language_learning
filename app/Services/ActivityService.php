@@ -102,8 +102,12 @@ class ActivityService
 
      public function createLanguage(array $data):void
      {
+        $mediaService = new MediaService;
+        $mediaUrl = $mediaService->uploadImage($data['image']);
+
         $language = new Language;
         $language->name = $data['name'];
+        $language->image = $mediaUrl;
         $language->save();
      }
      

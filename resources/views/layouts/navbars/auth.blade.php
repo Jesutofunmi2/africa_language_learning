@@ -47,7 +47,7 @@
             </li>
 
             <li class="{{ $elementActive == 'question' ? 'active' : '' }}">
-                <a href="">
+                <a href="{{ route('admin.question.index')}}">
                     <i class="nc-icon nc-badge"></i>
                     <p>{{ __('Create Question') }}</p>
                 </a>

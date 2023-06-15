@@ -17,9 +17,12 @@ class CreateCoursesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
+            $table->unsignedBigInteger('language_id');
             $table->string('image');
             $table->string('status');
             $table->timestamps();
+
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
     }
 
