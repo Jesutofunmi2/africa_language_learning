@@ -24,8 +24,8 @@ class LanguageController extends Controller
 
    public function create(CreateLanguageRequest $createLanguageRequest): RedirectResponse
    {
+    
     $this->service->createLanguage($createLanguageRequest->validated());
-
     return redirect()->route('admin.language.list')->with('success', 'Language created successfully');
    }
 

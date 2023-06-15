@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\CreateStudentRequest;
 use App\Http\Resources\LoginResource;
+use App\Http\Resources\StudentResource;
 use App\Services\TokenService;
 use App\Services\StudentService;
 use Illuminate\Http\JsonResponse;
@@ -21,12 +22,14 @@ class CreateStudentController extends Controller
        
         $ip = $request->ip();
         $user_agent = $request->userAgent();
+        $data = StudentResource::make($student);
 
         $token = $this->tokenService->createTokenStudent($student, 'test', $ip, $user_agent);
 
         return response()->json([
             'message' => 'Registration successful.',
-            'data' => LoginResource::make($student->withAccessToken($token))],
+            'data' => $data,
+            'token' => LoginResource::make($student->withAccessToken($token))],
             status: 201
         );
     }

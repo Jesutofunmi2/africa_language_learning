@@ -41,7 +41,7 @@
                                         {{ $language->name }}
                                     </td>
                                     <td>
-                                        <img src="{{ asset($language->image) }}" width="40px" height="40px" />
+                                        <img src="{{ asset($language->image_url) }}" width="40px" height="40px" />
                                     </td>
                                     <td>
                                         {{ $language->created_at->diffForHumans() }}

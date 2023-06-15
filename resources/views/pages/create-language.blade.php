@@ -33,11 +33,11 @@
                                     <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <input type="file" value="{{ old('image') }}" name="image" accept="image/*" class="form-control" />
+                                            <input type="file" value="{{ old('image_url') }}" name="image_url" accept="image/*" class="form-control" />
                                         </div>
-                                        @if ($errors->has('image'))
+                                        @if ($errors->has('image_url'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
-                                                <strong>{{ $errors->first('image') }}</strong>
+                                                <strong>{{ $errors->first('image_url') }}</strong>
                                             </span>
                                         @endif
                                     </div>
