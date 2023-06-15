@@ -9,6 +9,7 @@ use App\Http\Controllers\School\Auth\SchoolLoginController;
 use App\Http\Controllers\School\Auth\SchoolLogoutController;
 use App\Http\Controllers\Student\Auth\CreateStudentController;
 use App\Http\Controllers\Student\Auth\StudentLoginController;
+use App\Http\Controllers\Admin\CreateLanguageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +52,6 @@ Route::prefix('/v1')
         ->middleware('auth:sanctum')
         ->name('activity.')
         ->group(function() {
-            Route::get('/', UserActivityController::class)->name('activities');
+            Route::get('/', UserActivityController::class)->name('activities');  
     });
 });

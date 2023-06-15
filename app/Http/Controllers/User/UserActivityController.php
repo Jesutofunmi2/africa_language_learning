@@ -10,7 +10,7 @@ use App\Http\Resources\ActivityResource;
 
 class UserActivityController extends Controller
 {
-    public function __construct(protected ActivityService $service) {}
+    public function __construct(protected \App\Services\ActivityService $service) {}
 
 
      /**

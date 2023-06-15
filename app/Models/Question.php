@@ -5,18 +5,21 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Traits\UUID;
 
-class Course extends Model
-{
-    use HasApiTokens, HasFactory, Notifiable
+class Question extends Model
+{ 
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, UUID
     {
         HasFactory::factory as traitFactory;
     }
-    public function Questions(){
+     
+    public function Course(){
 
-        return $this->hasMany(App\Model\Question::class);
+        return $this->belongsTo(App\Model\Course::class);
     }
     /**
      * The attributes that are mass assignable.
@@ -24,8 +27,14 @@ class Course extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'language_id'
+        'question_title',
+        'question_instruction',
+        'language_id',
+        'course_id',
+        'answered_type',
+        'media_type',
+        'media_url'
+
     ];
 
     /**
@@ -42,7 +51,7 @@ class Course extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        
     ];
 
     public function getFullnameAttribute()

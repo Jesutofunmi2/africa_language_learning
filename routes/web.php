@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminLogoutController;
 use App\Http\Controllers\Admin\AdminRegisterController;
 use App\Http\Controllers\Admin\CreateLanguageController;
 use App\Http\Controllers\Admin\CreateCourseController;
+use App\Http\Controllers\Admin\CreateQuestionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +56,8 @@ Route::prefix('admin')->name('admin.')
             Route::get('courses', [CreateCourseController::class, 'list'])->name('course.list');
             Route::put('course/{course}', [CreateCourseController::class, 'show'])->name('course.show');
             Route::delete('course/{course}', [CreateCourseController::class, 'destroy'])->name('course.destroy');
+
+            Route::get('question/create', [CreateQuestionController::class, 'index'])->name('question.index');
 
 
 

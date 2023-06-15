@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateLanguageRequest extends FormRequest
+class CreateAnswereRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,6 +15,7 @@ class CreateLanguageRequest extends FormRequest
     {
         return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -23,8 +24,11 @@ class CreateLanguageRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['string', 'required'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:1024']
+            'answered_title' => ['string', 'required'],
+            'media_type' => ['string', 'required'],
+            'media_url' => ['string', 'required'],
+            'is_correct' => ['boolean', 'required']
+
         ];
     }
 }
