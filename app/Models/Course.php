@@ -10,11 +10,11 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Course extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable
-    {
+    use HasApiTokens, HasFactory, Notifiable {
         HasFactory::factory as traitFactory;
     }
-    public function questions(){
+    public function questions()
+    {
 
         return $this->hasMany(App\Model\Question::class);
     }
@@ -25,7 +25,7 @@ class Course extends Model
      */
     protected $fillable = [
         'name',
-        'language_id'
+        'image_url'
     ];
 
     /**
@@ -33,8 +33,7 @@ class Course extends Model
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-    ];
+    protected $hidden = [];
 
     /**
      * The attributes that should be cast.

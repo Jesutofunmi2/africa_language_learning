@@ -25,6 +25,7 @@ class SchoolResource extends JsonResource
             'country' => $this->country,
             'how_do_you_see_us' => $this->how_do_you_see_us,
             'type' => $this->type,
+            'created_at' => $this->created_at
         ];
     }
 }

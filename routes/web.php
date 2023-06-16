@@ -61,9 +61,6 @@ Route::prefix('admin')->name('admin.')
 
 
 
-
-            
-
             Route::post('logout', [AdminLogoutController::class, 'index'])->name('logout');
         });
         
