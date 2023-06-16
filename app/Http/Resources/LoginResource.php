@@ -16,7 +16,7 @@ class LoginResource extends JsonResource
     {
         return [
             'token' => gettype($token = $this->currentAccessToken()) === 'string' ? $token : null,
-            
+
         ];
     }
 }

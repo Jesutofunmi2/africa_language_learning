@@ -14,22 +14,26 @@ use Illuminate\Http\Request;
 class CreateStudentController extends Controller
 {
     //
-    public function __construct(protected TokenService $tokenService, protected StudentService $studentService) {}
+    public function __construct(protected TokenService $tokenService, protected StudentService $studentService)
+    {
+    }
 
     public function __invoke(CreateStudentRequest $request): JsonResponse
     {
         $student = $this->studentService->createStudent($request->validated());
-       
+
         $ip = $request->ip();
         $user_agent = $request->userAgent();
         $data = StudentResource::make($student);
 
         $token = $this->tokenService->createTokenStudent($student, 'test', $ip, $user_agent);
 
-        return response()->json([
-            'message' => 'Registration successful.',
-            'data' => $data,
-            'token' => LoginResource::make($student->withAccessToken($token))],
+        return response()->json(
+            [
+                'message' => 'Registration successful.',
+                'data' => $data,
+                'token' => LoginResource::make($student->withAccessToken($token))
+            ],
             status: 201
         );
     }
