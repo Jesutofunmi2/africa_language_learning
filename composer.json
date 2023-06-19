@@ -12,7 +12,9 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "league/flysystem-aws-s3-v3": "^1.0"
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "minuteoflaravel/laravel-audio-video-validator": "^1.1",
+        "pbmedia/laravel-ffmpeg": "7.8.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -24,14 +24,14 @@ class CreateQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'question_title'=> ['string','required'],
-            'question_instruction' => ['string', 'required'],
-            'language_id'=> ['integer', 'required'],
-            'course_id'=>['integer', 'required'],
-            'question_id'=>['required', 'integer'],
-            'answered_type'=>['required', 'emun'],
-            'media_type'=>['string', 'required'],
-            'media_url'=>['string', 'required'],
+            'title' => ['string', 'required'],
+            'instruction' => ['sometimes','string'],
+            'language_id' => ['integer', 'required', 'exists:languages,id'],
+            'course_id' => ['integer', 'required', 'exists:courses,id'],
+            'answered_type' => ['required','in:text,multiple,single,puzzle'],
+            'media_url' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg',
+            'image_url' => ['sometimes','image','mimes:jpeg,png,jpg','max:1024']
         ];
+        
     }
 }

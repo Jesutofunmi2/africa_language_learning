@@ -26,7 +26,7 @@ class CreateSchoolRequest extends FormRequest
         return [
             'name' => ['required','string', 'max:254'],
             'email' => ['required','email', 'min:5', 'max:100', 'unique:schools,email'],
-            'password' => ['required','string', 'min:4', 'max:50'],
+            'password' => ['required','string', 'min:8', 'max:50'],
             'confirm_password' => ['required', 'same:password'],
             'image_url' => ['required', 'string'],
             'country' => ['required', 'string'],

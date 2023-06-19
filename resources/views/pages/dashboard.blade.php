@@ -70,7 +70,7 @@
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
                                             <p class="card-category">Students</p>
-                                            <p class="card-title">23
+                                            <p class="card-title">{{$students}}
                                                 <p>
                                         </div>
                                     </div>
@@ -96,7 +96,7 @@
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
                                             <p class="card-category">Schools</p>
-                                            <p class="card-title">45
+                                            <p class="card-title">{{$schools}}
                                                 <p>
                                         </div>
                                     </div>
@@ -115,7 +115,7 @@
                     <div class="col-md-12">
                         <div class="card ">
                             <div class="card-header ">
-                                <h5 class="card-title">Users Behavior</h5>
+                                <h5 class="card-title">Users Behavior on Question</h5>
                                 <p class="card-category">24 Hours performance</p>
                             </div>
                             <div class="card-body ">

@@ -18,13 +18,22 @@
                     <table class="table">
                         <thead class="text-primary">
                             <th>
-                                Course Name
+                                Title
                             </th>
                              <th>
-                                Description
+                                Course
+                             </th>
+                             <th>
+                                Language
+                             </th>
+                             <th>
+                                Media
                              </th>
                              <th>
                                 Image
+                             </th>
+                             <th>
+                                Statos
                              </th>
                              <th>
                                 Date
@@ -38,26 +47,35 @@
                         </thead>
                         <tbody>
                             
-                            @foreach ($courses as $course)
+                            @foreach ($questions as $question)
                                 <tr>
                                     <td>
-                                        {{ $course->title }}
+                                        {{ $question->title }}
                                     </td>
+                                  
                                     <td>
-                                        {{ $course->description }}
+                                       <a href="{{$question->media_url}}"> Media Link</a>
+                                            
+                                      
                                     </td>
+
                                     <td>
-                                        <img src="{{ asset($course->image_url) }}" width="40px" height="40px" />
+                                        <img src="{{ asset($question->image_url) }}" width="40px" height="40px" />
                                     </td>
+
                                     <td>
-                                        {{ $course->created_at->diffForHumans() }}
+                                        {{ $question->status}}
+                                    </td>
+        
+                                    <td>
+                                        {{ $question->created_at->diffForHumans() }}
                                     </td>
                               
                                     <td>
-                                        <a href="{{ route('admin.course.show', $course->id) }}" class="btn">Edit</a>
+                                        <a href="{{ route('admin.question.show', $question->id) }}" class="btn">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('admin.course.destroy', $course->id) }}" onsubmit="return confirm('Are you sure you want to delete language?')" method="post">
+                                        <form action="{{ route('admin.question.destroy', $question->id) }}" onsubmit="return confirm('Are you sure you want to delete Question ?')" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger" type="submit">Delete</button>

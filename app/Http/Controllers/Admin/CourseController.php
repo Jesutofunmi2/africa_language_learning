@@ -11,7 +11,7 @@ use Illuminate\View\View;
 use App\Models\Language;
 use App\Models\Course;
 
-class CreateCourseController extends Controller
+class CourseController extends Controller
 {
     //
 
@@ -44,6 +44,6 @@ class CreateCourseController extends Controller
         $this->service->deleteCourse($course);
  
         return redirect()->route('admin.course.list')
-                ->with('success', 'course deleted successfully');
+                ->with('success', 'deleted successfully');
     }
 }
