@@ -27,7 +27,6 @@ class CreateCourseRequest extends FormRequest
         return [
             'title' => ['string', 'required'],
             'description' => ['string', 'sometimes'],
-            'language_id' => ['required', 'exists:languages,id'],
             'image_url' => ['sometimes', 'image', 'mimes:jpeg,png,jpg', 'max:1024']
         ];
     }

@@ -123,7 +123,6 @@ class ActivityService
         $course = new Course;
         $course->title = $data['title'];
         $course->description = $data['description'];
-        $course->language_id = $data['language_id'];
         $course->image_url = $mediaUrl;
         $course->save();
      }

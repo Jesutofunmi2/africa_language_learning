@@ -41,23 +41,6 @@
                                         @endif
                                     </div>
                                 </div>
-
-                                <div class="row-12">
-                                    <div class="form-group">
-                                        <select name="language_id" class="form-control">
-                                            <option value="{{ old('language_id') }}">Select Language For the Question</option>
-                                            @foreach ($languages as $language)
-                                                <option value="{{ $language->id }}">{{ $language->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <small>Note: don't leave blank, select language </small>
-                                    </div>
-                                    @if ($errors->has('language_id'))
-                                        <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('langauge_id') }}</strong>
-                                        </span>
-                                   @endif 
-                                </div>
                                 
                                 <div class="row">
                                     <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
