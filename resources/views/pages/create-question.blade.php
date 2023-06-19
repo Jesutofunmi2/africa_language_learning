@@ -15,16 +15,16 @@
                         <div class="card-body ">
                             <form class="form" method="POST" action="{{ route('admin.question.create') }}" enctype="multipart/form-data">
                                 @csrf
-                                <div class="input-group{{ $errors->has('question_title') ? ' has-danger' : '' }}">
+                                <div class="input-group{{ $errors->has('title') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <i class="nc-icon nc-box-2"></i>
                                         </span>
                                     </div>
-                                    <input name="question_title" type="text" class="form-control" placeholder="Question Title" value="{{ old('question_title') }}" required autofocus>
-                                    @if ($errors->has('question_title'))
+                                    <input name="title" type="text" class="form-control" placeholder="Title" value="{{ old('title') }}" required autofocus>
+                                    @if ($errors->has('title'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('question_title') }}</strong>
+                                            <strong>{{ $errors->first('title') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -32,11 +32,11 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="question_instruction" class="form-control" placeholder="Description"> {{ old('question_instruction') }} Question Instruction</textarea>
+                                            <textarea name="instruction" class="form-control" placeholder="Instruction"> {{ old('instruction') }} </textarea>
                                         </div>
-                                        @if ($errors->has('question_instruction'))
+                                        @if ($errors->has('instruction'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
-                                                <strong>{{ $errors->first('question_instruction') }}</strong>
+                                                <strong>{{ $errors->first('instruction') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -45,27 +45,27 @@
             
                                 <div class="row-12">
                                     <div class="form-group">
-                                        <select name="langauge_id" class="form-control">
-                                            <option value="{{ old('langauge_id') }}">Select Language For the Question</option>
+                                        <select name="language_id" class="form-control">
+                                            <option value="{{ old('language_id') }}">Select Language For the Question</option>
                                             @foreach ($languages as $language)
                                                 <option value="{{ $language->id }}">{{ $language->name }}</option>
                                             @endforeach
                                         </select>
                                         <small>Note: don't leave blank, select language </small>
                                     </div>
-                                    @if ($errors->has('langauge_id'))
+                                    @if ($errors->has('language_id'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('langauge_id') }}</strong>
+                                            <strong>{{ $errors->first('language_id') }}</strong>
                                         </span>
                                    @endif 
                                 </div>
 
                                 <div class="row-12">
                                     <div class="form-group">
-                                        <select name="langauge_id" class="form-control">
+                                        <select name="course_id" class="form-control">
                                             <option value="{{ old('course_id') }}">Select Course For the Question</option>
                                             @foreach ($courses as $course)
-                                                <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                                <option value="{{ $course->id }}">{{ $course->title }}</option>
                                             @endforeach
                                         </select>
                                         <small>Note: don't leave blank, select Course </small>
@@ -96,30 +96,13 @@
                                     @endif 
                                 </div>
 
-                                <div class="row-12">
-                                    <div class="form-group">
-                                        <select name="status" class="form-control">
-                                            <option value="{{old('media_type')}}">Select Media Type</option>
-                                            <option value="image">Image</option>
-                                            <option value="audio">Audio</option>
-                                            <option value="video">Video</option>
-                                        </select>
-                                        <small>Note: don't leave blank select a media type </small>
-                                    </div>
-                                    @if ($errors->has('media_type'))
-                                        <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('media_type') }}</strong>
-                                        </span>
-                                   @endif 
-                            </div>
-
 
                                 
-                                <div class="row" style="border: 50px">
-                                    
-                                    <div class="col-md-12" style="border: 50px">
-                                        <div class="form-group" style="border: 50px">
-                                            <input type="file" value="{{ old('media_url') }}" name="media_url"  placeholder="Select Image/Audio/Video"  accept="image/*" class="form-control" />
+                                <div class="row-12">
+                                    <label class="col-md-3 col-form-label">{{ __('Media Upload') }}</label>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="file" value="{{ old('media_url') }}" name="media_url"  placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"   class="form-control" />
                                         </div>
                                         @if ($errors->has('media_url'))
                                             <span class="invalid-feedback" style="display: block; border:30px" role="alert">
@@ -128,7 +111,20 @@
                                         @endif
                                     </div>
                                 </div>
-                                <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
+                                
+                                <div class="row-12" style="border-color: red #32a1ce;">
+                                    <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
+                                    <div class="col-md-12" style="border-color: red #32a1ce;">
+                                        <div class="form-group" style="border-color: red #32a1ce;">
+                                            <input type="file" value="{{ old('image_url') }}" name="image_url"  placeholder="Select Image"  accept="image/*"  class="form-control" />
+                                        </div>
+                                        @if ($errors->has('image_url'))
+                                            <span class="invalid-feedback" style="display: block; border:30px" role="alert">
+                                                <strong>{{ $errors->first('image_url') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
 
                                
                                 <div class="card-footer ">

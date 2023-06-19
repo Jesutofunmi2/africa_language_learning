@@ -1,5 +1,5 @@
 <?php
- 
+
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\ActivityType;
@@ -7,9 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Admin;
 use App\Models\Course;
+use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Language;
+use App\Models\Question;
+use App\Models\Student;
 
 class AdminDashboardController extends Controller
 {
@@ -20,7 +23,7 @@ class AdminDashboardController extends Controller
         $this->middleware('auth');
     }
 
-   /**
+    /**
      * Admin Dashboard Page.
      * 
      * This method return a view for admin dashboard.
@@ -35,7 +38,21 @@ class AdminDashboardController extends Controller
         $types = Activity::TYPES;
         $languages = Language::count();
         $courses = Course::count();
+        $students = Student::count();
+        $schools = School::count();
+        $questions = Question::count();
 
-        return view('pages.dashboard', ['users' => $users, 'types' => $types, 'languages' => $languages, 'courses'=> $courses]);
+        return view(
+            'pages.dashboard',
+            [
+                'users' => $users,
+                'types' => $types,
+                'languages' => $languages,
+                'courses' => $courses,
+                'students' => $students,
+                'schools' => $schools,
+                'questions' => $questions
+            ]
+        );
     }
 }

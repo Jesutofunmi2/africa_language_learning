@@ -6,8 +6,8 @@ use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminLogoutController;
 use App\Http\Controllers\Admin\AdminRegisterController;
 use App\Http\Controllers\Admin\LanguageController;
-use App\Http\Controllers\Admin\CreateCourseController;
-use App\Http\Controllers\Admin\CreateQuestionController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\QuestionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,14 +51,17 @@ Route::prefix('admin')->name('admin.')
             Route::put('language/{language}', [LanguageController::class, 'show'])->name('language.show');
             Route::delete('language/{language}', [LanguageController::class, 'destroy'])->name('language.destroy');
 
-            Route::get('course/create', [CreateCourseController::class, 'index'])->name('course.index');
-            Route::post('course/create', [CreateCourseController::class, 'create'])->name('course.create');
-            Route::get('courses', [CreateCourseController::class, 'list'])->name('course.list');
-            Route::put('course/{course}', [CreateCourseController::class, 'show'])->name('course.show');
-            Route::delete('course/{course}', [CreateCourseController::class, 'destroy'])->name('course.destroy');
+            Route::get('course/create', [CourseController::class, 'index'])->name('course.index');
+            Route::post('course/create', [CourseController::class, 'create'])->name('course.create');
+            Route::get('courses', [CourseController::class, 'list'])->name('course.list');
+            Route::put('course/{course}', [CourseController::class, 'show'])->name('course.show');
+            Route::delete('course/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
 
-            Route::get('question/create', [CreateQuestionController::class, 'index'])->name('question.index');
-
+            Route::get('question/create', [QuestionController::class, 'index'])->name('question.index');
+            Route::post('question/create', [QuestionController::class, 'create'])->name('question.create');
+            Route::get('questions', [QuestionController::class, 'list'])->name('question.list');
+            Route::put('questions/{question}', [QuestionController::class, 'show'])->name('question.show');
+            Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
 
 
             Route::post('logout', [AdminLogoutController::class, 'index'])->name('logout');

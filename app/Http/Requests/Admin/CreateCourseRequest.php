@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateCourseRequest extends FormRequest
 {
@@ -24,10 +25,10 @@ class CreateCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:1000'],
-            'status' => ['string', 'required'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:1024']
+            'title' => ['string', 'required'],
+            'description' => ['string', 'sometimes'],
+            'language_id' => ['required', 'exists:languages,id'],
+            'image_url' => ['sometimes', 'image', 'mimes:jpeg,png,jpg', 'max:1024']
         ];
     }
 }

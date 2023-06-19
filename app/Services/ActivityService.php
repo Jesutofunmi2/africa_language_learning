@@ -119,12 +119,12 @@ class ActivityService
      {
         $mediaService = new MediaService;
         $mediaUrl = $mediaService->uploadImage($data['image_url']);
-
+        
         $course = new Course;
         $course->title = $data['title'];
         $course->description = $data['description'];
-        $course->image = $mediaUrl;
-        $course->status = $data['status'];
+        $course->language_id = $data['language_id'];
+        $course->image_url = $mediaUrl;
         $course->save();
      }
     

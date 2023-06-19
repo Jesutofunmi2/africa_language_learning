@@ -12,10 +12,10 @@
                         <div class="card-header ">
                             <h4 class="card-title">{{ __('Create Course') }}</h4>
                         </div>
-                        <div class="card-body ">
+                        <div class="card-body">
                             <form class="form" method="POST" action="{{ route('admin.course.create') }}" enctype="multipart/form-data">
                                 @csrf
-                                <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                <div class="input-group{{ $errors->has('title') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <i class="nc-icon nc-box-2"></i>
@@ -32,7 +32,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="description" class="form-control" placeholder="Description"> {{ old('description') }} Course Descrption</textarea>
+                                            <textarea name="description" class="form-control" placeholder="Description"> {{ old('description') }}</textarea>
                                         </div>
                                         @if ($errors->has('description'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -41,36 +41,38 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                <div class="row-12">
+                                    <div class="form-group">
+                                        <select name="language_id" class="form-control">
+                                            <option value="{{ old('language_id') }}">Select Language For the Question</option>
+                                            @foreach ($languages as $language)
+                                                <option value="{{ $language->id }}">{{ $language->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <small>Note: don't leave blank, select language </small>
+                                    </div>
+                                    @if ($errors->has('language_id'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                            <strong>{{ $errors->first('langauge_id') }}</strong>
+                                        </span>
+                                   @endif 
+                                </div>
                                 
                                 <div class="row">
                                     <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <input type="file" value="{{ old('image') }}" name="image" accept="image/*" class="form-control" />
+                                            <input type="file" value="{{ old('image_url') }}" name="image_url" accept="image/*" class="form-control" />
                                         </div>
-                                        @if ($errors->has('image'))
+                                        @if ($errors->has('image_url'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
-                                                <strong>{{ $errors->first('image') }}</strong>
+                                                <strong>{{ $errors->first('image_url') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
 
-                                <div class="row-12">
-                                        <div class="form-group">
-                                            <select name="status" class="form-control">
-                                                <option value="">Select Status</option>
-                                                <option value="true">Active</option>
-                                                <option value="false">In Active</option>
-                                            </select>
-                                            <small>Note: don't leave blank </small>
-                                        </div>
-                                        @if ($errors->has('status'))
-                                            <span class="invalid-feedback" style="display: block;" role="alert">
-                                                <strong>{{ $errors->first('status') }}</strong>
-                                            </span>
-                                       @endif 
-                                </div>
 
                                 <div class="card-footer ">
                                     <button type="submit" class="btn btn-info btn-round">{{ __('Save') }}</button>

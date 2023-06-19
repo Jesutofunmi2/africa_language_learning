@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\School\SchoolLoginRequest;
 use App\Http\Resources\LoginResource;
+use App\Http\Resources\SchoolResource;
 use App\Services\TokenService;
 use App\Models\School;
 use Illuminate\Http\JsonResponse;
@@ -20,6 +21,7 @@ class SchoolLoginController extends Controller
     {
         
         $school = $this->authenticateUser($request);
+        $data = SchoolResource::make($school);
 
         $ip = $request->ip();
         $user_agent = $request->userAgent();
@@ -32,7 +34,8 @@ class SchoolLoginController extends Controller
 
         return response()->json([
             'message' => 'Login Successful',
-            'data' => LoginResource::make($school->withAccessToken($token))
+            'data' => $data,
+            'token' => LoginResource::make($school->withAccessToken($token))
         ]);
         
     }
