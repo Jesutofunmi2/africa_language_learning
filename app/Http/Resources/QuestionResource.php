@@ -19,10 +19,12 @@ class QuestionResource extends JsonResource
               'id' => $this->id,
               'title' => $this->title,
               'instruction' => $this->instruction,
-              'question' => $this->question,
+              'next_question_id' => $this->next_question_id,
               'media_url' => $this->media_url,
               'image_url' => $this->image_url,
-              'media_type' => $this->media_type
+              'media_type' => $this->media_type,
+              'language' => $this->language,
+              'course' => $this->course
         ];
     }
 }
