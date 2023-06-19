@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Question;
 
 class Course extends Model
 {
@@ -15,8 +16,7 @@ class Course extends Model
     }
     public function questions()
     {
-
-        return $this->hasMany(App\Model\Question::class);
+        return $this->hasMany(Question::class);
     }
     /**
      * The attributes that are mass assignable.

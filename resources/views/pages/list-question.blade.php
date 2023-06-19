@@ -33,7 +33,7 @@
                                 Image
                              </th>
                              <th>
-                                Statos
+                                Status
                              </th>
                              <th>
                                 Date
@@ -52,7 +52,12 @@
                                     <td>
                                         {{ $question->title }}
                                     </td>
-                                  
+                                    <td>
+                                        {{ $question->course->title }}
+                                    </td>
+                                    <td>
+                                        {{ $question->language->name }}
+                                    </td>
                                     <td>
                                        <a href="{{$question->media_url}}"> Media Link</a>
                                             
