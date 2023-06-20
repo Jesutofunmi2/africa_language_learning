@@ -24,7 +24,6 @@ class LanguageController extends Controller
 
    public function create(CreateLanguageRequest $createLanguageRequest): RedirectResponse
    {
-    
     $this->service->createLanguage($createLanguageRequest->validated());
     return redirect()->route('admin.language.list')->with('success', 'Language created successfully');
    }
@@ -34,9 +33,6 @@ class LanguageController extends Controller
     $language = Language::paginate();
     return view('pages.list-language')->with('languages', $language);
    }
-
-
-  
 
    public function destroy(Language $language): RedirectResponse
    {

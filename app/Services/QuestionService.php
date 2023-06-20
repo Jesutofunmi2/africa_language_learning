@@ -26,11 +26,14 @@ class QuestionService
 
             $extention = $data['media_url']->extension();
 
-            if (in_array($extention, $video_extension)) {
+            if (in_array($extention, $video_extension)) 
+            {
                 $mediaType = 'video';
-            } elseif (in_array($extention, $image_extension)) {
+            } elseif (in_array($extention, $image_extension)) 
+            {
                 $mediaType = 'image';
-            } elseif (in_array($extention, $audio_extension)) {
+            } elseif (in_array($extention, $audio_extension)) 
+            {
                 $mediaType = 'audio';
             }
 

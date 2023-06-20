@@ -60,8 +60,6 @@
                                     </td>
                                     <td>
                                        <a href="{{$question->media_url}}"> Media Link</a>
-                                            
-                                      
                                     </td>
 
                                     <td>
@@ -69,7 +67,11 @@
                                     </td>
 
                                     <td>
-                                        {{ $question->status}}
+                                      @if ($question->status == false)
+                                      <button class="btn btn-danger" type="submit">Offline</button>
+                                           @else
+                                      <button class="btn btn-success" type="submit">Online</button> 
+                                           @endif
                                     </td>
         
                                     <td>
