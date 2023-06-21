@@ -86,8 +86,8 @@
                                     <div class="form-group">
                                         <select name="is_correct" class="form-control">
                                             <option value="{{ old('is_correct') }}">Select Is Correct</option>
-                                                <option value="true">Yes</option>
-                                                <option value="false">No</option>
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
                                         </select>
                                         <small>Note: don't leave blank, select Is correct </small>
                                     </div>
