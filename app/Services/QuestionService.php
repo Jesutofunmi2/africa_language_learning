@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Option;
 use App\Models\Question;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -26,11 +27,14 @@ class QuestionService
 
             $extention = $data['media_url']->extension();
 
-            if (in_array($extention, $video_extension)) {
+            if (in_array($extention, $video_extension)) 
+            {
                 $mediaType = 'video';
-            } elseif (in_array($extention, $image_extension)) {
+            } elseif (in_array($extention, $image_extension)) 
+            {
                 $mediaType = 'image';
-            } elseif (in_array($extention, $audio_extension)) {
+            } elseif (in_array($extention, $audio_extension)) 
+            {
                 $mediaType = 'audio';
             }
 
@@ -56,5 +60,20 @@ class QuestionService
     public function deleteQuestion(Question $question)
     {
         $question->delete();
+    }
+
+    public function createOption(array $data)
+    {
+        
+           $option = new Option;
+            DB::transaction(function() use (&$option, $data) {
+                $option->title = $data['title'];
+                $option->language_id = $data['language_id'];
+                $option->question_id = $data['question_id'];
+                $option->answered_type = $data['answered_type'];
+                $option->status = $data['status'];
+                $option->save();
+            });
+        return $option;
     }
 }

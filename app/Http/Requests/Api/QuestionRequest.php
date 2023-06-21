@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateAnswereRequest extends FormRequest
+class QuestionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,7 @@ class CreateAnswereRequest extends FormRequest
     public function rules()
     {
         return [
-            'answered_title' => ['string', 'required'],
-            'media_type' => ['string', 'required'],
-            'media_url' => ['string', 'required'],
-            'is_correct' => ['boolean', 'required']
-
+            'language_id' => ['sometimes','exists:languages,id']
         ];
     }
 }

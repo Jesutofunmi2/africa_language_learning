@@ -116,9 +116,9 @@
                         <div class="card ">
                             <div class="card-header ">
                                 <h5 class="card-title">Users Behavior on Question</h5>
-                                <p class="card-category">24 Hours performance</p>
+                                <a href="{{ route('admin.question.list') }}">  <p class="card-category">Questions</p> </a>
                             </div>
-                            <div class="card-body ">
+                            <div class="card-body">
                                 <canvas id=chartHours width="400" height="100"></canvas>
                             </div>
                             <div class="card-footer ">

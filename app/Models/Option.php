@@ -5,33 +5,32 @@ namespace App\Models;
 use App\Traits\UUID;
 use App\Models\Course;
 use App\Models\Language;
-use App\Models\Option;
-use Laravel\Sanctum\HasApiTokens;
 use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Question extends Model
+class Option extends Model
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes, UUID {
         HasFactory::factory as traitFactory;
     }
 
-    public function course()
-    {
-        return $this->belongsTo(Course::class);
-    }
+    // public function course()
+    // {
+    //     return $this->belongsTo(Course::class);
+    // }
 
     public function language()
     {
         return $this->belongsTo(Language::class);
     }
 
-    public function options()
+    public function question()
     {
-        return $this->hasMany(Option::class);
+        return $this->belongsTo(Question::class);
     }
 
     /**
@@ -41,12 +40,10 @@ class Question extends Model
      */
     protected $fillable = [
         'title',
-        'instruction',
         'language_id',
         'course_id',
         'answered_type',
         'media_type',
-        'media_url'
 
     ];
 
