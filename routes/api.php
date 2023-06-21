@@ -57,7 +57,7 @@ Route::prefix('/v1')
 
                 Route::get('/lesson', [LessonController::class, 'list'])->name('lesson.list');
 
-                Route::get('/question', [QuestionController::class, 'list'])->name('question.list');
+                Route::get('/question/{language_id}', [QuestionController::class, 'list'])->name('question.list');
             });
 
         Route::prefix('/activity')
