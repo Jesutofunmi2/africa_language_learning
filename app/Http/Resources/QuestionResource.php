@@ -25,7 +25,7 @@ class QuestionResource extends JsonResource
               'media_type' => $this->media_type,
               'language' => $this->language,
               'course' => $this->course,
-              'options' => $this->options
+              'options' => OptionResource::collection($this->options)
         ];
     }
 }
