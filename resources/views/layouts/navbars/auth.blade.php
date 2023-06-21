@@ -73,10 +73,12 @@
                 </a>
             </li>
 
-
-            
-
-
+            <li class="{{ $elementActive == 'option' ? 'active' : '' }}">
+                <a href="{{ route('admin.option.index')}}">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Create Option for Question') }}</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

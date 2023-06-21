@@ -8,7 +8,9 @@ use App\Http\Controllers\Admin\AdminRegisterController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Admin\OptionController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +65,8 @@ Route::prefix('admin')->name('admin.')
             Route::put('questions/{question}', [QuestionController::class, 'show'])->name('question.show');
             Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
 
+            Route::get('question/option', [OptionController::class, 'index'])->name('option.index');
+            Route::post('question/option', [OptionController::class, 'create'])->name('option.create');
 
             Route::post('logout', [AdminLogoutController::class, 'index'])->name('logout');
         });
