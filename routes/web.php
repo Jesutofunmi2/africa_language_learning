@@ -67,6 +67,9 @@ Route::prefix('admin')->name('admin.')
 
             Route::get('question/option', [OptionController::class, 'index'])->name('option.index');
             Route::post('question/option', [OptionController::class, 'create'])->name('option.create');
+            Route::get('question', [OptionController::class, 'list'])->name('option.list');
+            Route::delete('question/{option}', [OptionController::class, 'destroy'])->name('option.destroy');
+
 
             Route::post('logout', [AdminLogoutController::class, 'index'])->name('logout');
         });

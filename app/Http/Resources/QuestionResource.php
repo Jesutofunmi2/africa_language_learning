@@ -24,7 +24,8 @@ class QuestionResource extends JsonResource
               'image_url' => $this->image_url,
               'media_type' => $this->media_type,
               'language' => $this->language,
-              'course' => $this->course
+              'course' => $this->course,
+              'options' => $this->options
         ];
     }
 }

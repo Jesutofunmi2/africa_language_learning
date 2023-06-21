@@ -23,8 +23,10 @@ class QuestionRequest extends FormRequest
      */
     public function rules()
     {
+        
         return [
-            'language_id' => ['sometimes','exists:languages,id']
+            'language_id' => ['integer','exists:languages,id'],
+            'course_id' => ['integer','exists:courses,id'],
         ];
     }
 }

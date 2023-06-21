@@ -14,7 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Option extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, UUID {
+    use HasApiTokens, HasFactory, Notifiable, UUID {
         HasFactory::factory as traitFactory;
     }
 
