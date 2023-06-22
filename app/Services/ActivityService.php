@@ -102,6 +102,7 @@ class ActivityService
 
     public function createLanguage(array $data): void
     {
+
         $mediaService = new MediaService;
         $mediaUrl = $mediaService->uploadImage($data['image_url']);
 
@@ -109,6 +110,11 @@ class ActivityService
         $language->name = $data['name'];
         $language->image_url = $mediaUrl;
         $language->save();
+    }
+
+    public function languageNameExists($name)
+    {
+        return Language::where('name', '=', $name)->exists();
     }
 
     /**
