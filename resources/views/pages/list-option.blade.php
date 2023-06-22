@@ -53,7 +53,7 @@
                                         {{ $option->question->title }}
                                     </td>
                                     <td>
-                                        <img src="{{ asset($option->media_url) }}" width="40px" height="40px" />
+                                      <a href="{{$option->media_url}}">Link</a>  
                                     </td>
                                     <td>
                                         {{ $option->created_at->diffForHumans() }}
