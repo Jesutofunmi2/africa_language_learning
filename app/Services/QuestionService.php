@@ -65,12 +65,29 @@ class QuestionService
         $option = new Option;
         DB::transaction(function () use (&$option, $data) {
             $mediaService = new MediaService;
-            $imageUrl = $mediaService->uploadImage($data['media_url']);
+            $imageUrl = $mediaService->uploadAudio($data['media_url']);
+
+            $mediaType = null;
+
+            $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
+            $image_extension = array('jpg', 'jpeg', 'png', 'gif');
+            $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
+
+            $extention = $data['media_url']->extension();
+
+
+            if (in_array($extention, $video_extension)) {
+                $mediaType = 'video';
+            } elseif (in_array($extention, $image_extension)) {
+                $mediaType = 'image';
+            } elseif (in_array($extention, $audio_extension)) {
+                $mediaType = 'audio';
+            }
 
             $option->title = $data['title'];
             $option->language_id = $data['language_id'];
             $option->question_id = $data['question_id'];
-            $option->media_type = $data['media_type'];
+            $option->media_type = $mediaType;
             $option->media_url = $imageUrl;
             $option->is_correct = $data['is_correct'];
             $option->save();

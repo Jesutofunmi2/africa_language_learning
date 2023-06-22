@@ -63,24 +63,6 @@
                                     @endif 
                                 </div>
                                 
-                                <div class="row-12">
-                                    <div class="form-group">
-                                        <select name="media_type" class="form-control">
-                                            <option value="{{ old('media_type') }}">Select Question Answered Type</option>
-                                                <option value="audio">Audio</option>
-                                                <option value="video">Video</option>
-                                                <option value="image">Image</option>
-                                                <option value="doc">Doc</option>
-                                           
-                                        </select>
-                                        <small>Note: don't leave blank, select Media Type </small>
-                                    </div>
-                                    @if ($errors->has('media_type'))
-                                        <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('media_type') }}</strong>
-                                        </span>
-                                    @endif 
-                                </div>
 
                                 <div class="row-12">
                                     <div class="form-group">
