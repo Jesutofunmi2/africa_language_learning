@@ -61,6 +61,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {!! $languages->links() !!}
                 </div>
             </div>
         </div>

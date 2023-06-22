@@ -35,7 +35,7 @@ class OptionController extends Controller
 
         public function list()
         {
-            $options = Option::orderBy('created_at', 'desc')->get();
+            $options = Option::orderBy('created_at', 'desc')->paginate();
     
             return view('pages.list-option', ['options' => $options]);
         }

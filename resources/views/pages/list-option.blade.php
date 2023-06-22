@@ -80,6 +80,7 @@
                         </tbody>
                     </table>
                 </div>
+                {!! $options->links() !!}
             </div>
         </div>
     </div>

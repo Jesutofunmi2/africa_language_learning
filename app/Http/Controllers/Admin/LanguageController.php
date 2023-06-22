@@ -22,28 +22,28 @@ class LanguageController extends Controller
         return view('pages.create-language');
     }
 
-   public function create(CreateLanguageRequest $createLanguageRequest): RedirectResponse
-   {
-    $validated = $createLanguageRequest->safe()->only(['name']);
-     if($this->service->languageNameExists($validated) == true){
-        return redirect()->route('admin.language.list')->with('success', 'Language already exists');
-     }
-    $this->service->createLanguage($createLanguageRequest->validated());
+    public function create(CreateLanguageRequest $createLanguageRequest): RedirectResponse
+    {
+        $validated = $createLanguageRequest->safe()->only(['name']);
+        if ($this->service->languageNameExists($validated) == true) {
+            return redirect()->route('admin.language.list')->with('success', 'Language already exists');
+        }
+        $this->service->createLanguage($createLanguageRequest->validated());
 
-    return redirect()->route('admin.language.list')->with('success', 'Language created successfully');
-   }
+        return redirect()->route('admin.language.list')->with('success', 'Language created successfully');
+    }
 
-   public function list(Request $request):View
-   {
-    $language = Language::orderBy('created_at', 'desc')->get();
-    return view('pages.list-language')->with('languages', $language);
-   }
+    public function list(Request $request): View
+    {
+        $language = Language::orderBy('created_at', 'desc')->paginate(15);
+        return view('pages.list-language')->with('languages', $language);
+    }
 
-   public function destroy(Language $language): RedirectResponse
-   {
-       $this->service->deleteLanguage($language);
+    public function destroy(Language $language): RedirectResponse
+    {
+        $this->service->deleteLanguage($language);
 
-       return redirect()->route('admin.language.list')
-               ->with('success', 'Language deleted successfully');
-   }
+        return redirect()->route('admin.language.list')
+            ->with('success', 'Language deleted successfully');
+    }
 }
