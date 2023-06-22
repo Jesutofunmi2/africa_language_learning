@@ -46,7 +46,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="language_id" class="form-control">
-                                            <option value="{{ old('language_id') }}">Select Language For the Question</option>
+                                            <option value="{{ old('language_id') }}">Select Language </option>
                                             @foreach ($languages as $language)
                                                 <option value="{{ $language->id }}">{{ $language->name }}</option>
                                             @endforeach
@@ -63,7 +63,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="course_id" class="form-control">
-                                            <option value="{{ old('course_id') }}">Select Course For the Question</option>
+                                            <option value="{{ old('course_id') }}">Select Course </option>
                                             @foreach ($courses as $course)
                                                 <option value="{{ $course->id }}">{{ $course->title }}</option>
                                             @endforeach
@@ -80,7 +80,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="answered_type" class="form-control">
-                                            <option value="{{ old('answered_type') }}">Select Question Answered Type</option>
+                                            <option value="{{ old('answered_type') }}">Select Answered Type</option>
                                                 <option value="single">Single</option>
                                                 <option value="multiple">Multiple</option>
                                                 <option value="puzzle">Puzzle</option>
@@ -97,34 +97,24 @@
                                 </div>
 
 
+                                <label class="col-md-3 col-form-label">{{ __('Media Upload') }}</label>
+                                <input type="file" value="{{ old('media_url') }}" name="media_url"  placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"   class="form-control" />
+                                @if ($errors->has('media_url'))
+                                <span class="invalid-feedback" style="display: block; border:30px" role="alert">
+                                    <strong>{{ $errors->first('media_url') }}</strong>
+                                </span>
+                               @endif
                                 
-                                <div class="row-12">
-                                    <label class="col-md-3 col-form-label">{{ __('Media Upload') }}</label>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input type="file" value="{{ old('media_url') }}" name="media_url"  placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"   class="form-control" />
-                                        </div>
-                                        @if ($errors->has('media_url'))
-                                            <span class="invalid-feedback" style="display: block; border:30px" role="alert">
-                                                <strong>{{ $errors->first('media_url') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                
-                                <div class="row-12" style="border-color: red #32a1ce;">
-                                    <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
-                                    <div class="col-md-12" style="border-color: red #32a1ce;">
-                                        <div class="form-group" style="border-color: red #32a1ce;">
-                                            <input type="file" value="{{ old('image_url') }}" name="image_url"  placeholder="Select Image"  accept="image/*"  class="form-control" />
-                                        </div>
-                                        @if ($errors->has('image_url'))
+
+                                <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
+                                <input type="file" value="{{ old('image_url') }}" name="image_url"  placeholder="Select Image"  accept="image/*"  class="form-control" />
+                                      @if ($errors->has('image_url'))
                                             <span class="invalid-feedback" style="display: block; border:30px" role="alert">
                                                 <strong>{{ $errors->first('image_url') }}</strong>
                                             </span>
                                         @endif
-                                    </div>
-                                </div>
+
+                               
 
                                
                                 <div class="card-footer ">

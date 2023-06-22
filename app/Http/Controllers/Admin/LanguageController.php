@@ -25,12 +25,13 @@ class LanguageController extends Controller
    public function create(CreateLanguageRequest $createLanguageRequest): RedirectResponse
    {
     $this->service->createLanguage($createLanguageRequest->validated());
+
     return redirect()->route('admin.language.list')->with('success', 'Language created successfully');
    }
 
    public function list(Request $request):View
    {
-    $language = Language::paginate();
+    $language = Language::orderBy('created_at', 'desc')->get();
     return view('pages.list-language')->with('languages', $language);
    }
 

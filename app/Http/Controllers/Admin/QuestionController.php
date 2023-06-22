@@ -35,7 +35,7 @@ class QuestionController extends Controller
 
     public function list()
     {
-        $questions = Question::all();
+        $questions = Question::orderBy('created_at', 'desc')->get();
 
         return view('pages.list-question', ['questions' => $questions]);
     }

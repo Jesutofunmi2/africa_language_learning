@@ -32,7 +32,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="language_id" class="form-control">
-                                            <option value="{{ old('language_id') }}">Select Language For the Question</option>
+                                            <option value="{{ old('language_id') }}">Select Language </option>
                                             @foreach ($languages as $language)
                                                 <option value="{{ $language->id }}">{{ $language->name }}</option>
                                             @endforeach
@@ -49,7 +49,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="question_id" class="form-control">
-                                            <option value="{{ old('question_id') }}">Select Course For the Question</option>
+                                            <option value="{{ old('question_id') }}">Select  Question</option>
                                             @foreach ($questions as $question)
                                                 <option value="{{ $question->id }}">{{ $question->title }}</option>
                                             @endforeach
@@ -79,34 +79,23 @@
                                         </span>
                                     @endif 
                                 </div>
-                                
-                                <div class="row-12">
-                                    <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input type="file" value="{{ old('image_url') }}" name="image_url"  placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"   class="form-control" />
-                                        </div>
-                                        @if ($errors->has('image_url'))
-                                            <span class="invalid-feedback" style="display: block; border:30px" role="alert">
-                                                <strong>{{ $errors->first('image_url') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
+                                <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
+                                <input type="file" value="{{ old('image_url') }}" name="image_url"  placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"   class="form-control" />
+                                @if ($errors->has('image_url'))
+                                <span class="invalid-feedback" style="display: block; border:30px" role="alert">
+                                    <strong>{{ $errors->first('image_url') }}</strong>
+                                </span>
+                                @endif
 
-                                <div class="row-12">
-                                    <label class="col-md-3 col-form-label">{{ __('Media Upload') }}</label>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input type="file" value="{{ old('media_url') }}" name="media_url"  placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"   class="form-control" />
-                                        </div>
-                                        @if ($errors->has('media_url'))
-                                            <span class="invalid-feedback" style="display: block; border:30px" role="alert">
-                                                <strong>{{ $errors->first('media_url') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
+                                <label class="col-md-3 col-form-label">{{ __('Media') }}</label>
+
+                                <input type="file" value="{{ old('media_url') }}" name="media_url"  placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"   class="form-control" />
+                                @if ($errors->has('media_url'))
+                                <span class="invalid-feedback" style="display: block; border:30px" role="alert">
+                                    <strong>{{ $errors->first('media_url') }}</strong>
+                                </span>
+                                  @endif
+                               
                                 
                                 <div class="card-footer ">
                                     <button type="submit" class="btn btn-info btn-round">{{ __('Save') }}</button>

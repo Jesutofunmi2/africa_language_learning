@@ -35,7 +35,7 @@ class CourseController extends Controller
 
     public function list(Request $request):View
     {
-     $courses = Course::paginate();
+     $courses = Course::orderBy('created_at', 'desc')->get();
      return view('pages.list-course')->with('courses', $courses);
     }
 
