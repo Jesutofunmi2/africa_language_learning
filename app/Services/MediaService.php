@@ -38,8 +38,9 @@ class MediaService
 
             $ext = $audio->extension();
             $file_name = 'audios/' . Str::random(15) . '.' . $ext;
-            $url = Storage::put($file_name, (string) $audio);
-            $url = Storage::url($file_name);
+           
+            $url = Storage::put( $file_name, $audio);
+            $url = Storage::url($url);
         }
         return $url;
     }
