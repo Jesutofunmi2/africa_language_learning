@@ -65,7 +65,8 @@ class QuestionService
         $option = new Option;
         DB::transaction(function () use (&$option, $data) {
             $mediaService = new MediaService;
-            $imageUrl = $mediaService->uploadAudio($data['media_url']);
+            $mediaUrl = $mediaService->uploadAudio($data['media_url']);
+            $imageUrl = $mediaService->uploadImage($data['image_url']);
 
             $mediaType = null;
 
@@ -88,7 +89,8 @@ class QuestionService
             $option->language_id = $data['language_id'];
             $option->question_id = $data['question_id'];
             $option->media_type = $mediaType;
-            $option->media_url = $imageUrl;
+            $option->media_url = $mediaUrl;
+            $option->image_url = $imageUrl;
             $option->is_correct = $data['is_correct'];
             $option->save();
         });

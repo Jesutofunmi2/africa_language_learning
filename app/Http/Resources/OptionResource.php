@@ -19,6 +19,7 @@ class OptionResource extends JsonResource
             'title' => $this->title,
             'media_url' => $this->media_url,
             'media_type' => $this->media_type,
+            'image_url' => $this->image_url,
         ];
     }
 }

@@ -79,6 +79,20 @@
                                         </span>
                                     @endif 
                                 </div>
+                                
+                                <div class="row-12">
+                                    <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="file" value="{{ old('image_url') }}" name="image_url"  placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"   class="form-control" />
+                                        </div>
+                                        @if ($errors->has('image_url'))
+                                            <span class="invalid-feedback" style="display: block; border:30px" role="alert">
+                                                <strong>{{ $errors->first('image_url') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
 
                                 <div class="row-12">
                                     <label class="col-md-3 col-form-label">{{ __('Media Upload') }}</label>
