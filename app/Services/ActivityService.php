@@ -31,7 +31,7 @@ class ActivityService
         $image = $manager->make($image);
         $image->encode(null, 90);
 
-        $file_name = 'images/'.Str::random(15).'.'.$ext;
+        $file_name = 'images/' . Str::random(15) . '.' . $ext;
 
         Storage::put($file_name, (string) $image, 'public');
         $url = Storage::url($file_name);
@@ -58,21 +58,21 @@ class ActivityService
     {
         $url = null;
 
-        if(! is_null($image)) {
+        if (!is_null($image)) {
             $ext = $image->extension();
 
             $manager = new ImageManager(array('driver' => 'gd'));
             $image = $manager->make($image);
             $image->encode(null, 90);
-    
-            $file_name = 'images/'.Str::random(15).'.'.$ext;
-    
+
+            $file_name = 'images/' . Str::random(15) . '.' . $ext;
+
             $url = Storage::put($file_name, (string) $image, 'public');
             $url = Storage::url($file_name);
         }
 
         // if user id in array, we create new edition for the user
-        if(array_key_exists('user_id', $data) && ! is_null($data['user_id'])) {
+        if (array_key_exists('user_id', $data) && !is_null($data['user_id'])) {
             $new_activity = new Activity;
 
             $new_activity->ref = $activity->ref;
@@ -83,10 +83,10 @@ class ActivityService
             $new_activity->type = 'personal';
             $new_activity->date = $activity->date;
             $new_activity->save();
-            
+
             return $new_activity;
         }
-        
+
         $activity->title = $data['title'] ?? $activity->title;
         $activity->description = $data['description'] ?? $activity->description;
         $activity->image_url = $url ? $url : $activity->image_url;
@@ -100,8 +100,10 @@ class ActivityService
      * 
      */
 
-     public function createLanguage(array $data):void
-     {
+    public function createLanguage(array $data): void
+    {
+        if (Language::where('name', '=', $data['name'])->exists()) {
+        }
         $mediaService = new MediaService;
         $mediaUrl = $mediaService->uploadImage($data['image_url']);
 
@@ -109,37 +111,37 @@ class ActivityService
         $language->name = $data['name'];
         $language->image_url = $mediaUrl;
         $language->save();
-     }
-     
-      /**
+    }
+
+    /**
      * Create Course.
      * 
      */
-     public function createCourse(array $data):void
-     {
+    public function createCourse(array $data): void
+    {
         $mediaService = new MediaService;
         $mediaUrl = $mediaService->uploadImage($data['image_url']);
-        
+
         $course = new Course;
         $course->title = $data['title'];
         $course->description = $data['description'];
         $course->image_url = $mediaUrl;
         $course->save();
-     }
-    
-   /**
+    }
+
+    /**
      * Delete a language.
      * 
      */
-     public function deleteLanguage(Language $language): void
-     {
-         $language->delete();
-     }
-     
-     public function deleteCourse(Course $course): void
-     {
-         $course->delete();
-     }
+    public function deleteLanguage(Language $language): void
+    {
+        $language->delete();
+    }
+
+    public function deleteCourse(Course $course): void
+    {
+        $course->delete();
+    }
     /**
      * Delete an activity.
      * 
@@ -156,11 +158,12 @@ class ActivityService
     public function getUserActivity($request): Collection
     {
         $user = $request->user();
-        
+
         $activities = Activity::query()
             ->userActivity($user->id)
             ->globalActivity()
-            ->when($request->query('from_date'), 
+            ->when(
+                $request->query('from_date'),
                 fn (Builder $query) => $query->dateBetween($request->query('from_date'), $request->query('to_date'))
             )
             ->orderBy('created_at', 'desc')

@@ -42,19 +42,13 @@
                                     </div>
                                 </div>
                                 
-                                <div class="row">
-                                    <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
-                                    <div class="col-md-9">
-                                        <div class="form-group">
-                                            <input type="file" value="{{ old('image_url') }}" name="image_url" accept="image/*" class="form-control" />
-                                        </div>
-                                        @if ($errors->has('image_url'))
+                                <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
+                                <input type="file" value="{{ old('image_url') }}" name="image_url" accept="image/*" class="form-control" />
+                                      @if ($errors->has('image_url'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
                                                 <strong>{{ $errors->first('image_url') }}</strong>
                                             </span>
                                         @endif
-                                    </div>
-                                </div>
 
 
                                 <div class="card-footer ">

@@ -28,7 +28,7 @@ class CreateOptionRequest extends FormRequest
             'language_id' => ['integer', 'required', 'exists:languages,id'],
             'question_id' => ['uuid', 'required', 'exists:questions,id'],
             'media_url' => 'required|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg',
-            'image_url' => ['sometimes', 'mimes:jpeg,png,jpg'],
+            'image_url' => ['sometimes', 'image', 'mimes:jpeg,png,jpg'],
             'is_correct' => ['boolean']
         ];
     }
