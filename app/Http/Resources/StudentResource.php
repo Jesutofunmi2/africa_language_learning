@@ -27,7 +27,7 @@ class StudentResource extends JsonResource
             'marital_status' => $this->marital_status,
             'how_do_you_see_us' => $this->how_do_you_see_us,
             'country' => $this->country,
-            'created_at' => $this->created_at
+            // 'created_at' => $this->created_at
         ];
     }
 }
