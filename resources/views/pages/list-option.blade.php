@@ -30,6 +30,9 @@
                                 Media Url
                              </th>
                              <th>
+                                Image
+                             </th>
+                             <th>
                                 Date
                              </th>
                             <th>
@@ -54,6 +57,9 @@
                                     </td>
                                     <td>
                                       <a href="{{$option->media_url}}">Link</a>  
+                                    </td>
+                                    <td>
+                                        <img src="{{ asset($option->image_url) }}" width="40px" height="40px" />
                                     </td>
                                     <td>
                                         {{ $option->created_at->diffForHumans() }}

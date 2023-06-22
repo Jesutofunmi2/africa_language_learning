@@ -44,6 +44,7 @@ class Option extends Model
         'course_id',
         'answered_type',
         'media_type',
+        'image_url'
 
     ];
 
