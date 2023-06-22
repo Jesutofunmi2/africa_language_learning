@@ -102,8 +102,6 @@ class ActivityService
 
     public function createLanguage(array $data): void
     {
-        if (Language::where('name', '=', $data['name'])->exists()) {
-        }
         $mediaService = new MediaService;
         $mediaUrl = $mediaService->uploadImage($data['image_url']);
 
