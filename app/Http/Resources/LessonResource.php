@@ -19,7 +19,7 @@ class LessonResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'image_url' => $this->image_url,
-            'created_at' => $this->created_at
+            // 'created_at' => $this->created_at
         ];
     }
 }
