@@ -12,6 +12,7 @@ use App\Http\Controllers\Student\Auth\StudentLoginController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\LessonController;
 use App\Http\Controllers\Api\QuestionController;
+use App\Http\Controllers\Api\AnswerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,6 +59,8 @@ Route::prefix('/v1')
                 Route::get('/lesson', [LessonController::class, 'list'])->name('lesson.list');
 
                 Route::get('/question', [QuestionController::class, 'list'])->name('question.list');
+
+                Route::get('/option', [AnswerController::class, 'checkAnswer'])->name('answer.check');
             });
 
         Route::prefix('/activity')

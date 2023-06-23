@@ -52,9 +52,9 @@
                                     <td>
                                         {{ $option->language->name }}
                                     </td>
-                                    <td>
-                                        {{ $option->question->title }}
-                                    </td>
+                                    {{-- <td>
+                                        {{ $option->question->id }}
+                                    </td> --}}
                                     <td>
                                       <a href="{{$option->media_url}}">Link</a>  
                                     </td>

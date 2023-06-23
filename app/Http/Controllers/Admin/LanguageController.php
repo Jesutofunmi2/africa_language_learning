@@ -26,7 +26,7 @@ class LanguageController extends Controller
     {
         $validated = $createLanguageRequest->safe()->only(['name']);
         if ($this->service->languageNameExists($validated) == true) {
-            return redirect()->route('admin.language.list')->with('success', 'Language already exists');
+            return back()->with('error', 'You can not add same language');
         }
         $this->service->createLanguage($createLanguageRequest->validated());
 

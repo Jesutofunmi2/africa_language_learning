@@ -80,7 +80,7 @@
                                     @endif 
                                 </div>
                                 <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
-                                <input type="file" value="{{ old('image_url') }}" name="image_url"  placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"   class="form-control" />
+                                <input type="file" value="{{ old('image_url') }}" name="image_url"  placeholder="Select Audio/Video" accept="image/*"   class="form-control" />
                                 @if ($errors->has('image_url'))
                                 <span class="invalid-feedback" style="display: block; border:30px" role="alert">
                                     <strong>{{ $errors->first('image_url') }}</strong>

@@ -41,7 +41,7 @@ class Option extends Model
     protected $fillable = [
         'title',
         'language_id',
-        'course_id',
+        'question_id',
         'answered_type',
         'media_type',
         'image_url'
