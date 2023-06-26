@@ -25,7 +25,8 @@ class AnswerRequest extends FormRequest
     {
         return [
             'question_id' => ['uuid','exists:questions,id'],
-            'option_id' => ['integer','exists:options,id'],
+            'optionIds' => ['array','min:1'],
+            'optionIds.*' => ['exists:options,id']
         ];
     }
 }

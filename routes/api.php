@@ -60,7 +60,7 @@ Route::prefix('/v1')
 
                 Route::get('/question', [QuestionController::class, 'list'])->name('question.list');
 
-                Route::get('/option', [AnswerController::class, 'checkAnswer'])->name('answer.check');
+                Route::post('/option', [AnswerController::class, 'checkAnswer'])->name('answer.check');
             });
 
         Route::prefix('/activity')
