@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\OptionController;
+use App\Http\Controllers\School\Auth\SchoolController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -69,6 +70,9 @@ Route::prefix('admin')->name('admin.')
             Route::post('question/option', [OptionController::class, 'create'])->name('option.create');
             Route::get('question', [OptionController::class, 'list'])->name('option.list');
             Route::delete('question/{option}', [OptionController::class, 'destroy'])->name('option.destroy');
+
+            Route::get('school/create', [SchoolController::class, 'index'])->name('school.index');
+            Route::post('school/create', [SchoolController::class, 'create'])->name('school.create');
 
 
             Route::post('logout', [AdminLogoutController::class, 'index'])->name('logout');

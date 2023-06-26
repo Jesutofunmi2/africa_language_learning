@@ -61,7 +61,7 @@
             </li>
             
             <li class="{{ $elementActive == 'school' ? 'active' : '' }}">
-                <a href="">
+                <a href="{{ route('admin.school.index')}}">
                     <i class="nc-icon nc-box"></i>
                     <p>{{ __('Create School') }}</p>
                 </a>

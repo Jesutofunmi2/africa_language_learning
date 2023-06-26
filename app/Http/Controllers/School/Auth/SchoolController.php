@@ -11,7 +11,7 @@ use App\Services\SchoolService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class CreateSchoolController extends Controller
+class SchoolController extends Controller
 {
       public function __construct(protected TokenService $tokenService, protected SchoolService $schoolService) {}
 
@@ -31,5 +31,15 @@ class CreateSchoolController extends Controller
             'token' => LoginResource::make($school->withAccessToken($token))],
             status: 201
         );
+    }
+
+    public function index()
+    {
+      return view('pages.create-school');
+    }
+
+    public function create()
+    {
+
     }
 }

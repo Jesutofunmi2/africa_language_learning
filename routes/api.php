@@ -4,7 +4,7 @@ use App\Http\Controllers\User\UserActivityController;
 use App\Http\Controllers\User\UserLoginController;
 use App\Http\Controllers\User\UserLogoutController;
 use App\Http\Controllers\User\UserRegisterController;
-use App\Http\Controllers\School\Auth\CreateSchoolController;
+use App\Http\Controllers\School\Auth\SchoolController;
 use App\Http\Controllers\School\Auth\SchoolLoginController;
 use App\Http\Controllers\School\Auth\SchoolLogoutController;
 use App\Http\Controllers\Student\Auth\CreateStudentController;
@@ -40,7 +40,7 @@ Route::prefix('/v1')
                 Route::post('/register', UserRegisterController::class)->name('register');
 
                 //schoool endpoint
-                Route::post('/createSchool', CreateSchoolController::class)->name('createSchool');
+                Route::post('/createSchool', SchoolController::class)->name('createSchool');
                 Route::post('/schoolLogin', SchoolLoginController::class)->name('schoolLogin');
                 Route::post('/schoolLogout', SchoolLogoutController::class)->middleware('auth:sanctum')->name('logout_for_school');
 
