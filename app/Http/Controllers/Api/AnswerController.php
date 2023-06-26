@@ -16,12 +16,13 @@ class AnswerController extends Controller
         $question_id = $answerRequest->question_id;
         $optionIds = $answerRequest->optionIds;
         $question =  Question::query()->whereId($question_id)->first();
-
-        if ($question->answered_type == 'multiple') 
-        {
+        
+        abort_if($question->answered_type == null, 400, 'No answer type for this question');
+        if ($question->answered_type == 'multiple') {
             return $this->single($question, $optionIds);
         }
 
+        
     }
 
 
@@ -38,10 +39,9 @@ class AnswerController extends Controller
             ],
             status: 200
         );
-
     }
 
-    protected function multiple( Question $question, array $optionIds )
+    protected function multiple(Question $question, array $optionIds)
     {
         $optionId =  $optionIds[0];
         $options = Option::query()->where('id', $optionId)
@@ -49,7 +49,7 @@ class AnswerController extends Controller
             ->where('is_correct', true)->get();
 
         abort_if($options->count() > 1, 400, 'Correct option can not be more than one');
-        
+
         $option = $options->first();
     }
 }
