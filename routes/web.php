@@ -73,7 +73,11 @@ Route::prefix('admin')->name('admin.')
 
             Route::get('school/create', [SchoolController::class, 'index'])->name('school.index');
             Route::post('school/create', [SchoolController::class, 'create'])->name('school.create');
-
+            Route::get('schools', [SchoolController::class, 'list'])->name('school.list');
+            Route::get('schools/{secondaryId}', [SchoolController::class, 'show'])->name('school.show');
+            Route::put('school/{secondaryId}', [SchoolController::class, 'update'])->name('school.update');
+            Route::delete('schools/{secondaryId}', [SchoolController::class, 'destroy'])->name('school.destroy');
+           
 
             Route::post('logout', [AdminLogoutController::class, 'index'])->name('logout');
         });

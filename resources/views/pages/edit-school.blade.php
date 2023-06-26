@@ -10,16 +10,17 @@
                 <div class="col-lg-8 col-md-8 offset-2 mr-auto">
                     <div class="card card-signup text-center">
                         <div class="card-header ">
-                            <h4 class="card-title">{{ __('Create School') }}</h4>
+                            <h4 class="card-title">{{ __('Edit School') }}</h4>
                         </div>
                         <div class="card-body ">
-                            <form class="form" method="POST" action="{{ route('admin.school.create') }}"
+                            <form class="form"  method="POST" action="{{ route('admin.school.update',  $school->id) }}"
                                 enctype="multipart/form-data">
+                                @method('put')
                                 @csrf
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="state" class="form-control">
-                                            <option value="{{ old('state') }}">Select State</option>
+                                            <option value="{{ old('state') ?? $school->state }}">Select State</option>
                                             <option value="fct abuja">FCT Abuja</option>
 
                                         </select>
@@ -35,7 +36,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="lga" class="form-control">
-                                            <option value="{{ old('lga') }}">Select LGA</option>
+                                            <option value="{{ old('lga') ?? $school->state }}">Select LGA</option>
                                             <option value="abaji">Abaji</option>
                                             <option value="garki">Garki</option>
                                             <option value="bwari">Bwari</option>
@@ -60,7 +61,7 @@
                                         </span>
                                     </div>
                                     <input name="name" type="text" class="form-control" placeholder="School Name"
-                                        value="{{ old('name') }}" required autofocus>
+                                        value="{{ old('name') ?? $school->name }}" required autofocus>
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -75,7 +76,7 @@
                                         </span>
                                     </div>
                                     <input name="email" type="text" class="form-control" placeholder="School Email"
-                                        value="{{ old('email') }}" required autofocus>
+                                        value="{{ old('email') ?? $school->email }}" required autofocus>
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -86,7 +87,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="type" class="form-control">
-                                            <option value="{{ old('type') }}">Select LGA</option>
+                                            <option value="{{ old('type') ?? $school->type}}">Select LGA</option>
                                             <option value="unity-school">Unity School</option>
                                             <option value="non-unity-school">Non Unity School</option>
                                         </select>
@@ -102,7 +103,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="address" class="form-control" placeholder="Address"> {{ old('aaddress') }} </textarea>
+                                            <textarea name="address" class="form-control" placeholder="Address"> {{ old('aaddress')  ?? $school->address}} </textarea>
                                         </div>
                                         @if ($errors->has('address'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -113,7 +114,7 @@
                                 </div>
 
                                 <label class="col-md-3 col-form-label">{{ __('School Logo') }}</label>
-                                <input type="file" value="{{ old('image_url') }}" name="image_url"
+                                <input type="file" value="{{ old('image_url')  ?? $school->image_url}}" name="image_url"
                                     placeholder="Select Image" accept="image/*" class="form-control" />
                                 @if ($errors->has('image_url'))
                                     <span class="invalid-feedback" style="display: block; border:30px" role="alert">
@@ -125,7 +126,7 @@
 
 
                                 <div class="card-footer ">
-                                    <button type="submit" class="btn btn-info btn-round">{{ __('Save') }}</button>
+                                    <button type="submit" class="btn btn-info btn-round">{{ __('Update') }}</button>
                                     {{-- <button type="" class="btn btn-danger btn-round">{{ __('Cancel') }}</button> --}}
                                 </div>
                             </form>
