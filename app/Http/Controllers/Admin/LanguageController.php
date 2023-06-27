@@ -45,7 +45,7 @@ class LanguageController extends Controller
         return view('pages.edit-language', ['language' => $language]);
     }
 
-    public function update(Language $language, CreateLanguageRequest $request, $languageId): RedirectResponse
+    public function update(CreateLanguageRequest $request, $languageId): RedirectResponse
     {
         $image = null;
 
@@ -53,7 +53,7 @@ class LanguageController extends Controller
             $image = $request->image_url;
         }
 
-        $this->service->updateLanguage($language, $request->validated(), $image, $languageId);
+        $this->service->updateLanguage($request->validated(), $image, $languageId);
 
         return redirect()->route('admin.language.list')
             ->with('success', 'Language updated successfully');

@@ -40,9 +40,33 @@ class QuestionController extends Controller
         return view('pages.list-question', ['questions' => $questions]);
     }
 
-    public function show()
+   
+    public function show($questionId)
     {
+        $languages = Language::all();
+        $courses = Course::all();
+        $question = $this->service->showQuestion($questionId);
+        return view('pages.edit-question', ['question' => $question, 'languages' => $languages, 'courses' => $courses]);
     }
+
+    public function update(CreateQuestionRequest $request, $questionId): RedirectResponse
+    {
+        $image = null;
+        $media_url = null;
+
+        if ($request->hasFile('image_url')) {
+            $image = $request->image_url;
+        }
+        if ($request->hasFile('media_url')) {
+            $media_url = $request->media_url;
+        }
+
+        $this->service->updateQuestion($request->validated(), $image, $media_url, $questionId);
+
+        return redirect()->route('admin.question.list')
+            ->with('success', 'Question updated successfully');
+    }
+
 
     public function destroy(Question $question)
     {

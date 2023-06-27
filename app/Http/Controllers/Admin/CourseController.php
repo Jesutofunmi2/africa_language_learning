@@ -39,6 +39,26 @@ class CourseController extends Controller
      return view('pages.list-course')->with('courses', $courses);
     }
 
+    public function show($courseId)
+    {
+        $course = $this->service->showCourse($courseId);
+        return view('pages.edit-course', ['course' => $course ]);
+    }
+
+    public function update(CreateCourseRequest $request, $courseId): RedirectResponse
+    {
+        $image = null;
+
+        if ($request->hasFile('image_url')) {
+            $image = $request->image_url;
+        }
+
+        $this->service->updateCourse($request->validated(), $image, $courseId);
+
+        return redirect()->route('admin.course.list')
+            ->with('success', 'Course updated successfully');
+    }
+
     public function destroy(Course $course): RedirectResponse
     {
         $this->service->deleteCourse($course);

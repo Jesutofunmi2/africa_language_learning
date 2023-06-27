@@ -118,7 +118,7 @@ class ActivityService
         return $language;
     }
 
-    public function updateLanguage(Language $language, array $data, $image = null, $languageId): Language
+    public function updateLanguage(array $data, $image = null, $languageId): Language
     {
         $url = null;
 
@@ -126,9 +126,9 @@ class ActivityService
             $mediaService = new MediaService;
             $url = $mediaService->uploadImage($data['image_url']);
         }
-
+         $language = new Language;
         // if user id in array, we create new edition for the user
-        $new_language = Language::where('id', $languageId)
+        $language::where('id', $languageId)
             ->update([
                 'name' => $data['name'],
                 'image_url' => $url ?? $language->image_url
@@ -155,6 +155,34 @@ class ActivityService
         $course->description = $data['description'];
         $course->image_url = $mediaUrl;
         $course->save();
+    }
+
+
+    public function showCourse($courseId): Course
+    {
+        $course = Course::whereId($courseId)->first();
+
+        return $course;
+    }
+
+    public function updateCourse(array $data, $image = null, $courseId): Course
+    {
+        $url = null;
+
+        if (!is_null($image)) {
+            $mediaService = new MediaService;
+            $url = $mediaService->uploadImage($data['image_url']);
+        }
+         $course = new Course;
+        // if user id in array, we create new edition for the user
+        $course::where('id', $courseId)
+            ->update([
+                'title' => $data['title'],
+                'description' => $data['description'],
+                'image_url' => $url
+            ]);
+
+        return $course;
     }
 
     /**

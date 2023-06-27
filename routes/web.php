@@ -58,13 +58,15 @@ Route::prefix('admin')->name('admin.')
             Route::get('course/create', [CourseController::class, 'index'])->name('course.index');
             Route::post('course/create', [CourseController::class, 'create'])->name('course.create');
             Route::get('courses', [CourseController::class, 'list'])->name('course.list');
-            Route::put('course/{course}', [CourseController::class, 'show'])->name('course.show');
+            Route::get('course/{course}', [CourseController::class, 'show'])->name('course.show');
+            Route::put('course/{course}', [CourseController::class, 'update'])->name('course.update');
             Route::delete('course/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
 
             Route::get('question/create', [QuestionController::class, 'index'])->name('question.index');
             Route::post('question/create', [QuestionController::class, 'create'])->name('question.create');
             Route::get('questions', [QuestionController::class, 'list'])->name('question.list');
-            Route::put('questions/{question}', [QuestionController::class, 'show'])->name('question.show');
+            Route::get('questions/{question}', [QuestionController::class, 'show'])->name('question.show');
+            Route::put('questions/{question}', [QuestionController::class, 'update'])->name('question.update');
             Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
 
             Route::get('question/option', [OptionController::class, 'index'])->name('option.index');

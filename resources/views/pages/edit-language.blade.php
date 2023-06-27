@@ -37,7 +37,7 @@
                                                 <strong>{{ $errors->first('image_url') }}</strong>
                                             </span>
                                         @endif
-                                        <img src="{{ asset($language->image_url) }}" width="60px" height="60px" />
+                                        <img src="{{ asset($language->image_url) }}" width="200px" height="200px" alt="" srcset="">
                                 <div class="card-footer ">
                                     <button type="submit" class="btn btn-info btn-round">{{ __('Update') }}</button>
                                 </div>
