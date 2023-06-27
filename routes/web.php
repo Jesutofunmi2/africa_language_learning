@@ -72,6 +72,7 @@ Route::prefix('admin')->name('admin.')
             Route::get('question/option', [OptionController::class, 'index'])->name('option.index');
             Route::post('question/option', [OptionController::class, 'create'])->name('option.create');
             Route::get('question', [OptionController::class, 'list'])->name('option.list');
+            Route::put('question/{id}', [OptionController::class, 'is_correct_update'])->name('option.is_correct_update');
             Route::delete('question/{option}', [OptionController::class, 'destroy'])->name('option.destroy');
 
             Route::get('school/create', [SchoolController::class, 'index'])->name('school.index');

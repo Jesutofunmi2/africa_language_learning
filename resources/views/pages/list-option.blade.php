@@ -36,6 +36,9 @@
                                 Image
                              </th>
                              <th>
+                                Is Correct
+                             </th>
+                             <th>
                                 Date
                              </th>
                             <th>
@@ -67,6 +70,20 @@
                                     <td>
                                         <img src="{{ asset($option->image_url) }}" width="40px" height="40px" />
                                     </td>
+                                    @if($option->is_correct == 1)
+                                    <form action="{{ route('admin.option.is_correct_update', $option->id) }}" onsubmit="return confirm('Are you sure you want to update option to wrong option?')" method="post">
+                                        @csrf
+                                        @method('put')
+                                     <td>  <button class="btn btn-success" type="submit">Yes</button></td>
+                                    </form>
+                                    @else
+                                    <td> 
+                                        <form action="{{ route('admin.option.is_correct_update', $option->id) }}" onsubmit="return confirm('Are you sure you want to update option to is correct?')" method="post">
+                                            @csrf
+                                            @method('put')
+                                             <button class="btn btn-danger" type="submit">No</button></td>
+                                            @endif
+                                        </form>
                                     <td>
                                         {{ $option->created_at->diffForHumans() }}
                                     </td>
