@@ -11,7 +11,9 @@ use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Language;
+use App\Models\Option;
 use App\Models\Question;
+use App\Models\SecondarySchool;
 use App\Models\Student;
 
 class AdminDashboardController extends Controller
@@ -39,8 +41,9 @@ class AdminDashboardController extends Controller
         $languages = Language::count();
         $courses = Course::count();
         $students = Student::count();
-        $schools = School::count();
+        $schools = SecondarySchool::count();
         $questions = Question::count();
+        $options = Option::count();
 
         return view(
             'pages.dashboard',
@@ -51,7 +54,8 @@ class AdminDashboardController extends Controller
                 'courses' => $courses,
                 'students' => $students,
                 'schools' => $schools,
-                'questions' => $questions
+                'questions' => $questions,
+                'options' => $options
             ]
         );
     }

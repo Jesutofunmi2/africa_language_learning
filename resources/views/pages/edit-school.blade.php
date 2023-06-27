@@ -123,7 +123,7 @@
                                 @endif
 
 
-
+                                <img src="{{ asset($school->image_url) }}" width="60px" height="60px" />
 
                                 <div class="card-footer ">
                                     <button type="submit" class="btn btn-info btn-round">{{ __('Update') }}</button>

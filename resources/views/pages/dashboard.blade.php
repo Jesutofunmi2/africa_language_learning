@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <p class="card-category">Schools</p>
+                                            <a href="{{ route('admin.school.list') }}">  <p class="card-category">Schools</p></a>
                                             <p class="card-title">{{$schools}}
                                                 <p>
                                         </div>
@@ -111,6 +111,114 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="nc-icon nc-globe text-warning"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <a href="{{ route('admin.question.list') }}">  <p class="card-category">Questions</p> </a>
+                                            <p class="card-title">{{$questions}}
+                                                <p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-refresh"></i> Update Now
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="nc-icon nc-money-coins text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <a href="{{ route('admin.option.list') }}"> <p class="card-category">Options</p></a>
+                                            <p class="card-title"> {{$options}}
+                                                <p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-calendar-o"></i> Last day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="nc-icon nc-vector text-danger"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <p class="card-category">Students</p>
+                                            <p class="card-title">{{$students}}
+                                                <p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-clock-o"></i> In the last hour
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="nc-icon nc-favourite-28 text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <a href="{{ route('admin.school.list') }}">  <p class="card-category">Teachers</p></a>
+                                            <p class="card-title">{{$schools}}
+                                                <p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-refresh"></i> Update now
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card ">

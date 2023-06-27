@@ -51,7 +51,8 @@ Route::prefix('admin')->name('admin.')
             Route::get('language/create', [LanguageController::class, 'index'])->name('language.index');
             Route::post('language/create', [LanguageController::class, 'create'])->name('language.create');
             Route::get('languages', [LanguageController::class, 'list'])->name('language.list');
-            Route::put('language/{language}', [LanguageController::class, 'show'])->name('language.show');
+            Route::get('language/{language}', [LanguageController::class, 'show'])->name('language.show');
+            Route::put('language/{language}', [LanguageController::class, 'update'])->name('language.update');
             Route::delete('language/{language}', [LanguageController::class, 'destroy'])->name('language.destroy');
 
             Route::get('course/create', [CourseController::class, 'index'])->name('course.index');

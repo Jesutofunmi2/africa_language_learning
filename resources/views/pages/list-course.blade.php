@@ -17,6 +17,7 @@
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="text-primary">
+                            <th>S/N</th>
                             <th>
                                 Course Name
                             </th>
@@ -40,6 +41,9 @@
                             
                             @foreach ($courses as $course)
                                 <tr>
+                                    <td>
+                                        {{ $loop->iteration }}
+                                    </td>
                                     <td>
                                         {{ $course->title }}
                                     </td>

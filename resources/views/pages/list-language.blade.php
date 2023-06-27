@@ -17,6 +17,7 @@
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="text-primary">
+                            <th>S/N</th>
                             <th>
                                 Language Name
                             </th>
@@ -38,6 +39,9 @@
                             @foreach ($languages as $language)
                                 <tr>
                                     <td>
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td>
                                         {{ $language->name }}
                                     </td>
                                     <td>
@@ -54,7 +58,7 @@
                                         <form action="{{ route('admin.language.destroy', $language->id) }}" onsubmit="return confirm('Are you sure you want to delete language?')" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-danger" type="submit">Delete</button>
+                                            <button class="btn btn-danger" type="submit">Delete(PLS, DON'T)</button>
                                         </form>
                                     </td>
                                 </tr>

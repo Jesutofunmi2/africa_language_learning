@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\Language;
 use App\Models\User;
 use App\Models\Course;
+use App\Models\SecondarySchool;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -102,21 +103,44 @@ class ActivityService
 
     public function createLanguage(array $data): void
     {
-
         $mediaService = new MediaService;
         $mediaUrl = $mediaService->uploadImage($data['image_url']);
-
         $language = new Language;
         $language->name = $data['name'];
         $language->image_url = $mediaUrl;
         $language->save();
     }
 
+    public function showLanguage($languageId): Language
+    {
+        $language = Language::whereId($languageId)->first();
+
+        return $language;
+    }
+
+    public function updateLanguage(Language $language, array $data, $image = null, $languageId): Language
+    {
+        $url = null;
+
+        if (!is_null($image)) {
+            $mediaService = new MediaService;
+            $url = $mediaService->uploadImage($data['image_url']);
+        }
+
+        // if user id in array, we create new edition for the user
+        $new_language = Language::where('id', $languageId)
+            ->update([
+                'name' => $data['name'],
+                'image_url' => $url ?? $language->image_url
+            ]);
+
+        return $language;
+    }
+
     public function languageNameExists($name)
     {
         return Language::where('name', '=', $name)->exists();
     }
-
     /**
      * Create Course.
      * 

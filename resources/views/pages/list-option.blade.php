@@ -18,6 +18,9 @@
                     <table class="table">
                         <thead class="text-primary">
                             <th>
+                                S/N
+                            </th>
+                            <th>
                                 Option
                             </th>
                              <th>
@@ -47,14 +50,17 @@
                             @foreach ($options as $option)
                                 <tr>
                                     <td>
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td>
                                         {{ $option->title }}
                                     </td>
                                     <td>
                                         {{ $option->language->name }}
                                     </td>
-                                    {{-- <td>
-                                        {{ $option->question->id }}
-                                    </td> --}}
+                                    <td>
+                                        {{ $option->question->title }}
+                                    </td>
                                     <td>
                                       <a href="{{$option->media_url}}">Link</a>  
                                     </td>

@@ -39,6 +39,26 @@ class LanguageController extends Controller
         return view('pages.list-language')->with('languages', $language);
     }
 
+    public function show($languageId)
+    {
+        $language = $this->service->showLanguage($languageId);
+        return view('pages.edit-language', ['language' => $language]);
+    }
+
+    public function update(Language $language, CreateLanguageRequest $request, $languageId): RedirectResponse
+    {
+        $image = null;
+
+        if ($request->hasFile('image_url')) {
+            $image = $request->image_url;
+        }
+
+        $this->service->updateLanguage($language, $request->validated(), $image, $languageId);
+
+        return redirect()->route('admin.language.list')
+            ->with('success', 'Language updated successfully');
+    }
+
     public function destroy(Language $language): RedirectResponse
     {
         $this->service->deleteLanguage($language);

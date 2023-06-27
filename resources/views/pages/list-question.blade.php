@@ -18,6 +18,9 @@
                     <table class="table">
                         <thead class="text-primary">
                             <th>
+                                S/N
+                            </th>
+                            <th>
                                 Title
                             </th>
                              <th>
@@ -49,6 +52,9 @@
                             
                             @foreach ($questions as $question)
                                 <tr>
+                                    <td>
+                                        {{ $loop->iteration }}
+                                    </td>
                                     <td>
                                         {{ $question->title }}
                                     </td>

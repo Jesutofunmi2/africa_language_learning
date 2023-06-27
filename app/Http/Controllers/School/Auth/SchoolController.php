@@ -58,9 +58,9 @@ class SchoolController extends Controller
     return view('pages.list-school')->with('schools', $school);
   }
 
-  public function show($schoolController)
+  public function show($schoolId)
   {
-    $school = $this->schoolService->showschool($schoolController);
+    $school = $this->schoolService->showschool($schoolId);
     return view('pages.edit-school', ['school' => $school]);
   }
 
