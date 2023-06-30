@@ -46,7 +46,8 @@ class QuestionController extends Controller
         $languages = Language::all();
         $courses = Course::all();
         $question = $this->service->showQuestion($questionId);
-        return view('pages.edit-question', ['question' => $question, 'languages' => $languages, 'courses' => $courses]);
+        
+        return view('pages.admin.edit-question', ['question' => $question, 'languages' => $languages, 'courses' => $courses]);
     }
 
     public function update(CreateQuestionRequest $request, $questionId): RedirectResponse
