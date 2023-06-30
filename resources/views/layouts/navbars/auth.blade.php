@@ -76,7 +76,20 @@
             <li class="{{ $elementActive == 'option' ? 'active' : '' }}">
                 <a href="{{ route('admin.option.index')}}">
                     <i class="nc-icon nc-box"></i>
-                    <p>{{ __('Create Option for Question') }}</p>
+                    <p>{{ __('Create Option') }}</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'role' ? 'active' : '' }}">
+                <a href="{{ route('admin.role.index')}}">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Create Role') }}</p>
+                </a>
+            </li>
+
+            <li class="{{ $elementActive == 'permission' ? 'active' : '' }}">
+                <a href="{{ route('admin.permission.index')}}">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Create Permission') }}</p>
                 </a>
             </li>
         </ul>

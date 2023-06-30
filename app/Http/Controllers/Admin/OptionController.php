@@ -22,7 +22,7 @@ class OptionController extends Controller
         $languages = Language::all();
         $questions = Question::all();
 
-        return view('pages.create-option', ['languages' => $languages, 'questions' => $questions]);
+        return view('pages.admin.create-option', ['languages' => $languages, 'questions' => $questions]);
     }
 
     public function create(CreateOptionRequest $createQuestionRequest): RedirectResponse
@@ -34,7 +34,7 @@ class OptionController extends Controller
     public function list()
     {
         $options = Option::orderBy('created_at', 'desc')->paginate();
-        return view('pages.list-option', ['options' => $options]);
+        return view('pages.admin.list-option', ['options' => $options]);
     }
     
     public function is_correct_update($id)

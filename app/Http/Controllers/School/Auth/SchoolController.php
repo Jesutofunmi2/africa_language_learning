@@ -43,7 +43,7 @@ class SchoolController extends Controller
 
   public function index()
   {
-    return view('pages.create-school');
+    return view('pages.admin.create-school');
   }
 
   public function create(SecondaryRequest $secondaryRequest)
@@ -55,13 +55,13 @@ class SchoolController extends Controller
   public function list(Request $request): View
   {
     $school = SecondarySchool::orderBy('created_at', 'desc')->paginate(15);
-    return view('pages.list-school')->with('schools', $school);
+    return view('pages.admin.list-school')->with('schools', $school);
   }
 
   public function show($schoolId)
   {
     $school = $this->schoolService->showschool($schoolId);
-    return view('pages.edit-school', ['school' => $school]);
+    return view('pages.admin.edit-school', ['school' => $school]);
   }
 
   public function update(SecondarySchool $secondarySchool, SecondaryRequest $request, $schoolId): RedirectResponse

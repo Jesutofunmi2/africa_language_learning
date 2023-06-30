@@ -32,7 +32,7 @@ class AdminActivityController extends Controller
     {
         $users = Admin::where('is_admin', true)->get();
         $types = Activity::TYPES;
-        return view('pages.create-activity',  ['users' => $users, 'types' => $types]);
+        return view('pages.admin.create-activity',  ['users' => $users, 'types' => $types]);
     }
 
 
@@ -72,7 +72,7 @@ class AdminActivityController extends Controller
     public function list(Request $request): View
     {
         $activities = Activity::paginate();
-        return view('pages.list-activity')->with('activities', $activities);
+        return view('pages.admin.list-activity')->with('activities', $activities);
     }
 
     /**
@@ -90,7 +90,7 @@ class AdminActivityController extends Controller
         $users = Admin::where('is_admin', true)->get();
         $types = Activity::TYPES;
         
-        return view('pages.edit-activity')->with([
+        return view('pages.admin.edit-activity')->with([
             'activity' => $activity,
             'users' => $users,
             'types' => $types]

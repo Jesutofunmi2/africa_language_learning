@@ -46,7 +46,7 @@ class AdminDashboardController extends Controller
         $options = Option::count();
 
         return view(
-            'pages.dashboard',
+            'pages.admin.dashboard',
             [
                 'users' => $users,
                 'types' => $types,

@@ -19,7 +19,7 @@ class LanguageController extends Controller
 
     public function index(Request $request): View
     {
-        return view('pages.create-language');
+        return view('pages.admin.create-language');
     }
 
     public function create(CreateLanguageRequest $createLanguageRequest): RedirectResponse
@@ -36,13 +36,13 @@ class LanguageController extends Controller
     public function list(Request $request): View
     {
         $language = Language::orderBy('created_at', 'desc')->paginate(15);
-        return view('pages.list-language')->with('languages', $language);
+        return view('pages.admin.list-language')->with('languages', $language);
     }
 
     public function show($languageId)
     {
         $language = $this->service->showLanguage($languageId);
-        return view('pages.edit-language', ['language' => $language]);
+        return view('pages.admin.edit-language', ['language' => $language]);
     }
 
     public function update(CreateLanguageRequest $request, $languageId): RedirectResponse

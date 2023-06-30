@@ -23,7 +23,7 @@ class CourseController extends Controller
     public function index(Request $request): View
     {
         $languages = Language::get();
-        return view('pages.create-course', ['languages' => $languages]);
+        return view('pages.admin.create-course', ['languages' => $languages]);
     }
 
     public function create(CreateCourseRequest $createCourseRequest): RedirectResponse
@@ -36,13 +36,13 @@ class CourseController extends Controller
     public function list(Request $request):View
     {
      $courses = Course::orderBy('created_at', 'desc')->paginate();
-     return view('pages.list-course')->with('courses', $courses);
+     return view('pages.admin.list-course')->with('courses', $courses);
     }
 
     public function show($courseId)
     {
         $course = $this->service->showCourse($courseId);
-        return view('pages.edit-course', ['course' => $course ]);
+        return view('pages.admin.edit-course', ['course' => $course ]);
     }
 
     public function update(CreateCourseRequest $request, $courseId): RedirectResponse

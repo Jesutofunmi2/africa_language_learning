@@ -31,7 +31,7 @@ class AdminRegisterController extends Controller
     public function index(Request $request): View
     {
         // return view('auth.register');
-        return view('pages.create-admin');
+        return view('pages.admin.create-admin');
     }
 
      /**

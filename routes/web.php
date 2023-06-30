@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\OptionController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\School\Auth\SchoolController;
 use Illuminate\Support\Facades\Route;
 
@@ -83,6 +85,21 @@ Route::prefix('admin')->name('admin.')
             Route::put('school/{secondaryId}', [SchoolController::class, 'update'])->name('school.update');
             Route::delete('schools/{secondaryId}', [SchoolController::class, 'destroy'])->name('school.destroy');
            
+            Route::get('role/create', [RoleController::class, 'index'])->name('role.index');
+            Route::post('role/create', [RoleController::class, 'create'])->name('role.create');
+            Route::get('roles', [RoleController::class, 'list'])->name('role.list');
+            Route::get('role/{roleId}', [RoleController::class, 'show'])->name('role.show');
+            Route::put('role/{roleId}', [RoleController::class, 'update'])->name('role.update');
+            Route::delete('role/{roleId}', [RoleController::class, 'destroy'])->name('role.destroy');
+            Route::post('/roles/{role}/permissions', [RoleController::class, 'givePermission'])->name('role.permissions');
+            Route::delete('/roles/{role}/permissions/{permission}', [RoleController::class, 'revokePermission'])->name('role.permissions.revoke');
+
+            Route::get('permission/create', [PermissionController::class, 'index'])->name('permission.index');
+            Route::post('permission/create', [PermissionController::class, 'create'])->name('permission.create');
+            Route::get('permissions', [PermissionController::class, 'list'])->name('permission.list');
+            Route::get('permission/{permissionId}', [PermissionController::class, 'show'])->name('permission.show');
+            Route::put('permission/{permissionId}', [PermissionController::class, 'update'])->name('permission.update');
+            Route::delete('permission/{permissionId}', [PermissionController::class, 'destroy'])->name('permission.destroy');
 
             Route::post('logout', [AdminLogoutController::class, 'index'])->name('logout');
         });

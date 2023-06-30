@@ -23,7 +23,7 @@ class QuestionController extends Controller
         $languages = Language::all();
         $courses = Course::all();
 
-        return view('pages.create-question', ['languages' => $languages, 'courses' => $courses]);
+        return view('pages.admin.create-question', ['languages' => $languages, 'courses' => $courses]);
     }
 
     public function create(CreateQuestionRequest $createQuestionRequest): RedirectResponse
@@ -37,7 +37,7 @@ class QuestionController extends Controller
     {
         $questions = Question::orderBy('created_at', 'desc')->paginate(15);
 
-        return view('pages.list-question', ['questions' => $questions]);
+        return view('pages.admin.list-question', ['questions' => $questions]);
     }
 
 
