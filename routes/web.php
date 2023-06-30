@@ -33,12 +33,12 @@ Route::prefix('admin')->name('admin.')
         Route::middleware('guest')->group(function() {
             Route::get('login', [AdminLoginController::class, 'index'])->name('login.get');
             Route::post('login', [AdminLoginController::class, 'login'])->name('login.post');
-
-            Route::get('register', [AdminRegisterController::class, 'index'])->name('register.get');
-            Route::post('register', [AdminRegisterController::class, 'register'])->name('register.post');
         });
 
         Route::middleware('auth', 'is_admin')->group(function() {
+            Route::get('register', [AdminRegisterController::class, 'index'])->name('register.get');
+            Route::post('register', [AdminRegisterController::class, 'register'])->name('register.post');
+
             Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
             Route::get('activity/create', [AdminActivityController::class, 'index'])->name('activity.index');
@@ -66,6 +66,7 @@ Route::prefix('admin')->name('admin.')
             Route::post('question/create', [QuestionController::class, 'create'])->name('question.create');
             Route::get('questions', [QuestionController::class, 'list'])->name('question.list');
             Route::get('questions/{question}', [QuestionController::class, 'show'])->name('question.show');
+            Route::put('questions/{id}', [QuestionController::class, 'status'])->name('question.status');
             Route::put('questions/{question}', [QuestionController::class, 'update'])->name('question.update');
             Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
 

@@ -19,7 +19,7 @@
             <ul class="navbar-nav">
                
                 <li class="nav-item ">
-                    <a href="{{ route('admin.register.get') }}" class="nav-link">
+                    <a href="#" class="nav-link">
                     <i class="nc-icon nc-book-bookpassword"></i>{{ __('Reset Password') }}
                     </a>
                 </li>

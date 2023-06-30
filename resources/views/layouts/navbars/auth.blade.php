@@ -1,11 +1,11 @@
 <div class="sidebar" data-color="white" data-active-color="danger">
     <div class="logo">
-        <a href="http://www.dev.izesan.com" class="simple-text logo-mini">
+        <a href="#" class="simple-text logo-mini">
             <div class="logo-image-small">
                 <img src="{{ asset('paper') }}/img/favicon.png">
             </div>
         </a>
-        <a href="http://www.dev.izesan.com" class="simple-text logo-normal">
+        <a href="#" class="simple-text logo-normal">
             {{ __('Izesan!') }}
         </a>
     </div>
@@ -33,16 +33,16 @@
                 </a>
             </li>
 
-            <li class="{{ $elementActive == 'activity' ? 'active' : '' }}">
-                <a href="{{ route('admin.activity.index') }}">
+            <li class="{{ $elementActive == 'admin' ? 'active' : '' }}">
+                <a href="{{ route('admin.register.get') }}">
                     <i class="nc-icon nc-box"></i>
-                    <p>{{ __('Create Activity') }}</p>
+                    <p>{{ __('Create Admin') }}</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'list' ? 'active' : '' }}">
-                <a href="{{ route('admin.activity.list') }}">
+                <a href="#">
                     <i class="nc-icon nc-pin-3"></i>
-                    <p>{{ __('List Activities') }}</p>
+                    <p>{{ __('List Admin User') }}</p>
                 </a>
             </li>
 

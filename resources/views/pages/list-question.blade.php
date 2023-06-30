@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'profile'
+    'elementActive' => 'profile',
 ])
 
 @section('content')
@@ -10,9 +10,9 @@
                 {{ session('success') }}
             </div>
         @endif
-       
+
         <div class="row">
-       
+
             <div class="col-md-10 offset-1">
                 <div class="table-responsive">
                     <table class="table">
@@ -23,33 +23,33 @@
                             <th>
                                 Title
                             </th>
-                             <th>
+                            <th>
                                 Course
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Language
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Media
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Image
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Status
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Date
-                             </th>
+                            </th>
                             <th>
                                 Action
                             </th>
                             <th>
-                                
+
                             </th>
                         </thead>
                         <tbody>
-                            
+
                             @foreach ($questions as $question)
                                 <tr>
                                     <td>
@@ -65,7 +65,7 @@
                                         {{ $question->language->name }}
                                     </td>
                                     <td>
-                                       <a href="{{$question->media_url}}"> Media Link</a>
+                                        <a href="{{ $question->media_url }}"> Media Link</a>
                                     </td>
 
                                     <td>
@@ -73,28 +73,39 @@
                                     </td>
 
                                     <td>
-                                      @if ($question->status == false)
-                                      <button class="btn btn-danger" type="submit">Offline</button>
-                                           @else
-                                      <button class="btn btn-success" type="submit">Online</button> 
-                                           @endif
-                                    </td>
-        
-                                    <td>
-                                        {{ $question->created_at->diffForHumans() }}
-                                    </td>
-                              
-                                    <td>
-                                        <a href="{{ route('admin.question.show', $question->id) }}" class="btn">Edit</a>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('admin.question.destroy', $question->id) }}" onsubmit="return confirm('Are you sure you want to delete Question ?')" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger" type="submit">Delete</button>
+                                       @if($question->status == true)
+                                       <form action="{{ route('admin.question.status', $question->id) }}"
+                                        onsubmit="return confirm('Are you sure you want to update Question status ?')" method="post">
+                                        @csrf
+                                        @method('put')
+                                          <button class="btn btn-success" type="submit">Online</button> 
                                         </form>
+                                       @else
+                                       <form action="{{ route('admin.question.status', $question->id) }}"
+                                        onsubmit="return confirm('Are you sure you want to update Question status ?')" method="post">
+                                        @csrf
+                                        @method('put')
+                                          <button class="btn btn-danger" type="submit">Offline</button>
+                                       </form>
+                                       @endif
                                     </td>
-                                </tr>
+
+                            <td>
+                                {{ $question->created_at->diffForHumans() }}
+                            </td>
+
+                            <td>
+                                <a href="{{ route('admin.question.show', $question->id) }}" class="btn">Edit</a>
+                            </td>
+                            <td>
+                                <form action="{{ route('admin.question.destroy', $question->id) }}"
+                                    onsubmit="return confirm('Are you sure you want to delete Question ?')" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+                            </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>

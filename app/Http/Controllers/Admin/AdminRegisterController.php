@@ -16,7 +16,7 @@ class AdminRegisterController extends Controller
 
     public function __construct(protected UserService $userService)
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
    /**
@@ -30,7 +30,8 @@ class AdminRegisterController extends Controller
      */
     public function index(Request $request): View
     {
-        return view('auth.register');
+        // return view('auth.register');
+        return view('pages.create-admin');
     }
 
      /**

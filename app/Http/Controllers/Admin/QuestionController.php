@@ -40,7 +40,7 @@ class QuestionController extends Controller
         return view('pages.list-question', ['questions' => $questions]);
     }
 
-   
+
     public function show($questionId)
     {
         $languages = Language::all();
@@ -66,13 +66,29 @@ class QuestionController extends Controller
         return redirect()->route('admin.question.list')
             ->with('success', 'Question updated successfully');
     }
+    public function status($id)
+    {
+        $new_question = new Question;
+        $question = Question::whereId($id)->first();
+        if ($question->status == true) {
+            $new_question::whereId($id)->update([
+                'status' => false
+            ]);
+        } else {
+            $new_question::whereId($id)->update([
+                'status' => true
+            ]);
+        }
+        return redirect()->route('admin.question.list')
+            ->with('success', 'Updated successfully');
+    }
 
 
     public function destroy(Question $question)
     {
         $this->service->deleteQuestion($question);
- 
+
         return redirect()->route('admin.question.list')
-                ->with('success', 'deleted successfully');
+            ->with('success', 'deleted successfully');
     }
 }
