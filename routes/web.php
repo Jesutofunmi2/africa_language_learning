@@ -40,6 +40,14 @@ Route::prefix('admin')->name('admin.')
         Route::middleware('auth', 'is_admin')->group(function() {
             Route::get('register', [AdminRegisterController::class, 'index'])->name('register.get');
             Route::post('register', [AdminRegisterController::class, 'register'])->name('register.post');
+            Route::get('registers', [AdminRegisterController::class, 'list'])->name('users.list');
+            Route::get('register/{registerId}', [AdminRegisterController::class, 'show'])->name('user.show');
+            Route::delete('register/{registerId}', [AdminRegisterController::class, 'destroy'])->name('user.destroy');
+            Route::put('register/{registerId}', [AdminRegisterController::class, 'update'])->name('user.update');
+            Route::post('/users/{user}/roles', [AdminRegisterController::class, 'assignRole'])->name('users.roles');
+            Route::delete('/users/{user}/roles/{role}', [AdminRegisterController::class, 'removeRole'])->name('users.roles.remove');
+            Route::post('/users/{user}/permissions', [AdminRegisterController::class, 'givePermission'])->name('users.permissions');
+            Route::delete('/users/{user}/permissions/{permission}', [AdminRegisterController::class, 'revokePermission'])->name('users.permissions.revoke');
 
             Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
@@ -100,6 +108,8 @@ Route::prefix('admin')->name('admin.')
             Route::get('permission/{permissionId}', [PermissionController::class, 'show'])->name('permission.show');
             Route::put('permission/{permissionId}', [PermissionController::class, 'update'])->name('permission.update');
             Route::delete('permission/{permissionId}', [PermissionController::class, 'destroy'])->name('permission.destroy');
+            Route::post('/permissions/{permission}/roles', [PermissionController::class, 'assignRole'])->name('permissions.roles');
+            Route::delete('/permissions/{permission}/roles/{role}', [PermissionController::class, 'removeRole'])->name('permissions.roles.remove');
 
             Route::post('logout', [AdminLogoutController::class, 'index'])->name('logout');
         });

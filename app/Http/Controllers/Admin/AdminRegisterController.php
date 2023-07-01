@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\RegisterUserRequest;
+use App\Models\Admin;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateAdminRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class AdminRegisterController extends Controller
 {
@@ -47,9 +51,73 @@ class AdminRegisterController extends Controller
     {
        
         $user = $this->userService->createAdmin($request->validated());
+    
+       // auth()->login($user);
 
-        auth()->login($user);
-
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.users.list')->with('success', 'Admin user created');
     }
+
+    public function list()
+    {
+        $users = Admin::orderBy('created_at', 'desc')->paginate(15);
+        return view('pages.admin.list-admin')->with('users', $users);
+    }
+
+    public function show($userId)
+    {
+        $user = Admin::whereId($userId)->first();
+        $roles = Role::all();
+        $permissions = Permission::all();
+
+        return view('pages.admin.edit-admin', compact('user', 'roles', 'permissions'));
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function destroy()
+    {
+
+    }
+
+    public function assignRole(Request $request, Admin $user)
+    {
+        if ($user->hasRole($request->role)) {
+            return back()->with('message', 'Role exists.');
+        }
+
+        $user->assignRole($request->role);
+        return back()->with('message', 'Role assigned.');
+    }
+
+    public function removeRole(Admin $user, Role $role)
+    {
+        if ($user->hasRole($role)) {
+            $user->removeRole($role);
+            return back()->with('message', 'Role removed.');
+        }
+
+        return back()->with('message', 'Role not exists.');
+    }
+
+    public function givePermission(Request $request, Admin $user)
+    {
+        if ($user->hasPermissionTo($request->permission)) {
+            return back()->with('message', 'Permission exists.');
+        }
+        $user->givePermissionTo($request->permission);
+        return back()->with('message', 'Permission added.');
+    }
+
+    public function revokePermission(Admin $user, Permission $permission)
+    {
+        if ($user->hasPermissionTo($permission)) {
+            $user->revokePermissionTo($permission);
+            return back()->with('message', 'Permission revoked.');
+        }
+        return back()->with('message', 'Permission does not exists.');
+    }
+
 }

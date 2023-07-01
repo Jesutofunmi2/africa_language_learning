@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'role'
+    'elementActive' => 'permission'
 ])
 @section('content')
     <div class="content">
@@ -10,11 +10,12 @@
                 <div class="col-lg-8 col-md-8 offset-2 mr-auto">
                     <div class="card card-signup text-center">
                         <div class="card-header ">
-                            <h4 class="card-title">{{ __('Edit Role') }}</h4>
+                            
+                            <h4 class="card-title">{{ __('Edit Permission') }}</h4>
                         </div>
                         <div class="card-body ">
                             
-                            <form class="form" method="POST" action="{{ route('admin.role.update', $role->id) }}" >
+                            <form class="form" method="POST" action="{{ route('admin.role.update', $permissions ) }}" >
                                 @method('put')
                                 @csrf
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
@@ -23,7 +24,7 @@
                                             <i class="nc-icon nc-box-2"></i>
                                         </span>
                                     </div>
-                                    <input name="name" type="text" class="form-control" placeholder="Role Name" value="{{ old('name') ?? $role->name}}" required autofocus>
+                                    <input name="name" type="text" class="form-control" placeholder="Permission Name" value="{{ old('name') ?? $permissions->name}}" required autofocus>
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -37,33 +38,33 @@
                             </form>
                         </div>
                         <div class="mt-6 p-2 bg-slate-100">
-                            <h2 class="text-2xl font-semibold">Role Permissions</h2>
+                            <h2 class="text-2xl font-semibold">Roles</h2>
                             <div class="flex space-x-2 mt-4 p-2">
-                                @if ($role->permissions)
-                                    @foreach ($role->permissions as $role_permission)
+                                @if ($permissions->roles)
+                                    @foreach ($permissions->roles as $permission_role)
                                         <form class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md" method="POST"
-                                            action="{{ route('admin.role.permissions.revoke', [$role->id, $role_permission->id]) }}"
+                                            action="{{ route('admin.permissions.roles.remove', [$permissions->id, $permission_role->id]) }}"
                                             onsubmit="return confirm('Are you sure?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-success" >{{ $role_permission->name }}</button>
+                                            <button type="submit" class="btn btn-success btn-round" >{{ $permission_role->name }}</button>
                                         </form>
                                     @endforeach
                                 @endif
                             </div>
                             <div class="max-w-xl mt-6">
-                                <form method="POST" action="{{ route('admin.role.permissions', $role->id) }}">
+                                <form method="POST" action="{{ route('admin.permissions.roles', $permissions->id) }}">
                                     @csrf
                                     <div class="sm:col-span-6">
-                                        <label for="permission"
-                                            class="block text-sm font-medium text-gray-700">Permission</label>
-                                        <select id="permission" name="permission" autocomplete="permission-name" class="form-control">
-                                            @foreach ($permissions as $permission)
-                                                <option value="{{ $permission->name }}">{{ $permission->name }}</option>
+                                        <label for="role" class="block text-sm font-medium text-gray-700">Roles</label>
+                                        <select id="role" name="role" autocomplete="role-name" class="form-control"
+                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->name }}">{{ $role->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('name')
+                                    @error('role')
                                         <span class="text-red-400 text-sm">{{ $message }}</span>
                                     @enderror
                             </div>

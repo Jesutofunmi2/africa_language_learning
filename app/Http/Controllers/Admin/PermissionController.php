@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
@@ -29,19 +30,48 @@ class PermissionController extends Controller
         return view('pages.permission.list-permission', ['permissions' => $permissions]);
     }
 
-    public function show()
+    public function show($permissionId)
     {
+        $permissions = Permission::whereId($permissionId)->first();
+        $roles = Role::all();
+
+        return view('pages.permission.edit-permission', ['roles' => $roles, 'permissions' => $permissions]);
 
     }
 
-    public function update()
+    public function update(Request $request, Permission $permission)
     {
+        $validated = $request->validate(['name' => 'required']);
+        $permission->update($validated);
 
+        return redirect()->route('admin.permissions.index')->with('message', 'Permission updated.');
     }
 
-    public function destroy()
+    public function destroy(Permission $permission)
     {
+        $permission->delete();
 
+        return back()->with('message', 'Permission deleted.');
+    }
+
+    public function assignRole(Request $request, Permission $permission)
+    {
+        if ($permission->hasRole($request->role)) {
+            return back()->with('message', 'Role exists.');
+        }
+
+        $permission->assignRole($request->role);
+        return back()->with('message', 'Role assigned.');
+    }
+
+    public function removeRole(Permission $permission, Role $role)
+    {
+        if ($permission->hasRole($role)) {
+            $permission->removeRole($role);
+            return back()->with('message', 'Role removed.');
+        }
+
+        return back()->with('message', 'Role not exists.');
     }
     //
 }
