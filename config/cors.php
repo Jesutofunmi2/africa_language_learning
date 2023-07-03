@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['https://izesan.com', 'http://izesan.com', '*'],
 
     'allowed_origins_patterns' => [],
 
