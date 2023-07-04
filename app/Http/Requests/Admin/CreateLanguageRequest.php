@@ -24,7 +24,7 @@ class CreateLanguageRequest extends FormRequest
     {
         return [
             'name' => ['string', 'required'],
-            'image_url' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:1024']
+            'image_url' => ['required', 'image', 'mimes:jpeg,png,jpg,svg', 'max:1024']
         ];
     }
 }
