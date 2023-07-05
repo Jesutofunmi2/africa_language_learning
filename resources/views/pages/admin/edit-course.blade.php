@@ -53,7 +53,7 @@
 
                                         <img src="{{ asset($course->image_url) }}" width="200px" height="200px" alt="" srcset="">
                                 <div class="card-footer ">
-                                    <button type="submit" class="btn btn-info btn-round">{{ __('Save') }}</button>
+                                    <button type="submit" class="btn btn-info btn-round">{{ __('Update') }}</button>
                                 </div>
                             </form>
                         </div>
