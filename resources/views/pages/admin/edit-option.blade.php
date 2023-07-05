@@ -50,7 +50,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="question_id" class="form-control">
-                                            <option value="{{ old('question_id') ?? $option->question->id }}">{{ $option->question->title}}</option>
+                                            <option value="{{ old('question_id') ?? $option->question->id ?? null }}">{{ $option->question->title ?? null}}</option>
                                             @foreach ($questions as $question)
                                                 <option value="{{ $question->id }}">{{ $question->title }}</option>
                                             @endforeach
