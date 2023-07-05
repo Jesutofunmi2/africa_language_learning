@@ -69,9 +69,9 @@ class QuestionController extends Controller
     }
     public function status($id)
     {
-      
+
         $this->service->questionStatus($id);
-    
+
         return redirect()->route('admin.question.list')
             ->with('success', 'Updated successfully');
     }

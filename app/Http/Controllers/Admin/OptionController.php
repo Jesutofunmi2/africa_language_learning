@@ -45,9 +45,9 @@ class OptionController extends Controller
         $option = $this->service->showOption($Id);
         $question = Question::all();
 
-        return view('pages.admin.edit-option', ['questions'=> $question, 'option' => $option, 'languages' => $languages, 'courses' => $courses]);
+        return view('pages.admin.edit-option', ['questions' => $question, 'option' => $option, 'languages' => $languages, 'courses' => $courses]);
     }
-    
+
 
 
     public function update(CreateOptionRequest $createoptionrequest, $questionId)
@@ -71,14 +71,14 @@ class OptionController extends Controller
     {
         $new_option = new Option;
         $options = Option::whereId($id)->first();
-        if($options->is_correct == 1){
+        if ($options->is_correct == 1) {
             $new_option::whereId($id)->update([
                 'is_correct' => 0
-             ]);
-        }else{
+            ]);
+        } else {
             $new_option::whereId($id)->update([
                 'is_correct' => 1
-             ]);
+            ]);
         }
         return redirect()->route('admin.option.list')
             ->with('success', 'Updated successfully');
