@@ -89,7 +89,7 @@
                                     </td>
                               
                                     <td>
-                                        <a href="{{ route('admin.course.show', $option->id) }}" class="btn">Edit</a>
+                                        <a href="{{ route('admin.option.show', $option->id) }}" class="btn">Edit</a>
                                     </td>
                                     <td>
                                         <form action="{{ route('admin.option.destroy', $option->id) }}" onsubmit="return confirm('Are you sure you want to delete option?')" method="post">

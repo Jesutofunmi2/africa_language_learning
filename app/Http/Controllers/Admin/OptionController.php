@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateOptionRequest;
+use App\Models\Course;
 use App\Services\QuestionService;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Language;
@@ -36,7 +37,36 @@ class OptionController extends Controller
         $options = Option::orderBy('created_at', 'desc')->paginate();
         return view('pages.admin.list-option', ['options' => $options]);
     }
+
+    public function show($Id)
+    {
+        $languages = Language::all();
+        $courses = Course::all();
+        $option = $this->service->showOption($Id);
+        $question = Question::all();
+
+        return view('pages.admin.edit-option', ['questions'=> $question, 'option' => $option, 'languages' => $languages, 'courses' => $courses]);
+    }
     
+
+
+    public function update(CreateOptionRequest $createoptionrequest, $questionId)
+    {
+        $image = null;
+        $media_url = null;
+
+        if ($createoptionrequest->hasFile('image_url')) {
+            $image = $createoptionrequest->image_url;
+        }
+        if ($createoptionrequest->hasFile('media_url')) {
+            $media_url = $createoptionrequest->media_url;
+        }
+
+        $this->service->updateOption($createoptionrequest->validated(), $image, $media_url, $questionId);
+
+        return redirect()->route('admin.option.list')
+            ->with('success', 'Option updated successfully');
+    }
     public function is_correct_update($id)
     {
         $new_option = new Option;

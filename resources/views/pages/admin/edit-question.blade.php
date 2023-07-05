@@ -47,7 +47,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="language_id" class="form-control">
-                                            <option value="{{ old('language_id') }}">Select Language </option>
+                                            <option value="{{ old('language_id') ?? $question->language->id  }}"> {{ $question->language->name }} </option>
                                             @foreach ($languages as $language)
                                                 <option value="{{ $language->id }}">{{ $language->name }}</option>
                                             @endforeach
@@ -64,7 +64,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="course_id" class="form-control">
-                                            <option value="{{ old('course_id') }}">Select Course </option>
+                                            <option value="{{ old('course_id') ?? $question->course->id  }}"> {{ $question->course->title }}</option>
                                             @foreach ($courses as $course)
                                                 <option value="{{ $course->id }}">{{ $course->title }}</option>
                                             @endforeach
@@ -81,7 +81,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="answered_type" class="form-control">
-                                            <option value="{{ old('answered_type') ?? $question->answered_type }}">Select Answered Type</option>
+                                            <option value="{{ old('answered_type') ?? $question->answered_type }}">{{ $question->answered_type }}</option>
                                                 <option value="single">Single</option>
                                                 <option value="multiple">Multiple</option>
                                                 <option value="puzzle">Puzzle</option>
@@ -99,7 +99,7 @@
 
 
                                 <label class="col-md-3 col-form-label">{{ __('Media Upload') }}</label>
-                                <input type="file" value="{{ old('media_url') }}" name="media_url"  placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"   class="form-control" />
+                                <input type="file" value="{{ old('media_url')  }}" name="media_url"  placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"   class="form-control" />
                                 @if ($errors->has('media_url'))
                                 <span class="invalid-feedback" style="display: block; border:30px" role="alert">
                                     <strong>{{ $errors->first('media_url') }}</strong>
@@ -114,8 +114,6 @@
                                                 <strong>{{ $errors->first('image_url') }}</strong>
                                             </span>
                                         @endif
-
-                               
                                         <img src="{{ asset($question->image_url) }}" width="200px" height="200px" alt="" srcset="">
                                
                                 <div class="card-footer ">

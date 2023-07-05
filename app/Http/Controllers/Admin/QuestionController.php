@@ -46,40 +46,32 @@ class QuestionController extends Controller
         $languages = Language::all();
         $courses = Course::all();
         $question = $this->service->showQuestion($questionId);
-        
+
         return view('pages.admin.edit-question', ['question' => $question, 'languages' => $languages, 'courses' => $courses]);
     }
 
-    public function update(CreateQuestionRequest $request, $questionId): RedirectResponse
+    public function update(CreateQuestionRequest $createquestionrequest, $questionId)
     {
         $image = null;
         $media_url = null;
 
-        if ($request->hasFile('image_url')) {
-            $image = $request->image_url;
+        if ($createquestionrequest->hasFile('image_url')) {
+            $image = $createquestionrequest->image_url;
         }
-        if ($request->hasFile('media_url')) {
-            $media_url = $request->media_url;
+        if ($createquestionrequest->hasFile('media_url')) {
+            $media_url = $createquestionrequest->media_url;
         }
 
-        $this->service->updateQuestion($request->validated(), $image, $media_url, $questionId);
+        $this->service->updateQuestion($createquestionrequest->validated(), $image, $media_url, $questionId);
 
         return redirect()->route('admin.question.list')
             ->with('success', 'Question updated successfully');
     }
     public function status($id)
     {
-        $new_question = new Question;
-        $question = Question::whereId($id)->first();
-        if ($question->status == true) {
-            $new_question::whereId($id)->update([
-                'status' => false
-            ]);
-        } else {
-            $new_question::whereId($id)->update([
-                'status' => true
-            ]);
-        }
+      
+        $this->service->questionStatus($id);
+    
         return redirect()->route('admin.question.list')
             ->with('success', 'Updated successfully');
     }

@@ -80,14 +80,16 @@ Route::prefix('admin')->name('admin.')
             Route::get('questions', [QuestionController::class, 'list'])->name('question.list');
             Route::get('questions/{question}', [QuestionController::class, 'show'])->name('question.show');
             Route::put('questions/{id}', [QuestionController::class, 'status'])->name('question.status');
-            Route::put('questions/{question}', [QuestionController::class, 'update'])->name('question.update');
+            Route::put('question/{questionId}', [QuestionController::class, 'update'])->name('question.update');
             Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
 
-            Route::get('question/option', [OptionController::class, 'index'])->name('option.index');
-            Route::post('question/option', [OptionController::class, 'create'])->name('option.create');
-            Route::get('question', [OptionController::class, 'list'])->name('option.list');
-            Route::put('question/{id}', [OptionController::class, 'is_correct_update'])->name('option.is_correct_update');
-            Route::delete('question/{option}', [OptionController::class, 'destroy'])->name('option.destroy');
+            Route::get('option/creeate', [OptionController::class, 'index'])->name('option.index');
+            Route::post('option/creeate', [OptionController::class, 'create'])->name('option.create');
+            Route::get('option', [OptionController::class, 'list'])->name('option.list');
+            Route::get('options/{id}', [OptionController::class, 'show'])->name('option.show');
+            Route::put('optionUpdate/{id}', [OptionController::class, 'update'])->name('option.update');
+            Route::put('option/{id}', [OptionController::class, 'is_correct_update'])->name('option.is_correct_update');
+            Route::delete('option/{option}', [OptionController::class, 'destroy'])->name('option.destroy');
 
             Route::get('school/create', [SchoolController::class, 'index'])->name('school.index');
             Route::post('school/create', [SchoolController::class, 'create'])->name('school.create');

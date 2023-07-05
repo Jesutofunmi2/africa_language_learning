@@ -22,7 +22,7 @@ class QuestionService
             $mediaType = null;
 
             $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
-            $image_extension = array('jpg', 'jpeg', 'png', 'gif','svg');
+            $image_extension = array('jpg', 'jpeg', 'png', 'gif', 'svg');
             $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
 
             $extention = $data['media_url']->extension();
@@ -62,6 +62,23 @@ class QuestionService
         return $question;
     }
 
+    public function questionStatus($id)
+    {
+        $new_question = new Question;
+        $question = Question::whereId($id)->first();
+        if ($question->status == true) {
+            $new_question::whereId($id)->update([
+                'status' => false
+            ]);
+        } else {
+            $new_question::whereId($id)->update([
+                'status' => true
+            ]);
+        }
+
+        return $new_question;
+    }
+
     public function updateQuestion(array $data, $image = null, $media_url = null, $questionId): Question
     {
         $url = null;
@@ -75,37 +92,51 @@ class QuestionService
 
         if (!is_null($media_url)) {
             $media = $mediaService->uploadAudio($data['media_url']);
+
+
+            $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
+            $image_extension = array('jpg', 'jpeg', 'png', 'gif', 'svg');
+            $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
+
+            $extention = $data['media_url']->extension();
+
+            if (in_array($extention, $video_extension)) {
+                $mediaType = 'video';
+            } elseif (in_array($extention, $image_extension)) {
+                $mediaType = 'image';
+            } elseif (in_array($extention, $audio_extension)) {
+                $mediaType = 'audio';
+            }
+        }
+        $question = Question::whereId($questionId)->first();
+        
+        if($url == null){
+            $url = $question->image_url;
         }
 
-        $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
-        $image_extension = array('jpg', 'jpeg', 'png', 'gif','svg');
-        $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
-
-        $extention = $data['media_url']->extension();
-
-        if (in_array($extention, $video_extension)) {
-            $mediaType = 'video';
-        } elseif (in_array($extention, $image_extension)) {
-            $mediaType = 'image';
-        } elseif (in_array($extention, $audio_extension)) {
-            $mediaType = 'audio';
+        if($media == null){
+            $media = $question->media_url;
         }
 
-        $question = new Question;
+        if($mediaType == null){
+            $mediaType = $question->media_type;
+        }
+        $new_question = new Question;
         // if user id in array, we create new edition for the user
-        $question::where('id', $question)
+
+        $new_question::where('id', $questionId)
             ->update([
-                'title' => $data['title'],
-                'instruction' => $data['instruction'],
-                'language_id' => $data['language_id'],
-                'course_id' => $data['course_id'],
-                'answered_type' => $data['answered_type'],
+                'title' => $data['title'] ?? $question->title,
+                'instruction' => $data['instruction'] ?? $question->instruction,
+                'language_id' => $data['language_id'] ?? $question->language_id,
+                'course_id' => $data['course_id'] ?? $question->course_id,
+                'answered_type' => $data['answered_type'] ?? $question->answered_type,
                 'media_type' => $mediaType,
                 'media_url' => $media,
                 'image_url' => $url
             ]);
 
-        return $question;
+        return $new_question;
     }
     public function deleteQuestion(Question $question)
     {
@@ -124,7 +155,7 @@ class QuestionService
             $mediaType = null;
 
             $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
-            $image_extension = array('jpg', 'jpeg', 'png', 'gif','svg');
+            $image_extension = array('jpg', 'jpeg', 'png', 'gif', 'svg');
             $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
 
             $extention = $data['media_url']->extension();
@@ -148,6 +179,72 @@ class QuestionService
             $option->save();
         });
         return $option;
+    }
+
+    public function showOption($questionId): Option
+    {
+        $option = Option::whereId($questionId)->first();
+
+        return $option;
+    }
+
+    public function updateOption(array $data, $image = null, $media_url = null, $optionId): Option
+    {
+        $url = null;
+        $media = null;
+        $mediaType = null;
+        $mediaService = new MediaService;
+        if (!is_null($image)) {
+
+            $url = $mediaService->uploadImage($data['image_url']);
+        }
+
+        if (!is_null($media_url)) {
+            $media = $mediaService->uploadAudio($data['media_url']);
+
+
+            $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
+            $image_extension = array('jpg', 'jpeg', 'png', 'gif', 'svg');
+            $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
+
+            $extention = $data['media_url']->extension();
+
+            if (in_array($extention, $video_extension)) {
+                $mediaType = 'video';
+            } elseif (in_array($extention, $image_extension)) {
+                $mediaType = 'image';
+            } elseif (in_array($extention, $audio_extension)) {
+                $mediaType = 'audio';
+            }
+        }
+        $option = Option::whereId($optionId)->first();
+        
+        if($url == null){
+            $url = $option->image_url;
+        }
+
+        if($media == null){
+            $media = $option->media_url;
+        }
+
+        if($mediaType == null){
+            $mediaType = $option->media_type;
+        }
+        $new_option = new Option;
+        // if user id in array, we create new edition for the user
+
+        $new_option::where('id', $optionId)
+            ->update([
+                'title' => $data['title'] ?? $option->title,
+                'language_id' => $data['language_id'] ?? $option->language_id,
+                'question_id' => $data['question_id'] ?? $option->question_id,
+                'is_correct' => $data['is_correct'] ?? $option->is_correct,
+                'media_type' => $mediaType,
+                'media_url' => $media,
+                'image_url' => $url
+            ]);
+
+        return $new_option;
     }
 
     public function deleteOption(Option $option)
