@@ -9,12 +9,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use App\Models\Student;
 class School extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable
     {
         HasFactory::factory as traitFactory;
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
     }
 
     /**

@@ -27,17 +27,14 @@ class CreateStudentRequest extends FormRequest
             'first_name' => ['required','string', 'max:254'],
             'last_name' => ['required','string', 'max:254'],
             'student_id' => ['sometimes','string', 'min:5', 'max:100', 'unique:students,student_id'],
-            'email' => ['email', 'min:5', 'max:100', 'unique:students,email'],
             'password' => ['string', 'min:4', 'max:50'],
             'school_id' => ['sometimes', 'string'],
             'image_url' => ['sometimes', 'string'],
             'language' => ['required', 'string'],
-            'phone_number'=>['sometimes', 'string'],
-            'age'=> ['required', 'integer'],
             'country' => ['required', 'string'],
-            'marital_status' => ['sometimes', 'string'],
             'gendar'=> ['required', 'string'],
-            'how_do_you_see_us' => ['required', 'string']
+            'phone_number'=> ['required', 'string'],
+            'age' => ['required', 'string']
         ];
     }
 }

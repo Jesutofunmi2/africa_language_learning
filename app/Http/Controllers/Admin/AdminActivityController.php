@@ -130,6 +130,7 @@ class AdminActivityController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * 
      */
+    
     public function destroy(Activity $activity): RedirectResponse
     {
         $this->service->deleteActivity($activity);

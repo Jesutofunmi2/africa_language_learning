@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Student;
 
 class SecondarySchool extends Authenticatable implements MustVerifyEmail
 {
@@ -17,6 +18,10 @@ class SecondarySchool extends Authenticatable implements MustVerifyEmail
         HasFactory::factory as traitFactory;
     }
 
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

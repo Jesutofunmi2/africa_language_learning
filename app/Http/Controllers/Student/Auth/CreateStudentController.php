@@ -22,17 +22,16 @@ class CreateStudentController extends Controller
     {
         $student = $this->studentService->createStudent($request->validated());
 
-        $ip = $request->ip();
-        $user_agent = $request->userAgent();
+        //$ip = $request->ip();
+       // $user_agent = $request->userAgent();
         $data = StudentResource::make($student);
 
-        $token = $this->tokenService->createTokenStudent($student, 'test', $ip, $user_agent);
+       // $token = $this->tokenService->createTokenStudent($student, 'test', $ip, $user_agent);
 
         return response()->json(
             [
                 'message' => 'Registration successful.',
                 'data' => $data,
-                'token' => LoginResource::make($student->withAccessToken($token))
             ],
             status: 201
         );

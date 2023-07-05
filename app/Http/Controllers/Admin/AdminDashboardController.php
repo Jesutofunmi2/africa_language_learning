@@ -36,6 +36,8 @@ class AdminDashboardController extends Controller
      */
     public function index(Request $request): View
     {
+
+        
         $users = Admin::where('is_admin', true)->get();
         $types = Activity::TYPES;
         $languages = Language::count();

@@ -13,6 +13,7 @@ class StudentService
      */
     public function createStudent(array $data): Student
     {
+    
         $student = new Student;
         $password = '12345678';
         $data['password'] = $password;
@@ -22,13 +23,13 @@ class StudentService
                 $student->student_id = $data['student_id']?? null;
                 $student->school_id = $data['school_id'] ?? null;
                 $student->email = $data['email'] ?? null ;
-                $student->phone_number = $data['phone_number'] ?? null;
+                $student->phone_number = $data['phone_number'] ;
                 $student->password = Hash::make($data['password']); 
                 $student->country = $data['country'];
                 $student->marital_status = $data['marital_status'] ?? null;
                 $student->gendar = $data['gendar'];
                 $student->language = $data['language'];
-                $student->age = $data['age'];
+                $student->age = $data['age']?? null;
                 $student->save();
       });
       return $student;

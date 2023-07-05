@@ -35,11 +35,14 @@ Route::prefix('admin')->name('admin.')
         Route::middleware('guest')->group(function() {
             Route::get('login', [AdminLoginController::class, 'index'])->name('login.get');
             Route::post('login', [AdminLoginController::class, 'login'])->name('login.post');
+  
         });
 
-        Route::middleware('auth', 'is_admin')->group(function() {
+        Route::middleware('auth')->group(function() {
+
             Route::get('register', [AdminRegisterController::class, 'index'])->name('register.get');
             Route::post('register', [AdminRegisterController::class, 'register'])->name('register.post');
+           
             Route::get('registers', [AdminRegisterController::class, 'list'])->name('users.list');
             Route::get('register/{registerId}', [AdminRegisterController::class, 'show'])->name('user.show');
             Route::delete('register/{registerId}', [AdminRegisterController::class, 'destroy'])->name('user.destroy');

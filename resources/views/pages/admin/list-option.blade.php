@@ -62,7 +62,7 @@
                                         {{ $option->language->name }}
                                     </td>
                                     <td>
-                                        {{ $option->question->title }}
+                                        {{ $option->question->title ?? null }}
                                     </td>
                                     <td>
                                       <a href="{{$option->media_url}}">Link</a>  

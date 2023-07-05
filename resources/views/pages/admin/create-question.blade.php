@@ -113,10 +113,7 @@
                                                 <strong>{{ $errors->first('image_url') }}</strong>
                                             </span>
                                         @endif
-
-                               
-
-                               
+                                        
                                 <div class="card-footer ">
                                     <button type="submit" class="btn btn-info btn-round">{{ __('Save') }}</button>
                                 </div>

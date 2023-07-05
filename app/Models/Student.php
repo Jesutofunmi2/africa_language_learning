@@ -8,12 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\School;
 
 class Student extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable
     {
         HasFactory::factory as traitFactory;
+    }
+
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
     }
 
     /**
@@ -34,7 +41,7 @@ class Student extends Authenticatable
         'password',
         'school_id',
     ];
-
+ 
     /**
      * The attributes that should be hidden for serialization.
      *

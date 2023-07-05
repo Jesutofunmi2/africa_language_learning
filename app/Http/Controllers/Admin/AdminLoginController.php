@@ -44,6 +44,7 @@ class AdminLoginController extends Controller
     {
         $data = $request->validated();
 
+
         if (! Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
 
             throw ValidationException::withMessages([
@@ -51,6 +52,7 @@ class AdminLoginController extends Controller
             ]);
         }
     
+       
         return redirect()->route('admin.dashboard');
     }
 }
