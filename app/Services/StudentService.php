@@ -34,7 +34,7 @@ class StudentService
                 $student->age = $data['age']?? null;
                 $student->save();
 
-                $student_id = $this->studentId($student->school_id, $student->id, $student->first_name);
+                $student_id = $this->studentId( $student->id,);
                 $student->student_id = $student_id;
                 $student->save();
       });
@@ -43,13 +43,12 @@ class StudentService
     }
 
 
-    protected function studentId($schId, $id, $username)
+    protected function studentId($id)
     {
-        $name = School::query()->whereId($schId)->first();
-        $letter = mb_substr($name->name, 0, 3);
+    
         $date = Carbon::now()->format('Y');
-        $id = str_pad($id, 5, "0", STR_PAD_LEFT);
-        $student_id = $letter.'/'. $username . '/' . $date . '/' . 'IZESAN' . '/' . $id;
+        $id = str_pad($id, 2, "0", STR_PAD_LEFT);
+        $student_id = $date.$id;
 
         return $student_id;
     }

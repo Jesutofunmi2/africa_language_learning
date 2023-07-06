@@ -77,9 +77,12 @@ class AdminRegisterController extends Controller
 
     }
 
-    public function destroy()
+    public function destroy($id)
     {
+         $this->userService->deleteAdmin($id);
 
+         return redirect()->route('admin.users.list')
+             ->with('success', 'deleted successfully');
     }
 
     public function assignRole(Request $request, Admin $user)

@@ -29,8 +29,8 @@ class CreateQuestionRequest extends FormRequest
             'language_id' => ['integer', 'required', 'exists:languages,id'],
             'course_id' => ['integer', 'required', 'exists:courses,id'],
             'answered_type' => ['required','in:text,multiple,single,puzzle'],
-            'media_url' => 'sometimes|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg,svg',
-            'image_url' => ['sometimes','image','mimes:jpeg,png,jpg,svg','max:1024']
+            'media_url' => 'sometimes|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg',
+            'image_url' => ['sometimes','image','mimes:jpeg,png,jpg','max:1024']
         ];
         
     }

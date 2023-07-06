@@ -51,6 +51,9 @@ class UserService
         return $user;
     }
 
-
+    public function deleteAdmin($id):void
+    {
+        Admin::whereId($id)->delete();
+    }
     
 }

@@ -109,6 +109,12 @@ class SchoolService
         return $secondary;
     }
 
+    public function list()
+    {
+        $users = SecondarySchool::orderBy('created_at', 'desc')->paginate(15);
+        return $users;
+    }
+
     public function deleteSchool($schoolId): void
     {
         SecondarySchool::whereId($schoolId)->delete();

@@ -176,8 +176,8 @@
                                     </div>
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <p class="card-category">Students</p>
-                                            <p class="card-title">{{$students}}
+                                            <a href="{{ route('admin.users.list') }}"> <p class="card-category">Users</p></a>
+                                            <p class="card-title">{{ $users }}
                                                 <p>
                                         </div>
                                     </div>

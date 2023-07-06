@@ -22,7 +22,7 @@ class QuestionService
             $mediaType = null;
 
             $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
-            $image_extension = array('jpg', 'jpeg', 'png', 'gif', 'svg');
+            $image_extension = array('jpg', 'jpeg', 'png', 'gif');
             $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
 
             $extention = $data['media_url']->extension();
@@ -95,7 +95,7 @@ class QuestionService
 
 
             $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
-            $image_extension = array('jpg', 'jpeg', 'png', 'gif', 'svg');
+            $image_extension = array('jpg', 'jpeg', 'png', 'gif');
             $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
 
             $extention = $data['media_url']->extension();
@@ -155,7 +155,7 @@ class QuestionService
             $mediaType = null;
 
             $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
-            $image_extension = array('jpg', 'jpeg', 'png', 'gif', 'svg');
+            $image_extension = array('jpg', 'jpeg', 'png', 'gif');
             $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
 
             $extention = $data['media_url']->extension();
@@ -204,7 +204,7 @@ class QuestionService
 
 
             $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
-            $image_extension = array('jpg', 'jpeg', 'png', 'gif', 'svg');
+            $image_extension = array('jpg', 'jpeg', 'png', 'gif');
             $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
 
             $extention = $data['media_url']->extension();

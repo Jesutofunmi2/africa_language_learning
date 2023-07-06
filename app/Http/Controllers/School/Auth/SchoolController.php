@@ -12,7 +12,6 @@ use App\Services\TokenService;
 use App\Services\SchoolService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class SchoolController extends Controller
@@ -52,7 +51,7 @@ class SchoolController extends Controller
     return redirect()->route('admin.school.list',  ['schools' => $school])->with('success', 'School created successfully');
   }
 
-  public function list(Request $request): View
+  public function list(): View
   {
     $school = SecondarySchool::orderBy('created_at', 'desc')->paginate(15);
     return view('pages.admin.list-school')->with('schools', $school);

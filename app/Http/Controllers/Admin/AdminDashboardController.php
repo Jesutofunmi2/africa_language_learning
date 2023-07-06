@@ -38,7 +38,7 @@ class AdminDashboardController extends Controller
     {
 
         
-        $users = Admin::where('is_admin', true)->get();
+        $users = Admin::count();
         $types = Activity::TYPES;
         $languages = Language::count();
         $courses = Course::count();
@@ -46,6 +46,7 @@ class AdminDashboardController extends Controller
         $schools = SecondarySchool::count();
         $questions = Question::count();
         $options = Option::count();
+
 
         return view(
             'pages.admin.dashboard',
