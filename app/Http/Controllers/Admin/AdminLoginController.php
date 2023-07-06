@@ -17,7 +17,6 @@ class AdminLoginController extends Controller
     {
 
     }
-
     /**
      * Admin Login Page.
      * 

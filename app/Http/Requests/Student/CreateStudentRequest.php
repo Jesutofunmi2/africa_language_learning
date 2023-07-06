@@ -30,11 +30,11 @@ class CreateStudentRequest extends FormRequest
             'password' => ['string', 'min:4', 'max:50'],
             'school_id' => ['sometimes', 'string'],
             'image_url' => ['sometimes', 'string'],
-            'language' => ['required', 'string'],
-            'country' => ['required', 'string'],
-            'gendar'=> ['required', 'string'],
-            'phone_number'=> ['required', 'string'],
-            'age' => ['required', 'string']
+            'language' => ['sometimes', 'string'],
+            'country' => ['sometimes', 'string'],
+            'gendar'=> ['sometimes', 'string'],
+            'phone_number'=> ['sometimes', 'string'],
+            'age' => ['sometimes', 'string']
         ];
     }
 }

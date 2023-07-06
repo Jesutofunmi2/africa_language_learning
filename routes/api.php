@@ -49,7 +49,7 @@ Route::prefix('/v1')
                 //student endpoint
                 Route::post('/createStudent', CreateStudentController::class)->name('createStudent');
                 Route::post('/studentLogin', StudentLoginController::class)->name('studentLogin');
-
+                Route::get('/students', [StudentController::class, 'list'])->name('student.list');
 
                 Route::post('/logout', UserLogoutController::class)->middleware('auth:sanctum')->name('logout');
             });
@@ -64,7 +64,7 @@ Route::prefix('/v1')
 
                 Route::post('/option', [AnswerController::class, 'checkAnswer'])->name('answer.check');
 
-                Route::get('/students', [StudentController::class, 'list'])->name('student.list');
+               
             });
 
         Route::prefix('/activity')
