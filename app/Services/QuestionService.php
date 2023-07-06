@@ -190,6 +190,7 @@ class QuestionService
 
     public function updateOption(array $data, $image = null, $media_url = null, $optionId): Option
     {
+
         $url = null;
         $media = null;
         $mediaType = null;
@@ -218,6 +219,7 @@ class QuestionService
             }
         }
         $option = Option::whereId($optionId)->first();
+    
         
         if($url == null){
             $url = $option->image_url;

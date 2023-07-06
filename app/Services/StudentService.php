@@ -7,6 +7,7 @@ use App\Models\Student;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class StudentService
 {
@@ -34,7 +35,7 @@ class StudentService
                 $student->age = $data['age']?? null;
                 $student->save();
 
-                $student_id = $this->studentId( $student->id,);
+                $student_id = $this->studentId($student->school_id, $student->id);
                 $student->student_id = $student_id;
                 $student->save();
       });
@@ -42,13 +43,37 @@ class StudentService
         //@todo we fire other actions after registration
     }
 
-
-    protected function studentId($id)
+    public function updateStudent($id, $data):Student
     {
+        
+        $new_student = new Student;
+        $student = Student::where('student_id' ,$id)->first();
+        $new_student::where('student_id', $id)
+        ->update([
+            'first_name' => $data['first_name'] ?? $student->first_name,
+            'last_name' => $data['last_name'] ?? $student->last_name,
+            'language' => $data['language'] ?? $student->language,
+            'country' => $data['country'] ?? $student->country,
+            'age' => $data['age'] ?? $student->age,
+            'gendar' => $data['gendar'] ?? $student->gendar,
+        ]);
+
+    return $new_student;
+    }
     
+
+    public function deleteStudent($id):void
+    {
+       Student::where('student_id' ,$id)->delete();
+    }
+
+    protected function studentId($schId, $id)
+    {
+        $name = School::query()->whereId($schId)->first();
+        $letter = mb_substr($name->name, 0, 3);
         $date = Carbon::now()->format('Y');
         $id = str_pad($id, 2, "0", STR_PAD_LEFT);
-        $student_id = $date.$id;
+        $student_id = Str::upper($letter).'/'.$date.$id;
 
         return $student_id;
     }

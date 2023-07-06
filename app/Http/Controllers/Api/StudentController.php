@@ -8,17 +8,39 @@ use App\Http\Requests\Api\StudentRequest;
 use App\Http\Requests\School\SecondaryRequest;
 use App\Http\Resources\StudentResource;
 use App\Models\Student;
+use App\Services\StudentService;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
 
+    public function __construct(protected StudentService $studentService)
+    {
+       // $this->middleware('auth');
+    }
+
     // Get student by school Id
     public function list(SchoolRequest $schoolRequest)
     {
         $school_id = $schoolRequest->school_id;
-        
-        $student = Student::query()->where('school_id', $school_id)->get();
+
+        $students = Student::query()->where('school_id', $school_id)->get();
+        $data = StudentResource::collection($students);
+
+        return response()->json(
+            [
+                'message' => 'Get Student Successful.',
+                'data' => $data
+            ],
+            status: 200
+        );
+    }
+
+    public function getStudent(StudentRequest $studentRequest)
+    {
+        $student_id = $studentRequest->student_id;
+
+        $student = Student::query()->where('student_id', $student_id)->get();
         $data = StudentResource::collection($student);
 
         return response()->json(
@@ -30,8 +52,32 @@ class StudentController extends Controller
         );
     }
 
-    public function create(SecondaryRequest $secondaryRequest)
+    public function update(StudentRequest $studentRequest)
     {
+        $student_id = $studentRequest->student_id;
+        $student = $this->studentService->updateStudent($student_id, $studentRequest->validated());
+        //$data = StudentResource::make($student);
+
+        return response()->json(
+            [
+                'message' => 'Student Updated Successful.',
+                //'data' => $data
+            ],
+            status: 200
+        );
+    }
+
+    public function destroy(StudentRequest $studentRequest)
+    {
+        $student_id = $studentRequest->student_id;
+        $this->studentService->deleteStudent($student_id);
        
+        return response()->json(
+            [
+                'message' => 'Student Deleted Successful.',
+                //'data' => $data
+            ],
+            status: 200
+        );
     }
 }

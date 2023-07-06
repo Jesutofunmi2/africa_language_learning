@@ -50,6 +50,9 @@ Route::prefix('/v1')
                 Route::post('/createStudent', CreateStudentController::class)->name('createStudent');
                 Route::post('/studentLogin', StudentLoginController::class)->name('studentLogin');
                 Route::get('/students', [StudentController::class, 'list'])->name('student.list');
+                Route::get('/getStudent', [StudentController::class, 'getStudent'])->name('student.show');
+                Route::put('/updateStudent', [StudentController::class, 'update'])->name('student.update');
+                Route::delete('/deleteStudent', [StudentController::class, 'destroy'])->name('student.destroy');
 
                 Route::post('/logout', UserLogoutController::class)->middleware('auth:sanctum')->name('logout');
             });

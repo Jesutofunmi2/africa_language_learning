@@ -48,8 +48,6 @@ class OptionController extends Controller
         return view('pages.admin.edit-option', ['questions' => $question, 'option' => $option, 'languages' => $languages, 'courses' => $courses]);
     }
 
-
-
     public function update(CreateOptionRequest $createoptionrequest, $questionId)
     {
         $image = null;
