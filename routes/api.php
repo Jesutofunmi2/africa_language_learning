@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\LessonController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\AnswerController;
 use App\Http\Controllers\Api\StudentController;
+use App\Http\Controllers\Api\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +54,14 @@ Route::prefix('/v1')
                 Route::get('/getStudent', [StudentController::class, 'getStudent'])->name('student.show');
                 Route::put('/updateStudent', [StudentController::class, 'update'])->name('student.update');
                 Route::delete('/deleteStudent', [StudentController::class, 'destroy'])->name('student.destroy');
+
+                //teacher endpoint
+                Route::get('/teachers', [TeacherController::class, 'list'])->name('teacher.list');
+                Route::get('/getTeacher', [TeacherController::class, 'getTeacher'])->name('teacher.show');
+                Route::post('/addTeacher', [TeacherController::class, 'addTeacher'])->name('addTeacher');
+                Route::put('/updateTeacher', [TeacherController::class, 'updateTeacher'])->name('updateTeacher');
+                Route::delete('/deleteTeacher', [TeacherController::class, 'destroy'])->name('teacher.destroy');
+
 
                 Route::post('/logout', UserLogoutController::class)->middleware('auth:sanctum')->name('logout');
             });

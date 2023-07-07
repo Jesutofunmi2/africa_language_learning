@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\School\Auth\SchoolController;
+use App\Http\Controllers\Teacher\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -97,6 +98,13 @@ Route::prefix('admin')->name('admin.')
             Route::get('schools/{secondaryId}', [SchoolController::class, 'show'])->name('school.show');
             Route::put('school/{secondaryId}', [SchoolController::class, 'update'])->name('school.update');
             Route::delete('schools/{secondaryId}', [SchoolController::class, 'destroy'])->name('school.destroy');
+
+            Route::get('teacher/create', [TeacherController::class, 'index'])->name('teacher.index');
+            Route::post('teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
+            Route::get('teachers', [TeacherController::class, 'list'])->name('teacher.list');
+            Route::get('teacher/{id}', [TeacherController::class, 'show'])->name('teacher.show');
+            Route::put('teachers/{id}', [TeacherController::class, 'update'])->name('teacher.update');
+            Route::delete('teachers/{id}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
            
             Route::get('role/create', [RoleController::class, 'index'])->name('role.index');
             Route::post('role/create', [RoleController::class, 'create'])->name('role.create');

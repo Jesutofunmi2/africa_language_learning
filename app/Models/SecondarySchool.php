@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Student;
+use App\Models\Teacher;
 
 class SecondarySchool extends Authenticatable implements MustVerifyEmail
 {
@@ -21,6 +22,16 @@ class SecondarySchool extends Authenticatable implements MustVerifyEmail
     public function students()
     {
         return $this->hasMany(Student::class);
+    }
+
+    public function teachers()
+    {
+        return $this->hasMany(Teacher::class);
+    }
+
+    public function classes()
+    {
+        return $this->belongsTo(Classes::class);
     }
     /**
      * The attributes that are mass assignable.

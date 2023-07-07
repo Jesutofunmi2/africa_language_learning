@@ -4,33 +4,21 @@ namespace App\Models;
 
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Student;
-use App\Models\Teacher;
-class School extends Authenticatable implements MustVerifyEmail
+
+class Teacher extends Model
 {
     use HasApiTokens, HasFactory, Notifiable
     {
         HasFactory::factory as traitFactory;
     }
 
-    public function students()
-    {
-        return $this->hasMany(Student::class);
-    }
 
-    public function teachers()
+    public function school()
     {
-        return $this->hasMany(Teacher::class);
-    }
-
-    public function classes()
-    {
-        return $this->belongsTo(Classes::class);
+        return $this->belongsTo(School::class);
     }
 
     /**
@@ -40,21 +28,21 @@ class School extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
-        'school_name',
-        'country',
-        'phone_number',
-        'no_of_pupil',
-        'image_url',
         'email',
+        'teacher_id',
+        'phone_number',
+        'address',
+        'language',
         'password',
-        'type'
+        'school_id',
     ];
-
+ 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -71,11 +59,12 @@ class School extends Authenticatable implements MustVerifyEmail
 
     public function getFullnameAttribute()
     {
-        return $this->name.' '.$this->school_name;
+        return $this->name;
     }
 
     public static function factory(...$parameters): UserFactory
     {
         return static::traitFactory($parameters);
     }
+
 }

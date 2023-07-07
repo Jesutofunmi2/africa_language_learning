@@ -39,10 +39,10 @@
                     <p>{{ __('Create Admin') }}</p>
                 </a>
             </li>
-            <li class="{{ $elementActive == 'list' ? 'active' : '' }}">
-                <a href="#">
+            <li class="{{ $elementActive == 'teacher' ? 'active' : '' }}">
+                <a href="{{ route('admin.teacher.index') }}">
                     <i class="nc-icon nc-pin-3"></i>
-                    <p>{{ __('List Admin User') }}</p>
+                    <p>{{ __('Create Teacher') }}</p>
                 </a>
             </li>
 

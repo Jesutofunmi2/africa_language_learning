@@ -202,8 +202,8 @@
                                     </div>
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <a href="{{ route('admin.school.list') }}">  <p class="card-category">Teachers</p></a>
-                                            <p class="card-title">{{$schools}}
+                                            <a href="{{ route('admin.teacher.list') }}">  <p class="card-category">Teachers</p></a>
+                                            <p class="card-title">{{$teachers}}
                                                 <p>
                                         </div>
                                     </div>

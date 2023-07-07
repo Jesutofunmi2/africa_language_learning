@@ -15,6 +15,7 @@ use App\Models\Option;
 use App\Models\Question;
 use App\Models\SecondarySchool;
 use App\Models\Student;
+use App\Models\Teacher;
 
 class AdminDashboardController extends Controller
 {
@@ -46,7 +47,7 @@ class AdminDashboardController extends Controller
         $schools = SecondarySchool::count();
         $questions = Question::count();
         $options = Option::count();
-
+        $teacher = Teacher::count();
 
         return view(
             'pages.admin.dashboard',
@@ -58,7 +59,8 @@ class AdminDashboardController extends Controller
                 'students' => $students,
                 'schools' => $schools,
                 'questions' => $questions,
-                'options' => $options
+                'options' => $options,
+                'teachers' => $teacher
             ]
         );
     }
