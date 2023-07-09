@@ -28,7 +28,7 @@ class CreateStudentRequest extends FormRequest
             'last_name' => ['required','string', 'max:254'],
             'student_id' => ['sometimes','string', 'min:5', 'max:100', 'unique:students,student_id'],
             'password' => ['string', 'min:4', 'max:50'],
-            'school_id' => ['sometimes', 'string'],
+            'school_id' => ['required', 'string','exists:schools,id'],
             'image_url' => ['sometimes', 'string'],
             'language' => ['sometimes', 'string'],
             'country' => ['sometimes', 'string'],

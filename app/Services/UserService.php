@@ -15,7 +15,7 @@ class UserService
     {
         $user = new Admin;
 
-        DB::transaction(function() use (&$user, $data) {
+        DB::transaction(function () use (&$user, $data) {
 
             $user->firstname = $data['firstname'];
             $user->lastname = $data['lastname'];
@@ -25,7 +25,7 @@ class UserService
 
             //@todo we fire other actions after registration
         });
-        
+
         return $user;
     }
 
@@ -36,7 +36,7 @@ class UserService
     {
         $user = new Admin;
 
-        DB::transaction(function() use (&$user, $data) {
+        DB::transaction(function () use (&$user, $data) {
 
             $user->firstname = $data['firstname'];
             $user->lastname = $data['lastname'];
@@ -51,9 +51,8 @@ class UserService
         return $user;
     }
 
-    public function deleteAdmin($id):void
+    public function deleteAdmin($id): void
     {
         Admin::whereId($id)->delete();
     }
-    
 }

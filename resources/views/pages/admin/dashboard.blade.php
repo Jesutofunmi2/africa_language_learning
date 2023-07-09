@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <p class="card-category">Students</p>
+                                            <a href="#">  <p class="card-category">Students</p></a>
                                             <p class="card-title">{{$students}}
                                                 <p>
                                         </div>

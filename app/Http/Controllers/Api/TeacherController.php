@@ -23,7 +23,6 @@ class TeacherController extends Controller
 
     public function createTeacher(TeacherRequest $request): JsonResponse
     {
-        dd($request);
         $teacher = $this->teacherService->createTeacher($request->validated());
 
         $data = TeacherResource::make($teacher);
@@ -87,13 +86,10 @@ class TeacherController extends Controller
         );
     }
 
-    public function updateTeacher(TeacherRequest $request):JsonResponse
+    public function updateTeacher(TeacherRequest $teacherrequest, TeacherGetRequest $teacherGetRequest):JsonResponse
     {
-        dd($request->validated());
-        $image = $request->image_url;
-        $teacher_id = $request->teacher_id;
-        $teacher = $this->teacherService->updateTeacher( $request->validated(),$image, $teacher_id, );
-        //$data = StudentResource::make($student);
+        $teacher_id = $teacherGetRequest->teacher_id;
+        $teacher = $this->teacherService->updateTeacher( $teacherrequest->validated(), $teacher_id, );
 
         return response()->json(
             [

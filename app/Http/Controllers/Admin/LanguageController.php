@@ -35,7 +35,7 @@ class LanguageController extends Controller
 
     public function list(Request $request): View
     {
-        $language = Language::orderBy('created_at', 'desc')->paginate(15);
+        $language = Language::orderBy('created_at', 'desc')->paginate(40);
         return view('pages.admin.list-language')->with('languages', $language);
     }
 

@@ -5,14 +5,17 @@
 
 @section('content')
     <div class="content">
+        <a href="{{ route('admin.question.index')}}" style="float: right">
+            <p>{{ __('Add') }}</p>
+        </a>
         @if (session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
             </div>
         @endif
-
+        
         <div class="row">
-
+            
             <div class="col-md-10 offset-1">
                 <div class="table-responsive">
                     <table class="table">
@@ -59,10 +62,10 @@
                                         {{ $question->title }}
                                     </td>
                                     <td>
-                                        {{ $question->course->title }}
+                                        {{ $question->course->title ?? ''}}
                                     </td>
                                     <td>
-                                        {{ $question->language->name }}
+                                        {{ $question->language->name ?? '' }}
                                     </td>
                                     <td>
                                         <a href="{{ $question->media_url }}"> Media Link</a>

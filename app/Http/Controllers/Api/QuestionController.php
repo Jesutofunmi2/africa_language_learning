@@ -16,8 +16,9 @@ class QuestionController extends Controller
     {
         $language_id = $questionRequest->language_id;
         $course_id = $questionRequest->course_id;
-        
+       
         $question = Question::query()->where('status', true)->where('course_id', $course_id)->whereRelation('options', 'language_id', '=', $language_id)->get();
+        
         $data = QuestionResource::collection($question);
 
         return response()->json(

@@ -5,6 +5,9 @@
 
 @section('content')
     <div class="content">
+        <a href="{{ route('admin.teacher.index')}}" style="float: right">
+            <p>{{ __('Add') }}</p>
+        </a>
         @if (session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
@@ -50,7 +53,7 @@
                                         {{ $teacher->name }}
                                     </td>
                                     <td>
-                                        {{ $teacher->school->name }}
+                                        {{ $teacher->school->name?? '' }}
                                     </td>
                                     <td>
                                         {{ $teacher->address }}

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LanguageResource extends JsonResource
+class FouriteResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,11 @@ class LanguageResource extends JsonResource
     public function toArray($request)
     {
         return [
-           'id'=> $this->id,
-           'name' => $this->name,
-           'image_url' => $this->image_url,
+            'id' => $this->id,
+            'question_id' => $this->question_id,
+            'student_id' => $this->student_id,
+            'question'=>$this->question,
+            'option'=>$this->question->options
         ];
     }
 }

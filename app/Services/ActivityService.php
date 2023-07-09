@@ -121,17 +121,22 @@ class ActivityService
     public function updateLanguage(array $data, $image = null, $languageId): Language
     {
         $url = null;
-
+        
         if (!is_null($image)) {
             $mediaService = new MediaService;
             $url = $mediaService->uploadImage($data['image_url']);
         }
-         $language = new Language;
+
+        $languages = Language::whereId($languageId)->first();
+        if($url == null){
+            $url = $languages->image_url;
+        }
+        $language = new Language;
         // if user id in array, we create new edition for the user
         $language::where('id', $languageId)
             ->update([
-                'name' => $data['name'],
-                'image_url' => $url ?? $language->image_url
+                'name' => $data['name']?? $languages->name,
+                'image_url' => $url ?? $languages->image_url
             ]);
 
         return $language;
@@ -173,12 +178,17 @@ class ActivityService
             $mediaService = new MediaService;
             $url = $mediaService->uploadImage($data['image_url']);
         }
-         $course = new Course;
+
+        $courses = Course::whereId($courseId)->first();
+        if($url == null){
+            $url=$courses->image_url;
+        }
+        $course = new Course;
         // if user id in array, we create new edition for the user
         $course::where('id', $courseId)
             ->update([
-                'title' => $data['title'],
-                'description' => $data['description'],
+                'title' => $data['title']?? $courses->title,
+                'description' => $data['description'] ?? $courses->description,
                 'image_url' => $url
             ]);
 

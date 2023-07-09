@@ -5,6 +5,9 @@
 
 @section('content')
     <div class="content">
+        <a href="{{ route('admin.option.index')}}" style="float: right">
+            <p>{{ __('Add') }}</p>
+        </a>
         @if (session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}

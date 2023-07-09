@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Teacher;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TeacherRequest extends FormRequest
+class FouriteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,9 @@ class TeacherRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','string', 'max:254'],
-            'school_id' => ['required', 'integer', 'unique:schools,id'],
-            'email' => ['sometimes','email'],
-            'image_url' => ['sometimes','image','mimes:jpeg,png,jpg','max:1024'],
-            'address' => ['sometimes', 'string']
+            'student_id' => ['required', 'string', 'exists:students,student_id'],
+            'question_id' => ['string','exists:questions,id'],
+            'question_name' => ['sometimes', 'string']
         ];
-
-        
     }
 }

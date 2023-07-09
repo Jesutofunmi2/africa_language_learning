@@ -55,45 +55,34 @@ class TeacherService
         return $teacher_id;
     }
 
-    public function showTeacher($id):Teacher
+    public function showTeacher($id): Teacher
     {
         $teacher = Teacher::whereId($id)->first();
 
         return $teacher;
     }
 
-    public function updateTeacher(array $data, $image = null, $teacherId):Teacher
+    public function updateTeacher(array $data,  $teacherId): Teacher
     {
-        $url = null;
-        $mediaService = new MediaService;
-        if (!is_null($image)) {
-            $url = $mediaService->uploadImage($data['image_url']);
-        }
-        
-        $teacher = Teacher::whereId($teacherId)->first();
-    
-        
-        if($url == null){
-            $url = $teacher->image_url;
-        }
 
+        $teacher = Teacher::where('teacher_id', $teacherId)->first();
         $new_teacher = new Teacher;
         // if user id in array, we create new edition for the user
 
-        $new_teacher::where('id', $teacherId)
+        $new_teacher::where('teacher_id', $teacherId)
             ->update([
                 'teacher_id' => $data['teacher_id'] ?? $teacher->teacher_id,
                 'name' => $data['name'] ?? $teacher->name,
                 'email' => $data['email'] ?? $teacher->email,
                 'school_id' => $data['school_id'] ?? $teacher->school_id,
                 'address' => $data['address'] ?? $teacher->address,
-                'image_url' => $url
+                'image_url' => $teacher->image_url
             ]);
 
         return $new_teacher;
     }
 
-    public function deleteTeacher($id):void
+    public function deleteTeacher($id): void
     {
         Teacher::whereId($id)->delete();
     }

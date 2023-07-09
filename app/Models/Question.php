@@ -33,6 +33,7 @@ class Question extends Model
     {
         return $this->hasMany(Option::class);
     }
+    
 
     /**
      * The attributes that are mass assignable.
