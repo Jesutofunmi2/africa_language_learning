@@ -33,6 +33,8 @@ class AnswerController extends Controller
             ->where('question_id', '=', $question->id)
             ->where('is_correct', true)->exists();
 
+        abort_if(is_null($option_exists), 204, 'No correct option or Invalid option');
+
         return response()->json(
             [
                 'is_correct' => $option_exists,

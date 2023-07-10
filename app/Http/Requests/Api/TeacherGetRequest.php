@@ -24,7 +24,7 @@ class TeacherGetRequest extends FormRequest
     public function rules()
     {
         return [
-            'teacher_id'=> ['required'],
+            'teacher_id'=> ['required', 'string', 'exists:teachers,teacher_id'],
         ];
     }
 }

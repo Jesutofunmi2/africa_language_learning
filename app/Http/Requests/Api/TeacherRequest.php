@@ -24,7 +24,7 @@ class TeacherRequest extends FormRequest
     public function rules()
     {
         return [
-            'school_id'=> ['sometimes', 'integer'],
+            'school_id'=> ['required', 'integer', 'exists:schools,id'],
             'name' => ['sometimes', 'string'],
             'email' => ['sometimes', 'email'],
             'address' => ['sometimes', 'string'],

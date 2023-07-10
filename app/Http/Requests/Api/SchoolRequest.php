@@ -24,7 +24,7 @@ class SchoolRequest extends FormRequest
     public function rules()
     {
         return [
-            'school_id' => ['required'],
+            'school_id'=> ['required', 'integer', 'exists:schools,id'],
         ];
     }
 }

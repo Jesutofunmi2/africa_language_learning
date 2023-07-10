@@ -14,20 +14,19 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
-    
+
     public function __construct(protected TeacherService $teacherService)
     {
-       // $this->middleware('auth');
+        // $this->middleware('auth');
     }
- 
 
-    public function createTeacher(TeacherRequest $request): JsonResponse
+
+    public function createTeacher(TeacherRequest $teacherrequest): JsonResponse
     {
-        $teacher = $this->teacherService->createTeacher($request->validated());
-
+        abort_if(is_null($teacherrequest->validated()), 204, 'Invalid Content or Parameter');
+        $teacher = $this->teacherService->createTeacher($teacherrequest->validated());
+        abort_if(is_null($teacher), 204, 'Invalid Content or Parameter');
         $data = TeacherResource::make($teacher);
-
-
         return response()->json(
             [
                 'message' => 'Registration successful.',
@@ -37,7 +36,7 @@ class TeacherController extends Controller
         );
     }
 
-    public function getTeacher(TeacherGetRequest $teacherRequest):JsonResponse
+    public function getTeacher(TeacherGetRequest $teacherRequest): JsonResponse
     {
         $teacher_id = $teacherRequest->teacher_id;
 
@@ -54,11 +53,11 @@ class TeacherController extends Controller
     }
 
 
-    public function list(SchoolRequest $schoolRequest):JsonResponse
+    public function list(SchoolRequest $schoolRequest): JsonResponse
     {
         $school_id = $schoolRequest->school_id;
-
         $teachers = Teacher::query()->where('school_id', $school_id)->get();
+        abort_if(is_null($teachers), 204, 'No Content');
         $data = TeacherResource::collection($teachers);
 
         return response()->json(
@@ -70,13 +69,11 @@ class TeacherController extends Controller
         );
     }
 
-    public function addTeacher(TeacherRequest $teacherRequest):JsonResponse
+    public function addTeacher(TeacherRequest $teacherRequest): JsonResponse
     {
         $teacher = $this->teacherService->createTeacher($teacherRequest->validated());
-
+        abort_if(is_null($teacher), 204, 'Invalid Content');
         $data = TeacherResource::make($teacher);
-
-
         return response()->json(
             [
                 'message' => 'Registration successful.',
@@ -86,11 +83,11 @@ class TeacherController extends Controller
         );
     }
 
-    public function updateTeacher(TeacherRequest $teacherrequest, TeacherGetRequest $teacherGetRequest):JsonResponse
+    public function updateTeacher(TeacherRequest $teacherrequest, TeacherGetRequest $teacherGetRequest): JsonResponse
     {
         $teacher_id = $teacherGetRequest->teacher_id;
-        $teacher = $this->teacherService->updateTeacher( $teacherrequest->validated(), $teacher_id, );
-
+        $teacher = $this->teacherService->updateTeacher($teacherrequest->validated(), $teacher_id,);
+        abort_if(is_null($teacher), 204, 'Invalid Content');
         return response()->json(
             [
                 'message' => 'Teacher Updated Successful.',
@@ -103,8 +100,8 @@ class TeacherController extends Controller
     public function destroy(TeacherGetRequest $teachergetRequest)
     {
         $teacher_id = $teachergetRequest->teacher_id;
+        abort_if(is_null($teacher_id), 204, 'Invalid Content');
         $this->teacherService->deleteTeacher($teacher_id);
-       
         return response()->json(
             [
                 'message' => 'Student Deleted Successful.',

@@ -30,7 +30,7 @@ class TeacherService
             $teacher->email = $data['email'];
             $teacher->password = Hash::make($password);
             $teacher->image_url = $mediaUrl ?? null;
-            $teacher->address = $data['address'];
+            $teacher->address = $data['address']?? null;
             $teacher->save();
 
             dispatch(new SendSchoolVerificationMail($teacher->name, $teacher->email, $teacher->verification_token));
@@ -84,6 +84,6 @@ class TeacherService
 
     public function deleteTeacher($id): void
     {
-        Teacher::whereId($id)->delete();
+        Teacher::where('teacher_id',$id)->delete();
     }
 }
