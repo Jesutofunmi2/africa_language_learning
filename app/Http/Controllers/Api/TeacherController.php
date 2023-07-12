@@ -19,17 +19,14 @@ class TeacherController extends Controller
     {
         // $this->middleware('auth');
     }
-
-
     public function createTeacher(TeacherRequest $teacherrequest): JsonResponse
     {
-        abort_if(is_null($teacherrequest->validated()), 204, 'Invalid Content or Parameter');
-        $teacher = $this->teacherService->createTeacher($teacherrequest->validated());
+        $teacher = $this->teacherService->updateTeacher($teacherrequest->validated(), $teacherrequest->teacher_id);
         abort_if(is_null($teacher), 204, 'Invalid Content or Parameter');
         $data = TeacherResource::make($teacher);
         return response()->json(
             [
-                'message' => 'Registration successful.',
+                'message' => 'Update successful.',
                 'data' => $data,
             ],
             status: 201
@@ -39,7 +36,6 @@ class TeacherController extends Controller
     public function getTeacher(TeacherGetRequest $teacherRequest): JsonResponse
     {
         $teacher_id = $teacherRequest->teacher_id;
-
         $teacher = Teacher::query()->where('teacher_id', $teacher_id)->get();
         $data = TeacherResource::collection($teacher);
 
@@ -68,7 +64,6 @@ class TeacherController extends Controller
             status: 200
         );
     }
-
     public function addTeacher(TeacherRequest $teacherRequest): JsonResponse
     {
         $teacher = $this->teacherService->createTeacher($teacherRequest->validated());

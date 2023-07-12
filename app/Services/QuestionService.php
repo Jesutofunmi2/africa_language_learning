@@ -13,7 +13,8 @@ class QuestionService
     public function createQuestion(array $data): Question
     {
         $question = new Question;
-
+        
+        
         DB::transaction(function () use (&$question, $data) {
 
             $mediaService = new MediaService;
@@ -247,6 +248,11 @@ class QuestionService
             ]);
 
         return $new_option;
+    }
+
+    public function questionNameExists($name)
+    {
+        return Question::where('title', '=', $name)->exists();
     }
 
     public function deleteOption(Option $option)

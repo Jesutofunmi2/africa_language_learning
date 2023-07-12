@@ -64,21 +64,30 @@ class TeacherService
 
     public function updateTeacher(array $data,  $teacherId): Teacher
     {
-
+        $mediaUrl= null;
+        $password = '12345678';
+        if(!is_null($data['image_url'])){
+            $mediaService = new MediaService;
+            $mediaUrl = $mediaService->uploadImage($data['image_url']);
+        }
+      
         $teacher = Teacher::where('teacher_id', $teacherId)->first();
+
+        $old_teacher = new Teacher;
         $new_teacher = new Teacher;
         // if user id in array, we create new edition for the user
-
-        $new_teacher::where('teacher_id', $teacherId)
-            ->update([
-                'teacher_id' => $data['teacher_id'] ?? $teacher->teacher_id,
-                'name' => $data['name'] ?? $teacher->name,
-                'email' => $data['email'] ?? $teacher->email,
-                'school_id' => $data['school_id'] ?? $teacher->school_id,
-                'address' => $data['address'] ?? $teacher->address,
-                'image_url' => $teacher->image_url
-            ]);
-
+        
+        // delete if exists
+       $old_teacher::where('teacher_id', $teacherId)->delete();
+        $new_teacher->teacher_id = $teacherId ;
+        $new_teacher->name = $data['name'] ?? $teacher->name;
+        $new_teacher->school_id = $data['school_id'] ?? $teacher->school_id;
+        $new_teacher->email = $teacher->email ?? $data['email'];
+        $new_teacher->password = Hash::make($password);
+        $new_teacher->image_url = $mediaUrl ?? $teacher->image_url;
+        $new_teacher->address = $data['address']?? $teacher->address;
+        $new_teacher->save();
+        
         return $new_teacher;
     }
 

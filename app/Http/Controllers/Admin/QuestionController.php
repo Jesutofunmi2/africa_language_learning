@@ -28,6 +28,10 @@ class QuestionController extends Controller
 
     public function create(CreateQuestionRequest $createQuestionRequest): RedirectResponse
     {
+        $validated = $createQuestionRequest->safe()->only(['title']);
+        if ($this->service->questionNameExists($validated) == true) {
+            return redirect()->route('admin.question.list')->with('danger', 'You can not add same Question');
+        }
         $this->service->createQuestion($createQuestionRequest->validated());
 
         return redirect()->route('admin.question.list')->with('success', 'Question created successfully');

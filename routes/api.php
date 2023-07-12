@@ -60,7 +60,7 @@ Route::prefix('/v1')
                 Route::get('/teachers', [TeacherController::class, 'list'])->name('teacher.list');
                 Route::get('/getTeacher', [TeacherController::class, 'getTeacher'])->name('teacher.show');
                 Route::post('/addTeacher', [TeacherController::class, 'addTeacher'])->name('addTeacher');
-                Route::put('/updateTeacher', [TeacherController::class, 'updateTeacher'])->name('updateTeacher');
+                Route::post('/updateTeacher', [TeacherController::class, 'createTeacher'])->name('createTeacher');
                 Route::delete('/deleteTeacher', [TeacherController::class, 'destroy'])->name('teacher.destroy');
 
                 //fourites endpoint

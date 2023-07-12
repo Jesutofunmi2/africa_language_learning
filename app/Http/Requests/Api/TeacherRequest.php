@@ -25,10 +25,22 @@ class TeacherRequest extends FormRequest
     {
         return [
             'school_id'=> ['required', 'integer', 'exists:schools,id'],
-            'name' => ['sometimes', 'string'],
-            'email' => ['sometimes', 'email'],
-            'address' => ['sometimes', 'string'],
-            'image_url' => ['sometimes','image','mimes:jpeg,png,jpg','max:1024'],
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email', 'min:5', 'max:100'],
+            'address' => ['required', 'string'],
+            'image_url' => ['required','image','mimes:jpeg,png,jpg','max:2024'],
+            'teacher_id'=> ['sometimes', 'string', 'exists:teachers,teacher_id'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'school_id.required' => 'School Id doest not exists in the database',
+            'image_url.required' => 'Image size is too large, less than 1mb required',
+            'name.required' => 'Teacher name is required',
+            'email.required' => 'Email is required or Exists',
+            'address.required' => 'Address is missing'
         ];
     }
 }

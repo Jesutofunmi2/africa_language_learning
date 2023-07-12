@@ -27,4 +27,11 @@ class TeacherGetRequest extends FormRequest
             'teacher_id'=> ['required', 'string', 'exists:teachers,teacher_id'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'teacher_id.required' => 'Teacher Id doest not exists in the database',
+        ];
+    }
 }
