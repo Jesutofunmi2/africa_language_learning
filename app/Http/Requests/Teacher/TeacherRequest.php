@@ -25,7 +25,7 @@ class TeacherRequest extends FormRequest
     {
         return [
             'name' => ['required','string', 'max:254'],
-            'school_id' => ['required', 'integer', 'unique:schools,id'],
+            'school_id' => ['required', 'integer', 'exists:schools,id'],
             'email' => ['sometimes','email'],
             'image_url' => ['sometimes','image','mimes:jpeg,png,jpg','max:1024'],
             'address' => ['sometimes', 'string']

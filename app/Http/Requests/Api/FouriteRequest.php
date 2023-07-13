@@ -29,4 +29,12 @@ class FouriteRequest extends FormRequest
             'question_name' => ['sometimes', 'string']
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'student_id.required' => 'Student Id doest not exists in the database',
+            'question_id.required' => 'Question Id  invalid',
+        ];
+    }
 }

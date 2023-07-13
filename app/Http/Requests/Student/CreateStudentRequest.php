@@ -34,7 +34,16 @@ class CreateStudentRequest extends FormRequest
             'country' => ['sometimes', 'string'],
             'gendar'=> ['sometimes', 'string'],
             'phone_number'=> ['sometimes', 'string'],
-            'age' => ['sometimes', 'string']
+            'age' => ['sometimes', 'integer']
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'first_name.required' => 'First name is missing',
+            'last_name.required' => 'Last Name is missing',
+            'school_id.required' => 'School Id is required'
         ];
     }
 }

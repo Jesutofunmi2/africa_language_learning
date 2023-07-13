@@ -27,4 +27,11 @@ class SchoolRequest extends FormRequest
             'school_id'=> ['required', 'integer', 'exists:schools,id'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'school_id.required' => 'School Id doest not exists in the database',
+        ];
+    }
 }

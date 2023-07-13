@@ -48,4 +48,19 @@ class FouriteController extends Controller
             status: 200
         );
     }
+
+
+    public function remove(FouriteRequest $fouriteRequest):JsonResponse
+    {
+         abort_if(is_null($fouriteRequest), 408, 'Request Timeout');
+
+         $this->fouriteService->removeFourite($fouriteRequest->validated());
+
+        return response()->json(
+            [
+                'message' => 'Fourite Removed Successful.',
+            ],
+            status: 200
+        );
+    }
 }

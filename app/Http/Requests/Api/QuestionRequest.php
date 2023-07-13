@@ -25,8 +25,16 @@ class QuestionRequest extends FormRequest
     {
         
         return [
-            'language_id' => ['integer','exists:languages,id'],
-            'course_id' => ['integer','exists:courses,id'],
+            'language_id' => ['required','integer','exists:languages,id'],
+            'course_id' => ['required','integer','exists:courses,id'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'language_id.required' => 'Language Id doest not exists in the database',
+            'course_id.required' => 'Course Id  invalid',
         ];
     }
 }

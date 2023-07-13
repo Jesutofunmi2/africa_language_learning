@@ -27,7 +27,14 @@ class FouriteService {
     public function getFourite($id)
     {
         $fourite = Fourite::where('student_id',$id)->get();
-
+        
         return $fourite;
+    }
+
+    public function removeFourite(array $data):void
+    {
+         
+        Fourite::where('student_id',$data['student_id'])->where('question_id', $data['question_id'])->delete();
+    
     }
 }

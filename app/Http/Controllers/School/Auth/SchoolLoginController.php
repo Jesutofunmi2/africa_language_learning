@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\School\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\SecondarySchool;
 use Illuminate\Http\Request;
 use App\Http\Requests\School\SchoolLoginRequest;
 use App\Http\Resources\LoginResource;
@@ -45,7 +46,7 @@ class SchoolLoginController extends Controller
     {
         $data = $request->validated();
 
-        $school = School::where('email', $data['email'])->first();
+        $school = SecondarySchool::where('email', $data['email'])->first();
 
         abort_if(is_null($school), 401, 'Incorrect login details');
 

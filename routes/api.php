@@ -48,7 +48,24 @@ Route::prefix('/v1')
                 Route::post('/schoolLogin', SchoolLoginController::class)->name('schoolLogin');
                 Route::post('/schoolLogout', SchoolLogoutController::class)->middleware('auth:sanctum')->name('logout_for_school');
 
-                //student endpoint
+
+                Route::post('/logout', UserLogoutController::class)->middleware('auth:sanctum')->name('logout');
+            });
+
+        Route::middleware('auth:sanctum')
+            ->group(function () {
+                Route::get('/language', [LanguageController::class, 'list'])->name('language.list');
+                Route::get('/lesson', [LessonController::class, 'list'])->name('lesson.list');
+                Route::get('/question', [QuestionController::class, 'list'])->name('question.list');
+                Route::post('/option', [AnswerController::class, 'checkAnswer'])->name('answer.check');
+
+
+                 //fourites endpoint
+                 Route::post('/createFourite', [FouriteController::class, 'create'])->name('fourite.create');
+                 Route::get('/getFourites', [FouriteController::class, 'list'])->name('fourite.list');
+                 Route::delete('/removeFourites', [FouriteController::class, 'remove'])->name('fourite.remove');
+ 
+                 //student endpoint
                 Route::post('/createStudent', CreateStudentController::class)->name('createStudent');
                 Route::post('/studentLogin', StudentLoginController::class)->name('studentLogin');
                 Route::get('/students', [StudentController::class, 'list'])->name('student.list');
@@ -62,24 +79,6 @@ Route::prefix('/v1')
                 Route::post('/addTeacher', [TeacherController::class, 'addTeacher'])->name('addTeacher');
                 Route::post('/updateTeacher', [TeacherController::class, 'createTeacher'])->name('createTeacher');
                 Route::delete('/deleteTeacher', [TeacherController::class, 'destroy'])->name('teacher.destroy');
-
-                //fourites endpoint
-                Route::post('/createFourite', [FouriteController::class, 'create'])->name('fourite.create');
-                Route::get('/getFourites', [FouriteController::class, 'list'])->name('fourite.list');
-
-
-                Route::post('/logout', UserLogoutController::class)->middleware('auth:sanctum')->name('logout');
-            });
-
-        Route::middleware('auth:sanctum')
-            ->group(function () {
-                Route::get('/language', [LanguageController::class, 'list'])->name('language.list');
-
-                Route::get('/lesson', [LessonController::class, 'list'])->name('lesson.list');
-
-                Route::get('/question', [QuestionController::class, 'list'])->name('question.list');
-
-                Route::post('/option', [AnswerController::class, 'checkAnswer'])->name('answer.check');
 
                
             });
