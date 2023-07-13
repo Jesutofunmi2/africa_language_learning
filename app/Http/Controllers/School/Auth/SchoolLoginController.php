@@ -20,7 +20,6 @@ class SchoolLoginController extends Controller
 
     public function __invoke(SchoolLoginRequest $request): JsonResponse
     {
-        
         $school = $this->authenticateUser($request);
         $data = SchoolResource::make($school);
 
@@ -46,7 +45,7 @@ class SchoolLoginController extends Controller
     {
         $data = $request->validated();
 
-        $school = SecondarySchool::where('email', $data['email'])->first();
+        $school = School::where('email', $data['email'])->first();
 
         abort_if(is_null($school), 401, 'Incorrect login details');
 
