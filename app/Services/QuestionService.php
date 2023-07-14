@@ -149,9 +149,14 @@ class QuestionService
 
         $option = new Option;
         DB::transaction(function () use (&$option, $data) {
-            $mediaService = new MediaService;
-            $mediaUrl = $mediaService->uploadAudio($data['media_url']);
-            $imageUrl = $mediaService->uploadImage($data['image_url']);
+            $mediaUrl = null;
+            $imageUrl = null;
+            if(!is_null($data['media_url']) && !is_null($data['image_url'])){
+                $mediaService = new MediaService;
+                $mediaUrl = $mediaService->uploadAudio($data['media_url']);
+                $imageUrl = $mediaService->uploadImage($data['image_url']);
+            }
+            
 
             $mediaType = null;
 
