@@ -62,9 +62,20 @@ class Option extends Model
      */
     protected $casts = [];
 
-    public function getFullnameAttribute()
+    public function getPuzzleFormattedOptionAttribute()
     {
-        return $this->name;
+        $delimiter = " ";
+        $option = explode($delimiter, $this->title);
+        $keys = array_keys($option);
+
+        shuffle($keys);
+        
+        foreach($keys as $k) {
+            $new_array[$k] = $option[$k];
+        }
+        $option = $new_array;
+        
+        return $option;
     }
 
     public static function factory(...$parameters): UserFactory

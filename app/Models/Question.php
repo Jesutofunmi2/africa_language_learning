@@ -67,7 +67,7 @@ class Question extends Model
 
     public function getFullnameAttribute()
     {
-        return $this->name;
+        return $this->title;
     }
 
     public static function factory(...$parameters): UserFactory

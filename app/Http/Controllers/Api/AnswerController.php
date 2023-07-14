@@ -54,4 +54,9 @@ class AnswerController extends Controller
 
         $option = $options->first();
     }
+
+    public function puzzle()
+    {
+        
+    }
 }

@@ -16,7 +16,7 @@ class OptionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
+            'title' => $this->question->answered_type == 'puzzle' ? $this->puzzle_formatted_option : $this->title,
             'media_url' => $this->media_url,
             'media_type' => $this->media_type,
             'image_url' => $this->image_url,
