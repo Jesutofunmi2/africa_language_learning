@@ -63,6 +63,19 @@
                                     @endif 
                                 </div>
                                 
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <textarea name="hint" class="form-control" placeholder="Hint"> {{ old('hint') }} </textarea>
+                                        </div>
+                                        @if ($errors->has('hint'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('hint') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                
 
                                 <div class="row-12">
                                     <div class="form-group">

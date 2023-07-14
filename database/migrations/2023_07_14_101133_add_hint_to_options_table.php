@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLanguageIdToTeachersTable extends Migration
+class AddHintToOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddLanguageIdToTeachersTable extends Migration
      */
     public function up()
     {
-        Schema::table('teachers', function (Blueprint $table) {
-            $table->string('language');
+        Schema::table('options', function (Blueprint $table) {
+            $table->mediumText('hint')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddLanguageIdToTeachersTable extends Migration
      */
     public function down()
     {
-        Schema::table('teachers', function (Blueprint $table) {
-            $table->dropColumn('language');
+        Schema::table('options', function (Blueprint $table) {
+            $table->dropColumn('hint');
         });
     }
 }

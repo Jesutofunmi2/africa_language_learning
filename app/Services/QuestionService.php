@@ -173,6 +173,7 @@ class QuestionService
             $option->title = $data['title'];
             $option->language_id = $data['language_id'];
             $option->question_id = $data['question_id'];
+            $option->hint = $data['hint'];
             $option->media_type = $mediaType;
             $option->media_url = $mediaUrl ?? null;
             $option->image_url = $imageUrl ?? null;
@@ -241,6 +242,7 @@ class QuestionService
                 'title' => $data['title'] ?? $option->title,
                 'language_id' => $data['language_id'] ?? $option->language_id,
                 'question_id' => $data['question_id'] ?? $option->question_id,
+                'hint' => $data['hint'] ?? $option->hint,
                 'is_correct' => $data['is_correct'] ?? $option->is_correct,
                 'media_type' => $mediaType,
                 'media_url' => $media,

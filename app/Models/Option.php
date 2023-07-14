@@ -42,6 +42,7 @@ class Option extends Model
         'title',
         'language_id',
         'question_id',
+        'hint',
         'answered_type',
         'media_type',
         'image_url'
@@ -69,7 +70,7 @@ class Option extends Model
         $keys = array_keys($option);
 
         shuffle($keys);
-        
+
         foreach($keys as $k) {
             $new_array[$k] = $option[$k];
         }
