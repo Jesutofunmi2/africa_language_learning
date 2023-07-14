@@ -174,8 +174,8 @@ class QuestionService
             $option->language_id = $data['language_id'];
             $option->question_id = $data['question_id'];
             $option->media_type = $mediaType;
-            $option->media_url = $mediaUrl;
-            $option->image_url = $imageUrl;
+            $option->media_url = $mediaUrl ?? null;
+            $option->image_url = $imageUrl ?? null;
             $option->is_correct = $data['is_correct'];
             $option->save();
         });

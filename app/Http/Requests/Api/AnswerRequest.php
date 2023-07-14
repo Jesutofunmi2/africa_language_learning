@@ -26,7 +26,8 @@ class AnswerRequest extends FormRequest
         return [
             'question_id' => ['uuid','exists:questions,id'],
             'optionIds' => ['array','min:1'],
-            'optionIds.*' => ['exists:options,id']
+            'optionIds.*' => ['exists:options,id'],
+            'puzzle_text' => ['sometimes', 'array']
         ];
     }
 }

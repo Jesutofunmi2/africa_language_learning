@@ -15,10 +15,14 @@ class AnswerController extends Controller
     {
         $question_id = $answerRequest->question_id;
         $optionIds = $answerRequest->optionIds;
+        $puzzle = $answerRequest->puzzle_text;
         $question =  Question::query()->whereId($question_id)->first();
         
         abort_if($question->answered_type == null, 400, 'No answer type for this question');
         if ($question->answered_type == 'multiple') {
+            return $this->single($question, $optionIds);
+        }
+        if ($question->answered_type == 'puzzle') {
             return $this->single($question, $optionIds);
         }
 
@@ -55,8 +59,8 @@ class AnswerController extends Controller
         $option = $options->first();
     }
 
-    public function puzzle()
+    public function puzzle(AnswerRequest $answerRequest)
     {
-        
+
     }
 }
