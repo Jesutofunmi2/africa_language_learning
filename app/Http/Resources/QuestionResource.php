@@ -20,6 +20,7 @@ class QuestionResource extends JsonResource
               'title' => $this->title,
               'instruction' => $this->instruction,
               'next_question_id' => $this->next_question_id,
+              'answered_type' => $this->answered_type,
               'media_url' => $this->media_url,
               'image_url' => $this->image_url,
               'media_type' => $this->media_type,

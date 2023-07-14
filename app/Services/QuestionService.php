@@ -149,19 +149,9 @@ class QuestionService
 
         $option = new Option;
         DB::transaction(function () use (&$option, $data) {
-            $mediaUrl = null;
-            $imageUrl = null;
             $mediaService = new MediaService;
-            if(!is_null($data['media_url'])){
-                
-                $mediaUrl = $mediaService->uploadAudio($data['media_url']);
-                
-            }
-
-            if(!is_null($data['image_url'])){
-                $imageUrl = $mediaService->uploadImage($data['image_url']);
-            }
-            
+            $mediaUrl = $mediaService->uploadAudio($data['media_url']);
+            $imageUrl = $mediaService->uploadImage($data['image_url']);
 
             $mediaType = null;
 
@@ -252,8 +242,8 @@ class QuestionService
                 'language_id' => $data['language_id'] ?? $option->language_id,
                 'question_id' => $data['question_id'] ?? $option->question_id,
                 'is_correct' => $data['is_correct'] ?? $option->is_correct,
-                'media_type' => $mediaType ?? null,
-                'media_url' => $media ?? null,
+                'media_type' => $mediaType,
+                'media_url' => $media,
                 'image_url' => $url
             ]);
 
