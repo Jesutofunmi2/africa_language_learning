@@ -67,7 +67,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="hint" class="form-control" placeholder="Hint"> {{  $option->option }} </textarea>
+                                            <textarea name="hint" class="form-control" placeholder="Hint"> {{  $option->hint }} </textarea>
                                         </div>
                                         @if ($errors->has('hint'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
