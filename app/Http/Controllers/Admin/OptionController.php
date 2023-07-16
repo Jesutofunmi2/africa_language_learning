@@ -10,6 +10,8 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\Language;
 use App\Models\Option;
 use App\Models\Question;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 
 class OptionController extends Controller
@@ -34,7 +36,10 @@ class OptionController extends Controller
 
     public function list()
     {
-        $options = Option::orderBy('created_at', 'desc')->paginate(60);
+
+        $options = Option::orderBy('created_at', 'desc')->paginate(40);
+        Session::put('option_url', request()->fullUrl());
+        // dd(Session::get(key:'option_url'));
         return view('pages.admin.list-option', ['options' => $options]);
     }
 
@@ -59,9 +64,10 @@ class OptionController extends Controller
         if ($createoptionrequest->hasFile('media_url')) {
             $media_url = $createoptionrequest->media_url;
         }
-
         $this->service->updateOption($createoptionrequest->validated(), $image, $media_url, $questionId);
-
+        if (session(key: 'option_url')) {
+            return redirect(session(key: 'option_url'))->with('success', 'Option updated successfully');
+        }
         return redirect()->route('admin.option.list')
             ->with('success', 'Option updated successfully');
     }
@@ -81,11 +87,10 @@ class OptionController extends Controller
         return redirect()->route('admin.option.list')
             ->with('success', 'Updated successfully');
     }
-    public function destroy(Option $option)
+    public function destroy(Request $request, Option $option)
     {
         $this->service->deleteOption($option);
-
-        return redirect()->route('admin.option.list')
+        return redirect()->route('admin.option.list', ['page' => $request->page])
             ->with('success', 'deleted successfully');
     }
 }

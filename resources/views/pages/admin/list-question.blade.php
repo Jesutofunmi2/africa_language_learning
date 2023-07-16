@@ -105,6 +105,7 @@
                                     onsubmit="return confirm('Are you sure you want to delete Question ?')" method="post">
                                     @csrf
                                     @method('delete')
+                                    <input type="hidden" name="page" value="{{$questions->currentPage()}}">
                                     <button class="btn btn-danger" type="submit">Delete</button>
                                 </form>
                             </td>

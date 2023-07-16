@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Language;
 use App\Models\Course;
 use App\Services\QuestionService;
+use Illuminate\Support\Facades\Session;
 
 class QuestionController extends Controller
 {
@@ -39,8 +40,8 @@ class QuestionController extends Controller
 
     public function list()
     {
-        $questions = Question::orderBy('created_at', 'desc')->paginate(15);
-
+        $questions = Question::orderBy('created_at', 'desc')->paginate(40);
+        Session::put('question_url', request()->fullUrl());
         return view('pages.admin.list-question', ['questions' => $questions]);
     }
 
@@ -68,6 +69,10 @@ class QuestionController extends Controller
 
         $this->service->updateQuestion($createquestionrequest->validated(), $image, $media_url, $questionId);
 
+        if (session(key: 'question_url')) {
+            return redirect(session(key: 'question_url'))->with('success', 'Question updated successfully');
+        }
+
         return redirect()->route('admin.question.list')
             ->with('success', 'Question updated successfully');
     }
@@ -81,11 +86,11 @@ class QuestionController extends Controller
     }
 
 
-    public function destroy(Question $question)
+    public function destroy(Request $request, Question $question)
     {
         $this->service->deleteQuestion($question);
 
-        return redirect()->route('admin.question.list')
+        return redirect()->route('admin.question.list', ['page' => $request->page])
             ->with('success', 'deleted successfully');
     }
 }

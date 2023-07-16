@@ -67,15 +67,7 @@ class Option extends Model
     {
         $delimiter = " ";
         $option = explode($delimiter, $this->title);
-        $keys = array_keys($option);
-
-        shuffle($keys);
-
-        foreach($keys as $k) {
-            $new_array[$k] = $option[$k];
-        }
-        $option = $new_array;
-        
+        shuffle($option);   
         return $option;
     }
 
@@ -83,4 +75,5 @@ class Option extends Model
     {
         return static::traitFactory($parameters);
     }
+
 }

@@ -52,7 +52,7 @@ class TeacherController extends Controller
     public function list(SchoolRequest $schoolRequest): JsonResponse
     {
         $school_id = $schoolRequest->school_id;
-        $teachers = Teacher::query()->where('school_id', $school_id)->get();
+        $teachers = Teacher::query()->orderBy('created_at', 'desc')->where('school_id', $school_id)->get();
         abort_if(is_null($teachers), 204, 'No Content');
         $data = TeacherResource::collection($teachers);
 

@@ -24,7 +24,7 @@ class StudentController extends Controller
     {
         $school_id = $schoolRequest->school_id;
 
-        $students = Student::query()->where('school_id', $school_id)->get();
+        $students = Student::query()->orderBy('created_at', 'desc')->where('school_id', $school_id)->get();
         $data = StudentResource::collection($students);
 
         return response()->json(

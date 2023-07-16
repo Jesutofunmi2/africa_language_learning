@@ -93,11 +93,13 @@
                               
                                     <td>
                                         <a href="{{ route('admin.option.show', $option->id) }}" class="btn">Edit</a>
+
                                     </td>
                                     <td>
                                         <form action="{{ route('admin.option.destroy', $option->id) }}" onsubmit="return confirm('Are you sure you want to delete option?')" method="post">
                                             @csrf
                                             @method('delete')
+                                            <input type="hidden" name="page" value="{{$options->currentPage()}}">
                                             <button class="btn btn-danger" type="submit">Delete</button>
                                         </form>
                                     </td>
