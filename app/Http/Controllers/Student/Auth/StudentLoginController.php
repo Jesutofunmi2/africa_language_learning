@@ -21,6 +21,7 @@ class StudentLoginController extends Controller
    
     public function __invoke(StudentLoginRequest $request): JsonResponse
     {
+
         $student = $this->authenticateUser($request);
         $data = StudentResource::make($student);
 

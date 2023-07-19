@@ -39,15 +39,16 @@ Route::prefix('/v1')
 
         Route::prefix('auth')->name('auth.')
             ->group(function () {
+                 //student endpoint
                // Route::post('/login', UserLoginController::class)->name('login');
                 Route::post('/register', UserRegisterController::class)->name('register');
-
+                Route::post('/studentLogin', StudentLoginController::class)->name('studentLogin');
+              
 
                 //schoool endpoint
                 Route::post('/createSchool', SchoolController::class)->name('createSchool');
                 Route::post('/schoolLogin', SchoolLoginController::class)->name('schoolLogin');
                 Route::post('/schoolLogout', SchoolLogoutController::class)->middleware('auth:sanctum')->name('logout_for_school');
-
 
                 Route::post('/logout', UserLogoutController::class)->middleware('auth:sanctum')->name('logout');
             });
@@ -59,15 +60,13 @@ Route::prefix('/v1')
                 Route::get('/question', [QuestionController::class, 'list'])->name('question.list');
                 Route::post('/option', [AnswerController::class, 'checkAnswer'])->name('answer.check');
 
-
                  //fourites endpoint
                  Route::post('/createFourite', [FouriteController::class, 'create'])->name('fourite.create');
                  Route::get('/getFourites', [FouriteController::class, 'list'])->name('fourite.list');
                  Route::delete('/removeFourites', [FouriteController::class, 'remove'])->name('fourite.remove');
  
-                 //student endpoint
+                //student endpoint
                 Route::post('/createStudent', CreateStudentController::class)->name('createStudent');
-                Route::post('/studentLogin', StudentLoginController::class)->name('studentLogin');
                 Route::get('/students', [StudentController::class, 'list'])->name('student.list');
                 Route::get('/getStudent', [StudentController::class, 'getStudent'])->name('student.show');
                 Route::put('/updateStudent', [StudentController::class, 'update'])->name('student.update');
