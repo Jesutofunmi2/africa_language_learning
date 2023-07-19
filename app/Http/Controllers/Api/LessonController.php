@@ -11,7 +11,7 @@ class LessonController extends Controller
 {
     public function list()
     {
-        $lesson = Course::all();
+        $lesson = Course::orderBy('created_at', 'desc')->get();
         $data = LessonResource::collection($lesson);
 
         return response()->json(

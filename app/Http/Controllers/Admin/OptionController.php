@@ -22,8 +22,8 @@ class OptionController extends Controller
     }
     public function index()
     {
-        $languages = Language::all();
-        $questions = Question::all();
+        $languages = Language::orderBy('created_at', 'desc')->get();
+        $questions = Question::orderBy('created_at', 'desc')->get();
 
         return view('pages.admin.create-option', ['languages' => $languages, 'questions' => $questions]);
     }

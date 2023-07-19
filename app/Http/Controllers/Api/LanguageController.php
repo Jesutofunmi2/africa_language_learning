@@ -11,7 +11,7 @@ class LanguageController extends Controller
 {
     public function list()
     {
-        $languages = Language::all();
+        $languages = Language::orderBy('created_at', 'desc')->get();
         $data = LanguageResource::collection($languages);
 
         return response()->json(
