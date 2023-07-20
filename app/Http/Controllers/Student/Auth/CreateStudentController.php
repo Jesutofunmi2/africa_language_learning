@@ -20,6 +20,7 @@ class CreateStudentController extends Controller
 
     public function __invoke(CreateStudentRequest $request): JsonResponse
     {
+        dd($request);
         $student = $this->studentService->createStudent($request->validated());
 
         //$ip = $request->ip();

@@ -30,11 +30,11 @@ class CreateStudentRequest extends FormRequest
             'password' => ['string', 'min:4', 'max:50'],
             'school_id' => ['required', 'string','exists:schools,id'],
             'image_url' => ['sometimes', 'string'],
-            'language' => ['sometimes', 'string'],
+            'language' => ['required', 'string'],
             'country' => ['sometimes', 'string'],
-            'gendar'=> ['sometimes', 'string'],
+            'gendar'=> ['required', 'string'],
             'phone_number'=> ['sometimes', 'string'],
-            'age' => ['sometimes', 'integer']
+            'age' => 'required|numeric|gt:0'
         ];
     }
 
@@ -43,7 +43,10 @@ class CreateStudentRequest extends FormRequest
         return [
             'first_name.required' => 'First name is missing',
             'last_name.required' => 'Last Name is missing',
-            'school_id.required' => 'School Id is required'
+            'school_id.required' => 'School Id is required',
+            'language.required' => 'language is missing',
+            'age.required' => 'age is missing or not an integer value',
+            'gendar.required' => 'gender is missing',
         ];
     }
 }

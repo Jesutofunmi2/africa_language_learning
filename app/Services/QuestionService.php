@@ -9,11 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class QuestionService
 {
-
     public function createQuestion(array $data): Question
     {
         $question = new Question;
-        
         
         DB::transaction(function () use (&$question, $data) {
 
@@ -47,7 +45,6 @@ class QuestionService
             $question->image_url = $imageUrl;
 
             $question->save();
-
 
             //@todo we fire other actions after registration
         });
@@ -93,7 +90,6 @@ class QuestionService
 
         if (!is_null($media_url)) {
             $media = $mediaService->uploadAudio($data['media_url']);
-
 
             $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
             $image_extension = array('jpg', 'jpeg', 'png', 'gif');
@@ -170,7 +166,7 @@ class QuestionService
                 $mediaType = 'audio';
             }
 
-            $option->title = $data['title'];
+            $option->title = str_replace('  ', ' ', $data['title']);
             $option->language_id = $data['language_id'];
             $option->question_id = $data['question_id'];
             $option->hint = $data['hint'];

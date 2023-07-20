@@ -66,7 +66,9 @@ class Option extends Model
     public function getPuzzleFormattedOptionAttribute()
     {
         $delimiter = " ";
-        $option = explode($delimiter, $this->title);
+
+        $trim_value = str_replace('  ', ' ', $this->title);
+        $option = explode($delimiter, $trim_value);
         shuffle($option);   
         return $option;
     }
