@@ -26,7 +26,7 @@ class QuestionRequest extends FormRequest
         
         return [
             'language_id' => ['required','integer','exists:languages,id'],
-            'course_id' => ['required','integer','exists:courses,id'],
+            'topic_id' => ['required','integer','exists:topics,id'],
         ];
     }
 
@@ -34,7 +34,7 @@ class QuestionRequest extends FormRequest
     {
         return [
             'language_id.required' => 'Language Id doest not exists in the database',
-            'course_id.required' => 'Course Id  invalid',
+            'topic_id.required' => 'topic Id  invalid',
         ];
     }
 }

@@ -1,19 +1,21 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminActivityController;
-use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\Admin\AdminLoginController;
-use App\Http\Controllers\Admin\AdminLogoutController;
-use App\Http\Controllers\Admin\AdminRegisterController;
-use App\Http\Controllers\Admin\LanguageController;
-use App\Http\Controllers\Admin\CourseController;
-use App\Http\Controllers\Admin\QuestionController;
-use App\Http\Controllers\Admin\OptionController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\School\Auth\SchoolController;
-use App\Http\Controllers\Teacher\TeacherController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TopicController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\OptionController;
+use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Teacher\TeacherController;
+use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\AdminLogoutController;
+use App\Http\Controllers\School\Auth\SchoolController;
+use App\Http\Controllers\Admin\AdminActivityController;
+use App\Http\Controllers\Admin\AdminRegisterController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 
 
 /*
@@ -69,12 +71,12 @@ Route::prefix('admin')->name('admin.')
             Route::put('language/{language}', [LanguageController::class, 'update'])->name('language.update');
             Route::delete('language/{language}', [LanguageController::class, 'destroy'])->name('language.destroy');
 
-            Route::get('course/create', [CourseController::class, 'index'])->name('course.index');
-            Route::post('course/create', [CourseController::class, 'create'])->name('course.create');
-            Route::get('courses', [CourseController::class, 'list'])->name('course.list');
-            Route::get('course/{course}', [CourseController::class, 'show'])->name('course.show');
-            Route::put('course/{course}', [CourseController::class, 'update'])->name('course.update');
-            Route::delete('course/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
+            Route::get('topic/create', [TopicController::class, 'index'])->name('topic.index');
+            Route::post('topic/create', [TopicController::class, 'create'])->name('topic.create');
+            Route::get('topics', [TopicController::class, 'list'])->name('topic.list');
+            Route::get('topic/{topic}', [TopicController::class, 'show'])->name('topic.show');
+            Route::put('topic/{topic}', [TopicController::class, 'update'])->name('topic.update');
+            Route::delete('topic/{topic}', [TopicController::class, 'destroy'])->name('topic.destroy');
 
             Route::get('question/create', [QuestionController::class, 'index'])->name('question.index');
             Route::post('question/create', [QuestionController::class, 'create'])->name('question.create');
@@ -123,6 +125,20 @@ Route::prefix('admin')->name('admin.')
             Route::delete('permission/{permissionId}', [PermissionController::class, 'destroy'])->name('permission.destroy');
             Route::post('/permissions/{permission}/roles', [PermissionController::class, 'assignRole'])->name('permissions.roles');
             Route::delete('/permissions/{permission}/roles/{role}', [PermissionController::class, 'removeRole'])->name('permissions.roles.remove');
+
+            Route::get('section/create', [SectionController::class, 'index'])->name('section.index');
+            Route::post('section/create', [SectionController::class, 'create'])->name('section.create');
+            Route::get('sections', [SectionController::class, 'list'])->name('section.list');
+            Route::get('section/{id}', [SectionController::class, 'show'])->name('section.show');
+            Route::put('sections/{id}', [SectionController::class, 'update'])->name('section.update');
+            Route::delete('sections/{id}', [SectionController::class, 'destroy'])->name('section.destroy');
+
+            Route::get('course/create', [CourseController::class, 'index'])->name('course.index');
+            Route::post('course/create', [CourseController::class, 'create'])->name('course.create');
+            Route::get('courses', [CourseController::class, 'list'])->name('course.list');
+            Route::get('course/{course}', [CourseController::class, 'show'])->name('course.show');
+            Route::put('course/{course}', [CourseController::class, 'update'])->name('course.update');
+            Route::delete('course/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
 
             Route::post('logout', [AdminLogoutController::class, 'index'])->name('logout');
         });

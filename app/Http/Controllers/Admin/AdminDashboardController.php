@@ -6,7 +6,7 @@ use App\Enums\ActivityType;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Admin;
-use App\Models\Course;
+use App\Models\Topic;
 use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -19,8 +19,6 @@ use App\Models\Teacher;
 
 class AdminDashboardController extends Controller
 {
-
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -37,12 +35,10 @@ class AdminDashboardController extends Controller
      */
     public function index(Request $request): View
     {
-
-        
         $users = Admin::count();
         $types = Activity::TYPES;
         $languages = Language::count();
-        $courses = Course::count();
+        $topics =  Topic::count();
         $students = Student::count();
         $schools = SecondarySchool::count();
         $questions = Question::count();
@@ -55,7 +51,7 @@ class AdminDashboardController extends Controller
                 'users' => $users,
                 'types' => $types,
                 'languages' => $languages,
-                'courses' => $courses,
+                'topics' => $topics,
                 'students' => $students,
                 'schools' => $schools,
                 'questions' => $questions,

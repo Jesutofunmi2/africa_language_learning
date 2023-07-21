@@ -63,17 +63,17 @@
 
                                 <div class="row-12">
                                     <div class="form-group">
-                                        <select name="course_id" class="form-control">
-                                            <option value="{{ old('course_id') ?? $question->course->id  }}"> {{ $question->course->title }}</option>
-                                            @foreach ($courses as $course)
-                                                <option value="{{ $course->id }}">{{ $course->title }}</option>
+                                        <select name="topic_id" class="form-control">
+                                            <option value="{{ old('topic_id') ?? $question->topic->id  }}"> {{ $question->topic->title }}</option>
+                                            @foreach ($topics as $topic)
+                                                <option value="{{ $topic->id }}">{{ $topic->title }}</option>
                                             @endforeach
                                         </select>
-                                        <small>Note: don't leave blank, select Course </small>
+                                        <small>Note: don't leave blank, select topic </small>
                                     </div>
-                                    @if ($errors->has('course_id'))
+                                    @if ($errors->has('topic_id'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('course_id') }}</strong>
+                                            <strong>{{ $errors->first('topic_id') }}</strong>
                                         </span>
                                     @endif 
                                 </div>

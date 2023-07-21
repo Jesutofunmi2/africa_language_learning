@@ -27,7 +27,7 @@ class CreateQuestionRequest extends FormRequest
             'title' => ['string', 'required'],
             'instruction' => ['sometimes','string'],
             'language_id' => ['integer', 'required', 'exists:languages,id'],
-            'course_id' => ['integer', 'required', 'exists:courses,id'],
+            'topic_id' => ['integer', 'required', 'exists:topics,id'],
             'answered_type' => ['required','in:text,multiple,single,puzzle'],
             'media_url' => 'sometimes|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg',
             'image_url' => ['sometimes','image','mimes:jpeg,png,jpg','max:1024']

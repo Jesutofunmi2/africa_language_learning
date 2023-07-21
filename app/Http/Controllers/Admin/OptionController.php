@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateOptionRequest;
-use App\Models\Course;
+use App\Models\Topic;
 use App\Services\QuestionService;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Language;
@@ -46,11 +46,11 @@ class OptionController extends Controller
     public function show($Id)
     {
         $languages = Language::all();
-        $courses = Course::all();
+        $topics = Topic::all();
         $option = $this->service->showOption($Id);
         $question = Question::all();
 
-        return view('pages.admin.edit-option', ['questions' => $question, 'option' => $option, 'languages' => $languages, 'courses' => $courses]);
+        return view('pages.admin.edit-option', ['questions' => $question, 'option' => $option, 'languages' => $languages, 'topics' => $topics]);
     }
 
     public function update(CreateOptionRequest $createoptionrequest, $questionId)

@@ -21,7 +21,7 @@
                                             <i class="nc-icon nc-box-2"></i>
                                         </span>
                                     </div>
-                                    <input name="title" type="text" class="form-control" placeholder="Course name" value="{{ old('title') }}" required autofocus>
+                                    <input name="title" type="text" class="form-control" placeholder="Title" value="{{ old('title') }}" required autofocus>
                                     @if ($errors->has('title'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('title') }}</strong>
@@ -32,7 +32,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="description" class="form-control" placeholder="Description"> {{ old('description') }}</textarea>
+                                            <textarea name="description" class="form-control" placeholder="description"> {{ old('description') }} </textarea>
                                         </div>
                                         @if ($errors->has('description'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -41,14 +41,15 @@
                                         @endif
                                     </div>
                                 </div>
-                                
+
                                 <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
-                                <input type="file" value="{{ old('image_url') }}" name="image_url" accept="image/*" class="form-control" />
-                                      @if ($errors->has('image_url'))
+                                     <input type="file" value="{{ old('image_url') }}" name="image_url" accept="image/*" class="form-control" />
+                                       @if ($errors->has('image_url'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
                                                 <strong>{{ $errors->first('image_url') }}</strong>
                                             </span>
                                         @endif
+                               
 
 
                                 <div class="card-footer ">

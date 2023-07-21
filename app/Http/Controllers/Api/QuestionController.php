@@ -15,9 +15,9 @@ class QuestionController extends Controller
     public function list(QuestionRequest $questionRequest)
     {
         $language_id = $questionRequest->language_id;
-        $course_id = $questionRequest->course_id;
+        $topic_id = $questionRequest->topic_id;
        
-        $question = Question::query()->orderBy('created_at', 'asc')->where('status', true)->where('course_id', $course_id)->whereRelation('options', 'language_id', '=', $language_id)->get();
+        $question = Question::query()->orderBy('created_at', 'asc')->where('status', true)->where('topic_id', $topic_id)->whereRelation('options', 'language_id', '=', $language_id)->get();
         
         $data = QuestionResource::collection($question);
 

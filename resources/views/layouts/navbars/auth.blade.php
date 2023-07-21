@@ -26,10 +26,10 @@
                 </a>
             </li>
            
-            <li class="{{ $elementActive == 'course' ? 'active' : '' }}">
-                <a href="{{ route('admin.course.index') }}">
+            <li class="{{ $elementActive == 'topic' ? 'active' : '' }}">
+                <a href="{{ route('admin.topic.index') }}">
                     <i class="nc-icon nc-app"></i>
-                    <p>{{ __('Create Course') }}</p>
+                    <p>{{ __('Create Topic') }}</p>
                 </a>
             </li>
 
@@ -50,6 +50,18 @@
                 <a href="{{ route('admin.question.index')}}">
                     <i class="nc-icon nc-badge"></i>
                     <p>{{ __('Create Question') }}</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'course' ? 'active' : '' }}">
+                <a href="{{ route('admin.course.index')}}">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Create Course') }}</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'section' ? 'active' : '' }}">
+                <a href="{{ route('admin.section.index')}}">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Create Section') }}</p>
                 </a>
             </li>
 

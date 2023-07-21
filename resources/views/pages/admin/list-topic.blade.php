@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="content">
-        <a href="{{ route('admin.course.index')}}" style="float: right">
+        <a href="{{ route('admin.topic.index')}}" style="float: right">
             <p>{{ __('Add') }}</p>
         </a>
         @if (session('success'))
@@ -28,7 +28,13 @@
                                 Description
                              </th>
                              <th>
-                                Image
+                                Sectional
+                             </th>
+                             <th>
+                                Section
+                             </th>
+                             <th>
+                                Media Url
                              </th>
                              <th>
                                 Date
@@ -42,29 +48,41 @@
                         </thead>
                         <tbody>
                             
-                            @foreach ($courses as $course)
+                            @foreach ($topics as $topic)
                                 <tr>
                                     <td>
                                         {{ $loop->iteration }}
                                     </td>
                                     <td>
-                                        {{ $course->title }}
+                                        {{ $topic->title }}
                                     </td>
                                     <td>
-                                        {{ $course->description }}
+                                        {{ $topic->description }}
                                     </td>
                                     <td>
-                                        <img src="{{ asset($course->image_url) }}" width="40px" height="40px" />
+                                        {{ $topic->type }}
                                     </td>
                                     <td>
-                                        {{ $course->created_at->diffForHumans() }}
+                                        {{ $topic->section->title??'' }}
+                                    </td>
+                                    @if($topic->media_type=='image')
+                                    <td>
+                                        <img src="{{ asset($topic->image_url) }}" width="40px" height="40px" />
+                                    </td>
+                                    @else
+                                    <td>
+                                        <a href="{{ asset($topic->image_url) }}">media link</a>
+                                    </td>
+                                    @endif
+                                    <td>
+                                        {{ $topic->created_at->diffForHumans() }}
                                     </td>
                               
                                     <td>
-                                        <a href="{{ route('admin.course.show', $course->id) }}" class="btn">Edit</a>
+                                        <a href="{{ route('admin.topic.show', $topic->id) }}" class="btn">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('admin.course.destroy', $course->id) }}" onsubmit="return confirm('Are you sure you want to delete course?')" method="post">
+                                        <form action="{{ route('admin.topic.destroy', $topic->id) }}" onsubmit="return confirm('Are you sure you want to delete course?')" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger" type="submit">Delete</button>
@@ -75,7 +93,7 @@
                         </tbody>
                     </table>
                 </div>
-                {!! $courses->links() !!}
+                {!! $topics->links() !!}
             </div>
         </div>
     </div>

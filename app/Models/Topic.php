@@ -2,36 +2,28 @@
 
 namespace App\Models;
 
-use App\Traits\UUID;
-use App\Models\Topic;
-use App\Models\Language;
-use App\Models\Option;
-use Laravel\Sanctum\HasApiTokens;
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
+use App\Models\Question;
+use App\Models\Section;
+use App\Traits\UUID;
 
-class Question extends Model
+class Topic extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, UUID {
+    use HasApiTokens, HasFactory, Notifiable, UUID {
         HasFactory::factory as traitFactory;
     }
-
-    public function topic()
+    public function questions()
     {
-        return $this->belongsTo(Topic::class);
+        return $this->hasMany(Question::class);
     }
 
-    public function language()
+    public function section()
     {
-        return $this->belongsTo(Language::class);
-    }
-
-    public function options()
-    {
-        return $this->hasMany(Option::class);
+        return $this->belongsTo(Section::class);
     }
     /**
      * The attributes that are mass assignable.
@@ -39,13 +31,8 @@ class Question extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'title',
-        'instruction',
-        'language_id',
-        'topic_id',
-        'answered_type',
-        'media_type',
-        'media_url'
+        'name',
+        'image_url'
     ];
 
     /**
@@ -60,11 +47,13 @@ class Question extends Model
      *
      * @var array<string, string>
      */
-    protected $casts = [];
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 
     public function getFullnameAttribute()
     {
-        return $this->title;
+        return $this->name;
     }
 
     public static function factory(...$parameters): UserFactory

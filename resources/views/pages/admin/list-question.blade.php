@@ -27,7 +27,7 @@
                                 Title
                             </th>
                             <th>
-                                Course
+                              Topic
                             </th>
                             <th>
                                 Language
@@ -62,7 +62,7 @@
                                         {{ $question->title }}
                                     </td>
                                     <td>
-                                        {{ $question->course->title ?? ''}}
+                                        {{ $question->topic->title ?? ''}}
                                     </td>
                                     <td>
                                         {{ $question->language->name ?? '' }}

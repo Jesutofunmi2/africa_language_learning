@@ -3,37 +3,30 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CreateCourseRequest;
-use App\Services\ActivityService;
+use App\Http\Requests\Admin\CourseRequest;
+use App\Models\Course;
+use App\Services\CourseService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\Language;
-use App\Models\Course;
 
 class CourseController extends Controller
 {
-    //
-
-    public function __construct(protected ActivityService $service)
+    public function __construct(protected CourseService $service)
     {
         $this->middleware('auth');
     }
-
-    public function index(Request $request): View
+    public function index(): View
     {
-        $languages = Language::get();
-        return view('pages.admin.create-course', ['languages' => $languages]);
+        return view('pages.admin.create-course');
     }
-
-    public function create(CreateCourseRequest $createCourseRequest): RedirectResponse
+    public function create(CourseRequest $courseRequest): RedirectResponse
     {
-     $this->service->createCourse($createCourseRequest->validated());
+     $this->service->createCourse($courseRequest->validated());
  
      return redirect()->route('admin.course.list')->with('success', 'Course created successfully');
     }
-
-    public function list(Request $request):View
+    public function list():View
     {
      $courses = Course::orderBy('created_at', 'desc')->paginate(40);
      return view('pages.admin.list-course')->with('courses', $courses);
@@ -42,28 +35,24 @@ class CourseController extends Controller
     public function show($courseId)
     {
         $course = $this->service->showCourse($courseId);
-        return view('pages.admin.edit-course', ['course' => $course ]);
+        return view('pages.admin.edit-course', ['course' => $course]);
     }
 
-    public function update(CreateCourseRequest $request, $courseId): RedirectResponse
+    public function update(CourseRequest $request, $sectionId): RedirectResponse
     {
-        $image = null;
-
-        if ($request->hasFile('image_url')) {
-            $image = $request->image_url;
-        }
-
-        $this->service->updateCourse($request->validated(), $image, $courseId);
+        $this->service->updateCourse($request->validated(), $sectionId);
 
         return redirect()->route('admin.course.list')
             ->with('success', 'Course updated successfully');
     }
 
-    public function destroy(Course $course): RedirectResponse
+    public function destroy($courseId): RedirectResponse
     {
-        $this->service->deleteCourse($course);
- 
+        
+        $this->service->deleteCourse($courseId);
+        
         return redirect()->route('admin.course.list')
                 ->with('success', 'deleted successfully');
     }
+
 }

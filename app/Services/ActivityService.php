@@ -1,15 +1,11 @@
 <?php
 
 namespace App\Services;
-
 use App\Models\Activity;
 use App\Models\Language;
-use App\Models\User;
-use App\Models\Course;
-use App\Models\SecondarySchool;
+use App\Models\Topic;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;
@@ -146,67 +142,107 @@ class ActivityService
     {
         return Language::where('name', '=', $name)->exists();
     }
-    /**
-     * Create Course.
-     * 
-     */
-    public function createCourse(array $data): void
+    
+    public function createTopic(array $data): void
     {
         $mediaService = new MediaService;
-        $mediaUrl = $mediaService->uploadImage($data['image_url']);
+        $mediaUrl = null;
+        $mediaType = null;
 
-        $course = new Course;
-        $course->title = $data['title'];
-        $course->description = $data['description'];
-        $course->image_url = $mediaUrl;
-        $course->save();
+        $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
+        $image_extension = array('jpg', 'jpeg', 'png', 'gif');
+        $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
+
+        $extention = $data['image_url']->extension();
+
+
+        if (in_array($extention, $video_extension)) {
+            $mediaType = 'video';
+           $mediaUrl= $mediaService->uploadAudio($data['image_url']);
+        } elseif (in_array($extention, $image_extension)) {
+            $mediaType = 'image';
+            $mediaUrl= $mediaService->uploadImage($data['image_url']);
+        } elseif (in_array($extention, $audio_extension)) {
+            $mediaType = 'audio';
+            $mediaUrl= $mediaService->uploadAudio($data['image_url']);
+        }
+
+        $topic = new Topic;
+        $topic->title = $data['title'];
+        $topic->description = $data['description'];
+        $topic->section_id = $data['section_id'];
+        $topic->content = $data['content']?? null;
+        $topic->objective = $data['objective']?? null;
+        $topic->type = $data['type'];
+        $topic->media_type = $mediaType;
+        $topic->image_url = $mediaUrl;
+        $topic->save();
     }
 
 
-    public function showCourse($courseId): Course
+    public function showTopic($topicId): Topic
     {
-        $course = Course::whereId($courseId)->first();
+        $topic = Topic::whereId($topicId)->first();
 
-        return $course;
+        return $topic;
     }
 
-    public function updateCourse(array $data, $image = null, $courseId): Course
+    public function updateTopic(array $data, $image = null, $topicId): Topic
     {
         $url = null;
-
+        $mediaUrl = null;
+        $mediaType = null;
         if (!is_null($image)) {
             $mediaService = new MediaService;
-            $url = $mediaService->uploadImage($data['image_url']);
+            $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
+            $image_extension = array('jpg', 'jpeg', 'png', 'gif');
+            $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
+    
+            $extention = $image->extension();
+    
+    
+            if (in_array($extention, $video_extension)) {
+                $mediaType = 'video';
+               $mediaUrl= $mediaService->uploadAudio($image);
+            } elseif (in_array($extention, $image_extension)) {
+                $mediaType = 'image';
+                $mediaUrl= $mediaService->uploadImage($image);
+            } elseif (in_array($extention, $audio_extension)) {
+                $mediaType = 'audio';
+                $mediaUrl= $mediaService->uploadAudio($image);
+            }
+
         }
 
-        $courses = Course::whereId($courseId)->first();
-        if($url == null){
-            $url=$courses->image_url;
+        $topics = Topic::whereId($topicId)->first();
+        if($mediaUrl  == null){
+            $mediaUrl =$topics->image_url;
         }
-        $course = new Course;
+        $topic = new Topic;
         // if user id in array, we create new edition for the user
-        $course::where('id', $courseId)
+        $topic::where('id', $topicId)
             ->update([
-                'title' => $data['title']?? $courses->title,
-                'description' => $data['description'] ?? $courses->description,
-                'image_url' => $url
+                'title' => $data['title']?? $topics->title,
+                'description' => $data['description'] ?? $topics->description,
+                'content' => $data['content'] ?? $topics->content,
+                'objective' => $data['objective'] ?? $topics->objective,
+                'section_id' => $data['section_id']?? $topics->section_id,
+                'type' => $data['type'] ?? $topics->type,
+                'image_url' => $mediaUrl,
+                'media_type' => $mediaType,
             ]);
 
-        return $course;
+        return $topic;
     }
 
-    /**
-     * Delete a language.
-     * 
-     */
     public function deleteLanguage(Language $language): void
     {
         $language->delete();
     }
 
-    public function deleteCourse(Course $course): void
+    public function deleteTopic(Topic $topic): void
     {
-        $course->delete();
+        $topic->delete();
     }
     /**
      * Delete an activity.

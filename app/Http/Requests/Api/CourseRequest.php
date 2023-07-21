@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class CreateCourseRequest extends FormRequest
+class CourseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class CreateCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -25,9 +24,7 @@ class CreateCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['string', 'required'],
-            'description' => ['string', 'sometimes'],
-            'image_url' => ['sometimes', 'image', 'mimes:jpeg,png,jpg', 'max:1024']
+            //
         ];
     }
 }

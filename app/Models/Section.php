@@ -2,26 +2,34 @@
 
 namespace App\Models;
 
-use App\Traits\UUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Section;
+use App\Models\Course;
+use App\Models\Topic;
+use App\Traits\UUID;
 
-class Course extends Model
+class Section extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable, UUID{
+    use HasApiTokens, HasFactory, Notifiable, UUID {
         HasFactory::factory as traitFactory;
     }
-    public function section()
+
+    public function course()
     {
-        return $this->hasMany(Section::class);
+        return $this->belongsTo(Course::class);
     }
+
+    public function topic()
+    {
+        return $this->hasMany(Topic::class);
+    }
+
     protected $fillable = [
         'title',
-        'description',
-        'image'
+        'level',
+        'category'
     ];
     protected $hidden = [];
 }

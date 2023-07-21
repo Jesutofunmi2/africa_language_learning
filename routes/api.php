@@ -1,22 +1,24 @@
 <?php
 
-use App\Http\Controllers\User\UserActivityController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\TopicController;
+use App\Http\Controllers\Api\AnswerController;
+use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\FouriteController;
+use App\Http\Controllers\Api\SectionController;
+use App\Http\Controllers\Api\StudentController;
+use App\Http\Controllers\Api\TeacherController;
+use App\Http\Controllers\Api\LanguageController;
+use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\User\UserLoginController;
 use App\Http\Controllers\User\UserLogoutController;
+use App\Http\Controllers\User\UserActivityController;
 use App\Http\Controllers\User\UserRegisterController;
 use App\Http\Controllers\School\Auth\SchoolController;
 use App\Http\Controllers\School\Auth\SchoolLoginController;
 use App\Http\Controllers\School\Auth\SchoolLogoutController;
-use App\Http\Controllers\Student\Auth\CreateStudentController;
 use App\Http\Controllers\Student\Auth\StudentLoginController;
-use App\Http\Controllers\Api\LanguageController;
-use App\Http\Controllers\Api\LessonController;
-use App\Http\Controllers\Api\QuestionController;
-use App\Http\Controllers\Api\AnswerController;
-use App\Http\Controllers\Api\FouriteController;
-use App\Http\Controllers\Api\StudentController;
-use App\Http\Controllers\Api\TeacherController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Student\Auth\CreateStudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +58,9 @@ Route::prefix('/v1')
         Route::middleware('auth:sanctum')
             ->group(function () {
                 Route::get('/language', [LanguageController::class, 'list'])->name('language.list');
-                Route::get('/lesson', [LessonController::class, 'list'])->name('lesson.list');
+                Route::get('/topic', [TopicController::class, 'list'])->name('topic.list');
+                Route::get('/section', [SectionController::class, 'list'])->name('section.list');
+                Route::get('/course', [CourseController::class, 'list'])->name('course.list');
                 Route::get('/question', [QuestionController::class, 'list'])->name('question.list');
                 Route::post('/option', [AnswerController::class, 'checkAnswer'])->name('answer.check');
 

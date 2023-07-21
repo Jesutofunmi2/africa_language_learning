@@ -8,13 +8,12 @@ use App\Models\Question;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Language;
-use App\Models\Course;
+use App\Models\Topic;
 use App\Services\QuestionService;
 use Illuminate\Support\Facades\Session;
 
 class QuestionController extends Controller
 {
-
     public function __construct(protected QuestionService $service)
     {
         $this->middleware('auth');
@@ -22,9 +21,9 @@ class QuestionController extends Controller
     public function index()
     {
         $languages = Language::all();
-        $courses = Course::all();
+        $topics = Topic::all();
 
-        return view('pages.admin.create-question', ['languages' => $languages, 'courses' => $courses]);
+        return view('pages.admin.create-question', ['languages' => $languages, 'topics' => $topics]);
     }
 
     public function create(CreateQuestionRequest $createQuestionRequest): RedirectResponse
@@ -49,10 +48,10 @@ class QuestionController extends Controller
     public function show($questionId)
     {
         $languages = Language::all();
-        $courses = Course::all();
+        $topics = Topic::all();
         $question = $this->service->showQuestion($questionId);
 
-        return view('pages.admin.edit-question', ['question' => $question, 'languages' => $languages, 'courses' => $courses]);
+        return view('pages.admin.edit-question', ['question' => $question, 'languages' => $languages, 'topics' => $topics]);
     }
 
     public function update(CreateQuestionRequest $createquestionrequest, $questionId)

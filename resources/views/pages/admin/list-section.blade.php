@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="content">
-        <a href="{{ route('admin.course.index')}}" style="float: right">
+        <a href="{{ route('admin.section.index')}}" style="float: right">
             <p>{{ __('Add') }}</p>
         </a>
         @if (session('success'))
@@ -25,11 +25,14 @@
                                  Name
                             </th>
                              <th>
-                                Description
+                                Level
                              </th>
                              <th>
-                                Image
+                               Category
                              </th>
+                             <th>
+                                Course
+                              </th>
                              <th>
                                 Date
                              </th>
@@ -42,29 +45,32 @@
                         </thead>
                         <tbody>
                             
-                            @foreach ($courses as $course)
+                            @foreach ($sections as $section)
                                 <tr>
                                     <td>
                                         {{ $loop->iteration }}
                                     </td>
                                     <td>
-                                        {{ $course->title }}
+                                        {{ $section->title }}
                                     </td>
                                     <td>
-                                        {{ $course->description }}
+                                        {{ $section->level }}
                                     </td>
                                     <td>
-                                        <img src="{{ asset($course->image_url) }}" width="40px" height="40px" />
+                                        {{ $section->category }}
                                     </td>
                                     <td>
-                                        {{ $course->created_at->diffForHumans() }}
+                                        {{ $section->course->title?? '' }}
+                                    </td>
+                                    <td>
+                                        {{ $section->created_at->diffForHumans() }}
                                     </td>
                               
                                     <td>
-                                        <a href="{{ route('admin.course.show', $course->id) }}" class="btn">Edit</a>
+                                        <a href="{{ route('admin.section.show', $section->id) }}" class="btn">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('admin.course.destroy', $course->id) }}" onsubmit="return confirm('Are you sure you want to delete course?')" method="post">
+                                        <form action="{{ route('admin.section.destroy', $section->id) }}" onsubmit="return confirm('Are you sure you want to delete section?')" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger" type="submit">Delete</button>
@@ -75,7 +81,7 @@
                         </tbody>
                     </table>
                 </div>
-                {!! $courses->links() !!}
+                {!! $sections->links() !!}
             </div>
         </div>
     </div>

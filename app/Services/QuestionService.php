@@ -37,7 +37,7 @@ class QuestionService
             $question->title = $data['title'];
             $question->instruction = $data['instruction'];
             $question->language_id = $data['language_id'];
-            $question->course_id = $data['course_id'];
+            $question->topic_id = $data['topic_id'];
             $question->answered_type = $data['answered_type'];
             $question->next_question_id = $data['next_question_id'] ?? '';
             $question->media_type = $mediaType;
@@ -126,7 +126,7 @@ class QuestionService
                 'title' => $data['title'] ?? $question->title,
                 'instruction' => $data['instruction'] ?? $question->instruction,
                 'language_id' => $data['language_id'] ?? $question->language_id,
-                'course_id' => $data['course_id'] ?? $question->course_id,
+                'topic_id' => $data['topic_id'] ?? $question->topic_id,
                 'answered_type' => $data['answered_type'] ?? $question->answered_type,
                 'media_type' => $mediaType,
                 'media_url' => $media,

@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\LessonResource;
-use App\Models\Course;
+use App\Http\Resources\TopicResource;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 
-class LessonController extends Controller
+class TopicController extends Controller
 {
     public function list()
     {
-        $lesson = Course::orderBy('created_at', 'desc')->get();
-        $data = LessonResource::collection($lesson);
+        $lesson = Topic::orderBy('created_at', 'desc')->get();
+        $data = TopicResource::collection($lesson);
 
         return response()->json(
             [

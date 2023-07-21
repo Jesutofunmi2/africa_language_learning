@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Traits\UUID;
-use App\Models\Course;
+use App\Models\Topic;
 use App\Models\Language;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,9 +18,9 @@ class Option extends Model
         HasFactory::factory as traitFactory;
     }
 
-    // public function course()
+    // public function topic()
     // {
-    //     return $this->belongsTo(Course::class);
+    //     return $this->belongsTo(Topic::class);
     // }
 
     public function language()

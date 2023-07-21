@@ -43,8 +43,8 @@
                                     </div>
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <a href="{{ route('admin.course.list') }}"> <p class="card-category">Courses</p></a>
-                                            <p class="card-title"> {{$courses}}
+                                            <a href="{{ route('admin.topic.list') }}"> <p class="card-category">topics</p></a>
+                                            <p class="card-title"> {{$topics}}
                                                 <p>
                                         </div>
                                     </div>

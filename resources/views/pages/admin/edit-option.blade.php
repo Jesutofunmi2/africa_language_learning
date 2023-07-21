@@ -55,7 +55,7 @@
                                                 <option value="{{ $question->id }}">{{ $question->title }}</option>
                                             @endforeach
                                         </select>
-                                        <small>Note: don't leave blank, select Course </small>
+                                        <small>Note: don't leave blank, select Topic </small>
                                     </div>
                                     @if ($errors->has('question_id'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
