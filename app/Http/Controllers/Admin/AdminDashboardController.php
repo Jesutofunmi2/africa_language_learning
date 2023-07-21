@@ -6,6 +6,8 @@ use App\Enums\ActivityType;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Admin;
+use App\Models\Course;
+use App\Models\Section;
 use App\Models\Topic;
 use App\Models\School;
 use Illuminate\Http\Request;
@@ -44,6 +46,8 @@ class AdminDashboardController extends Controller
         $questions = Question::count();
         $options = Option::count();
         $teacher = Teacher::count();
+        $sections = Section::count();
+        $courses = Course::count();
 
         return view(
             'pages.admin.dashboard',
@@ -56,7 +60,9 @@ class AdminDashboardController extends Controller
                 'schools' => $schools,
                 'questions' => $questions,
                 'options' => $options,
-                'teachers' => $teacher
+                'teachers' => $teacher,
+                'sections' => $sections,
+                'courses' => $courses
             ]
         );
     }
