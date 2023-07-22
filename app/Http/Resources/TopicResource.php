@@ -20,11 +20,10 @@ class TopicResource extends JsonResource
             'description' => $this->description,
             'content' => $this->content,
             'objective' => $this->objective,
-            'image_url' => $this->image_url,
+            'media_url' => $this->image_url,
             'type' => $this->type,
             'media_type' => $this->media_type,
-            'section'=>$this->section,
-            // 'created_at' => $this->created_at
+           // 'questions'=> QuestionResource::collection($this->questions)
         ];
     }
 }

@@ -18,7 +18,7 @@ class SectionResource extends JsonResource
           'id'=>$this->id,
           'level'=>$this->level,
           'category'=>$this->category,
-          'course'=>$this->course
+          'topics'=>$this->topics
         ];
     }
 }

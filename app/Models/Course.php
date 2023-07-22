@@ -14,7 +14,7 @@ class Course extends Model
     use HasApiTokens, HasFactory, Notifiable, UUID{
         HasFactory::factory as traitFactory;
     }
-    public function section()
+    public function sections()
     {
         return $this->hasMany(Section::class);
     }

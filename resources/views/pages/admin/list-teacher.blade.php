@@ -13,9 +13,7 @@
                 {{ session('success') }}
             </div>
         @endif
-       
         <div class="row">
-       
             <div class="col-md-10 offset-1">
                 <div class="table-responsive">
                     <table class="table">

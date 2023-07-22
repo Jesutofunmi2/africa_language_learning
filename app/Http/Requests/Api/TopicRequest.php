@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SectionRequest extends FormRequest
+class TopicRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class SectionRequest extends FormRequest
     public function rules()
     {
         return [
-            'level' => ['sometimes', 'string']
+            'type' => ['sometimes', 'string']
         ];
     }
 }

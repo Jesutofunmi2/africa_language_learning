@@ -13,7 +13,7 @@ class CourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class CourseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'level' => ['required', 'string']
+        ];
+    }
+
+
+    public function messages(): array
+    {
+        return [
+            'level.required' => 'Level doest not exists in the database',
         ];
     }
 }

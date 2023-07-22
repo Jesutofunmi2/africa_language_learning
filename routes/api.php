@@ -59,6 +59,7 @@ Route::prefix('/v1')
             ->group(function () {
                 Route::get('/language', [LanguageController::class, 'list'])->name('language.list');
                 Route::get('/topic', [TopicController::class, 'list'])->name('topic.list');
+                Route::get('/type', [TopicController::class, 'type'])->name('topic.type');
                 Route::get('/section', [SectionController::class, 'list'])->name('section.list');
                 Route::get('/course', [CourseController::class, 'list'])->name('course.list');
                 Route::get('/question', [QuestionController::class, 'list'])->name('question.list');
