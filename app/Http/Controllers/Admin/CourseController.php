@@ -22,14 +22,14 @@ class CourseController extends Controller
     }
     public function create(CourseRequest $courseRequest): RedirectResponse
     {
-     $this->service->createCourse($courseRequest->validated());
- 
-     return redirect()->route('admin.course.list')->with('success', 'Course created successfully');
+        $this->service->createCourse($courseRequest->validated());
+
+        return redirect()->route('admin.course.list')->with('success', 'Course created successfully');
     }
-    public function list():View
+    public function list(): View
     {
-     $courses = Course::orderBy('created_at', 'desc')->paginate(40);
-     return view('pages.admin.list-course')->with('courses', $courses);
+        $courses = Course::orderBy('created_at', 'desc')->paginate(40);
+        return view('pages.admin.list-course')->with('courses', $courses);
     }
 
     public function show($courseId)
@@ -48,11 +48,10 @@ class CourseController extends Controller
 
     public function destroy($courseId): RedirectResponse
     {
-        
-        $this->service->deleteCourse($courseId);
-        
-        return redirect()->route('admin.course.list')
-                ->with('success', 'deleted successfully');
-    }
 
+        $this->service->deleteCourse($courseId);
+
+        return redirect()->route('admin.course.list')
+            ->with('success', 'deleted successfully');
+    }
 }

@@ -23,18 +23,9 @@ class QuestionRequest extends FormRequest
      */
     public function rules()
     {
-        
         return [
-            'language_id' => ['required','integer','exists:languages,id'],
-            'topic_id' => ['required','integer','exists:topics,id'],
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'language_id.required' => 'Language Id doest not exists in the database',
-            'topic_id.required' => 'topic Id  invalid',
+            'language_id' => ['sometimes','integer','exists:languages,id'],
+            'topic_id' => ['sometimes','integer','exists:topics,id'],
         ];
     }
 }

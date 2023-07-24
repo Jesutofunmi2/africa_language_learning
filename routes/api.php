@@ -45,7 +45,6 @@ Route::prefix('/v1')
                // Route::post('/login', UserLoginController::class)->name('login');
                 Route::post('/register', UserRegisterController::class)->name('register');
                 Route::post('/studentLogin', StudentLoginController::class)->name('studentLogin');
-              
 
                 //schoool endpoint
                 Route::post('/createSchool', SchoolController::class)->name('createSchool');
@@ -62,6 +61,7 @@ Route::prefix('/v1')
                 Route::get('/type', [TopicController::class, 'type'])->name('topic.type');
                 Route::get('/section', [SectionController::class, 'list'])->name('section.list');
                 Route::get('/course', [CourseController::class, 'list'])->name('course.list');
+                Route::get('/getCourse', [CourseController::class, 'getCourse'])->name('course.getCourse');
                 Route::get('/question', [QuestionController::class, 'list'])->name('question.list');
                 Route::post('/option', [AnswerController::class, 'checkAnswer'])->name('answer.check');
 

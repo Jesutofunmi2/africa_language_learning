@@ -36,10 +36,9 @@ class OptionController extends Controller
 
     public function list()
     {
-
         $options = Option::orderBy('created_at', 'desc')->paginate(40);
         Session::put('option_url', request()->fullUrl());
-        // dd(Session::get(key:'option_url'));
+
         return view('pages.admin.list-option', ['options' => $options]);
     }
 

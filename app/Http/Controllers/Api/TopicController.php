@@ -24,6 +24,7 @@ class TopicController extends Controller
         );
     }
 
+
     public function type(TopicRequest $topicRequest)
     {
         $type= $topicRequest->type;

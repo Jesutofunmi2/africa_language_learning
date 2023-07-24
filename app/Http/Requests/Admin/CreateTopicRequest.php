@@ -31,7 +31,7 @@ class CreateTopicRequest extends FormRequest
             'content' => ['sometimes', 'string'],
             'objective' => ['sometimes', 'string'],
             'description' => ['string', 'sometimes'],
-            'image_url' => 'sometimes|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg',
+            'image_url' => ['sometimes','image','application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg','max:10240'],
         ];
     }
 }

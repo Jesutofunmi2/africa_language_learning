@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TopicResource extends JsonResource
+class SingleCourseResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,11 +18,7 @@ class TopicResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'content' => $this->content,
-            'objective' => $this->objective,
-            'media_url' => $this->image_url,
-            'type' => $this->type,
-            'media_type' => $this->media_type,
+            'image_url' => $this->image_url 
         ];
     }
 }

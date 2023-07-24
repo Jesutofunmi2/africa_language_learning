@@ -19,9 +19,7 @@ class CourseResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'image_url' => $this->image_url,
-            'section'=>SectionResource::collection($this->sections->where('level',  $request->level)),
-           
-            // 'created_at' => $this->created_at
+            'section'=>SectionResource::collection($this->sections)
         ];
     }
 }

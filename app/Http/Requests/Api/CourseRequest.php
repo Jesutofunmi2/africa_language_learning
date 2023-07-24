@@ -24,7 +24,7 @@ class CourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'level' => ['required', 'string']
+            'id' => ['required', 'string']
         ];
     }
 
@@ -32,7 +32,7 @@ class CourseRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'level.required' => 'Level doest not exists in the database',
+            'id.required' => 'Level doest not exists in the database',
         ];
     }
 }
