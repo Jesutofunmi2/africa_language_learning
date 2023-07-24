@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Section;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CourseResource extends JsonResource
@@ -19,7 +20,7 @@ class CourseResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'image_url' => $this->image_url,
-            'section'=>SectionResource::collection($this->sections)
+            'section'=>SectionResource::collection(Section::orderBy('created_at', 'desc')->has('topics')->get())
         ];
     }
 }

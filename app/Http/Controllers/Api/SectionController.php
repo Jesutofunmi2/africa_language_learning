@@ -11,7 +11,7 @@ class SectionController extends Controller
 {
     public function list()
     {
-        $section = Section::orderBy('created_at', 'desc')->get();
+        $section = Section::orderBy('created_at', 'desc')->has('topics')->get();
         $data = SectionResource::collection($section);
 
         return response()->json(
