@@ -45,11 +45,9 @@
                                     <div class="form-group">
                                         <select name="section_id" class="form-control">
                                             <option value="{{ old('section_id') }}">Select Section</option>
-                                           
                                             @foreach ($sections as $section)
                                                 <option value="{{ $section->id }}">{{ $section->title }}</option>
                                             @endforeach
-                                    
                                         </select>
                                         <small>Note: don't leave blank, select section </small>
                                     </div>
