@@ -20,6 +20,10 @@ class AnswerController extends Controller
         $question =  Question::query()->whereId($question_id)->first();
 
         abort_if($question->answered_type == null, 400, 'No answer type for this question');
+        if ($question->answered_type == 'single') {
+            return $this->single($question, $optionIds);
+         }
+         
         if ($question->answered_type == 'multiple') {
             return $this->multiple($question, $optionIds);
         }
@@ -48,13 +52,18 @@ class AnswerController extends Controller
     protected function single(Question $question, array $optionIds)
     {
         $optionId =  $optionIds[0];
-        $options = Option::query()->where('id', $optionId)
+        $option_exists = Option::query()->where('id', $optionId)
             ->where('question_id', '=', $question->id)
-            ->where('is_correct', true)->get();
+            ->where('is_correct', true)->exists();
 
-        abort_if($options->count() > 1, 400, 'Correct option can not be more than one');
+        abort_if(is_null($option_exists), 204, 'No correct option or Invalid option');
 
-        $option = $options->first();
+        return response()->json(
+            [
+                'is_correct' => $option_exists,
+            ],
+            status: 200
+        );
     }
 
     public function puzzle(Question $question, array $optionIds, array $puzzle)
