@@ -76,7 +76,8 @@ class Student extends Authenticatable
        $days_remaining = floor($remaining / 86400);
        $hours_remaining = floor(($remaining % 86400) / 3600);
 
-       return "There are $days_remaining days and $hours_remaining hours left";
+       return "Trial version: $days_remaining days and $hours_remaining hours left";
+
     }
 
     public static function factory(...$parameters): UserFactory
