@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\School;
+use Carbon\Carbon;
 
 class Student extends Authenticatable
 {
@@ -64,6 +65,18 @@ class Student extends Authenticatable
     public function getFullnameAttribute()
     {
         return $this->first_name.' '.$this->last_name;
+    }
+
+    public function getFutureAttribute()
+    {
+       $time = Carbon::parse($this->attributes['created_at'])->addDays(90);
+
+       $date = strtotime($time);
+       $remaining = $date - time();
+       $days_remaining = floor($remaining / 86400);
+       $hours_remaining = floor(($remaining % 86400) / 3600);
+
+       return "There are $days_remaining days and $hours_remaining hours left";
     }
 
     public static function factory(...$parameters): UserFactory

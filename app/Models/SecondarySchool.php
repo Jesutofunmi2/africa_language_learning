@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -73,6 +74,17 @@ class SecondarySchool extends Authenticatable implements MustVerifyEmail
         return $this->name.' '.$this->name;
     }
 
+    public function getFutureAttribute()
+    {
+       $time= Carbon::parse($this->attributes['created_at'])->addDays(90);
+
+       $date = strtotime($time);
+       $remaining = $date - time();
+       $days_remaining = floor($remaining / 86400);
+       $hours_remaining = floor(($remaining % 86400) / 3600);
+
+       return "There are $days_remaining days and $hours_remaining hours left";
+    }
     public static function factory(...$parameters): UserFactory
     {
         return static::traitFactory($parameters);

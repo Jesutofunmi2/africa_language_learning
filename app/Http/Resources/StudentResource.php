@@ -22,7 +22,8 @@ class StudentResource extends JsonResource
             'gendar' => $this->gendar,
             'school' => $this->school,
             'age' => $this->age,
-            'country' => $this->country
+            'country' => $this->country,
+            'count_down' => $this->future,
         ];
     }
 }
