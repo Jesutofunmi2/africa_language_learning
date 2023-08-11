@@ -23,7 +23,7 @@ class TopicResource extends JsonResource
             'media_url' => $this->image_url,
             'type' => $this->type,
             'media_type' => $this->media_type,
-            'questions'=>$this->questions
+            'questions'=> $this->questions
         ];
     }
 }
