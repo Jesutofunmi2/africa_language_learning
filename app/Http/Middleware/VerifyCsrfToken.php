@@ -18,6 +18,7 @@ class VerifyCsrfToken extends Middleware
         '/api/v1/auth/studentLogin',
         '/api/v1/auth/*',
         '/api/v1/option',
-        '/api/v1/*'
+        '/api/v1/*',
+        '/api/v1/auth/createFourite',
     ];
 }
