@@ -22,7 +22,8 @@ class TopicResource extends JsonResource
             'objective' => $this->objective,
             'media_url' => $this->image_url,
             'type' => $this->type,
-            'media_type' => $this->media_type
+            'media_type' => $this->media_type,
+            'questions'=>$this->questions
         ];
     }
 }
