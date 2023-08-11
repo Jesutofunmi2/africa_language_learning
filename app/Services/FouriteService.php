@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Fourite;
+use App\Models\Question;
 use Illuminate\Support\Facades\DB;
 
 class FouriteService {
@@ -12,8 +13,7 @@ class FouriteService {
         $fourite = new Fourite;
         
         DB::transaction(function () use (&$fourite, $data,) {
-
-            $fourite->question_name = $data['question_name']??'';
+           
             $fourite->student_id = $data['student_id'];
             $fourite->question_id = $data['question_id'];
 
@@ -24,11 +24,12 @@ class FouriteService {
         return $fourite;
     }
 
-    public function getFourite($id)
+    public function getFourite($student_id, $question_id, $language_id)
     {
-        $fourite = Fourite::where('student_id',$id)->get();
         
-        return $fourite;
+        $fourite = Fourite::where('student_id', $student_id)->get();
+
+        return $fourite; 
     }
 
     public function removeFourite(array $data):void

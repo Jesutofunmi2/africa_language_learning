@@ -18,8 +18,8 @@ class FouriteResource extends JsonResource
             'id' => $this->id,
             'question_id' => $this->question_id,
             'student_id' => $this->student_id,
-            'question'=>$this->question,
-            'option'=>$this->question->options
+            'question'=> $request->language_id ? QuestionResource::collection($this->question->where('language_id', $request->language_id)->get()):$this->question,
+            //'option'=>$this->question->options
         ];
     }
 }

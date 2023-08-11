@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Question;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TopicResource extends JsonResource
@@ -23,8 +22,7 @@ class TopicResource extends JsonResource
             'objective' => $this->objective,
             'media_url' => $this->image_url,
             'type' => $this->type,
-            'media_type' => $this->media_type,
-            'questions' => QuestionResource::collection(Question::orderBy('created_at', 'desc')->get()) ,
+            'media_type' => $this->media_type
         ];
     }
 }

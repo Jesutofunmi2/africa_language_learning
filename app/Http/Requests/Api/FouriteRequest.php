@@ -25,8 +25,8 @@ class FouriteRequest extends FormRequest
     {
         return [
             'student_id' => ['required', 'string', 'exists:students,student_id'],
-            'question_id' => ['string','exists:questions,id'],
-            'question_name' => ['sometimes', 'string']
+            'question_id' => ['sometimes', 'string','exists:questions,id'],
+            'language_id' => ['sometimes', 'integer', 'exists:languages,id'],
         ];
     }
 
@@ -34,7 +34,8 @@ class FouriteRequest extends FormRequest
     {
         return [
             'student_id.required' => 'Student Id doest not exists in the database',
-            'question_id.required' => 'Question Id  invalid',
+            'question_id.required' => 'Question Id doest not exists in the database',
+            'langauge_id.required' => 'Language Id doest not exists in the database',
         ];
     }
 }
