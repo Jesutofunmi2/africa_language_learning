@@ -24,18 +24,20 @@ class TopicResource extends JsonResource
             'type' => $this->type,
             'media_type' => $this->media_type,
             'questions' => $this->questions,
+            'question_count' => $this->questions->count(),
             'percentage' => $this->calculatePercentage()
         ];
     }
 
     public function calculatePercentage()
     {
-        $question_count = $this->questions->count();
-        $question_answered = $this->answereds->where('student_id', auth()->user()->id)->count();
+        $question_count = $this->questions->count() + 1;
+
+        $question_answered = $this->answereds->where('student_id', auth()->user()->id)->count() + 1;
         if ($question_count == 0 || $question_answered == 0) {
             return 0;
         }
-        $per = ($question_count / $question_answered) / 100;
+        $per = ($question_count  / $question_answered) / 100;
         return $per;
     }
 }
