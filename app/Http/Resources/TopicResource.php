@@ -23,7 +23,19 @@ class TopicResource extends JsonResource
             'media_url' => $this->image_url,
             'type' => $this->type,
             'media_type' => $this->media_type,
-            'questions'=> $this->questions
+            'questions' => $this->questions,
+            'percentage' => $this->calculatePercentage()
         ];
+    }
+
+    public function calculatePercentage()
+    {
+        $question_count = $this->questions->count();
+        $question_answered = $this->answereds->where('student_id', auth()->user()->id)->count();
+        if ($question_count == 0 || $question_answered == 0) {
+            return 0;
+        }
+        $per = ($question_count / $question_answered) / 100;
+        return $per;
     }
 }

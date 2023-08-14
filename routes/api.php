@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\QuestionAnsweredController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TopicController;
 use App\Http\Controllers\Api\AnswerController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\School\Auth\SchoolLoginController;
 use App\Http\Controllers\School\Auth\SchoolLogoutController;
 use App\Http\Controllers\Student\Auth\StudentLoginController;
 use App\Http\Controllers\Student\Auth\CreateStudentController;
+use App\Models\QuestionAnswered;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +85,9 @@ Route::prefix('/v1')
                 Route::post('/addTeacher', [TeacherController::class, 'addTeacher'])->name('addTeacher');
                 Route::post('/updateTeacher', [TeacherController::class, 'createTeacher'])->name('createTeacher');
                 Route::delete('/deleteTeacher', [TeacherController::class, 'destroy'])->name('teacher.destroy');
+                
+                // Question Answered
+                Route::post('/questionAnswered', [QuestionAnsweredController::class, 'create'])->name('questionAnswered.create');
 
                
             });

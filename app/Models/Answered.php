@@ -7,37 +7,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Question;
-use App\Models\Section;
-use App\Models\Answered;
-use App\Traits\UUID;
 
-class Topic extends Model
+class Answered extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable, UUID {
+    use HasApiTokens, HasFactory, Notifiable {
         HasFactory::factory as traitFactory;
     }
-    public function questions()
-    {
-        return $this->hasMany(Question::class);
-    }
-    public function answereds()
-    {
-        return $this->hasMany(Answered::class);
-    }
 
-    public function section()
-    {
-        return $this->belongsTo(Section::class);
-    }
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'image_url'
+        'question_id',
+        'student_id',
+        'topic_id'
     ];
 
     /**
@@ -58,7 +43,7 @@ class Topic extends Model
 
     public function getFullnameAttribute()
     {
-        return $this->name;
+        return $this->question_id;
     }
 
     public static function factory(...$parameters): UserFactory
