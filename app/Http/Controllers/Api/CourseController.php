@@ -15,7 +15,7 @@ class CourseController extends Controller
     public function list(CourseRequest $courseRequest)
     {
         $id = $courseRequest->id;
-        $course = Course::orderBy('created_at', 'desc')->where('id', $id)->get();
+        $course = Course::orderBy('created_at', 'asc')->where('id', $id)->get();
         $data = CourseResource::collection($course);
 
         return response()->json(

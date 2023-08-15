@@ -25,7 +25,8 @@ class TopicResource extends JsonResource
             'media_type' => $this->media_type,
             'questions' => $this->questions,
             'question_count' => $this->questions->count(),
-            'percentage' => $this->calculatePercentage()
+            'percentage' => $this->calculatePercentage(),
+            'last_question_answered'=> $this->answereds->where('student_id', auth()->user()->id)->sortByDesc('update_at')->first()
         ];
     }
 
