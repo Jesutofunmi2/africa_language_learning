@@ -20,7 +20,7 @@ class CourseResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'image_url' => $this->image_url,
-            'section'=>SectionResource::collection(Section::orderBy('created_at', 'desc')->has('topics')->get())
+            'section'=>SectionResource::collection(Section::orderBy('created_at', 'asc')->has('topics')->get())
         ];
     }
 }
