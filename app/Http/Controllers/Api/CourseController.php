@@ -30,7 +30,7 @@ class CourseController extends Controller
     //Get all courses without relation
     public function getCourse()
     {
-        $course = Course::orderBy('created_at', 'desc')->get();
+        $course = Course::orderBy('created_at', 'asc')->get();
         $data = SingleCourseResource::collection($course);
 
         return response()->json(

@@ -12,7 +12,7 @@ class TopicController extends Controller
 {
     public function list()
     {
-        $lesson = Topic::orderBy('created_at', 'desc')->get();
+        $lesson = Topic::orderBy('created_at', 'asc')->get();
         $data = TopicResource::collection($lesson);
 
         return response()->json(
