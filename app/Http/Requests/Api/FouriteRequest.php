@@ -27,6 +27,7 @@ class FouriteRequest extends FormRequest
             'student_id' => ['required', 'string', 'exists:students,student_id'],
             'question_id' => ['sometimes', 'string','exists:questions,id'],
             'language_id' => ['sometimes', 'integer', 'exists:languages,id'],
+            'topic_id' => ['sometimes', 'integer', 'exists:topics,id']
         ];
     }
 

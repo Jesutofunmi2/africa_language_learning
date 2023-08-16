@@ -18,7 +18,7 @@ class FouriteResource extends JsonResource
             'id' => $this->id,
             'question_id' => $this->question_id,
             'student_id' => $this->student_id,
-            'question'=> $request->language_id ? QuestionResource::collection($this->question->where('language_id', $request->language_id)->get()):$this->question,
+            'question'=> $request->language_id ? QuestionResource::collection($this->question->where('language_id', $request->language_id)->where('topic_id', $request->topic_id)->get())->unique('question_id'): QuestionResource::make($this->question),
             //'option'=>$this->question->options
         ];
     }

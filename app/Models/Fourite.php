@@ -30,6 +30,7 @@ class Fourite extends Model
         'question_name',
         'student_id',
         'question_id',
+        ''
     ];
 
 
