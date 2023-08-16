@@ -24,6 +24,11 @@ class Question extends Model
         return $this->belongsTo(Topic::class);
     }
 
+    // public function fourites()
+    // {
+    //     return $this->belongsTo(Fourite::class);
+    // }
+
     public function language()
     {
         return $this->belongsTo(Language::class);

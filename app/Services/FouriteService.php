@@ -11,7 +11,13 @@ class FouriteService {
     public function addFourite(array $data):Fourite
     {
         $fourite = new Fourite;
-        
+    
+        $answered = Fourite::where('student_id', '=', $data['student_id'])
+            ->where('question_id', '=', $data['question_id'])->exists();
+
+        if ($answered == true) {
+            return $fourite;
+        }
         DB::transaction(function () use (&$fourite, $data,) {
            
             $fourite->student_id = $data['student_id'];
