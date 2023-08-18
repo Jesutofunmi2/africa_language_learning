@@ -23,7 +23,7 @@ class TopicResource extends JsonResource
             'media_url' => $this->image_url,
             'type' => $this->type,
             'media_type' => $this->media_type,
-            'questions' => $this->questions,
+            'questions' => QuestionResource::collection($this->questions),
             'question_count' => $this->questions->count(),
             'percentage' => $this->calculatePercentage(),
             'last_question_answered' => QuestionAnsweredResource::make($this->answereds->where('student_id', auth()->user()->id)->sortByDesc('update_at')->first())
