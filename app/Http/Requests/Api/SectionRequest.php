@@ -24,7 +24,8 @@ class SectionRequest extends FormRequest
     public function rules()
     {
         return [
-            'level' => ['sometimes', 'string']
+            'level' => ['sometimes', 'string'],
+            'course_id' => ['sometimes', 'string']
         ];
     }
 }

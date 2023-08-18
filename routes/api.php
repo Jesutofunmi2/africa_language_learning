@@ -62,6 +62,7 @@ Route::prefix('/v1')
                 Route::get('/topic', [TopicController::class, 'list'])->name('topic.list');
                 Route::get('/type', [TopicController::class, 'type'])->name('topic.type');
                 Route::get('/section', [SectionController::class, 'list'])->name('section.list');
+                Route::get('/section/{id}', [SectionController::class, 'show'])->name('section.show');
                 Route::get('/course', [CourseController::class, 'list'])->name('course.list');
                 Route::get('/getCourse', [CourseController::class, 'getCourse'])->name('course.getCourse');
                 Route::get('/question', [QuestionController::class, 'list'])->name('question.list');
