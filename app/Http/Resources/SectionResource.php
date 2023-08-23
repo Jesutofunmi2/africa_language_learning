@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Topic;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SectionResource extends JsonResource
@@ -20,7 +19,7 @@ class SectionResource extends JsonResource
           'title' =>$this->title,
           'level'=>$this->level,
           'category'=>$this->category,
-          'topics'=>  TopicResource::collection(Topic::orderBy('created_at', 'asc'))
+          'topics'=>  TopicResource::collection($this->topics)
         ];
     }
 }
