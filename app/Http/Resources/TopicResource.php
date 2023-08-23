@@ -38,7 +38,7 @@ class TopicResource extends JsonResource
         if ($question_count == 0 || $question_answered == 0) {
             return 0;
         }
-        $per = ($question_count  / $question_answered);
+        $per = ($question_count  / $question_answered)/100;
         return $per;
     }
 }
