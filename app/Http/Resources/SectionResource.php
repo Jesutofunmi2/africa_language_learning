@@ -19,7 +19,7 @@ class SectionResource extends JsonResource
           'title' =>$this->title,
           'level'=>$this->level,
           'category'=>$this->category,
-          'topics'=>  TopicResource::collection($this->topics)
+          'topics'=>  TopicResource::collection($this->topics->orderBy('created_at', 'asc'))
         ];
     }
 }

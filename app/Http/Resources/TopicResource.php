@@ -32,9 +32,9 @@ class TopicResource extends JsonResource
 
     public function calculatePercentage()
     {
-        $question_count = $this->questions->count();
+        $question_count = $this->questions->count()+ 1;
 
-        $question_answered = $this->answereds->where('student_id', auth()->user()->id)->count();
+        $question_answered = $this->answereds->where('student_id', auth()->user()->id)->count() +1;
         if ($question_count == 0 || $question_answered == 0) {
             return 0;
         }
