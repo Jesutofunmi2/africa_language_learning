@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Admin;
 use App\Models\School;
 use App\Models\Student;
+use App\Models\Teacher;
 
 class TokenService
 {
@@ -22,6 +23,13 @@ class TokenService
     public function createTokenSchool(School $school, string $device_name, string $ip = Null, string $user_agent = Null): string
     {
         $token = $school->createToken($device_name)->plainTextToken;
+
+        return $token;
+    }
+
+    public function createTokenTeacher(Teacher $teacher, string $device_name, string $ip = Null, string $user_agent = Null): string
+    {
+        $token = $teacher->createToken($device_name)->plainTextToken;
 
         return $token;
     }

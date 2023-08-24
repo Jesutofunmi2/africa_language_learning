@@ -8,7 +8,6 @@ use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\FouriteController;
 use App\Http\Controllers\Api\SectionController;
 use App\Http\Controllers\Api\StudentController;
-use App\Http\Controllers\Api\TeacherController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\User\UserLoginController;
@@ -18,6 +17,9 @@ use App\Http\Controllers\User\UserRegisterController;
 use App\Http\Controllers\School\Auth\SchoolController;
 use App\Http\Controllers\School\Auth\SchoolLoginController;
 use App\Http\Controllers\School\Auth\SchoolLogoutController;
+use App\Http\Controllers\Teacher\Auth\TeacherLoginController;
+use App\Http\Controllers\Teacher\Auth\TeacherLogoutController;
+use App\Http\Controllers\Teacher\TeacherController;
 use App\Http\Controllers\Student\Auth\StudentLoginController;
 use App\Http\Controllers\Student\Auth\CreateStudentController;
 use App\Models\QuestionAnswered;
@@ -52,6 +54,12 @@ Route::prefix('/v1')
                 Route::post('/createSchool', SchoolController::class)->name('createSchool');
                 Route::post('/schoolLogin', SchoolLoginController::class)->name('schoolLogin');
                 Route::post('/schoolLogout', SchoolLogoutController::class)->middleware('auth:sanctum')->name('logout_for_school');
+
+                //teacher endpoint
+                //Route::post('/createTeacher', TeacherController::class)->name('createTeacher');
+                Route::post('/teacherLogin', TeacherLoginController::class)->name('teacherLogin');
+                Route::post('/teacherLogout', TeacherLogoutController::class)->middleware('auth:sanctum')->name('logout_for_teacher');
+   
 
                 Route::post('/logout', UserLogoutController::class)->middleware('auth:sanctum')->name('logout');
             });
