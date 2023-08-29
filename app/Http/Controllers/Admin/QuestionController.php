@@ -46,7 +46,7 @@ class QuestionController extends Controller
 
     public function list()
     {
-        $questions = Question::orderBy('created_at', 'desc')->paginate(40);
+        $questions = Question::orderBy('created_at', 'desc')->get();
         Session::put('question_url', request()->fullUrl());
         return view('pages.admin.list-question', ['questions' => $questions]);
     }
