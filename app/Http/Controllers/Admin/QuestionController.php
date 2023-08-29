@@ -87,6 +87,10 @@ class QuestionController extends Controller
 
         $this->service->questionStatus($id);
 
+        if (session(key: 'question_url')) {
+            return redirect(session(key: 'question_url'))->with('success', 'Question updated successfully');
+        }
+
         return redirect()->route('admin.question.list')
             ->with('success', 'Updated successfully');
     }
@@ -129,12 +133,10 @@ class QuestionController extends Controller
 
     public function batchUpload(QuestionBatchUploadRequest $questionBatchUploadRequest)
     {
-       $dataTime = date('Ymd_His');
-       $file = $questionBatchUploadRequest->file('file');
-       $fileName = $dataTime.'-'.$file->getClientOriginalName();
-       $excel=  Excel::import(new ImportQuestion, $questionBatchUploadRequest->file('file')->store('files'));
-      
-
+        $dataTime = date('Ymd_His');
+        $file = $questionBatchUploadRequest->file('file');
+        $fileName = $dataTime . '-' . $file->getClientOriginalName();
+        $excel =  Excel::import(new ImportQuestion, $questionBatchUploadRequest->file('file')->store('files'));
     }
     public function destroy(Request $request, Question $question)
     {
