@@ -198,13 +198,11 @@
                <td>`
                                         if (res.questions[i].status == true){
                                             htmlView += `
-                                               <input type="hidden" id="success-id" value="{{ ` + res.questions[i].id + `}}">
                                                 <button class="btn btn-success"  id="success" >Online</button>`
                                            
                                         }
                                         else{
                                             htmlView += `
-                                               <input type="hidden" id="dangerid" value="{{ ` + res.questions[i].id + `}}">
                                                 <button class="btn btn-danger"  id="danger" >Offline</button>`
                                            
                                         }
@@ -216,13 +214,6 @@
             }
             $('tbody').html(htmlView);
         }
-
-
-        $('#danger').on('click', function() {
-        var id = $('#dangerid').val();
-        console.log(id)
-            //status(id);
-        });
 
     </script>
 @endsection
