@@ -5,6 +5,7 @@
 
 @section('content')
     <div class="content">
+        
         <a href="{{ route('admin.teacher.index')}}" style="float: right">
             <p>{{ __('Add') }}</p>
         </a>

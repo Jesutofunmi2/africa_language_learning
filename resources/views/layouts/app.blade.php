@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,9 +6,10 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('paper') }}/img/apple-icon.png">
     <link rel="icon" type="image/png" href="{{ asset('paper') }}/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Extra details for Live View on GitHub Pages -->
-    
+
     <title>
         {{ __('Izesan! Admin Dashboard') }}
     </title>
@@ -25,17 +25,18 @@
     <link href="{{ asset('paper') }}/demo/demo.css" rel="stylesheet" />
     <link href="{{ asset('paper') }}/css/calendar.css" rel="stylesheet" />
 
-    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+   {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" /> --}}
 
 </head>
 
 <body class="{{ $class }}">
-    
+
     @auth()
         @include('layouts.page_templates.auth')
         @include('layouts.navbars.fixed-plugin')
     @endauth
-    
+
     @guest
         @include('layouts.page_templates.guest')
     @endguest
@@ -58,10 +59,13 @@
     <script src="{{ asset('paper') }}/js/calendar.js"></script>
     <!-- Sharrre libray -->
     <script src="../assets/demo/jquery.sharrre.js"></script>
-    
+
+
     @stack('scripts')
 
     @include('layouts.navbars.fixed-plugin-js')
+
+   
 </body>
 
 </html>

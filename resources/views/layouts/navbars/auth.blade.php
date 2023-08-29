@@ -33,12 +33,12 @@
                 </a>
             </li>
 
-            <li class="{{ $elementActive == 'admin' ? 'active' : '' }}">
+            {{-- <li class="{{ $elementActive == 'admin' ? 'active' : '' }}">
                 <a href="{{ route('admin.register.get') }}">
                     <i class="nc-icon nc-box"></i>
                     <p>{{ __('Create Admin') }}</p>
                 </a>
-            </li>
+            </li> --}}
             <li class="{{ $elementActive == 'teacher' ? 'active' : '' }}">
                 <a href="{{ route('admin.teacher.index') }}">
                     <i class="nc-icon nc-pin-3"></i>
@@ -91,7 +91,29 @@
                     <p>{{ __('Create Option') }}</p>
                 </a>
             </li>
-            <li class="{{ $elementActive == 'role' ? 'active' : '' }}">
+
+            <li class="{{ $elementActive == 'media' ? 'active' : '' }}">
+                <a href="{{ route('admin.question.media')}}">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Upload Media') }}</p>
+                </a>
+            </li>
+
+            <li class="{{ $elementActive == 'batchquestion' ? 'active' : '' }}">
+                <a href="{{ route('admin.question.batch-cretate')}}">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Question Batch Upload') }}</p>
+                </a>
+            </li>
+
+            <li class="{{ $elementActive == 'batchoption' ? 'active' : '' }}">
+                <a href="{{ route('admin.option.batch-cretate')}}">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Option Batch Upload') }}</p>
+                </a>
+            </li>
+
+            {{-- <li class="{{ $elementActive == 'role' ? 'active' : '' }}">
                 <a href="{{ route('admin.role.index')}}">
                     <i class="nc-icon nc-box"></i>
                     <p>{{ __('Create Role') }}</p>
@@ -103,7 +125,9 @@
                     <i class="nc-icon nc-box"></i>
                     <p>{{ __('Create Permission') }}</p>
                 </a>
-            </li>
+            </li> --}}
+
+
         </ul>
     </div>
 </div>

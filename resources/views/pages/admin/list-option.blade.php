@@ -5,9 +5,28 @@
 
 @section('content')
     <div class="content">
-        <a href="{{ route('admin.option.index')}}" style="float: right">
-            <p>{{ __('Add') }}</p>
-        </a>
+        <div class="row">
+            <div class="col-8">
+
+            </div>
+            <div class="col-2">
+            <form>
+                <div class="input-group no-border">
+                    <input type="text" value="" class="form-control" placeholder="Search...">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <i class="nc-icon nc-zoom-split"></i>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+            <div class="col-2">
+                <a href="{{ route('admin.option.index')}}" style="float: right">
+                    <p>{{ __('Add') }}</p>
+                </a>
+            </div>
+        </div>
         @if (session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
