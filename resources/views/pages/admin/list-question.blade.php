@@ -102,7 +102,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('put')
-                                                <input type="hidden" id="success-id" value="{{ $question->id }}">
+                                                
                                                 <input type="hidden" name="page" value="{{ $questions->currentPage() }}">
                                                 <button class="btn btn-success"  id="success" type="submit">Online</button>
                                             </form>

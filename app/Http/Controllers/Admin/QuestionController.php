@@ -82,16 +82,11 @@ class QuestionController extends Controller
         return redirect()->route('admin.question.list')
             ->with('success', 'Question updated successfully');
     }
-    public function status($id)
+    public function status(Request $request, $id)
     {
 
         $this->service->questionStatus($id);
-
-        if (session(key: 'question_url')) {
-            return redirect(session(key: 'question_url'))->with('success', 'Question updated successfully');
-        }
-
-        return redirect()->route('admin.question.list')
+        return redirect()->route('admin.question.list', ['page' => $request->page])
             ->with('success', 'Updated successfully');
     }
 
