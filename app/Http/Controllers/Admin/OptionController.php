@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateOptionRequest;
+use App\Http\Requests\Admin\QuestionBatchUploadRequest;
 use App\Models\Topic;
 use App\Services\QuestionService;
 use Illuminate\Http\RedirectResponse;
@@ -136,6 +137,21 @@ class OptionController extends Controller
         }
 
         return view('pages.admin.list-option', ['options' => $alloptions ]);
+    }
+
+    public function batch()
+    {
+        $languages = Language::orderBy('name')->get();
+        $questions = Question::orderBy('title')->get();
+        return view('pages.admin.create-batch-upload-option', ['languages' => $languages, 'questions' => $questions]);
+    }
+
+    public function batchUpload(QuestionBatchUploadRequest $questionBatchUploadRequest)
+    {
+        $dataTime = date('Ymd_His');
+        $file = $questionBatchUploadRequest->file('file');
+        $fileName = $dataTime . '-' . $file->getClientOriginalName();
+        //$excel =  Excel::import(new ImportQuestion, $questionBatchUploadRequest->file('file')->store('files'));
     }
     public function destroy(Request $request, Option $option)
     {
