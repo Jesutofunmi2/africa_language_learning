@@ -93,12 +93,12 @@ Route::prefix('admin')->name('admin.')
 
             Route::get('option/create', [OptionController::class, 'index'])->name('option.index');
             Route::post('option/create', [OptionController::class, 'create'])->name('option.create');
-            Route::get('option/search', [OptionController::class, 'search'])->name('option.search');
+            Route::get('options/search', [OptionController::class, 'search'])->name('options.search');
             Route::get('option', [OptionController::class, 'list'])->name('option.list');
             Route::get('options/{id}', [OptionController::class, 'show'])->name('option.show');
             Route::put('optionUpdate/{id}', [OptionController::class, 'update'])->name('option.update');
-            Route::put('option/{id}', [OptionController::class, 'is_correct_update'])->name('option.is_correct_update');
-            Route::get('/option/delete/{option}', [OptionController::class, 'destroy'])->name('option.destroy');
+            Route::get('options/is_correct/{id}', [OptionController::class, 'is_correct_update'])->name('option.is_correct_update');
+            Route::get('/options/delete/{option}', [OptionController::class, 'destroy'])->name('option.destroy');
             Route::get('option/batch-create', [OptionController::class, 'batch'])->name('option.batch-cretate');
             Route::post('option/batchUpload', [OptionController::class, 'batchUpload'])->name('option.batchUpload');
 

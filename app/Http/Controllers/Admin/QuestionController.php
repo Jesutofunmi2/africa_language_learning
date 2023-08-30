@@ -65,6 +65,7 @@ class QuestionController extends Controller
     {
         $image = null;
         $media_url = null;
+       // $allquestions = Question::orderBy('created_at', 'desc')->get();
 
         if ($createquestionrequest->hasFile('image_url')) {
             $image = $createquestionrequest->image_url;
@@ -75,16 +76,16 @@ class QuestionController extends Controller
 
         $this->service->updateQuestion($createquestionrequest->validated(), $image, $media_url, $questionId);
 
-        if (session(key: 'question_url')) {
-            return redirect(session(key: 'question_url'))->with('success', 'Question updated successfully');
-        }
+        // if (session(key: 'question_url')) {
+        //     return redirect(session(key: 'question_url'))->with('success', 'Question updated successfully');
+        // }
 
+       // return view('pages.admin.list-question', ['questions' => $allquestions]);
         return redirect()->route('admin.question.list')
             ->with('success', 'Question updated successfully');
     }
     public function status(Request $request, $id)
     {
-
         $this->service->questionStatus($id);
         return redirect()->route('admin.question.list', ['page' => $request->page])
             ->with('success', 'Updated successfully');
@@ -94,7 +95,6 @@ class QuestionController extends Controller
     {
         $output = '';
         $allquestions = Question::orderBy('created_at', 'desc')->get();
-        Session::put('question_url', request()->fullUrl());
 
         if ($request->search != '') {
             $questions = Question::where('title', 'LIKE', '%' . $request->search . '%')->orderBy('title', 'desc')->get()->load('topic', 'language');

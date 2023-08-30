@@ -65,9 +65,10 @@ class OptionController extends Controller
             $media_url = $createoptionrequest->media_url;
         }
         $this->service->updateOption($createoptionrequest->validated(), $image, $media_url, $questionId);
-        if (session(key: 'option_url')) {
-            return redirect(session(key: 'option_url'))->with('success', 'Option updated successfully');
-        }
+        // if (session(key: 'option_url')) {
+        //     return redirect(session(key: 'option_url'))->with('success', 'Option updated successfully');
+        // }
+
         return redirect()->route('admin.option.list')
             ->with('success', 'Option updated successfully');
     }
@@ -98,7 +99,7 @@ class OptionController extends Controller
 
         if ($request->option != '') {
             $options = Option::where('title', 'LIKE', '%' . $request->option . '%')->orderBy('title', 'desc')->get()->load('question', 'language');
-
+            
             foreach ( $options  as $index=>$options ) {
                 $count = $index + 1;
                 $outputoption.=
@@ -111,7 +112,7 @@ class OptionController extends Controller
                <td><img src="' . asset($options->image_url) . '" width="40px" height="40px" /></td>
 
                <td> '.'
-               <a href="questions/status/'.$options->id.'" class="btn btn-success">'.'Online</a>
+               <a href="options/is_correct/'.$options->id.'" class="btn btn-success">'.'Yes</a>
                 '.'</td>
 
                 <td> '.'
@@ -119,11 +120,11 @@ class OptionController extends Controller
                 '.'</td>
 
                 <td> '.'
-                <a href="option/'.$options->id.'" class="btn">'.'Edit</a>
+                <a href="options/'.$options->id.'" class="btn">'.'Edit</a>
                 '.'</td>
 
                 <td> '.'
-                <a href="/option/delete/'.$options->id.'" class="btn btn-danger">'.'Delete</a>
+                <a href="options/delete/'.$options->id.'" class="btn btn-danger">'.'Delete</a>
                 '.'</td>
 
               </tr>';

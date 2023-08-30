@@ -93,16 +93,16 @@
                                         <img src="{{ asset($option->image_url) }}" width="40px" height="40px" />
                                     </td>
                                     @if($option->is_correct == 1)
-                                    <form action="{{ route('admin.option.is_correct_update', $option->id) }}" onsubmit="return confirm('Are you sure you want to update option to wrong option?')" method="post">
+                                    <form action="{{ route('admin.option.is_correct_update', $option->id) }}" onsubmit="return confirm('Are you sure you want to update option to wrong option?')" method="get">
                                         @csrf
-                                        @method('put')
+                                        @method('get')
                                      <td>  <button class="btn btn-success" type="submit">Yes</button></td>
                                     </form>
                                     @else
                                     <td> 
-                                        <form action="{{ route('admin.option.is_correct_update', $option->id) }}" onsubmit="return confirm('Are you sure you want to update option to is correct?')" method="post">
+                                        <form action="{{ route('admin.option.is_correct_update', $option->id) }}" onsubmit="return confirm('Are you sure you want to update option to is correct?')" method="get">
                                             @csrf
-                                            @method('put')
+                                            @method('get')
                                              <button class="btn btn-danger" type="submit">No</button></td>
                                             @endif
                                         </form>
@@ -115,9 +115,9 @@
 
                                     </td>
                                     <td>
-                                        <form action="{{ route('admin.option.destroy', $option->id) }}" onsubmit="return confirm('Are you sure you want to delete option?')" method="post">
+                                        <form action="{{ route('admin.option.destroy', $option->id) }}" onsubmit="return confirm('Are you sure you want to delete option?')" method="get">
                                             @csrf
-                                            @method('delete')
+                                            @method('get')
                                             <input type="hidden" name="page" value="{{$options->currentPage()}}">
                                             <button class="btn btn-danger" type="submit">Delete</button>
                                         </form>
@@ -153,7 +153,7 @@
              
              $.ajax({
                 type: 'get',
-                url: '{{route('admin.option.search')}}',
+                url: '{{route('admin.options.search')}}',
                 data:{'option':$valueoption},
                 success:function(data)
                 {
