@@ -92,17 +92,49 @@ class QuestionController extends Controller
 
     public function search(Request $request)
     {
-
-        $questions = Question::orderBy('created_at', 'desc')->paginate(40);
-
-        if ($request->keyword != '') {
-            $questions = Question::where('title', 'LIKE', '%' . $request->keyword . '%')->orderBy('title', 'desc')->get()->load('topic', 'language');
-            return response()->json([
-                'questions' => $questions
-            ]);
-        }
+        $output = '';
+        $allquestions = Question::orderBy('created_at', 'desc')->get();
         Session::put('question_url', request()->fullUrl());
-        return view('pages.admin.list-question', ['questions' => $questions]);
+
+        if ($request->search != '') {
+            $questions = Question::where('title', 'LIKE', '%' . $request->search . '%')->orderBy('title', 'desc')->get()->load('topic', 'language');
+
+            foreach ($questions as $index => $questions) {
+                $count = $index + 1;
+                $output .=
+             '<tr>
+               <td> ' . $count . '</td>
+               <td> ' . $questions->title . '</td>
+               <td> ' . $questions->topic->title . ' </td>
+               <td> ' . $questions->language->name . ' </td>
+               <td><a href="' . $questions->media_url . '"> Media Link</a></td>
+               <td><img src="' . asset($questions->image_url) . '" width="40px" height="40px" /></td>
+
+               <td> '.'
+               <a href="questions/status/'.$questions->id.'" class="btn btn-success">'.'Online</a>
+                '.'</td>
+
+                <td> '.'
+                '.$questions->created_at->diffForHumans() .'
+                '.'</td>
+
+                <td> '.'
+                <a href="questions/'.$questions->id.'" class="btn">'.'Edit</a>
+                '.'</td>
+
+                <td> '.'
+                <a href="questions/delete/'.$questions->id.'" class="btn btn-danger">'.'Delete</a>
+                '.'</td>
+
+              </tr>';
+            }
+
+            return response($output);
+        } elseif ($request->search == '') {
+            return view('pages.admin.list-question', ['questions' => $allquestions]);
+        }
+
+        return view('pages.admin.list-question', ['questions' => $allquestions]);
     }
 
     public function media()

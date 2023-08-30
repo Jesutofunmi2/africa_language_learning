@@ -56,6 +56,7 @@ class OptionController extends Controller
     {
         $image = null;
         $media_url = null;
+        Session::put('option_url', request()->fullUrl());
 
         if ($createoptionrequest->hasFile('image_url')) {
             $image = $createoptionrequest->image_url;
@@ -85,6 +86,55 @@ class OptionController extends Controller
         }
         return redirect()->route('admin.option.list')
             ->with('success', 'Updated successfully');
+    }
+
+
+
+    public function search(Request $request)
+    {
+        $outputoption = '';
+        $alloptions  = Option::orderBy('created_at', 'desc')->get();
+        Session::put('option_url', request()->fullUrl());
+
+        if ($request->option != '') {
+            $options = Option::where('title', 'LIKE', '%' . $request->option . '%')->orderBy('title', 'desc')->get()->load('question', 'language');
+
+            foreach ( $options  as $index=>$options ) {
+                $count = $index + 1;
+                $outputoption.=
+             '<tr>
+               <td> ' . $count . '</td>
+               <td> ' . $options->title . '</td>
+               <td> ' . $options->language->name . ' </td>
+               <td> ' . $options->question->title . ' </td>
+               <td><a href="' . $options->media_url . '"> Media Link</a></td>
+               <td><img src="' . asset($options->image_url) . '" width="40px" height="40px" /></td>
+
+               <td> '.'
+               <a href="questions/status/'.$options->id.'" class="btn btn-success">'.'Online</a>
+                '.'</td>
+
+                <td> '.'
+                '.$options->created_at->diffForHumans() .'
+                '.'</td>
+
+                <td> '.'
+                <a href="option/'.$options->id.'" class="btn">'.'Edit</a>
+                '.'</td>
+
+                <td> '.'
+                <a href="/option/delete/'.$options->id.'" class="btn btn-danger">'.'Delete</a>
+                '.'</td>
+
+              </tr>';
+            }
+
+            return response($outputoption);
+        } elseif ($request->search == '') {
+            return view('pages.admin.list-option', ['options' => $alloptions ]);
+        }
+
+        return view('pages.admin.list-option', ['options' => $alloptions ]);
     }
     public function destroy(Request $request, Option $option)
     {

@@ -71,7 +71,7 @@
 
                             </th>
                         </thead>
-                        <tbody>
+                        <tbody class="allData">
 
                             @foreach ($questions as $question)
                                 <tr>
@@ -97,21 +97,23 @@
 
                                     <td>
                                         @if ($question->status == true)
+                                          
                                             <form action="{{ route('admin.question.status', $question->id) }}"
                                                 onsubmit="return confirm('Are you sure you want to update Question status ?')"
-                                                method="post">
+                                                method="get">
                                                 @csrf
-                                                @method('put')
+                                                @method('get')
                                                 
                                                 <input type="hidden" name="page" value="{{ $questions->currentPage() }}">
-                                                <button class="btn btn-success"  id="success" type="submit">Online</button>
+                                               <button class="btn btn-success"  id="online">Online</button>
                                             </form>
                                         @else
+                                        
                                             <form action="{{ route('admin.question.status', $question->id) }}"
                                                 onsubmit="return confirm('Are you sure you want to update Question status ?')"
-                                                method="post">
+                                                method="get">
                                                 @csrf
-                                                @method('put')
+                                                @method('get')
                                                 <input type="hidden" name="page" value="{{ $questions->currentPage() }}">
                                                 <button class="btn btn-danger" type="submit">Offline</button>
                                             </form>
@@ -128,9 +130,9 @@
                                     <td>
                                         <form action="{{ route('admin.question.destroy', $question->id) }}"
                                             onsubmit="return confirm('Are you sure you want to delete Question ?')"
-                                            method="post">
+                                            method="get">
                                             @csrf
-                                            @method('delete')
+                                            @method('get')
                                             <input type="hidden" name="page" value="{{ $questions->currentPage() }}">
                                             <button class="btn btn-danger" type="submit">Delete</button>
                                         </form>
@@ -138,84 +140,47 @@
                                 </tr>
                             @endforeach
                         </tbody>
+
+                        <tbody id="Content" class="searchData">
+
+                        </tbody>
                     </table>
                 </div>
                 {!! $questions->links() !!}
             </div>
+
+
         </div>
     </div>
 
     <script type="text/javascript">
-     
+
         $('#search').on('keyup', function() {
-            search();
+             $value = $(this).val();
+
+             if($value)
+             {
+                $('.searchData').show();
+                $('.allData').hide();
+             }
+             else
+             {
+                $('.searchData').hide();
+                $('.allData').show();
+             }
+             
+             $.ajax({
+                type: 'get',
+                url: '{{route('admin.question.search')}}',
+                data:{'search':$value},
+
+                success:function(data)
+                {
+                    console.log(data);
+                    $('#Content').html(data);
+                }
+             });
         });
-        search();
-
-        function search() {
-            var keyword = $('#search').val();
-            $.post('{{ route('admin.question.search') }}', {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    keyword: keyword
-                },
-                function(data) {
-                    table_post_row(data);
-                });
-        }
-
-        function status(sid){
-            var id = sid;
-            var url = '{{ route("admin.question.status", ":id") }}';
-            url = url.replace(':id', id);
-            console.log(url)
-            $.post('url', {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    keyword: keyword
-                },
-                function(data) {
-                   
-                });
-        }
-
-
-        function table_post_row(res) {
-            console.log(res);
-            let htmlView = '';
-            if (res.questions.length <= 0) {
-                htmlView += `
-       <tr>
-          <td colspan="40">No data.</td>
-       </tr>`;
-            }
-            for (let i = 0; i < res.questions.length; i++) {
-                htmlView += `
-        <tr>
-           <td>` + (i + 1) + `</td>
-              
-               <td>` + res.questions[i].title + `</td>
-               <td>` + res.questions[i].topic.title + `</td>
-               <td>` + res.questions[i].language.name + `</td>
-               <td> <a href=` + res.questions[i].media_url + `> Media Link </a> </td>
-               <td><img src=` + res.questions[i].image_url +` width="40px" height="40px" /></td>
-               <td>`
-                                        if (res.questions[i].status == true){
-                                            htmlView += `
-                                                <button class="btn btn-success"  id="success" >Online</button>`
-                                           
-                                        }
-                                        else{
-                                            htmlView += `
-                                                <button class="btn btn-danger"  id="danger" >Offline</button>`
-                                           
-                                        }
-                                    `</td>
-                                    <td>`+ res.questions[i].created_at + `</td>
-
-            
-        </tr>`;
-            }
-            $('tbody').html(htmlView);
-        }
 
     </script>
 @endsection

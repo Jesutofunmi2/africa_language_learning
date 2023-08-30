@@ -79,13 +79,13 @@ Route::prefix('admin')->name('admin.')
             Route::delete('topic/{topic}', [TopicController::class, 'destroy'])->name('topic.destroy');
 
             Route::get('question/create', [QuestionController::class, 'index'])->name('question.index');
-            Route::post('question/search', [QuestionController::class, 'search'])->name('question.search');
+            Route::get('question/search', [QuestionController::class, 'search'])->name('question.search');
             Route::post('question/create', [QuestionController::class, 'create'])->name('question.create');
             Route::get('questions', [QuestionController::class, 'list'])->name('question.list');
             Route::get('questions/{question}', [QuestionController::class, 'show'])->name('question.show');
-            Route::put('questions/{id}', [QuestionController::class, 'status'])->name('question.status');
+            Route::get('questions/status/{id}', [QuestionController::class, 'status'])->name('question.status');
             Route::put('question/{questionId}', [QuestionController::class, 'update'])->name('question.update');
-            Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
+            Route::get('questions/delete/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
             Route::get('question/media', [QuestionController::class, 'media'])->name('question.media');
             Route::post('media/create', [QuestionController::class, 'mediaCreate'])->name('question.media-create');
             Route::get('question/batch-create', [QuestionController::class, 'batch'])->name('question.batch-cretate');
@@ -93,11 +93,12 @@ Route::prefix('admin')->name('admin.')
 
             Route::get('option/create', [OptionController::class, 'index'])->name('option.index');
             Route::post('option/create', [OptionController::class, 'create'])->name('option.create');
+            Route::get('option/search', [OptionController::class, 'search'])->name('option.search');
             Route::get('option', [OptionController::class, 'list'])->name('option.list');
             Route::get('options/{id}', [OptionController::class, 'show'])->name('option.show');
             Route::put('optionUpdate/{id}', [OptionController::class, 'update'])->name('option.update');
             Route::put('option/{id}', [OptionController::class, 'is_correct_update'])->name('option.is_correct_update');
-            Route::delete('option/{option}', [OptionController::class, 'destroy'])->name('option.destroy');
+            Route::get('/option/delete/{option}', [OptionController::class, 'destroy'])->name('option.destroy');
             Route::get('option/batch-create', [OptionController::class, 'batch'])->name('option.batch-cretate');
             Route::post('option/batchUpload', [OptionController::class, 'batchUpload'])->name('option.batchUpload');
 
