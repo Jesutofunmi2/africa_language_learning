@@ -29,9 +29,10 @@ class OptionController extends Controller
         return view('pages.admin.create-option', ['languages' => $languages, 'questions' => $questions]);
     }
 
-    public function create(CreateOptionRequest $createQuestionRequest): RedirectResponse
+    public function create(CreateOptionRequest $createOptionRequest): RedirectResponse
     {
-        $this->service->createOption($createQuestionRequest->validated());
+    
+        $this->service->createOption($createOptionRequest->validated());
         return redirect()->route('admin.option.list')->with('success', 'Option created successfully');
     }
 

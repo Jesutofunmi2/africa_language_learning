@@ -144,10 +144,12 @@ class QuestionService
     {
 
         $option = new Option;
-        DB::transaction(function () use (&$option, $data) {
+        for ( $i = 0; $i< count($data['addMoreInputFields']); $i++) {
+
+        DB::transaction(function () use (&$option, $data, $i) {
             $mediaService = new MediaService;
-            $mediaUrl = $mediaService->uploadAudio($data['media_url']);
-            $imageUrl = $mediaService->uploadImage($data['image_url']);
+            $mediaUrl = $mediaService->uploadAudio($data['addMoreInputFields'][$i]['media_url']);
+            $imageUrl = $mediaService->uploadImage($data['addMoreInputFields'][$i]['image_url']);
 
             $mediaType = null;
 
@@ -155,9 +157,7 @@ class QuestionService
             $image_extension = array('jpg', 'jpeg', 'png', 'gif');
             $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
 
-            $extention = $data['media_url']->extension();
-
-
+            $extention = $data['addMoreInputFields'][$i]['media_url']->extension();
             if (in_array($extention, $video_extension)) {
                 $mediaType = 'video';
             } elseif (in_array($extention, $image_extension)) {
@@ -166,7 +166,7 @@ class QuestionService
                 $mediaType = 'audio';
             }
 
-            $option->title = str_replace('  ', ' ', $data['title']);
+            $option->title = str_replace('  ', ' ', $data['addMoreInputFields'][$i]['title']);
             $option->language_id = $data['language_id'];
             $option->question_id = $data['question_id'];
             $option->hint = $data['hint'];
@@ -176,8 +176,12 @@ class QuestionService
             $option->is_correct = $data['is_correct'];
             $option->save();
         });
-        return $option;
+       
     }
+
+    return $option;
+
+}
 
     public function showOption($questionId): Option
     {
