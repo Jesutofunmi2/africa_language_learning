@@ -231,7 +231,7 @@ class QuestionService
             }
         }
         $option = Option::whereId($optionId)->first();
-
+       
 
         if ($url == null) {
             $url = $option->image_url;
@@ -258,7 +258,6 @@ class QuestionService
                 'media_url' => $media,
                 'image_url' => $url
             ]);
-
         return $new_option;
     }
 

@@ -22,6 +22,7 @@ use App\Http\Controllers\Teacher\Auth\TeacherLogoutController;
 use App\Http\Controllers\Teacher\TeacherController;
 use App\Http\Controllers\Student\Auth\StudentLoginController;
 use App\Http\Controllers\Student\Auth\CreateStudentController;
+use App\Http\Controllers\Teacher\Auth\CreateTeacherController;
 use App\Models\QuestionAnswered;
 
 /*
@@ -89,9 +90,9 @@ Route::prefix('/v1')
                 Route::delete('/deleteStudent', [StudentController::class, 'destroy'])->name('student.destroy');
 
                 //teacher endpoint
+                Route::post('/addTeacher', [CreateTeacherController::class])->name('addTeacher');
                 Route::get('/teachers', [TeacherController::class, 'list'])->name('teacher.list');
                 Route::get('/getTeacher', [TeacherController::class, 'getTeacher'])->name('teacher.show');
-                Route::post('/addTeacher', [TeacherController::class, 'create'])->name('addTeacher');
                 Route::post('/updateTeacher', [TeacherController::class, 'createTeacher'])->name('createTeacher');
                 Route::delete('/deleteTeacher', [TeacherController::class, 'destroy'])->name('teacher.destroy');
                 

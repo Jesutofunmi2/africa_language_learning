@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateOptionRequest;
+use App\Http\Requests\Admin\EditOptionRequest;
 use App\Http\Requests\Admin\QuestionBatchUploadRequest;
 use App\Models\Topic;
 use App\Services\QuestionService;
@@ -53,19 +54,21 @@ class OptionController extends Controller
         return view('pages.admin.edit-option', ['questions' => $question, 'option' => $option, 'languages' => $languages, 'topics' => $topics]);
     }
 
-    public function update(CreateOptionRequest $createoptionrequest, $questionId)
+    public function update(EditOptionRequest $editoptionrequest, $questionId)
     {
+
+       
         $image = null;
         $media_url = null;
         Session::put('option_url', request()->fullUrl());
 
-        if ($createoptionrequest->hasFile('image_url')) {
-            $image = $createoptionrequest->image_url;
+        if ($editoptionrequest->hasFile('image_url')) {
+            $image = $editoptionrequest->image_url;
         }
-        if ($createoptionrequest->hasFile('media_url')) {
-            $media_url = $createoptionrequest->media_url;
+        if ($editoptionrequest->hasFile('media_url')) {
+            $media_url = $editoptionrequest->media_url;
         }
-        $this->service->updateOption($createoptionrequest->validated(), $image, $media_url, $questionId);
+        $this->service->updateOption($editoptionrequest->validated(), $image, $media_url, $questionId);
         // if (session(key: 'option_url')) {
         //     return redirect(session(key: 'option_url'))->with('success', 'Option updated successfully');
         // }
