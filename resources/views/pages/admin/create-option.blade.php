@@ -108,7 +108,7 @@
 
                                 <table class="table table-bordered" id="dynamicAddRemoveImage">
                                     <tr>
-                                        <th>IMAGE</th>
+                                        <th>IMAGE FILE</th>
                                         <th>Action</th>
                                     </tr>
                                     <tr>
@@ -133,7 +133,7 @@
 
                                 <table class="table table-bordered" id="dynamicAddRemoveMedia">
                                     <tr>
-                                        <th>Media</th>
+                                        <th>Video/Audio File</th>
                                         <th>Action</th>
                                     </tr>
                                     <tr>
@@ -158,7 +158,7 @@
 
 
                                 <div class="card-footer ">
-                                    <button type="submit" class="btn btn-info btn-round">{{ __('Save') }}</button>
+                                    <button type="submit" class="btn btn-info btn-round">{{ __('Upload') }}</button>
                                 </div>
                             </form>
                         </div>

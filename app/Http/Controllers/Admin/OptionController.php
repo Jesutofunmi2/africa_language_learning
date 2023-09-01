@@ -31,7 +31,6 @@ class OptionController extends Controller
 
     public function create(CreateOptionRequest $createOptionRequest): RedirectResponse
     {
-    
         $this->service->createOption($createOptionRequest->validated());
         return redirect()->route('admin.option.list')->with('success', 'Option created successfully');
     }

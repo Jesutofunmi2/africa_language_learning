@@ -12,7 +12,7 @@ class QuestionService
     public function createQuestion(array $data): Question
     {
         $question = new Question;
-        
+
         DB::transaction(function () use (&$question, $data) {
 
             $mediaService = new MediaService;
@@ -106,16 +106,16 @@ class QuestionService
             }
         }
         $question = Question::whereId($questionId)->first();
-        
-        if($url == null){
+
+        if ($url == null) {
             $url = $question->image_url;
         }
 
-        if($media == null){
+        if ($media == null) {
             $media = $question->media_url;
         }
 
-        if($mediaType == null){
+        if ($mediaType == null) {
             $mediaType = $question->media_type;
         }
         $new_question = new Question;
@@ -142,46 +142,56 @@ class QuestionService
 
     public function createOption(array $data)
     {
+        $thisArray = $data['addMoreInputFields'];
+        for ($i = 0; $i < count($thisArray); $i++) {
 
-        $option = new Option;
-        for ( $i = 0; $i< count($data['addMoreInputFields']); $i++) {
+            DB::transaction(function () use (&$option, $thisArray, $data, $i) {
 
-        DB::transaction(function () use (&$option, $data, $i) {
-            $mediaService = new MediaService;
-            $mediaUrl = $mediaService->uploadAudio($data['addMoreInputFields'][$i]['media_url']);
-            $imageUrl = $mediaService->uploadImage($data['addMoreInputFields'][$i]['image_url']);
+                $optionData = $thisArray[$i];
 
-            $mediaType = null;
+                $option = new Option;
+                $mediaService = new MediaService;
 
-            $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
-            $image_extension = array('jpg', 'jpeg', 'png', 'gif');
-            $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
+                $mediaType = null;
+                $audioUrl = null;
+                $imageUrl = null;
 
-            $extention = $data['addMoreInputFields'][$i]['media_url']->extension();
-            if (in_array($extention, $video_extension)) {
-                $mediaType = 'video';
-            } elseif (in_array($extention, $image_extension)) {
-                $mediaType = 'image';
-            } elseif (in_array($extention, $audio_extension)) {
-                $mediaType = 'audio';
-            }
+                $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
+                $image_extension = array('jpg', 'jpeg', 'png', 'gif');
+                $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
 
-            $option->title = str_replace('  ', ' ', $data['addMoreInputFields'][$i]['title']);
-            $option->language_id = $data['language_id'];
-            $option->question_id = $data['question_id'];
-            $option->hint = $data['hint'];
-            $option->media_type = $mediaType;
-            $option->media_url = $mediaUrl ?? null;
-            $option->image_url = $imageUrl ?? null;
-            $option->is_correct = $data['is_correct'];
-            $option->save();
-        });
-       
+                if (array_key_exists('media_url', $optionData)) {
+                    $audioUrl = $mediaService->uploadAudio($optionData['media_url']);
+
+                    $extention = $thisArray[$i]['media_url']->extension();
+                    if (in_array($extention, $video_extension)) {
+                        $mediaType = 'video';
+                    } elseif (in_array($extention, $image_extension)) {
+                        $mediaType = 'image';
+                    } elseif (in_array($extention, $audio_extension)) {
+                        $mediaType = 'audio';
+                    }
+                }
+
+
+                if (array_key_exists('image_url', $optionData)) {
+                    $imageUrl = $mediaService->uploadImage($optionData['image_url']);
+                }
+
+
+                $option->title = str_replace('  ', ' ', $optionData['title']);
+                $option->language_id = $data['language_id'];
+                $option->question_id = $data['question_id'];
+                $option->hint = $data['hint'];
+                $option->media_type = $mediaType;
+                $option->media_url = $audioUrl ?? null;
+                $option->image_url = $imageUrl ?? null;
+                $option->is_correct = $data['is_correct'];
+                $option->save();
+            });
+            // return $option;
+        }
     }
-
-    return $option;
-
-}
 
     public function showOption($questionId): Option
     {
@@ -221,17 +231,17 @@ class QuestionService
             }
         }
         $option = Option::whereId($optionId)->first();
-    
-        
-        if($url == null){
+
+
+        if ($url == null) {
             $url = $option->image_url;
         }
 
-        if($media == null){
+        if ($media == null) {
             $media = $option->media_url;
         }
 
-        if($mediaType == null){
+        if ($mediaType == null) {
             $mediaType = $option->media_type;
         }
         $new_option = new Option;
