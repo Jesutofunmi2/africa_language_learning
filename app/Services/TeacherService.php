@@ -18,12 +18,17 @@ class TeacherService
 
     public function createTeacher(array $data): Teacher
     {
-        $teacher = new Teacher;
+       
         $password = '12345678';
 
         DB::transaction(function () use (&$teacher, $data, $password) {
+            $teacher = new Teacher;
             $mediaService = new MediaService;
-            $mediaUrl = $mediaService->uploadImage($data['image_url']);
+            if($data['image_url'] != null )
+            {
+                $mediaUrl = $mediaService->uploadImage($data['image_url']);
+            }
+            
 
             $teacher->name = $data['name'];
             $teacher->school_id = $data['school_id'];

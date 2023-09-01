@@ -91,7 +91,7 @@ Route::prefix('/v1')
                 //teacher endpoint
                 Route::get('/teachers', [TeacherController::class, 'list'])->name('teacher.list');
                 Route::get('/getTeacher', [TeacherController::class, 'getTeacher'])->name('teacher.show');
-                Route::post('/addTeacher', [TeacherController::class, 'addTeacher'])->name('addTeacher');
+                Route::post('/addTeacher', [TeacherController::class, 'create'])->name('addTeacher');
                 Route::post('/updateTeacher', [TeacherController::class, 'createTeacher'])->name('createTeacher');
                 Route::delete('/deleteTeacher', [TeacherController::class, 'destroy'])->name('teacher.destroy');
                 
