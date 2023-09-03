@@ -21,8 +21,7 @@ class QuestionController extends Controller
                               ->where('status', true)
                               ->when($topic_id, fn ($query) => $query->where('topic_id', $topic_id))
                               ->when($language_id, 
-                                        fn ($query) => $query->whereRelation('options', 'language_id', '=', $language_id)
-                                             
+                                        fn ($query) => $query->whereRelation('options', 'language_id', '=', $language_id)           
                                 )
                               ->get();
         
@@ -36,4 +35,6 @@ class QuestionController extends Controller
             status: 200
         );
     }
+
+    
 }

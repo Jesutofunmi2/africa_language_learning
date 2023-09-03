@@ -29,8 +29,6 @@ class TeacherRequest extends FormRequest
             'email' => ['sometimes','email'],
             'image_url' => ['sometimes','image','mimes:jpeg,png,jpg','max:1024'],
             'address' => ['sometimes', 'string']
-        ];
-
-        
+        ]; 
     }
 }

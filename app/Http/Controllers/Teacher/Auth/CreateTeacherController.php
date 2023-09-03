@@ -14,12 +14,15 @@ use Illuminate\Http\Request;
 class CreateTeacherController extends Controller
 {
     //
+    
     public function __construct(protected TokenService $tokenService, protected TeacherService $teacherService)
     {
+        dd('jjj');
     }
 
     public function __invoke(TeacherRequest $request): JsonResponse
     {   
+        dd($request); 
         $teacher = $this->teacherService->createTeacher($request->validated());
         $data = TeacherResource::make($teacher);
         

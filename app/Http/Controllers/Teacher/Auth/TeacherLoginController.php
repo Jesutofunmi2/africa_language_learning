@@ -44,9 +44,9 @@ class TeacherLoginController extends Controller
     protected function authenticateUser(TeacherLoginRequest $request): Teacher
     {
         $data = $request->validated();
-
+    
         $teacher = Teacher::where('email', $data['email'])->first();
-
+        
         abort_if(is_null($teacher), 401, 'Incorrect login details');
 
         if(! Hash::check($data['password'], $teacher->password)) {
