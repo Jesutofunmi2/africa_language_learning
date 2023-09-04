@@ -23,6 +23,7 @@ use App\Http\Controllers\Student\Auth\StudentLoginController;
 use App\Http\Controllers\Student\Auth\CreateStudentController;
 use App\Http\Controllers\Teacher\Auth\CreateTeacherController;
 use App\Http\Controllers\Api\TeacherController;
+use App\Http\Controllers\Api\ClassController;
 use App\Models\QuestionAnswered;
 
 /*
@@ -95,6 +96,9 @@ Route::prefix('/v1')
                 Route::get('/getTeacher', [TeacherController::class, 'getTeacher'])->name('teacher.show');
                 Route::post('/updateTeacher', [TeacherController::class, 'createTeacher'])->name('createTeacher');
                 Route::delete('/deleteTeacher', [TeacherController::class, 'destroy'])->name('teacher.destroy');
+
+                //classes endpoint
+                Route::post('/addClass', [ClassController::class, 'createClass'])->name('createClass');
                 
                 // Question Answered
                 Route::post('/questionAnswered', [QuestionAnsweredController::class, 'create'])->name('questionAnswered.create');
