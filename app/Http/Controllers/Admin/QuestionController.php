@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateQuestionRequest;
+use App\Http\Requests\Admin\EditQuestionRequest;
 use App\Http\Requests\Admin\QuestionBatchUploadRequest;
 use App\Http\Requests\Media\MediaRequest;
 use App\Imports\ImportQuestion;
@@ -35,10 +36,12 @@ class QuestionController extends Controller
 
     public function create(CreateQuestionRequest $createQuestionRequest): RedirectResponse
     {
-        $validated = $createQuestionRequest->safe()->only(['title']);
+       // dd($createQuestionRequest['addMoreInputFields']);
+        $validated = $createQuestionRequest->safe()->only(['addMoreInputFields']);
         if ($this->service->questionNameExists($validated) == true) {
             return redirect()->route('admin.question.list')->with('danger', 'You can not add same Question');
         }
+      
         $this->service->createQuestion($createQuestionRequest->validated());
 
         return redirect()->route('admin.question.list')->with('success', 'Question created successfully');
@@ -61,7 +64,7 @@ class QuestionController extends Controller
         return view('pages.admin.edit-question', ['question' => $question, 'languages' => $languages, 'topics' => $topics]);
     }
 
-    public function update(CreateQuestionRequest $createquestionrequest, $questionId)
+    public function update(EditQuestionRequest $createquestionrequest, $questionId)
     {
         $image = null;
         $media_url = null;

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateQuestionRequest extends FormRequest
+class EditQuestionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,16 +23,14 @@ class CreateQuestionRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
-            'addMoreInputFields.*.title' => ['string', 'required'],
-            'addMoreInputFields.*.instruction' => ['sometimes','string'],
+            'title' => ['string', 'required'],
+            'instruction' => ['sometimes','string'],
             'language_id' => ['integer', 'required', 'exists:languages,id'],
             'topic_id' => ['integer', 'required', 'exists:topics,id'],
             'answered_type' => ['required','in:text,multiple,single,puzzle'],
-            'addMoreInputFields.*.media_url' => 'sometimes|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg',
-            'addMoreInputFields.*.image_url' => ['sometimes','image','mimes:jpeg,png,jpg','max:1024']
+            'media_url' => 'sometimes|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg',
+            'image_url' => ['sometimes','image','mimes:jpeg,png,jpg','max:1024']
         ];
-        
     }
 }

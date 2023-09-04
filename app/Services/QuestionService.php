@@ -9,47 +9,56 @@ use Illuminate\Support\Facades\DB;
 
 class QuestionService
 {
-    public function createQuestion(array $data): Question
+    public function createQuestion(array $data)
     {
-        $question = new Question;
+        $thisArray = $data['addMoreInputFields'];
+        for ($i = 0; $i < count($thisArray); $i++) {
+            DB::transaction(function () use (&$question, $thisArray, $data, $i) {
 
-        DB::transaction(function () use (&$question, $data) {
+                $questionData = $thisArray[$i];
+                $question = new Question;
+                $mediaService = new MediaService;
+                $mediaType = null;
+                $audioUrl = null;
+                $imageUrl = null;
 
-            $mediaService = new MediaService;
-            $imageUrl = $mediaService->uploadImage($data['image_url']);
-            $mediaUrl = $mediaService->uploadAudio($data['media_url']);
-            $mediaType = null;
+                $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
+                $image_extension = array('jpg', 'jpeg', 'png', 'gif');
+                $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
 
-            $video_extension = array('mp4', 'mov', 'wmv', 'avi', 'FLV', 'F4V', 'SWF', 'MKV', 'WEBM');
-            $image_extension = array('jpg', 'jpeg', 'png', 'gif');
-            $audio_extension = array('mpeg', 'mpga', 'mp3', 'wav');
+                if (array_key_exists('media_url',  $questionData)) {
+                    $audioUrl = $mediaService->uploadAudio($questionData['media_url']);
 
-            $extention = $data['media_url']->extension();
+                    $extention = $thisArray[$i]['media_url']->extension();
+                    if (in_array($extention, $video_extension)) {
+                        $mediaType = 'video';
+                    } elseif (in_array($extention, $image_extension)) {
+                        $mediaType = 'image';
+                    } elseif (in_array($extention, $audio_extension)) {
+                        $mediaType = 'audio';
+                    }
+                }
 
-            if (in_array($extention, $video_extension)) {
-                $mediaType = 'video';
-            } elseif (in_array($extention, $image_extension)) {
-                $mediaType = 'image';
-            } elseif (in_array($extention, $audio_extension)) {
-                $mediaType = 'audio';
-            }
+                if (array_key_exists('image_url',  $questionData)) {
+                    $imageUrl = $mediaService->uploadImage($questionData['image_url']);
+                }
 
-            $question->title = $data['title'];
-            $question->instruction = $data['instruction'];
-            $question->language_id = $data['language_id'];
-            $question->topic_id = $data['topic_id'];
-            $question->answered_type = $data['answered_type'];
-            $question->next_question_id = $data['next_question_id'] ?? '';
-            $question->media_type = $mediaType;
-            $question->media_url = $mediaUrl;
-            $question->image_url = $imageUrl;
+                $question->title =  $questionData['title'];
+                $question->instruction =  $questionData['instruction'];
+                $question->language_id = $data['language_id'];
+                $question->topic_id = $data['topic_id'];
+                $question->answered_type = $data['answered_type'];
+                $question->next_question_id = $data['next_question_id'] ?? '';
+                $question->media_type = $mediaType;
+                $question->media_url = $audioUrl;
+                $question->image_url = $imageUrl;
 
-            $question->save();
+                $question->save();
 
-            //@todo we fire other actions after registration
-        });
-
-        return $question;
+                //@todo we fire other actions after registration
+            });
+        }
+        // return $question;
     }
 
 
@@ -231,7 +240,7 @@ class QuestionService
             }
         }
         $option = Option::whereId($optionId)->first();
-       
+
 
         if ($url == null) {
             $url = $option->image_url;
