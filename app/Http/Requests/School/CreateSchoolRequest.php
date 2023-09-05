@@ -26,15 +26,15 @@ class CreateSchoolRequest extends FormRequest
         return [
             'name' => ['required','string', 'max:254'],
             'email' => ['required','email', 'min:5', 'max:100', 'unique:schools,email'],
-            'password' => ['required','string', 'min:8', 'max:50'],
-            'confirm_password' => ['required', 'same:password'],
-            'image_url' => ['required', 'string'],
-            'country' => ['required', 'string'],
-            'phone_number'=>['required', 'string'],
-            'no_of_pupil'=> ['required', 'integer', 'max:254'],
-            'school_name' => ['required', 'string', 'max:254'],
+            'password' => ['sometimes','string', 'min:8', 'max:50'],
+            'confirm_password' => ['sometimes', 'same:password'],
+            'image_url' => ['sometimes', 'image', 'mimes:jpeg,png,jpg'],
+            'country' => ['sometimes', 'string'],
+            'phone_number'=>['sometimes', 'string'],
+            'no_of_pupil'=> ['sometimes', 'integer', 'max:254'],
+            'school_name' => ['sometimes', 'string', 'max:254'],
             'type'=> ['required', 'string'],
-            'how_do_you_see_us' => ['required', 'string']
+            'how_do_you_see_us' => ['sometimes', 'string']
         ];
     }
 }

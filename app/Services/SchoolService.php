@@ -78,9 +78,9 @@ class SchoolService
         return $school;
     }
 
-    public function showSchool($schoolId): SecondarySchool
+    public function showSchool($schoolId): School
     {
-        $school = SecondarySchool::whereId($schoolId)->first();
+        $school = School::whereId($schoolId)->first();
 
         return $school;
     }
@@ -117,7 +117,7 @@ class SchoolService
 
     public function deleteSchool($schoolId): void
     {
-        SecondarySchool::whereId($schoolId)->delete();
+        School::whereId($schoolId)->delete();
     }
 
     protected function schoolId($name, $id)

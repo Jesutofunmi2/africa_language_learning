@@ -44,16 +44,16 @@
                                 S/N
                             </th>
                             <th>
-                                Name
+                               School Name
                             </th>
                              <th>
-                                School ID
+                                School Number
                              </th>
                              <th>
-                                Address
+                                Email
                              </th>
                              <th>
-                                LGA
+                                Type
                              </th>
                              <th>
                                 Image
@@ -73,16 +73,16 @@
                                         {{ $loop->iteration }}
                                     </td>
                                     <td>
-                                        {{ $school->name }}
+                                        {{ $school->school_name }}
                                     </td>
                                     <td>
-                                        {{ $school->school_id }}
+                                        {{ $school->phone_number }}
                                     </td>
                                     <td>
-                                        {{ $school->address }}
+                                        {{ $school->email }}
                                     </td>
                                     <td>
-                                        {{ $school->lga }}
+                                        {{ $school->type }}
                                     </td>
                                     <td>
                                         <img src="{{ asset($school->image_url) }}" width="40px" height="40px" />

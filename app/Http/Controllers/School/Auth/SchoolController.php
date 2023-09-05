@@ -7,6 +7,7 @@ use App\Http\Requests\School\CreateSchoolRequest;
 use App\Http\Requests\School\SecondaryRequest;
 use App\Http\Resources\LoginResource;
 use App\Http\Resources\SchoolResource;
+use App\Models\School;
 use App\Models\SecondarySchool;
 use App\Services\TokenService;
 use App\Services\SchoolService;
@@ -45,15 +46,15 @@ class SchoolController extends Controller
     return view('pages.admin.create-school');
   }
 
-  public function create(SecondaryRequest $secondaryRequest)
+  public function create(CreateSchoolRequest $request)
   {
-    $school = $this->schoolService->createSecondarySchool($secondaryRequest->validated());
+    $school = $this->schoolService->createSchool($request->validated());
     return redirect()->route('admin.school.list',  ['schools' => $school])->with('success', 'School created successfully');
   }
 
   public function list(): View
   {
-    $school = SecondarySchool::orderBy('created_at', 'desc')->paginate(15);
+    $school = School::orderBy('created_at', 'desc')->paginate(15);
     return view('pages.admin.list-school')->with('schools', $school);
   }
 
