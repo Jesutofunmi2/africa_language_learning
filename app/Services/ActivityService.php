@@ -257,6 +257,7 @@ class ActivityService
      * Get user activities.
      * 
      */
+    
     public function getUserActivity($request): Collection
     {
         $user = $request->user();

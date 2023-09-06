@@ -23,4 +23,19 @@ class ClassService
 
         return $class;
      }
+
+
+     public function showClass(array $data)
+     {
+        $class = Classes::where('teacher_id',$data['teacher_id'])->where('school_id', $data['school_id'])->get();
+
+        return $class;
+     }
+
+     public function deleteClass(array $data)
+     {
+       $deleteClass = Classes::where('teacher_id',$data['teacher_id'])->where('school_id', $data['school_id'])->delete();
+
+       return $deleteClass;
+     }
 }

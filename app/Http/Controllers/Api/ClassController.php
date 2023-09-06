@@ -32,4 +32,32 @@ class ClassController extends Controller
             status: 201
         );
     }
+
+    public function show(ClassRequest $classrequest)
+    {
+        $Class = $this->classService->showClass($classrequest->validated());
+        abort_if(is_null($Class), 204, 'Invalid Content or Parameter');
+        $data = ClassResource::collection($Class);
+        return response()->json(
+            [
+                'message' => 'GET successful.',
+                'data' => $data,
+            ],
+            status: 201
+        );
+    }
+
+    public function delete(ClassRequest $classrequest)
+    {
+        $deleteClass = $this->classService->deleteClass($classrequest->validated());
+        abort_if(is_null($deleteClass), 204, 'Invalid Content or Parameter');
+    
+        return response()->json(
+            [
+                'message' => 'Delete successful.',   
+            ],
+            status: 202
+        );
+    }
+
 }

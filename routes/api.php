@@ -61,7 +61,6 @@ Route::prefix('/v1')
                 //Route::post('/createTeacher', TeacherController::class)->name('createTeacher');
                 Route::post('/teacherLogin', TeacherLoginController::class)->name('teacherLogin');
                 Route::post('/teacherLogout', TeacherLogoutController::class)->middleware('auth:sanctum')->name('logout_for_teacher');
-   
 
                 Route::post('/logout', UserLogoutController::class)->middleware('auth:sanctum')->name('logout');
             });
@@ -99,6 +98,8 @@ Route::prefix('/v1')
 
                 //classes endpoint
                 Route::post('/addClass', [ClassController::class, 'createClass'])->name('createClass');
+                Route::get('/showClass', [ClassController::class, 'show'])->name('showClass');
+                Route::delete('/deleteClass', [ClassController::class, 'delete'])->name('deleteClass');
                 
                 // Question Answered
                 Route::post('/questionAnswered', [QuestionAnsweredController::class, 'create'])->name('questionAnswered.create');
