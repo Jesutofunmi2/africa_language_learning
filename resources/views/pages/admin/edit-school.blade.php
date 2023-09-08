@@ -20,8 +20,8 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="state" class="form-control">
-                                            <option value="{{ old('state') ?? $school->state }}">Select State</option>
-                                            <option value="fct abuja">FCT Abuja</option>
+                                            <option value="{{ old('state') ?? $school->state }}">{{ $school->state ?? 'Select State'}}</option>
+                                            <option value="FCT">FCT Abuja</option>
 
                                         </select>
                                         <small>Note: don't leave blank, select State </small>
@@ -36,13 +36,13 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="lga" class="form-control">
-                                            <option value="{{ old('lga') ?? $school->state }}">Select LGA</option>
-                                            <option value="abaji">Abaji</option>
-                                            <option value="garki">Garki</option>
-                                            <option value="bwari">Bwari</option>
-                                            <option value="gwagwalada">Gwagwalada</option>
-                                            <option value="kuje">Kuje</option>
-                                            <option value="kwali">Kwali</option>
+                                            <option value="{{ old('lga') ?? $school->lga }}">{{$school->lga ?? 'Select LGA'}}</option>
+                                            <option value="Abaji">Abaji</option>
+                                            <option value="Garki">Garki</option>
+                                            <option value="Bwari">Bwari</option>
+                                            <option value="Gwagwalada">Gwagwalada</option>
+                                            <option value="Kuje">Kuje</option>
+                                            <option value="Kwali">Kwali</option>
 
                                         </select>
                                         <small>Note: don't leave blank, select LGA</small>
@@ -69,6 +69,52 @@
                                     @endif
                                 </div>
 
+                                <div class="input-group{{ $errors->has('school_name') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="nc-icon nc-box-2"></i>
+                                        </span>
+                                    </div>
+                                    <input name="school_name" type="text" class="form-control" placeholder="Admin Name"
+                                        value="{{ old('school_name') ?? $school->school_name }}" required autofocus>
+                                    @if ($errors->has('school_name'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                            <strong>{{ $errors->first('school_name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="input-group{{ $errors->has('phone_number') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="nc-icon nc-box-2"></i>
+                                        </span>
+                                    </div>
+                                    <input name="phone_number" type="text" class="form-control" placeholder="Admin Name"
+                                        value="{{ old('phone_number') ?? $school->phone_number}}" required autofocus>
+                                    @if ($errors->has('phone_number'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                            <strong>{{ $errors->first('phone_number') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+
+                                <div class="input-group{{ $errors->has('no_of_pupil') ? ' has-danger' : '' }}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="nc-icon nc-box-2"></i>
+                                        </span>
+                                    </div>
+                                    <input name="no_of_pupil" type="text" class="form-control" placeholder="No of pupil"
+                                        value="{{ old('no_of_pupil') ?? $school->no_of_pupil}}" required autofocus>
+                                    @if ($errors->has('no_of_pupil'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                            <strong>{{ $errors->first('no_of_pupil') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
                                 <div class="input-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
@@ -87,7 +133,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="type" class="form-control">
-                                            <option value="{{ old('type') ?? $school->type}}">Select LGA</option>
+                                            <option value="{{ old('type') ?? $school->type}}">{{$school->type ?? 'School Type'}}</option>
                                             <option value="unity-school">Unity School</option>
                                             <option value="non-unity-school">Non Unity School</option>
                                         </select>
@@ -96,6 +142,22 @@
                                     @if ($errors->has('type'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('type') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="row-12">
+                                    <div class="form-group">
+                                        <select name="country" class="form-control">
+                                            <option value="{{ old('country') ?? $school->country}}">{{$school->country ?? 'Country'}}</option>
+                                            <option value="nigeria">Nigeria</option>
+                                            <option value="gabon">Gabon</option>
+                                        </select>
+                                        <small>Note: don't leave blank, select School Country</small>
+                                    </div>
+                                    @if ($errors->has('country'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                            <strong>{{ $errors->first('country') }}</strong>
                                         </span>
                                     @endif
                                 </div>

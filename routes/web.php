@@ -107,6 +107,7 @@ Route::prefix('admin')->name('admin.')
             Route::get('schools', [SchoolController::class, 'list'])->name('school.list');
             Route::get('schools/{secondaryId}', [SchoolController::class, 'show'])->name('school.show');
             Route::put('school/{secondaryId}', [SchoolController::class, 'update'])->name('school.update');
+            Route::get('schools/status/{id}', [SchoolController::class, 'status'])->name('school.status');
             Route::delete('schools/{secondaryId}', [SchoolController::class, 'destroy'])->name('school.destroy');
 
             Route::get('teacher/create', [TeacherController::class, 'index'])->name('teacher.index');

@@ -6,6 +6,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 
 class Teacher extends Model
@@ -65,6 +66,20 @@ class Teacher extends Model
     public static function factory(...$parameters): UserFactory
     {
         return static::traitFactory($parameters);
+    }
+
+
+    public function getFutureAttribute()
+    {
+       $time = Carbon::parse($this->attributes['created_at'])->addDays(90);
+
+       $date = strtotime($time);
+       $remaining = $date - time();
+       $days_remaining = floor($remaining / 86400);
+       $hours_remaining = floor(($remaining % 86400) / 3600);
+
+       return "Trial version: $days_remaining days and $hours_remaining hours left";
+
     }
 
 }

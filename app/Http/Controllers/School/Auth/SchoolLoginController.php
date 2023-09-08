@@ -45,7 +45,7 @@ class SchoolLoginController extends Controller
     {
         $data = $request->validated();
 
-        $school = School::where('email', $data['email'])->first();
+        $school = School::where('email', $data['email'])->where('status', true)->first();
 
         abort_if(is_null($school), 401, 'Incorrect login details');
 

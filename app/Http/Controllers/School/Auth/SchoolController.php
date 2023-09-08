@@ -14,6 +14,7 @@ use App\Services\SchoolService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class SchoolController extends Controller
 {
@@ -54,8 +55,8 @@ class SchoolController extends Controller
 
   public function list(): View
   {
-    $school = School::orderBy('created_at', 'desc')->paginate(15);
-    return view('pages.admin.list-school')->with('schools', $school);
+    $schools = School::orderBy('created_at', 'desc')->paginate(15);
+    return view('pages.admin.list-school')->with('schools', $schools);
   }
 
   public function show($schoolId)
@@ -64,10 +65,10 @@ class SchoolController extends Controller
     return view('pages.admin.edit-school', ['school' => $school]);
   }
 
-  public function update(SecondarySchool $secondarySchool, SecondaryRequest $request, $schoolId): RedirectResponse
+  public function update(School $secondarySchool, SecondaryRequest $request, $schoolId): RedirectResponse
   {
-    $image = null;
 
+    $image = null;
     if ($request->hasFile('image_url')) {
       $image = $request->image_url;
     }
@@ -78,6 +79,14 @@ class SchoolController extends Controller
       ->with('success', 'School updated successfully');
   }
 
+
+  public function status(Request $request, $id)
+  {
+    $this->schoolService->schoolStatus($id);
+
+    return redirect()->route('admin.school.list', ['page' => $request->page])
+      ->with('success', 'Updated successfully');
+  }
 
   public function destroy($secondaryId): RedirectResponse
   {

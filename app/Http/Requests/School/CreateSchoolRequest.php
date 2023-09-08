@@ -31,8 +31,10 @@ class CreateSchoolRequest extends FormRequest
             'image_url' => ['sometimes', 'image', 'mimes:jpeg,png,jpg'],
             'country' => ['sometimes', 'string'],
             'phone_number'=>['sometimes', 'string'],
-            'no_of_pupil'=> ['sometimes', 'integer', 'max:254'],
+            'no_of_pupil'=> ['sometimes', 'integer'],
             'school_name' => ['sometimes', 'string', 'max:254'],
+            'state' => ['sometimes', 'string', 'max:254'],
+            'lga' => ['sometimes', 'string', 'max:254'],
             'type'=> ['required', 'string'],
             'how_do_you_see_us' => ['sometimes', 'string']
         ];

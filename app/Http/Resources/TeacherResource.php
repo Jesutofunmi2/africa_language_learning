@@ -21,7 +21,8 @@ class TeacherResource extends JsonResource
             'email' => $this->email,
             'school' => $this->school,
             'address' => $this->address,
-            'image_url' => $this->image_url
+            'image_url' => $this->image_url,
+            'count_down' => $this->future,
           
         ];
     }

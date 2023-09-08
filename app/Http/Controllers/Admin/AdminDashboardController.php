@@ -42,7 +42,7 @@ class AdminDashboardController extends Controller
         $languages = Language::count();
         $topics =  Topic::count();
         $students = Student::count();
-        $schools = SecondarySchool::count();
+        $schools = School::count();
         $questions = Question::count();
         $options = Option::count();
         $teacher = Teacher::count();

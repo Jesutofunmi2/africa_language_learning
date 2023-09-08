@@ -17,7 +17,7 @@ class ClassResource extends JsonResource
         return [
             'id' => $this->id,
             'teacher_id' => $this->teacher_id,
-            'classs-room-name' => $this->name,
+            'classs_room_name' => $this->name,
         
         ];
     }

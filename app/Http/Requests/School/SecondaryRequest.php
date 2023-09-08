@@ -25,12 +25,18 @@ class SecondaryRequest extends FormRequest
     {
         return [
             'name' => ['required','string', 'max:254'],
-            'image_url' => ['sometimes', 'image', 'mimes:jpeg,png,jpg', 'max:1024'],
+            'email' => ['required','email', 'min:5', 'max:100'],
+            'password' => ['sometimes','string', 'min:8', 'max:50'],
+            'confirm_password' => ['sometimes', 'same:password'],
+            'image_url' => ['sometimes', 'image', 'mimes:jpeg,png,jpg'],
+            'country' => ['sometimes', 'string'],
+            'phone_number'=>['sometimes', 'string'],
+            'no_of_pupil'=> ['sometimes', 'integer'],
+            'school_name' => ['sometimes', 'string', 'max:254'],
+            'state' => ['sometimes', 'string', 'max:254'],
+            'lga' => ['sometimes', 'string', 'max:254'],
             'type'=> ['required', 'string'],
-            'email' => ['required','email', 'min:5', 'max:100', 'unique:admins,email'],
-            'state' => ['required', 'string'],
-            'lga' => ['required', 'string'],
-            'address' => ['required', 'string']
+            'how_do_you_see_us' => ['sometimes', 'string']
         ];
     }
 }

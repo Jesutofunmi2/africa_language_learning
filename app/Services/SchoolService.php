@@ -18,9 +18,15 @@ class SchoolService
      */
     public function createSchool(array $data): School
     {
-        $school = new School;
+       
 
         DB::transaction(function () use (&$school, $data) {
+            $school = new School;
+            $mediaService = new MediaService;
+            if($data['image_url'] != null )
+            {
+                $mediaUrl = $mediaService->uploadImage($data['image_url']);
+            }
 
             $school->name = $data['name'];
             $school->country = $data['country'];
@@ -30,7 +36,7 @@ class SchoolService
             $school->school_name = $data['school_name'];
             $school->phone_number = $data['phone_number'];
             $school->no_of_pupil = $data['no_of_pupil'];
-            $school->image_url = $data['image_url'];
+            $school->image_url = $mediaUrl ?? null;
             $school->verification_token = md5($data['email']) . Str::random();
             $school->save();
 
@@ -85,25 +91,29 @@ class SchoolService
         return $school;
     }
 
-    public function update(SecondarySchool $secondary, array $data, $image = null, $schoolId): SecondarySchool
+    public function update(School $secondary, array $data, $image = null, $schoolId): School
     {
         $url = null;
-
+       
         if (!is_null($image)) {
             $mediaService = new MediaService;
-            $url = $mediaService->uploadImage($data['image_url']);
+            $url = $mediaService->uploadImage($image);
         }
-
+        
+        $school = School::where('id', $schoolId);
         // if user id in array, we create new edition for the user
-        $new_school = SecondarySchool::where('id', $schoolId)
+        $new_school = School::where('id', $schoolId)
             ->update([
-                'name' => $data['name'],
-                'address' => $data['address'],
-                'email' => $data['email'],
-                'state' => $data['state'],
-                'lga' => $data['lga'],
-                'type' => $data['type'],
-                'image_url' => $url ?? $secondary->image_url
+                'name' => $data['name']?? $school->name,
+                'school_name' => $data['school_name'] ?? $school->school_name,
+                'email' => $data['email'] ?? $school->email,
+                'state' => $data['state'] ?? $school->state,
+                'lga' => $data['lga'] ?? $school->lga,
+                'phone_number' => $data['phone_number'] ?? $school->phone_number,
+                'country' => $data['country'] ?? $school->country,
+                'type' => $data['type'] ?? $school->type,
+                'no_of_pupil' => $data['no_of_pupil']?? $school->no_of_pupil,
+                'image_url' => $url ?? $school->image_url
             ]);
 
         return $secondary;
@@ -114,6 +124,24 @@ class SchoolService
         $users = SecondarySchool::orderBy('created_at', 'desc')->paginate(15);
         return $users;
     }
+
+    public function schoolStatus($id)
+    {
+        $new_school = new School;
+        $school = School::whereId($id)->first();
+        if ($school->status == true) {
+            $new_school::whereId($id)->update([
+                'status' => false
+            ]);
+        } else {
+            $new_school::whereId($id)->update([
+                'status' => true
+            ]);
+        }
+
+        return $new_school;
+    }
+
 
     public function deleteSchool($schoolId): void
     {

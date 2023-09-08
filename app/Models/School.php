@@ -48,7 +48,9 @@ class School extends Authenticatable implements MustVerifyEmail
         'image_url',
         'email',
         'password',
-        'type'
+        'type',
+        'lga',
+        'state',
     ];
 
     /**

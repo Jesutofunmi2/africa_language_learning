@@ -52,8 +52,9 @@
                              <th>
                                 Email
                              </th>
+
                              <th>
-                                Type
+                                Time Left
                              </th>
                              <th>
                                 Image
@@ -81,8 +82,9 @@
                                     <td>
                                         {{ $school->email }}
                                     </td>
+
                                     <td>
-                                        {{ $school->type }}
+                                        {{substr( $school->future, 14) }}
                                     </td>
                                     <td>
                                         <img src="{{ asset($school->image_url) }}" width="40px" height="40px" />
@@ -96,12 +98,37 @@
                                         <a href="{{ route('admin.school.show', $school->id) }}" class="btn">Edit</a>
                                     </td>
                                     <td>
+                                        @if ($school->status == true)
+                                          
+                                            <form action="{{ route('admin.school.status', $school->id) }}"
+                                                onsubmit="return confirm('Are you sure you want to update status ?')"
+                                                method="get">
+                                                @csrf
+                                                @method('get')
+                                                
+                                                <input type="hidden" name="page" value="{{ $schools->currentPage() }}">
+                                               <button class="btn btn-success"  id="online">Online</button>
+                                            </form>
+                                        @else
+                                        
+                                            <form action="{{ route('admin.school.status', $school->id) }}"
+                                                onsubmit="return confirm('Are you sure you want to update status ?')"
+                                                method="get">
+                                                @csrf
+                                                @method('get')
+                                                <input type="hidden" name="page" value="{{ $schools->currentPage() }}">
+                                                <button class="btn btn-danger" type="submit">Offline</button>
+                                            </form>
+                                        @endif
+                                    </td>
+
+                                     {{-- <td>
                                         <form action="{{ route('admin.school.destroy', $school->id) }}" onsubmit="return confirm('Are you sure you want to delete School ?')" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger" type="submit">Delete</button>
                                         </form>
-                                    </td>
+                                     </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
