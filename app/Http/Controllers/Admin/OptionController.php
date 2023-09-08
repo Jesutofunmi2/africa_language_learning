@@ -57,7 +57,7 @@ class OptionController extends Controller
     public function update(EditOptionRequest $editoptionrequest, $questionId)
     {
 
-       
+
         $image = null;
         $media_url = null;
         Session::put('option_url', request()->fullUrl());
@@ -103,11 +103,11 @@ class OptionController extends Controller
 
         if ($request->option != '') {
             $options = Option::where('title', 'LIKE', '%' . $request->option . '%')->orderBy('title', 'desc')->get()->load('question', 'language');
-            
-            foreach ( $options  as $index=>$options ) {
+
+            foreach ($options  as $index => $options) {
                 $count = $index + 1;
-                $outputoption.=
-             '<tr>
+                $outputoption .=
+                    '<tr>
                <td> ' . $count . '</td>
                <td> ' . $options->title . '</td>
                <td> ' . $options->language->name . ' </td>
@@ -115,31 +115,31 @@ class OptionController extends Controller
                <td><a href="' . $options->media_url . '"> Media Link</a></td>
                <td><img src="' . asset($options->image_url) . '" width="40px" height="40px" /></td>
 
-               <td> '.'
-               <a href="options/is_correct/'.$options->id.'" class="btn btn-success">'.'Yes</a>
-                '.'</td>
+               <td> ' . '
+               <a href="options/is_correct/' . $options->id . '" class="btn btn-success">' . 'Yes</a>
+                ' . '</td>
 
-                <td> '.'
-                '.$options->created_at->diffForHumans() .'
-                '.'</td>
+                <td> ' . '
+                ' . $options->created_at->diffForHumans() . '
+                ' . '</td>
 
-                <td> '.'
-                <a href="options/'.$options->id.'" class="btn">'.'Edit</a>
-                '.'</td>
+                <td> ' . '
+                <a href="options/' . $options->id . '" class="btn">' . 'Edit</a>
+                ' . '</td>
 
-                <td> '.'
-                <a href="options/delete/'.$options->id.'" class="btn btn-danger">'.'Delete</a>
-                '.'</td>
+                <td> ' . '
+                <a href="options/delete/' . $options->id . '" class="btn btn-danger">' . 'Delete</a>
+                ' . '</td>
 
               </tr>';
             }
 
             return response($outputoption);
         } elseif ($request->search == '') {
-            return view('pages.admin.list-option', ['options' => $alloptions ]);
+            return view('pages.admin.list-option', ['options' => $alloptions]);
         }
 
-        return view('pages.admin.list-option', ['options' => $alloptions ]);
+        return view('pages.admin.list-option', ['options' => $alloptions]);
     }
 
     public function batch()

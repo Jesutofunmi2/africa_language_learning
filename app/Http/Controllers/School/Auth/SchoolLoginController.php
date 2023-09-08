@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Hash;
 class SchoolLoginController extends Controller
 {
     //
-    public function __construct(protected TokenService $service) {}
+    public function __construct(protected TokenService $service)
+    {
+    }
 
     public function __invoke(SchoolLoginRequest $request): JsonResponse
     {
@@ -37,10 +39,9 @@ class SchoolLoginController extends Controller
             'data' => $data,
             'token' => LoginResource::make($school->withAccessToken($token))
         ]);
-        
     }
 
-   
+
     protected function authenticateUser(SchoolLoginRequest $request): School
     {
         $data = $request->validated();
@@ -49,7 +50,7 @@ class SchoolLoginController extends Controller
 
         abort_if(is_null($school), 401, 'Incorrect login details');
 
-        if(! Hash::check($data['password'], $school->password)) {
+        if (!Hash::check($data['password'], $school->password)) {
             abort(401, 'Incorrect login details');
         }
 
