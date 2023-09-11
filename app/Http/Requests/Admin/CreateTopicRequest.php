@@ -26,10 +26,10 @@ class CreateTopicRequest extends FormRequest
     {
         return [
             'title' => ['string', 'required'],
-           // 'section_id' => ['sometimes', 'uuid'],
+            'section_id' => ['uuid', 'required', 'exists:sections,id'],
             'type' => ['sometimes', 'string'],
             'content' => ['sometimes', 'string'],
-            'question_type' => ['sometimes', 'required'],
+            'question_type' => ['string', 'required'],
             'objective' => ['sometimes', 'string'],
             'description' => ['string', 'sometimes'],
             'image_url' => 'sometimes|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg',
