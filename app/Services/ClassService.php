@@ -34,7 +34,9 @@ class ClassService
 
      public function deleteClass(array $data)
      {
-       $deleteClass = Classes::where('teacher_id',$data['teacher_id'])->where('school_id', $data['school_id'])->delete();
+       $deleteClass = Classes::where('teacher_id', $data['teacher_id'])
+                               ->where('school_id', $data['school_id'])
+                               ->where('name', $data['class_room_name'] )->delete();
 
        return $deleteClass;
      }

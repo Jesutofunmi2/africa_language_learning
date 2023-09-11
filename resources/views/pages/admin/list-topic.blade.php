@@ -50,6 +50,10 @@
                              <th>
                                 Sectional
                              </th>
+
+                             <th>
+                                Question Type
+                             </th>
                              <th>
                                 Section
                              </th>
@@ -81,6 +85,10 @@
                                     </td>
                                     <td>
                                         {{ $topic->type }}
+                                    </td>
+
+                                    <td>
+                                        {{ $topic->question_type }}
                                     </td>
                                     <td>
                                         {{ $topic->section->title??'' }}

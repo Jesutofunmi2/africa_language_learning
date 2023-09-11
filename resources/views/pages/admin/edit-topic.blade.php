@@ -79,6 +79,24 @@
                                     @endif 
                                 </div>
 
+                                <div class="row-12">
+                                    <div class="form-group">
+                                        <select name="question_type" class="form-control">
+                                            <option value="{{ old('question_type') }}">Question Type</option>
+                                                <option value="puzzle">Puzzle</option>
+                                                <option value="single">Single</option>
+                                                <option value="multiple">Multiple</option>
+                                           
+                                        </select>
+                                        <small>Note: don't leave blank, select Question type </small>
+                                    </div>
+                                    @if ($errors->has('question_type'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                            <strong>{{ $errors->first('question_type') }}</strong>
+                                        </span>
+                                    @endif 
+                                </div>
+
                                 <label class="col-md-3 col-form-label">{{ __('Content(Optional)') }}</label>
                                 <div class="row">
                                     <div class="col-md-12">

@@ -171,6 +171,7 @@ class ActivityService
         $topic->title = $data['title'];
         $topic->description = $data['description'];
         $topic->section_id = $data['section_id'];
+        $topic->question_type = $data['question_type'];
         $topic->content = $data['content']?? null;
         $topic->objective = $data['objective']?? null;
         $topic->type = $data['type'];
@@ -228,6 +229,7 @@ class ActivityService
                 'objective' => $data['objective'] ?? $topics->objective,
                 'section_id' => $data['section_id']?? $topics->section_id,
                 'type' => $data['type'] ?? $topics->type,
+                'question_type' => $data['question_type']?? $topic->question_type,
                 'image_url' => $mediaUrl,
                 'media_type' => $mediaType,
             ]);

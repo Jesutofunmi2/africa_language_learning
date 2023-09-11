@@ -24,13 +24,12 @@ class QuestionController extends Controller
                                         fn ($query) => $query->whereRelation('options', 'language_id', '=', $language_id)           
                                 )
                               ->get();
-        
         $data = QuestionResource::collection($question);
-
+       
         return response()->json(
             [
                 'message' => 'Get Question Successful.',
-                'data' => $data
+                'data' => $data,
             ],
             status: 200
         );
