@@ -28,7 +28,7 @@ class ClassWorksService
         return $classwork;
     }
 
-    public function showClassWork(array $data): ClassWork
+    public function showClassWork(array $data)
     {
        
         $classwork = ClassWork::where('teacher_id',$data['teacher_id'])
