@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ClassWorkRequest;
 use App\Http\Resources\ClassWorkResource;
-use App\Models\ClassWork;
 use App\Services\ClassWorkService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,6 +12,10 @@ use Illuminate\Http\Request;
 class ClassWorkController extends Controller
 {
     
+    /**
+     * Summary of __construct
+     * @param \App\Services\ClassWorkService $classworkService
+     */
     public function __construct(protected ClassWorkService $classworkService)
     {
         // $this->middleware('auth');
