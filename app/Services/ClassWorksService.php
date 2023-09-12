@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\ClassWork;
 use Illuminate\Support\Facades\DB;
 
-class ClassWorkService
+class ClassWorksService
 {
     public function createClasswork(array $data): ClassWork
     {
