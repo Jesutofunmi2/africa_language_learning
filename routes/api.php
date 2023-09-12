@@ -24,6 +24,7 @@ use App\Http\Controllers\Student\Auth\CreateStudentController;
 use App\Http\Controllers\Teacher\Auth\CreateTeacherController;
 use App\Http\Controllers\Api\TeacherController;
 use App\Http\Controllers\Api\ClassController;
+use App\Http\Controllers\Api\ClassWorkController;
 use App\Models\QuestionAnswered;
 
 /*
@@ -100,6 +101,11 @@ Route::prefix('/v1')
                 Route::post('/addClass', [ClassController::class, 'createClass'])->name('createClass');
                 Route::get('/showClass', [ClassController::class, 'show'])->name('showClass');
                 Route::delete('/deleteClass', [ClassController::class, 'delete'])->name('deleteClass');
+
+                //classwork endpoint
+                Route::post('/addClassWork', [ClassWorkController::class, 'createClassWork'])->name('createClassWork');
+                Route::get('/ClassWork', [ClassWorkController::class, 'list'])->name('getClassWork');
+                Route::delete('/deleteClassWork', [ClassWorkController::class, 'delete'])->name('deleteClassWork');
                 
                 // Question Answered
                 Route::post('/questionAnswered', [QuestionAnsweredController::class, 'create'])->name('questionAnswered.create');
