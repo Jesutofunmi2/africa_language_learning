@@ -10,7 +10,9 @@ use Illuminate\Http\JsonResponse;
 class SchoolLogoutController extends Controller
 {
     //
-    public function __construct(protected \App\Services\TokenService $service) {}
+    public function __construct(protected \App\Services\TokenService $service)
+    {
+    }
 
     public function __invoke(Request $request): JsonResponse
     {

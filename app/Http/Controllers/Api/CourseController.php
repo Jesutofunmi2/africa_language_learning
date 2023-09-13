@@ -41,6 +41,4 @@ class CourseController extends Controller
             status: 200
         );
     }
-
-
 }

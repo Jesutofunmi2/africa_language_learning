@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'topic'
+    'elementActive' => 'topic',
 ])
 @section('content')
     <div class="content">
@@ -12,7 +12,8 @@
                             <h4 class="card-title">{{ __('Create Topic') }}</h4>
                         </div>
                         <div class="card-body">
-                            <form class="form" method="POST" action="{{ route('admin.topic.create') }}" enctype="multipart/form-data">
+                            <form class="form" method="POST" action="{{ route('admin.topic.create') }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="input-group{{ $errors->has('title') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
@@ -20,7 +21,8 @@
                                             <i class="nc-icon nc-box-2"></i>
                                         </span>
                                     </div>
-                                    <input name="title" type="text" class="form-control" placeholder="name" value="{{ old('title') }}" required autofocus>
+                                    <input name="title" type="text" class="form-control" placeholder="name"
+                                        value="{{ old('title') }}" required autofocus>
                                     @if ($errors->has('title'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('title') }}</strong>
@@ -55,17 +57,17 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('section_id') }}</strong>
                                         </span>
-                                    @endif 
+                                    @endif
                                 </div>
 
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="question_type" class="form-control">
                                             <option value="{{ old('question_type') }}">Question Type</option>
-                                                <option value="puzzle">Puzzle</option>
-                                                <option value="single">Single</option>
-                                                <option value="multiple">Multiple</option>
-                                           
+                                            <option value="puzzle">Puzzle</option>
+                                            <option value="single">Single</option>
+                                            <option value="multiple">Multiple</option>
+
                                         </select>
                                         <small>Note: don't leave blank, select Question type </small>
                                     </div>
@@ -73,16 +75,16 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('question_type') }}</strong>
                                         </span>
-                                    @endif 
+                                    @endif
                                 </div>
 
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="type" class="form-control">
                                             <option value="{{ old('type') }}">Select Type</option>
-                                                <option value="sectional">Sectional</option>
-                                                <option value="standalone">StandAlone</option>
-                                           
+                                            <option value="sectional">Sectional</option>
+                                            <option value="standalone">StandAlone</option>
+
                                         </select>
                                         <small>Note: don't leave blank, select type </small>
                                     </div>
@@ -90,7 +92,7 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('type') }}</strong>
                                         </span>
-                                    @endif 
+                                    @endif
                                 </div>
 
                                 <label class="col-md-3 col-form-label">{{ __('Content(Optional)') }}</label>
@@ -122,12 +124,13 @@
                                 </div>
 
                                 <label class="col-md-3 col-form-label">{{ __('Media Url') }}</label>
-                                <input type="file" value="{{ old('image_url') }}" name="image_url" accept="image/*,audio/*,video/*"  class="form-control" />
-                                      @if ($errors->has('image_url'))
-                                            <span class="invalid-feedback" style="display: block;" role="alert">
-                                                <strong>{{ $errors->first('image_url') }}</strong>
-                                            </span>
-                                        @endif
+                                <input type="file" value="{{ old('image_url') }}" name="image_url"
+                                    accept="image/*,audio/*,video/*" class="form-control" />
+                                @if ($errors->has('image_url'))
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('image_url') }}</strong>
+                                    </span>
+                                @endif
 
 
                                 <div class="card-footer ">
@@ -137,13 +140,13 @@
                         </div>
                     </div>
                 </div>
-             </div>
+            </div>
         </div>
-     </div> 
-     @if (count($errors) > 0)
-     <script>
-         document.getElementById('form-body').classList.remove('invisible');
-         document.getElementById("form-container").scrollIntoView(true);
-     </script>
- @endif
+    </div>
+    @if (count($errors) > 0)
+        <script>
+            document.getElementById('form-body').classList.remove('invisible');
+            document.getElementById("form-container").scrollIntoView(true);
+        </script>
+    @endif
 @endsection

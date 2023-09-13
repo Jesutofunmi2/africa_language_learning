@@ -36,7 +36,7 @@ class AdminActivityController extends Controller
     }
 
 
-     /**
+    /**
      * Create Activity Method.
      * 
      * This method handles creating of activity.
@@ -49,10 +49,10 @@ class AdminActivityController extends Controller
     {
         $activities_count = Activity::whereDate('date', $request->date)->count();
 
-        if($activities_count >= config('app.max_activities_per_day')) {
+        if ($activities_count >= config('app.max_activities_per_day')) {
             return back()->with('error', 'You can not add more than per day activity set');
         }
-        
+
         $image = $request->image;
 
         $this->service->createActivity($request->validated(), $image);
@@ -89,11 +89,13 @@ class AdminActivityController extends Controller
     {
         $users = Admin::where('is_admin', true)->get();
         $types = Activity::TYPES;
-        
-        return view('pages.admin.edit-activity')->with([
-            'activity' => $activity,
-            'users' => $users,
-            'types' => $types]
+
+        return view('pages.admin.edit-activity')->with(
+            [
+                'activity' => $activity,
+                'users' => $users,
+                'types' => $types
+            ]
         );
     }
 
@@ -111,14 +113,14 @@ class AdminActivityController extends Controller
     {
         $image = null;
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $image = $request->image;
         }
 
         $this->service->updateActivity($activity, $request->validated(), $image);
 
         return redirect()->route('admin.activity.list')
-                ->with('success', 'Activity updated successfully');
+            ->with('success', 'Activity updated successfully');
     }
 
     /**
@@ -130,12 +132,12 @@ class AdminActivityController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * 
      */
-    
+
     public function destroy(Activity $activity): RedirectResponse
     {
         $this->service->deleteActivity($activity);
 
         return redirect()->route('admin.activity.list')
-                ->with('success', 'Activity deleted successfully');
+            ->with('success', 'Activity deleted successfully');
     }
 }

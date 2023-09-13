@@ -22,7 +22,7 @@ class ClassController extends Controller
 
         $classes = $this->classService->createClass($classrequest->validated());
 
-        abort_if(is_null($classes ), 204, 'Invalid Content or Parameter');
+        abort_if(is_null($classes), 204, 'Invalid Content or Parameter');
         $data = ClassResource::make($classes);
         return response()->json(
             [
@@ -51,13 +51,12 @@ class ClassController extends Controller
     {
         $deleteClass = $this->classService->deleteClass($classrequest->validated());
         abort_if(is_null($deleteClass), 204, 'Invalid Content or Parameter');
-    
+
         return response()->json(
             [
-                'message' => 'Delete successful.',   
+                'message' => 'Delete successful.',
             ],
             status: 202
         );
     }
-
 }

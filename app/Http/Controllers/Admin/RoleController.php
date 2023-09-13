@@ -11,9 +11,9 @@ class RoleController extends Controller
 {
     public function index()
     {
-        return view ('pages.role.create-role');
+        return view('pages.role.create-role');
     }
-    
+
 
     public function create(Request $request)
     {
@@ -40,13 +40,12 @@ class RoleController extends Controller
 
     public function update(Request $request, $roleId)
     {
-        
+
         $validated = $request->validate(['name' => ['required', 'min:3']]);
         $role = Role::where('id', $roleId)->first();
         $role->update($validated);
         return redirect()->route('admin.role.list')
-        ->with('success', 'Role updated successfully');
-        
+            ->with('success', 'Role updated successfully');
     }
 
     public function destroy(Role $role)
@@ -58,7 +57,7 @@ class RoleController extends Controller
 
     public function givePermission(Request $request, Role $role)
     {
-        if($role->hasPermissionTo($request->permission)){
+        if ($role->hasPermissionTo($request->permission)) {
             return back()->with('message', 'Permission exists.');
         }
         $role->givePermissionTo($request->permission);
@@ -67,11 +66,10 @@ class RoleController extends Controller
 
     public function revokePermission(Role $role, Permission $permission)
     {
-        if($role->hasPermissionTo($permission)){
+        if ($role->hasPermissionTo($permission)) {
             $role->revokePermissionTo($permission);
             return back()->with('message', 'Permission revoked.');
         }
         return back()->with('message', 'Permission not exists.');
     }
-
 }

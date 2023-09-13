@@ -36,12 +36,12 @@ class QuestionController extends Controller
 
     public function create(CreateQuestionRequest $createQuestionRequest): RedirectResponse
     {
-       // dd($createQuestionRequest['addMoreInputFields']);
+        // dd($createQuestionRequest['addMoreInputFields']);
         $validated = $createQuestionRequest->safe()->only(['addMoreInputFields']);
         if ($this->service->questionNameExists($validated) == true) {
             return redirect()->route('admin.question.list')->with('danger', 'You can not add same Question');
         }
-      
+
         $this->service->createQuestion($createQuestionRequest->validated());
 
         return redirect()->route('admin.question.list')->with('success', 'Question created successfully');
@@ -68,7 +68,7 @@ class QuestionController extends Controller
     {
         $image = null;
         $media_url = null;
-       // $allquestions = Question::orderBy('created_at', 'desc')->get();
+        // $allquestions = Question::orderBy('created_at', 'desc')->get();
 
         if ($createquestionrequest->hasFile('image_url')) {
             $image = $createquestionrequest->image_url;
@@ -83,7 +83,7 @@ class QuestionController extends Controller
         //     return redirect(session(key: 'question_url'))->with('success', 'Question updated successfully');
         // }
 
-       // return view('pages.admin.list-question', ['questions' => $allquestions]);
+        // return view('pages.admin.list-question', ['questions' => $allquestions]);
         return redirect()->route('admin.question.list')
             ->with('success', 'Question updated successfully');
     }
@@ -105,7 +105,7 @@ class QuestionController extends Controller
             foreach ($questions as $index => $questions) {
                 $count = $index + 1;
                 $output .=
-             '<tr>
+                    '<tr>
                <td> ' . $count . '</td>
                <td> ' . $questions->title . '</td>
                <td> ' . $questions->topic->title . ' </td>
@@ -113,21 +113,21 @@ class QuestionController extends Controller
                <td><a href="' . $questions->media_url . '"> Media Link</a></td>
                <td><img src="' . asset($questions->image_url) . '" width="40px" height="40px" /></td>
 
-               <td> '.'
-               <a href="questions/status/'.$questions->id.'" class="btn btn-success">'.'Online</a>
-                '.'</td>
+               <td> ' . '
+               <a href="questions/status/' . $questions->id . '" class="btn btn-success">' . 'Online</a>
+                ' . '</td>
 
-                <td> '.'
-                '.$questions->created_at->diffForHumans() .'
-                '.'</td>
+                <td> ' . '
+                ' . $questions->created_at->diffForHumans() . '
+                ' . '</td>
 
-                <td> '.'
-                <a href="questions/'.$questions->id.'" class="btn">'.'Edit</a>
-                '.'</td>
+                <td> ' . '
+                <a href="questions/' . $questions->id . '" class="btn">' . 'Edit</a>
+                ' . '</td>
 
-                <td> '.'
-                <a href="questions/delete/'.$questions->id.'" class="btn btn-danger">'.'Delete</a>
-                '.'</td>
+                <td> ' . '
+                <a href="questions/delete/' . $questions->id . '" class="btn btn-danger">' . 'Delete</a>
+                ' . '</td>
 
               </tr>';
             }

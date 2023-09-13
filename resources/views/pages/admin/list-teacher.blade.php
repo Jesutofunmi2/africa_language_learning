@@ -1,12 +1,12 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'profile'
+    'elementActive' => 'profile',
 ])
 
 @section('content')
     <div class="content">
-        
-        <a href="{{ route('admin.teacher.index')}}" style="float: right">
+
+        <a href="{{ route('admin.teacher.index') }}" style="float: right">
             <p>{{ __('Add') }}</p>
         </a>
         @if (session('success'))
@@ -25,24 +25,24 @@
                             <th>
                                 Name
                             </th>
-                             <th>
+                            <th>
                                 School Name
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Address
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Image
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Date
-                             </th>
+                            </th>
                             <th>
                                 Action
                             </th>
                         </thead>
                         <tbody>
-                            
+
                             @foreach ($teachers as $teacher)
                                 <tr>
                                     <td>
@@ -52,25 +52,27 @@
                                         {{ $teacher->name }}
                                     </td>
                                     <td>
-                                        {{ $teacher->school->name?? '' }}
+                                        {{ $teacher->school->name ?? '' }}
                                     </td>
                                     <td>
                                         {{ $teacher->address }}
                                     </td>
-                                  
+
                                     <td>
                                         <img src="{{ asset($teacher->image_url) }}" width="40px" height="40px" />
                                     </td>
-        
+
                                     <td>
                                         {{ $teacher->created_at->diffForHumans() }}
                                     </td>
-                              
+
                                     <td>
                                         <a href="{{ route('admin.teacher.show', $teacher->id) }}" class="btn">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('admin.teacher.destroy', $teacher->id) }}" onsubmit="return confirm('Are you sure you want to delete Teacher ?')" method="post">
+                                        <form action="{{ route('admin.teacher.destroy', $teacher->id) }}"
+                                            onsubmit="return confirm('Are you sure you want to delete Teacher ?')"
+                                            method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger" type="submit">Delete</button>

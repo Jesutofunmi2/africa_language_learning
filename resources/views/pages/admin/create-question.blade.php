@@ -1,19 +1,20 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'question'
+    'elementActive' => 'question',
 ])
 @section('content')
     <div class="content">
         <div class="container">
             <div class="row">
-            
+
                 <div class="col-lg-8 col-md-8 offset-2 mr-auto">
                     <div class="card card-signup text-center">
                         <div class="card-header ">
                             <h4 class="card-title">{{ __('Create Question') }}</h4>
                         </div>
                         <div class="card-body ">
-                            <form class="form" method="POST" action="{{ route('admin.question.create') }}" enctype="multipart/form-data">
+                            <form class="form" method="POST" action="{{ route('admin.question.create') }}"
+                                enctype="multipart/form-data">
                                 @csrf
 
                                 <table class="table table-bordered" id="dynamicAddRemove">
@@ -50,7 +51,7 @@
                                             <td>
 
 
-                                                    <textarea name="addMoreInputFields[0][instruction]" class="form-control" placeholder="Instruction"> {{ old('instruction') }} </textarea>
+                                                <textarea name="addMoreInputFields[0][instruction]" class="form-control" placeholder="Instruction"> {{ old('instruction') }} </textarea>
                                             </td>
                                             <td> <button type="button" name="add" id="dynamic-ar-instruction"
                                                     class="btn btn-outline-primary"> Add</button></td>
@@ -64,9 +65,9 @@
                                     </tr>
                                 </table>
 
-                                
-                                
-            
+
+
+
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="language_id" class="form-control">
@@ -81,7 +82,7 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('language_id') }}</strong>
                                         </span>
-                                   @endif 
+                                    @endif
                                 </div>
 
                                 <div class="row-12">
@@ -98,18 +99,18 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('topic_id') }}</strong>
                                         </span>
-                                    @endif 
+                                    @endif
                                 </div>
-                                
+
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="answered_type" class="form-control">
                                             <option value="{{ old('answered_type') }}">Select Answered Type</option>
-                                                <option value="single">Single</option>
-                                                <option value="multiple">Multiple</option>
-                                                <option value="puzzle">Puzzle</option>
-                                                <option value="text">Text</option>
-                                           
+                                            <option value="single">Single</option>
+                                            <option value="multiple">Multiple</option>
+                                            <option value="puzzle">Puzzle</option>
+                                            <option value="text">Text</option>
+
                                         </select>
                                         <small>Note: don't leave blank, select Answered Type </small>
                                     </div>
@@ -117,7 +118,7 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('answered_type') }}</strong>
                                         </span>
-                                    @endif 
+                                    @endif
                                 </div>
 
 
@@ -130,18 +131,19 @@
                                     <tr>
                                         <div class="input-group{{ $errors->has('image_url') ? ' has-danger' : '' }}">
                                             <td>
-                                                <input type="file" value="{{ old('image_url') }}" name="addMoreInputFields[0][image_url]"
-                                                placeholder="Select Image" accept="image/*" class="form-control" />
+                                                <input type="file" value="{{ old('image_url') }}"
+                                                    name="addMoreInputFields[0][image_url]" placeholder="Select Image"
+                                                    accept="image/*" class="form-control" />
                                             </td>
                                             <td> <button type="button" name="add" id="dynamic-ar-image"
                                                     class="btn btn-outline-primary"> Add</button></td>
 
-                                                    @if ($errors->has('image_url'))
-                                                    <span class="invalid-feedback" style="display: block; border:30px"
-                                                        role="alert">
-                                                        <strong>{{ $errors->first('image_url') }}</strong>
-                                                    </span>
-                                                @endif
+                                            @if ($errors->has('image_url'))
+                                                <span class="invalid-feedback" style="display: block; border:30px"
+                                                    role="alert">
+                                                    <strong>{{ $errors->first('image_url') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </tr>
                                 </table>
@@ -155,23 +157,23 @@
                                     <tr>
                                         <div class="input-group{{ $errors->has('media_url') ? ' has-danger' : '' }}">
                                             <td>
-                                                <input type="file" value="{{ old('media_url') }}" name="addMoreInputFields[0][media_url]"
-                                                placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"
-                                                class="form-control" />
+                                                <input type="file" value="{{ old('media_url') }}"
+                                                    name="addMoreInputFields[0][media_url]" placeholder="Select Audio/Video"
+                                                    accept="image/*,audio/*,video/*" class="form-control" />
                                             </td>
                                             <td> <button type="button" name="add" id="dynamic-ar-media"
                                                     class="btn btn-outline-primary"> Add </button></td>
 
-                                                    @if ($errors->has('media_url'))
-                                                    <span class="invalid-feedback" style="display: block; border:30px"
-                                                        role="alert">
-                                                        <strong>{{ $errors->first('media_url') }}</strong>
-                                                    </span>
-                                                @endif
+                                            @if ($errors->has('media_url'))
+                                                <span class="invalid-feedback" style="display: block; border:30px"
+                                                    role="alert">
+                                                    <strong>{{ $errors->first('media_url') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </tr>
                                 </table>
-                                        
+
                                 <div class="card-footer ">
                                     <button type="submit" class="btn btn-info btn-round">{{ __('Upload') }}</button>
                                 </div>
@@ -179,10 +181,10 @@
                         </div>
                     </div>
                 </div>
-             </div>
+            </div>
         </div>
-     </div> 
-     <script type="text/javascript">
+    </div>
+    <script type="text/javascript">
         var i = 0;
         var ii = 0;
         var iii = 0;

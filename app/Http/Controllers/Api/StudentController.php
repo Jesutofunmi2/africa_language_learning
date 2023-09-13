@@ -16,7 +16,7 @@ class StudentController extends Controller
 
     public function __construct(protected StudentService $studentService)
     {
-       // $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     // Get student by school Id
@@ -71,7 +71,7 @@ class StudentController extends Controller
     {
         $student_id = $studentRequest->student_id;
         $this->studentService->deleteStudent($student_id);
-       
+
         return response()->json(
             [
                 'message' => 'Student Deleted Successful.',

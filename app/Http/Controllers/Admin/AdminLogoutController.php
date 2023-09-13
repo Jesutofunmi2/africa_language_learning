@@ -1,5 +1,5 @@
 <?php
- 
+
 namespace App\Http\Controllers\Admin;
 
 use App\Services\TokenService;
@@ -10,9 +10,11 @@ use Illuminate\Http\RedirectResponse;
 class AdminLogoutController extends Controller
 {
 
-    public function __construct(protected TokenService $service) {}
+    public function __construct(protected TokenService $service)
+    {
+    }
 
-   /**
+    /**
      * Logout method
      *
      * This method handles logging an admin out

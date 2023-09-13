@@ -1,19 +1,20 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'question'
+    'elementActive' => 'question',
 ])
 @section('content')
     <div class="content">
         <div class="container">
             <div class="row">
-            
+
                 <div class="col-lg-8 col-md-8 offset-2 mr-auto">
                     <div class="card card-signup text-center">
                         <div class="card-header ">
                             <h4 class="card-title">{{ __('Edit Question') }}</h4>
                         </div>
                         <div class="card-body ">
-                            <form class="form" method="POST" action="{{ route('admin.question.update', $question->id ) }}" enctype="multipart/form-data">
+                            <form class="form" method="POST" action="{{ route('admin.question.update', $question->id) }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
                                 <div class="input-group{{ $errors->has('title') ? ' has-danger' : '' }}">
@@ -22,7 +23,8 @@
                                             <i class="nc-icon nc-box-2"></i>
                                         </span>
                                     </div>
-                                    <input name="title" type="text" class="form-control" placeholder="Title" value="{{ old('title') ?? $question->title }}" required autofocus>
+                                    <input name="title" type="text" class="form-control" placeholder="Title"
+                                        value="{{ old('title') ?? $question->title }}" required autofocus>
                                     @if ($errors->has('title'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('title') }}</strong>
@@ -42,12 +44,13 @@
                                         @endif
                                     </div>
                                 </div>
-                                
-            
+
+
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="language_id" class="form-control">
-                                            <option value="{{ old('language_id') ?? $question->language->id  }}"> {{ $question->language->name }} </option>
+                                            <option value="{{ old('language_id') ?? $question->language->id }}">
+                                                {{ $question->language->name }} </option>
                                             @foreach ($languages as $language)
                                                 <option value="{{ $language->id }}">{{ $language->name }}</option>
                                             @endforeach
@@ -58,13 +61,14 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('language_id') }}</strong>
                                         </span>
-                                   @endif 
+                                    @endif
                                 </div>
 
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="topic_id" class="form-control">
-                                            <option value="{{ old('topic_id') ?? $question->topic->id  }}"> {{ $question->topic->title }}</option>
+                                            <option value="{{ old('topic_id') ?? $question->topic->id }}">
+                                                {{ $question->topic->title }}</option>
                                             @foreach ($topics as $topic)
                                                 <option value="{{ $topic->id }}">{{ $topic->title }}</option>
                                             @endforeach
@@ -75,18 +79,19 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('topic_id') }}</strong>
                                         </span>
-                                    @endif 
+                                    @endif
                                 </div>
-                                
+
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="answered_type" class="form-control">
-                                            <option value="{{ old('answered_type') ?? $question->answered_type }}">{{ $question->answered_type }}</option>
-                                                <option value="single">Single</option>
-                                                <option value="multiple">Multiple</option>
-                                                <option value="puzzle">Puzzle</option>
-                                                <option value="text">Text</option>
-                                           
+                                            <option value="{{ old('answered_type') ?? $question->answered_type }}">
+                                                {{ $question->answered_type }}</option>
+                                            <option value="single">Single</option>
+                                            <option value="multiple">Multiple</option>
+                                            <option value="puzzle">Puzzle</option>
+                                            <option value="text">Text</option>
+
                                         </select>
                                         <small>Note: don't leave blank, select Answered Type </small>
                                     </div>
@@ -94,28 +99,32 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('answered_type') }}</strong>
                                         </span>
-                                    @endif 
+                                    @endif
                                 </div>
 
 
                                 <label class="col-md-3 col-form-label">{{ __('Media Upload') }}</label>
-                                <input type="file" value="{{ old('media_url')  }}" name="media_url"  placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"   class="form-control" />
+                                <input type="file" value="{{ old('media_url') }}" name="media_url"
+                                    placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"
+                                    class="form-control" />
                                 @if ($errors->has('media_url'))
-                                <span class="invalid-feedback" style="display: block; border:30px" role="alert">
-                                    <strong>{{ $errors->first('media_url') }}</strong>
-                                </span>
-                               @endif
-                               <a href="{{ $question->media_url }}"> Media Link </a>
+                                    <span class="invalid-feedback" style="display: block; border:30px" role="alert">
+                                        <strong>{{ $errors->first('media_url') }}</strong>
+                                    </span>
+                                @endif
+                                <a href="{{ $question->media_url }}"> Media Link </a>
 
                                 <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
-                                <input type="file" value="{{ old('image_url') }}" name="image_url"  placeholder="Select Image"  accept="image/*"  class="form-control" />
-                                      @if ($errors->has('image_url'))
-                                            <span class="invalid-feedback" style="display: block; border:30px" role="alert">
-                                                <strong>{{ $errors->first('image_url') }}</strong>
-                                            </span>
-                                        @endif
-                                        <img src="{{ asset($question->image_url) }}" width="200px" height="200px" alt="" srcset="">
-                               
+                                <input type="file" value="{{ old('image_url') }}" name="image_url"
+                                    placeholder="Select Image" accept="image/*" class="form-control" />
+                                @if ($errors->has('image_url'))
+                                    <span class="invalid-feedback" style="display: block; border:30px" role="alert">
+                                        <strong>{{ $errors->first('image_url') }}</strong>
+                                    </span>
+                                @endif
+                                <img src="{{ asset($question->image_url) }}" width="200px" height="200px" alt=""
+                                    srcset="">
+
                                 <div class="card-footer ">
                                     <button type="submit" class="btn btn-info btn-round">{{ __('Update') }}</button>
                                 </div>
@@ -123,13 +132,13 @@
                         </div>
                     </div>
                 </div>
-             </div>
+            </div>
         </div>
-     </div> 
-     @if (count($errors) > 0)
-     <script>
-         document.getElementById('form-body').classList.remove('invisible');
-         document.getElementById("form-container").scrollIntoView(true);
-     </script>
- @endif
+    </div>
+    @if (count($errors) > 0)
+        <script>
+            document.getElementById('form-body').classList.remove('invisible');
+            document.getElementById("form-container").scrollIntoView(true);
+        </script>
+    @endif
 @endsection

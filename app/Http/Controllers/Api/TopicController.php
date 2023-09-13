@@ -27,7 +27,7 @@ class TopicController extends Controller
 
     public function type(TopicRequest $topicRequest)
     {
-        $type= $topicRequest->type;
+        $type = $topicRequest->type;
         $topics = Topic::query()->orderBy('created_at', 'asc')->where('type', $type)->get();
         $data = TopicResource::collection($topics);
 

@@ -23,21 +23,21 @@ class TopicController extends Controller
     {
         $languages = Language::get();
         $sections = Section::all();
-        return view('pages.admin.create-topic', ['languages' => $languages, 'sections'=>$sections]);
+        return view('pages.admin.create-topic', ['languages' => $languages, 'sections' => $sections]);
     }
 
     public function create(CreateTopicRequest $createTopicRequest): RedirectResponse
     {
 
-     $this->service->createTopic($createTopicRequest->validated());
- 
-     return redirect()->route('admin.topic.list')->with('success', 'Topic created successfully');
+        $this->service->createTopic($createTopicRequest->validated());
+
+        return redirect()->route('admin.topic.list')->with('success', 'Topic created successfully');
     }
 
-    public function list(Request $request):View
+    public function list(Request $request): View
     {
-     $topics = Topic::orderBy('created_at', 'desc')->paginate(40);
-     return view('pages.admin.list-topic')->with('topics', $topics);
+        $topics = Topic::orderBy('created_at', 'desc')->paginate(40);
+        return view('pages.admin.list-topic')->with('topics', $topics);
     }
 
     public function show($topicId)
@@ -64,8 +64,8 @@ class TopicController extends Controller
     public function destroy(Topic $topic): RedirectResponse
     {
         $this->service->deleteTopic($topic);
- 
+
         return redirect()->route('admin.topic.list')
-                ->with('success', 'deleted successfully');
+            ->with('success', 'deleted successfully');
     }
 }

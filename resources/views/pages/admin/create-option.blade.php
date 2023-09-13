@@ -114,18 +114,19 @@
                                     <tr>
                                         <div class="input-group{{ $errors->has('image_url') ? ' has-danger' : '' }}">
                                             <td>
-                                                <input type="file" value="{{ old('image_url') }}" name="addMoreInputFields[0][image_url]"
-                                                placeholder="Select Image" accept="image/*" class="form-control" />
+                                                <input type="file" value="{{ old('image_url') }}"
+                                                    name="addMoreInputFields[0][image_url]" placeholder="Select Image"
+                                                    accept="image/*" class="form-control" />
                                             </td>
                                             <td> <button type="button" name="add" id="dynamic-ar-image"
                                                     class="btn btn-outline-primary"> Add Image</button></td>
 
-                                                    @if ($errors->has('image_url'))
-                                                    <span class="invalid-feedback" style="display: block; border:30px"
-                                                        role="alert">
-                                                        <strong>{{ $errors->first('image_url') }}</strong>
-                                                    </span>
-                                                @endif
+                                            @if ($errors->has('image_url'))
+                                                <span class="invalid-feedback" style="display: block; border:30px"
+                                                    role="alert">
+                                                    <strong>{{ $errors->first('image_url') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </tr>
                                 </table>
@@ -139,19 +140,19 @@
                                     <tr>
                                         <div class="input-group{{ $errors->has('media_url') ? ' has-danger' : '' }}">
                                             <td>
-                                                <input type="file" value="{{ old('media_url') }}" name="addMoreInputFields[0][media_url]"
-                                                placeholder="Select Audio/Video" accept="image/*,audio/*,video/*"
-                                                class="form-control" />
+                                                <input type="file" value="{{ old('media_url') }}"
+                                                    name="addMoreInputFields[0][media_url]" placeholder="Select Audio/Video"
+                                                    accept="image/*,audio/*,video/*" class="form-control" />
                                             </td>
                                             <td> <button type="button" name="add" id="dynamic-ar-media"
                                                     class="btn btn-outline-primary"> Add Media</button></td>
 
-                                                    @if ($errors->has('media_url'))
-                                                    <span class="invalid-feedback" style="display: block; border:30px"
-                                                        role="alert">
-                                                        <strong>{{ $errors->first('media_url') }}</strong>
-                                                    </span>
-                                                @endif
+                                            @if ($errors->has('media_url'))
+                                                <span class="invalid-feedback" style="display: block; border:30px"
+                                                    role="alert">
+                                                    <strong>{{ $errors->first('media_url') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </tr>
                                 </table>

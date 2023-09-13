@@ -1,5 +1,5 @@
 <?php
- 
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -15,7 +15,6 @@ class AdminLoginController extends Controller
 
     public function __construct()
     {
-
     }
     /**
      * Admin Login Page.
@@ -30,7 +29,7 @@ class AdminLoginController extends Controller
         return view('auth.login');
     }
 
-     /**
+    /**
      * Admin Login Method.
      * 
      * This method handles an admin authentication attempt.
@@ -44,14 +43,14 @@ class AdminLoginController extends Controller
         $data = $request->validated();
 
 
-        if (! Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+        if (!Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
 
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
         }
-    
-       
+
+
         return redirect()->route('admin.dashboard');
     }
 }

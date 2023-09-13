@@ -21,8 +21,8 @@
                                         <select name="school_id" class="form-control">
                                             <option value="{{ old('school') }}">Select School</option>
                                             @foreach ($schools as $school)
-                                            <option value="{{ $school->id }}">{{ $school->name }}</option>
-                                             @endforeach
+                                                <option value="{{ $school->id }}">{{ $school->name }}</option>
+                                            @endforeach
 
                                         </select>
                                         <small>Note: don't leave blank, select School </small>
@@ -67,7 +67,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="address" class="form-control" placeholder="Address"> {{ old('aaddress') ?? 'Address'}} </textarea>
+                                            <textarea name="address" class="form-control" placeholder="Address"> {{ old('aaddress') ?? 'Address' }} </textarea>
                                         </div>
                                         @if ($errors->has('address'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">

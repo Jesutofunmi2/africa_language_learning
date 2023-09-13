@@ -1,5 +1,5 @@
 <?php
- 
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\RegisterUserRequest;
@@ -23,7 +23,7 @@ class AdminRegisterController extends Controller
         $this->middleware('auth');
     }
 
-   /**
+    /**
      * Admin Register Page.
      * 
      * This method return a view for admin register.
@@ -38,7 +38,7 @@ class AdminRegisterController extends Controller
         return view('pages.admin.create-admin');
     }
 
-     /**
+    /**
      * Admin Login Method.
      * 
      * This method handles an admin authentication attempt.
@@ -49,10 +49,10 @@ class AdminRegisterController extends Controller
      */
     public function register(CreateAdminRequest $request): RedirectResponse
     {
-       
+
         $user = $this->userService->createAdmin($request->validated());
-    
-       // auth()->login($user);
+
+        // auth()->login($user);
 
         return redirect()->route('admin.users.list')->with('success', 'Admin user created');
     }
@@ -74,15 +74,14 @@ class AdminRegisterController extends Controller
 
     public function update()
     {
-
     }
 
     public function destroy($id)
     {
-         $this->userService->deleteAdmin($id);
+        $this->userService->deleteAdmin($id);
 
-         return redirect()->route('admin.users.list')
-             ->with('success', 'deleted successfully');
+        return redirect()->route('admin.users.list')
+            ->with('success', 'deleted successfully');
     }
 
     public function assignRole(Request $request, Admin $user)
@@ -122,5 +121,4 @@ class AdminRegisterController extends Controller
         }
         return back()->with('message', 'Permission does not exists.');
     }
-
 }

@@ -18,7 +18,7 @@ class ClassWorkController extends Controller
     public function createClassWork(ClassWorkRequest $classworkrequest)
     {
         $classwork = $this->classworkService->createClassWork($classworkrequest->validated());
-        abort_if(is_null($classwork ), 204, 'Invalid Content or Parameter');
+        abort_if(is_null($classwork), 204, 'Invalid Content or Parameter');
         $data = ClassWorkResource::make($classwork);
         return response()->json(
             [
@@ -48,10 +48,10 @@ class ClassWorkController extends Controller
         $deleteClassWork = $this->classworkService->deleteClassWork($classworkrequest->validated());
 
         abort_if($deleteClassWork == 0, 204, 'Invalid Content or Parameter');
-    
+
         return response()->json(
             [
-                'message' => 'Delete successful.',   
+                'message' => 'Delete successful.',
             ],
             status: 202
         );

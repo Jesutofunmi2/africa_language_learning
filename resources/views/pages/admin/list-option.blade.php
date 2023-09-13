@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'profile'
+    'elementActive' => 'profile',
 ])
 
 @section('content')
@@ -10,19 +10,19 @@
 
             </div>
             <div class="col-2">
-            <form>
-                <div class="input-group no-border">
-                    <input type="search" class="form-control" placeholder="Search..." name="searchoption" id="searchOption">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <i class="nc-icon nc-zoom-split"></i>
+                <form>
+                    <div class="input-group no-border">
+                        <input type="search" class="form-control" placeholder="Search..." name="searchoption" id="searchOption">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <i class="nc-icon nc-zoom-split"></i>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
             </div>
             <div class="col-2">
-                <a href="{{ route('admin.option.index')}}" style="float: right">
+                <a href="{{ route('admin.option.index') }}" style="float: right">
                     <p>{{ __('Add') }}</p>
                 </a>
             </div>
@@ -32,9 +32,9 @@
                 {{ session('success') }}
             </div>
         @endif
-       
+
         <div class="row">
-       
+
             <div class="col-md-10 offset-1">
                 <div class="table-responsive">
                     <table class="table">
@@ -45,33 +45,33 @@
                             <th>
                                 Option
                             </th>
-                             <th>
+                            <th>
                                 Language
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Question
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Media Url
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Image
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Is Correct
-                             </th>
-                             <th>
+                            </th>
+                            <th>
                                 Date
-                             </th>
+                            </th>
                             <th>
                                 Action
                             </th>
                             <th>
-                                
+
                             </th>
                         </thead>
                         <tbody class="allDataOption">
-                            
+
                             @foreach ($options as $option)
                                 <tr>
                                     <td>
@@ -87,38 +87,45 @@
                                         {{ $option->question->title ?? null }}
                                     </td>
                                     <td>
-                                      <a href="{{$option->media_url}}">Link</a>  
+                                        <a href="{{ $option->media_url }}">Link</a>
                                     </td>
                                     <td>
                                         <img src="{{ asset($option->image_url) }}" width="40px" height="40px" />
                                     </td>
-                                    @if($option->is_correct == 1)
-                                    <form action="{{ route('admin.option.is_correct_update', $option->id) }}" onsubmit="return confirm('Are you sure you want to update option to wrong option?')" method="get">
-                                        @csrf
-                                        @method('get')
-                                     <td>  <button class="btn btn-success" type="submit">Yes</button></td>
-                                    </form>
-                                    @else
-                                    <td> 
-                                        <form action="{{ route('admin.option.is_correct_update', $option->id) }}" onsubmit="return confirm('Are you sure you want to update option to is correct?')" method="get">
+                                    @if ($option->is_correct == 1)
+                                        <form action="{{ route('admin.option.is_correct_update', $option->id) }}"
+                                            onsubmit="return confirm('Are you sure you want to update option to wrong option?')"
+                                            method="get">
                                             @csrf
                                             @method('get')
-                                             <button class="btn btn-danger" type="submit">No</button></td>
-                                            @endif
+                                            <td> <button class="btn btn-success" type="submit">Yes</button></td>
                                         </form>
+                                    @else
+                                        <td>
+                                            <form action="{{ route('admin.option.is_correct_update', $option->id) }}"
+                                                onsubmit="return confirm('Are you sure you want to update option to is correct?')"
+                                                method="get">
+                                                @csrf
+                                                @method('get')
+                                                <button class="btn btn-danger" type="submit">No</button>
+                                        </td>
+                                    @endif
+                                    </form>
                                     <td>
                                         {{ $option->created_at->diffForHumans() }}
                                     </td>
-                              
+
                                     <td>
                                         <a href="{{ route('admin.option.show', $option->id) }}" class="btn">Edit</a>
 
                                     </td>
                                     <td>
-                                        <form action="{{ route('admin.option.destroy', $option->id) }}" onsubmit="return confirm('Are you sure you want to delete option?')" method="get">
+                                        <form action="{{ route('admin.option.destroy', $option->id) }}"
+                                            onsubmit="return confirm('Are you sure you want to delete option?')"
+                                            method="get">
                                             @csrf
                                             @method('get')
-                                            <input type="hidden" name="page" value="{{$options->currentPage()}}">
+                                            <input type="hidden" name="page" value="{{ $options->currentPage() }}">
                                             <button class="btn btn-danger" type="submit">Delete</button>
                                         </form>
                                     </td>
@@ -127,7 +134,7 @@
                         </tbody>
                         <tbody id="ContentOption" class="searchDataOption">
 
-                       </tbody>
+                        </tbody>
                     </table>
                 </div>
                 {!! $options->links() !!}
@@ -136,32 +143,28 @@
     </div>
 
     <script type="text/javascript">
-
         $('#searchOption').on('keyup', function() {
-             $valueoption = $(this).val();
+            $valueoption = $(this).val();
 
-             if($valueoption)
-             {
+            if ($valueoption) {
                 $('.searchDataOption').show();
                 $('.allDataOption').hide();
-             }
-             else
-             {
+            } else {
                 $('.searchDataOption').hide();
                 $('.allDataOption').show();
-             }
-             
-             $.ajax({
+            }
+
+            $.ajax({
                 type: 'get',
-                url: '{{route('admin.options.search')}}',
-                data:{'option':$valueoption},
-                success:function(data)
-                {
+                url: '{{ route('admin.options.search') }}',
+                data: {
+                    'option': $valueoption
+                },
+                success: function(data) {
                     console.log(data)
                     $('#ContentOption').html(data);
                 }
-             });
+            });
         });
-
     </script>
 @endsection

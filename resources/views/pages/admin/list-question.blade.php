@@ -97,24 +97,24 @@
 
                                     <td>
                                         @if ($question->status == true)
-                                          
                                             <form action="{{ route('admin.question.status', $question->id) }}"
                                                 onsubmit="return confirm('Are you sure you want to update Question status ?')"
                                                 method="get">
                                                 @csrf
                                                 @method('get')
-                                                
-                                                <input type="hidden" name="page" value="{{ $questions->currentPage() }}">
-                                               <button class="btn btn-success"  id="online">Online</button>
+
+                                                <input type="hidden" name="page"
+                                                    value="{{ $questions->currentPage() }}">
+                                                <button class="btn btn-success" id="online">Online</button>
                                             </form>
                                         @else
-                                        
                                             <form action="{{ route('admin.question.status', $question->id) }}"
                                                 onsubmit="return confirm('Are you sure you want to update Question status ?')"
                                                 method="get">
                                                 @csrf
                                                 @method('get')
-                                                <input type="hidden" name="page" value="{{ $questions->currentPage() }}">
+                                                <input type="hidden" name="page"
+                                                    value="{{ $questions->currentPage() }}">
                                                 <button class="btn btn-danger" type="submit">Offline</button>
                                             </form>
                                         @endif
@@ -154,33 +154,29 @@
     </div>
 
     <script type="text/javascript">
-
         $('#search').on('keyup', function() {
-             $value = $(this).val();
+            $value = $(this).val();
 
-             if($value)
-             {
+            if ($value) {
                 $('.searchData').show();
                 $('.allData').hide();
-             }
-             else
-             {
+            } else {
                 $('.searchData').hide();
                 $('.allData').show();
-             }
-             
-             $.ajax({
-                type: 'get',
-                url: '{{route('admin.question.search')}}',
-                data:{'search':$value},
+            }
 
-                success:function(data)
-                {
+            $.ajax({
+                type: 'get',
+                url: '{{ route('admin.question.search') }}',
+                data: {
+                    'search': $value
+                },
+
+                success: function(data) {
                     console.log(data);
                     $('#Content').html(data);
                 }
-             });
+            });
         });
-
     </script>
 @endsection

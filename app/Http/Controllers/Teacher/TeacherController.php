@@ -14,7 +14,7 @@ use Illuminate\View\View;
 
 class TeacherController extends Controller
 {
-    public function __construct(protected TokenService $tokenService, protected TeacherService $teacherService)
+  public function __construct(protected TokenService $tokenService, protected TeacherService $teacherService)
   {
   }
 
@@ -25,8 +25,8 @@ class TeacherController extends Controller
     return view('pages.admin.create-teacher', ['schools' => $schools]);
   }
 
-//teacher create logic
-public function create(TeacherRequest $teacherRequest)
+  //teacher create logic
+  public function create(TeacherRequest $teacherRequest)
   {
     $teacher = $this->teacherService->createTeacher($teacherRequest->validated());
     return redirect()->route('admin.teacher.list',  ['teacher' => $teacher])->with('success', 'Teacher created successfully');
@@ -43,7 +43,7 @@ public function create(TeacherRequest $teacherRequest)
   {
     $schools = School::all();
     $teacher = $this->teacherService->showTeacher($teacherId);
-    return view('pages.admin.edit-teacher', ['teacher' => $teacher , 'schools'=> $schools]);
+    return view('pages.admin.edit-teacher', ['teacher' => $teacher, 'schools' => $schools]);
   }
 
   public function update(TeacherRequest $teacherRequest, $teacherId): RedirectResponse
@@ -54,7 +54,7 @@ public function create(TeacherRequest $teacherRequest)
       $image = $teacherRequest->image_url;
     }
 
-    $this->teacherService->updateTeacher( $teacherRequest->validated(), $image, $teacherId);
+    $this->teacherService->updateTeacher($teacherRequest->validated(), $image, $teacherId);
 
     return redirect()->route('admin.teacher.list')
       ->with('success', 'Teacher updated successfully');
@@ -68,6 +68,4 @@ public function create(TeacherRequest $teacherRequest)
     return redirect()->route('admin.teacher.list')
       ->with('success', 'Teacher deleted successfully');
   }
-
-
 }

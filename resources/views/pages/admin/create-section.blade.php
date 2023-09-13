@@ -1,19 +1,20 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'section'
+    'elementActive' => 'section',
 ])
 @section('content')
     <div class="content">
         <div class="container">
             <div class="row">
-            
+
                 <div class="col-lg-8 col-md-8 offset-2 mr-auto">
                     <div class="card card-signup text-center">
                         <div class="card-header ">
                             <h4 class="card-title">{{ __('Create Section') }}</h4>
                         </div>
                         <div class="card-body">
-                            <form class="form" method="POST" action="{{ route('admin.section.create') }}" enctype="multipart/form-data">
+                            <form class="form" method="POST" action="{{ route('admin.section.create') }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="input-group{{ $errors->has('title') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
@@ -21,7 +22,8 @@
                                             <i class="nc-icon nc-box-2"></i>
                                         </span>
                                     </div>
-                                    <input name="title" type="text" class="form-control" placeholder="Title" value="{{ old('title') }}" required autofocus>
+                                    <input name="title" type="text" class="form-control" placeholder="Title"
+                                        value="{{ old('title') }}" required autofocus>
                                     @if ($errors->has('title'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('title') }}</strong>
@@ -33,11 +35,11 @@
                                     <div class="form-group">
                                         <select name="course_id" class="form-control">
                                             <option value="{{ old('course_id') }}">Select Course</option>
-                                           
+
                                             @foreach ($courses as $course)
                                                 <option value="{{ $course->id }}">{{ $course->title }}</option>
                                             @endforeach
-                                    
+
                                         </select>
                                         <small>Note: don't leave blank, select course </small>
                                     </div>
@@ -45,7 +47,7 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('course_id') }}</strong>
                                         </span>
-                                    @endif 
+                                    @endif
                                 </div>
 
                                 <div class="row-12">
@@ -55,7 +57,7 @@
                                             <option value="beginner">Beginners</option>
                                             <option value="intermediate">Intermediate</option>
                                             <option value="advanced">Advanced</option>
-                                    
+
                                         </select>
                                         <small>Note: don't leave blank, select level </small>
                                     </div>
@@ -63,7 +65,7 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('level') }}</strong>
                                         </span>
-                                    @endif 
+                                    @endif
                                 </div>
 
                                 <div class="row-12">
@@ -73,7 +75,7 @@
                                             <option value="bronze">Bronze</option>
                                             <option value="silver">Silver</option>
                                             <option value="gold">Gold</option>
-                                    
+
                                         </select>
                                         <small>Note: don't leave blank, select category </small>
                                     </div>
@@ -81,7 +83,7 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('category') }}</strong>
                                         </span>
-                                    @endif 
+                                    @endif
                                 </div>
 
 
@@ -92,13 +94,13 @@
                         </div>
                     </div>
                 </div>
-             </div>
+            </div>
         </div>
-     </div> 
-     @if (count($errors) > 0)
-     <script>
-         document.getElementById('form-body').classList.remove('invisible');
-         document.getElementById("form-container").scrollIntoView(true);
-     </script>
- @endif
+    </div>
+    @if (count($errors) > 0)
+        <script>
+            document.getElementById('form-body').classList.remove('invisible');
+            document.getElementById("form-container").scrollIntoView(true);
+        </script>
+    @endif
 @endsection

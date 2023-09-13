@@ -22,8 +22,8 @@ class AnswerController extends Controller
         abort_if($question->answered_type == null, 400, 'No answer type for this question');
         if ($question->answered_type == 'single') {
             return $this->single($question, $optionIds);
-         }
-         
+        }
+
         if ($question->answered_type == 'multiple') {
             return $this->multiple($question, $optionIds);
         }

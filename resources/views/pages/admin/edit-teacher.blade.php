@@ -20,10 +20,10 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="school_id" class="form-control">
-                                            <option value="{{ old('school_id') }}">{{$teacher->school->name}}</option>
+                                            <option value="{{ old('school_id') }}">{{ $teacher->school->name }}</option>
                                             @foreach ($schools as $school)
-                                            <option value="{{ $school->id }}">{{ $school->name }}</option>
-                                             @endforeach
+                                                <option value="{{ $school->id }}">{{ $school->name }}</option>
+                                            @endforeach
 
                                         </select>
                                         <small>Note: don't leave blank, select School </small>
@@ -42,7 +42,7 @@
                                         </span>
                                     </div>
                                     <input name="name" type="text" class="form-control" placeholder="Name"
-                                        value="{{ old('name')?? $teacher->name }}" required autofocus>
+                                        value="{{ old('name') ?? $teacher->name }}" required autofocus>
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -57,7 +57,7 @@
                                         </span>
                                     </div>
                                     <input name="email" type="text" class="form-control" placeholder="Email"
-                                        value="{{ old('email') ?? $teacher->email  }}" required autofocus>
+                                        value="{{ old('email') ?? $teacher->email }}" required autofocus>
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -68,7 +68,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="address" class="form-control" placeholder="Address"> {{ old('aaddress') ?? $teacher->address}} </textarea>
+                                            <textarea name="address" class="form-control" placeholder="Address"> {{ old('aaddress') ?? $teacher->address }} </textarea>
                                         </div>
                                         @if ($errors->has('address'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -86,7 +86,8 @@
                                         <strong>{{ $errors->first('image_url') }}</strong>
                                     </span>
                                 @endif
-                                <img src="{{ asset($teacher->image_url) }}" width="200px" height="200px" alt="" srcset="">
+                                <img src="{{ asset($teacher->image_url) }}" width="200px" height="200px" alt=""
+                                    srcset="">
                                 <div class="card-footer ">
                                     <button type="submit" class="btn btn-info btn-round">{{ __('Save') }}</button>
                                     {{-- <button type="" class="btn btn-danger btn-round">{{ __('Cancel') }}</button> --}}

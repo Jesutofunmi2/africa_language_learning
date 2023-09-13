@@ -1,19 +1,20 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'question'
+    'elementActive' => 'question',
 ])
 @section('content')
     <div class="content">
         <div class="container">
             <div class="row">
-            
+
                 <div class="col-lg-8 col-md-8 offset-2 mr-auto">
                     <div class="card card-signup text-center">
                         <div class="card-header ">
                             <h4 class="card-title">{{ __('Create Batch Upload Of Question') }}</h4>
                         </div>
                         <div class="card-body ">
-                            <form class="form" method="POST" action="{{ route('admin.question.batchUpload') }}" enctype="multipart/form-data">
+                            <form class="form" method="POST" action="{{ route('admin.question.batchUpload') }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="row-12">
                                     <div class="form-group">
@@ -29,7 +30,7 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('language_id') }}</strong>
                                         </span>
-                                   @endif 
+                                    @endif
                                 </div>
 
                                 <div class="row-12">
@@ -46,17 +47,19 @@
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('topic_id') }}</strong>
                                         </span>
-                                    @endif 
+                                    @endif
                                 </div>
 
                                 <label class="col-md-3 col-form-label">{{ __('Pick Excel') }}</label>
-                                 <input type="file" value="{{ old('file') }}" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" class="form-control" />
-                                      @if ($errors->has('file'))
-                                            <span class="invalid-feedback" style="display: block;" role="alert">
-                                                <strong>{{ $errors->first('file') }}</strong>
-                                            </span>
-                                        @endif
-                                 <a href="{{url('/sample/questionUpload.xlsx')}}">Download sample</a>
+                                <input type="file" value="{{ old('file') }}" name="file"
+                                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                    class="form-control" />
+                                @if ($errors->has('file'))
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('file') }}</strong>
+                                    </span>
+                                @endif
+                                <a href="{{ url('/sample/questionUpload.xlsx') }}">Download sample</a>
 
                                 <div class="card-footer ">
                                     <button type="submit" class="btn btn-info btn-round">{{ __('Upload') }}</button>
@@ -66,13 +69,13 @@
                         </div>
                     </div>
                 </div>
-             </div>
+            </div>
         </div>
-     </div> 
-     @if (count($errors) > 0)
-     <script>
-         document.getElementById('form-body').classList.remove('invisible');
-         document.getElementById("form-container").scrollIntoView(true);
-     </script>
- @endif
+    </div>
+    @if (count($errors) > 0)
+        <script>
+            document.getElementById('form-body').classList.remove('invisible');
+            document.getElementById("form-container").scrollIntoView(true);
+        </script>
+    @endif
 @endsection

@@ -13,14 +13,15 @@
                             <h4 class="card-title">{{ __('Edit School') }}</h4>
                         </div>
                         <div class="card-body ">
-                            <form class="form"  method="POST" action="{{ route('admin.school.update',  $school->id) }}"
+                            <form class="form" method="POST" action="{{ route('admin.school.update', $school->id) }}"
                                 enctype="multipart/form-data">
                                 @method('put')
                                 @csrf
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="state" class="form-control">
-                                            <option value="{{ old('state') ?? $school->state }}">{{ $school->state ?? 'Select State'}}</option>
+                                            <option value="{{ old('state') ?? $school->state }}">
+                                                {{ $school->state ?? 'Select State' }}</option>
                                             <option value="FCT">FCT Abuja</option>
 
                                         </select>
@@ -36,7 +37,8 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="lga" class="form-control">
-                                            <option value="{{ old('lga') ?? $school->lga }}">{{$school->lga ?? 'Select LGA'}}</option>
+                                            <option value="{{ old('lga') ?? $school->lga }}">
+                                                {{ $school->lga ?? 'Select LGA' }}</option>
                                             <option value="Abaji">Abaji</option>
                                             <option value="Garki">Garki</option>
                                             <option value="Bwari">Bwari</option>
@@ -91,7 +93,7 @@
                                         </span>
                                     </div>
                                     <input name="phone_number" type="text" class="form-control" placeholder="Admin Name"
-                                        value="{{ old('phone_number') ?? $school->phone_number}}" required autofocus>
+                                        value="{{ old('phone_number') ?? $school->phone_number }}" required autofocus>
                                     @if ($errors->has('phone_number'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('phone_number') }}</strong>
@@ -107,7 +109,7 @@
                                         </span>
                                     </div>
                                     <input name="no_of_pupil" type="text" class="form-control" placeholder="No of pupil"
-                                        value="{{ old('no_of_pupil') ?? $school->no_of_pupil}}" required autofocus>
+                                        value="{{ old('no_of_pupil') ?? $school->no_of_pupil }}" required autofocus>
                                     @if ($errors->has('no_of_pupil'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('no_of_pupil') }}</strong>
@@ -133,7 +135,8 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="type" class="form-control">
-                                            <option value="{{ old('type') ?? $school->type}}">{{$school->type ?? 'School Type'}}</option>
+                                            <option value="{{ old('type') ?? $school->type }}">
+                                                {{ $school->type ?? 'School Type' }}</option>
                                             <option value="unity-school">Unity School</option>
                                             <option value="non-unity-school">Non Unity School</option>
                                         </select>
@@ -149,7 +152,8 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="country" class="form-control">
-                                            <option value="{{ old('country') ?? $school->country}}">{{$school->country ?? 'Country'}}</option>
+                                            <option value="{{ old('country') ?? $school->country }}">
+                                                {{ $school->country ?? 'Country' }}</option>
                                             <option value="nigeria">Nigeria</option>
                                             <option value="gabon">Gabon</option>
                                         </select>
@@ -165,7 +169,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="address" class="form-control" placeholder="Address"> {{ old('aaddress')  ?? $school->address}} </textarea>
+                                            <textarea name="address" class="form-control" placeholder="Address"> {{ old('aaddress') ?? $school->address }} </textarea>
                                         </div>
                                         @if ($errors->has('address'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -176,8 +180,8 @@
                                 </div>
 
                                 <label class="col-md-3 col-form-label">{{ __('School Logo') }}</label>
-                                <input type="file" value="{{ old('image_url')  ?? $school->image_url}}" name="image_url"
-                                    placeholder="Select Image" accept="image/*" class="form-control" />
+                                <input type="file" value="{{ old('image_url') ?? $school->image_url }}"
+                                    name="image_url" placeholder="Select Image" accept="image/*" class="form-control" />
                                 @if ($errors->has('image_url'))
                                     <span class="invalid-feedback" style="display: block; border:30px" role="alert">
                                         <strong>{{ $errors->first('image_url') }}</strong>
@@ -185,7 +189,8 @@
                                 @endif
 
 
-                                <img src="{{ asset($school->image_url) }}" width="200px" height="200px" alt="" srcset="">
+                                <img src="{{ asset($school->image_url) }}" width="200px" height="200px" alt=""
+                                    srcset="">
 
                                 <div class="card-footer ">
                                     <button type="submit" class="btn btn-info btn-round">{{ __('Update') }}</button>

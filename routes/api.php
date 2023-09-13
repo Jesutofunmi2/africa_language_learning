@@ -48,8 +48,8 @@ Route::prefix('/v1')
 
         Route::prefix('auth')->name('auth.')
             ->group(function () {
-                 //student endpoint
-               // Route::post('/login', UserLoginController::class)->name('login');
+                //student endpoint
+                // Route::post('/login', UserLoginController::class)->name('login');
                 Route::post('/register', UserRegisterController::class)->name('register');
                 Route::post('/studentLogin', StudentLoginController::class)->name('studentLogin');
 
@@ -78,11 +78,11 @@ Route::prefix('/v1')
                 Route::get('/question', [QuestionController::class, 'list'])->name('question.list');
                 Route::post('/option', [AnswerController::class, 'checkAnswer'])->name('answer.check');
 
-                 //fourites endpoint
-                 Route::post('/createFourite', [FouriteController::class, 'create'])->name('fourite.create');
-                 Route::get('/getFourites', [FouriteController::class, 'list'])->name('fourite.list');
-                 Route::delete('/removeFourites', [FouriteController::class, 'remove'])->name('fourite.remove');
- 
+                //fourites endpoint
+                Route::post('/createFourite', [FouriteController::class, 'create'])->name('fourite.create');
+                Route::get('/getFourites', [FouriteController::class, 'list'])->name('fourite.list');
+                Route::delete('/removeFourites', [FouriteController::class, 'remove'])->name('fourite.remove');
+
                 //student endpoint
                 Route::post('/createStudent', CreateStudentController::class)->name('createStudent');
                 Route::get('/students', [StudentController::class, 'list'])->name('student.list');
@@ -106,11 +106,9 @@ Route::prefix('/v1')
                 Route::post('/addClassWork', [ClassWorkController::class, 'createClassWork'])->name('createClassWork');
                 Route::get('/ClassWork', [ClassWorkController::class, 'list'])->name('getClassWork');
                 Route::delete('/deleteClassWork', [ClassWorkController::class, 'delete'])->name('deleteClassWork');
-                
+
                 // Question Answered
                 Route::post('/questionAnswered', [QuestionAnsweredController::class, 'create'])->name('questionAnswered.create');
-
-               
             });
 
         Route::prefix('/activity')

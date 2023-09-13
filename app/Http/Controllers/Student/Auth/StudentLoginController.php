@@ -15,10 +15,12 @@ use Illuminate\Support\Facades\Hash;
 class StudentLoginController extends Controller
 {
     //
-    
-    public function __construct(protected TokenService $service) {}
 
-   
+    public function __construct(protected TokenService $service)
+    {
+    }
+
+
     public function __invoke(StudentLoginRequest $request): JsonResponse
     {
 
@@ -39,10 +41,9 @@ class StudentLoginController extends Controller
             'data' => $data,
             'token' => LoginResource::make($student->withAccessToken($token))
         ]);
-        
     }
 
-   
+
     protected function authenticateUser(StudentLoginRequest $request): Student
     {
         $data = $request->validated();
@@ -52,19 +53,18 @@ class StudentLoginController extends Controller
             $student = Student::where('student_id', $data['login_id'])->first();
             abort_if(is_null($student), 401, 'Incorrect login details');
 
-            if(! Hash::check($data['password'], $student->password)) {
+            if (!Hash::check($data['password'], $student->password)) {
                 abort(401, 'Incorrect login details');
             }
-          }else{
+        } else {
             $student = Student::where('email', $data['login_id'])->first();
             abort_if(is_null($student), 401, 'Incorrect login details');
 
-            if(! Hash::check($data['password'], $student->password)) {
+            if (!Hash::check($data['password'], $student->password)) {
                 abort(401, 'Incorrect login details');
             }
-          }
-       
+        }
+
         return $student;
     }
 }
-

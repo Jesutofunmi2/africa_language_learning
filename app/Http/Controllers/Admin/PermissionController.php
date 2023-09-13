@@ -11,9 +11,9 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        return view ('pages.permission.create-permission');
+        return view('pages.permission.create-permission');
     }
-    
+
 
     public function create(Request $request)
     {
@@ -36,7 +36,6 @@ class PermissionController extends Controller
         $roles = Role::all();
 
         return view('pages.permission.edit-permission', ['roles' => $roles, 'permissions' => $permissions]);
-
     }
 
     public function update(Request $request, Permission $permission)

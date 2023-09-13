@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'role'
+    'elementActive' => 'role',
 ])
 @section('content')
     <div class="content">
@@ -22,7 +22,8 @@
                             <div class="flex space-x-2 mt-4 p-2">
                                 @if ($user->roles)
                                     @foreach ($user->roles as $user_role)
-                                        <form class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md" method="POST"
+                                        <form class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md"
+                                            method="POST"
                                             action="{{ route('admin.users.roles.remove', [$user->id, $user_role->id]) }}"
                                             onsubmit="return confirm('Are you sure?');">
                                             @csrf
@@ -49,8 +50,7 @@
                                     @enderror
                             </div>
                             <div class="sm:col-span-6 pt-5">
-                                <button type="submit"
-                                    class="btn btn-info rounded-md">Assign</button>
+                                <button type="submit" class="btn btn-info rounded-md">Assign</button>
                             </div>
                             </form>
                         </div>
@@ -59,12 +59,14 @@
                             <div class="flex space-x-2 mt-4 p-2">
                                 @if ($user->permissions)
                                     @foreach ($user->permissions as $user_permission)
-                                        <form class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md" method="POST"
+                                        <form class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md"
+                                            method="POST"
                                             action="{{ route('admin.users.permissions.revoke', [$user->id, $user_permission->id]) }}"
                                             onsubmit="return confirm('Are you sure?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-success">{{ $user_permission->name }}</button>
+                                            <button type="submit"
+                                                class="btn btn-success">{{ $user_permission->name }}</button>
                                         </form>
                                     @endforeach
                                 @endif
@@ -87,15 +89,14 @@
                                     @enderror
                             </div>
                             <div class="sm:col-span-6 pt-5">
-                                <button type="submit"
-                                    class="btn btn-success rounded-md">Assign</button>
+                                <button type="submit" class="btn btn-success rounded-md">Assign</button>
                             </div>
                             </form>
-            
+
                         </div>
                     </div>
                 </div>
-             </div>
+            </div>
         </div>
-     </div> 
+    </div>
 @endsection

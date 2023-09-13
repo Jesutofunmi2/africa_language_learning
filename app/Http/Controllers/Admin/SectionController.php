@@ -24,15 +24,15 @@ class SectionController extends Controller
 
     public function create(SectionRequest $sectionRequest): RedirectResponse
     {
-     $this->service->createSection($sectionRequest->validated());
- 
-     return redirect()->route('admin.section.list')->with('success', 'Section created successfully');
+        $this->service->createSection($sectionRequest->validated());
+
+        return redirect()->route('admin.section.list')->with('success', 'Section created successfully');
     }
 
-    public function list():View
+    public function list(): View
     {
-     $sections = Section::orderBy('created_at', 'desc')->paginate(40);
-     return view('pages.admin.list-section')->with('sections', $sections);
+        $sections = Section::orderBy('created_at', 'desc')->paginate(40);
+        return view('pages.admin.list-section')->with('sections', $sections);
     }
 
     public function show($sectionId)
@@ -54,9 +54,8 @@ class SectionController extends Controller
     public function destroy($sectionId): RedirectResponse
     {
         $this->service->deleteSection($sectionId);
- 
-        return redirect()->route('admin.section.list')
-                ->with('success', 'deleted successfully');
-    }
 
+        return redirect()->route('admin.section.list')
+            ->with('success', 'deleted successfully');
+    }
 }

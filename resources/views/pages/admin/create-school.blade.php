@@ -145,13 +145,14 @@
                                     @endif
                                 </div>
 
-                               
+
 
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input name="phone_number" type="number" class="form-control" placeholder="Phone Number"
-                                        value="{{ old('phone_number') }}" required autofocus>
+                                            <input name="phone_number" type="number" class="form-control"
+                                                placeholder="Phone Number" value="{{ old('phone_number') }}" required
+                                                autofocus>
                                         </div>
                                         @if ($errors->has('phone_number'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -164,8 +165,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input name="no_of_pupil" type="number" class="form-control" placeholder="No of pupil"
-                                        value="{{ old('no_of_pupil') }}" required autofocus>
+                                            <input name="no_of_pupil" type="number" class="form-control"
+                                                placeholder="No of pupil" value="{{ old('no_of_pupil') }}" required
+                                                autofocus>
                                         </div>
                                         @if ($errors->has('no_of_pupil'))
                                             <span class="invalid-feedback" style="display: block;" role="alert">

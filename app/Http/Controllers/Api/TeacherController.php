@@ -66,7 +66,7 @@ class TeacherController extends Controller
     }
     public function addTeacher(TeacherRequest $teacherRequest): JsonResponse
     {
-        
+
         $teacher = $this->teacherService->createTeacher($teacherRequest->validated());
         abort_if(is_null($teacher), 204, 'Invalid Content');
         $data = TeacherResource::make($teacher);
