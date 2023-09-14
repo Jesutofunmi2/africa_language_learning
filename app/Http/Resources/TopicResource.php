@@ -24,7 +24,7 @@ class TopicResource extends JsonResource
             'media_url' => $this->image_url,
             'type' => $this->type,
             'media_type' => $this->media_type,
-            'questions' => QuestionResource::collection($this->questions),
+            'questions' => QuestionResource::collection($this->questions->where('language_id', $request->language_id)),
             'question_count' => $this->questions->count(),
             'percentage' => $this->calculatePercentage(),
             'last_question_answered' => QuestionAnsweredResource::make($this->answereds->where('student_id', auth()->user()->student_id)->sortByDesc('update_at')->first())
@@ -39,8 +39,6 @@ class TopicResource extends JsonResource
         if ($question_count == 0 || $question_answered == 0) {
             return 0;
         }
-       
-         //$per = ($question_count  / $question_answered);
          $per = ($question_answered / $question_count  )*100;
         return $per;
     }
