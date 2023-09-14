@@ -109,6 +109,7 @@ Route::prefix('/v1')
 
                 // Question Answered
                 Route::post('/questionAnswered', [QuestionAnsweredController::class, 'create'])->name('questionAnswered.create');
+                Route::get('/questionAnswered', [QuestionAnsweredController::class, 'list'])->name('questionAnswered.list');
             });
 
         Route::prefix('/activity')

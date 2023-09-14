@@ -31,4 +31,21 @@ class QuestionAnsweredController extends Controller
             status: 200
         );
     }
+
+    public function list(QuestionAnsweredRequest $questionAnsweredRequest)
+    {
+        abort_if(is_null($questionAnsweredRequest), 408, 'Request Timeout');
+        $questionAnswered = $this->questionAnswered->getQuestionAnswered($questionAnsweredRequest->validated());
+
+        abort_if(is_null($questionAnswered), 400, 'The server cannot or will not process the request due to something that is perceived to be a client error');
+
+        $data = QuestionAnsweredResource::collection($questionAnswered);
+        return response()->json(
+            [
+                'message' => 'Answered Get Successful.',
+                'data' => $data
+            ],
+            status: 200
+        );
+    }
 }

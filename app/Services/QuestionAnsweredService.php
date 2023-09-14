@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class QuestionAnsweredService
 {
-
     public function addQuestionAnswered(array $data): Answered
     {
         $questionAnswered = new Answered;
@@ -28,5 +27,14 @@ class QuestionAnsweredService
         });
 
         return $questionAnswered;
+    }
+
+
+    public function getQuestionAnswered(array $data)
+    {
+        $answered = Answered::where('student_id', '=', $data['student_id'])
+            ->where('topic_id', '=', $data['topic_id'])->get();
+
+        return $answered;
     }
 }
