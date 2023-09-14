@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Jobs\SendSchoolVerificationMail;
+use App\Jobs\SendTeacherVerificationMail;
 use App\Models\School;
 use App\Models\SecondarySchool;
 use App\Models\Teacher;
@@ -29,7 +29,6 @@ class TeacherService
                 $mediaUrl = $mediaService->uploadImage($data['image_url']);
             }
             
-
             $teacher->name = $data['name'];
             $teacher->school_id = $data['school_id'];
             $teacher->email = $data['email'];
@@ -38,11 +37,13 @@ class TeacherService
             $teacher->address = $data['address']?? null;
             $teacher->save();
 
-            dispatch(new SendSchoolVerificationMail($teacher->name, $teacher->email, $teacher->verification_token));
+         
 
             $teacher_id = $this->teacherId($teacher->name, $teacher->id);
             $teacher->teacher_id = $teacher_id;
             $teacher->save();
+
+            dispatch(new SendTeacherVerificationMail($teacher->name, $teacher->email, $teacher->teacher_id, $teacher->verification_token));
 
             //@todo we fire other actions after registration
         });

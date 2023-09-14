@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "Izesan!",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "African Language App.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {

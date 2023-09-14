@@ -23,7 +23,7 @@ class TopicResource extends JsonResource
             'objective' => $this->objective,
             'media_url' => $this->image_url,
             'type' => $this->type,
-            'answered' => auth()->user(),
+            'answered' => $this->answereds->where('student_id', auth()->user()->student_id),
             'media_type' => $this->media_type,
             'questions' => QuestionResource::collection($this->questions),
             'question_count' => $this->questions->count(),
@@ -36,7 +36,7 @@ class TopicResource extends JsonResource
     {
         $question_count = $this->questions->count();
 
-        $question_answered = $this->answereds->where('student_id', auth()->user()->student_id)->count()+1;
+        $question_answered = $this->answereds->where('student_id', auth()->user()->student_id)->count() + 1;
         if ($question_count == 0 || $question_answered == 0) {
             return 0;
         }
