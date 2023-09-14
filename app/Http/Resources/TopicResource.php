@@ -27,21 +27,21 @@ class TopicResource extends JsonResource
             'questions' => QuestionResource::collection($this->questions),
             'question_count' => $this->questions->count(),
             'percentage' => $this->calculatePercentage(),
-            'last_question_answered' => QuestionAnsweredResource::make($this->answereds->where('id', auth()->user()->id)->sortByDesc('update_at')->first())
+            'last_question_answered' => QuestionAnsweredResource::make($this->answereds->where('student_id', auth()->user()->student_id)->sortByDesc('update_at')->first())
         ];
     }
 
     public function calculatePercentage()
     {
-        
         $question_count = $this->questions->count();
 
-        $question_answered = $this->answereds->where('id', auth()->user()->id)->count()+1;
+        $question_answered = $this->answereds->where('student_id', auth()->user()->student_id)->count();
         if ($question_count == 0 || $question_answered == 0) {
             return 0;
         }
-         $per = ($question_count  / $question_answered);
-        //$per = ($question_count  / 100 )/100;
+       
+         //$per = ($question_count  / $question_answered);
+         $per = ($question_answered / $question_count  )*100;
         return $per;
     }
 }
