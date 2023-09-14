@@ -26,7 +26,7 @@ class CreateTopicRequest extends FormRequest
     {
         return [
             'title' => ['string', 'required'],
-            //'section_id' => ['sometimes', 'string'],
+            'section_id' => ['uuid', 'required', 'exists:sections,id'],
             'type' => ['sometimes', 'string'],
             'content' => ['sometimes', 'string'],
             'question_type' => ['string', 'required'],

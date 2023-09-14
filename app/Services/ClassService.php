@@ -36,8 +36,8 @@ class ClassService
      {
        $deleteClass = Classes::where('teacher_id', $data['teacher_id'])
                                ->where('school_id', $data['school_id'])
-                               ->where('name', $data['class_room_name'] )->delete();
-
+                               ->where('name', $data['class_room_name'])->get();
+                               
        return $deleteClass;
      }
 }
