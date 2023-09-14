@@ -23,7 +23,7 @@ class TopicResource extends JsonResource
             'objective' => $this->objective,
             'media_url' => $this->image_url,
             'type' => $this->type,
-            'answered' => auth()->user()->student_id,
+            'answered' => auth()->user(),
             'media_type' => $this->media_type,
             'questions' => QuestionResource::collection($this->questions),
             'question_count' => $this->questions->count(),
