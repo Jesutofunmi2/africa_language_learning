@@ -15,7 +15,7 @@ class TopicResource extends JsonResource
      */
     public function toArray($request)
     {
-        
+
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -47,13 +47,11 @@ class TopicResource extends JsonResource
     }
 
 
-        private function questionQeury ()
-        {
-           $language_id = request()->get('language_id');
-           return $this->questions->when( $language_id,  fn ($query) => $query->where('options.language_id', '=', $language_id));
-        }
-
+    private function questionQeury()
+    {
+        $language_id = request()->get('language_id');
+        return $this->questions()->where('id', $this->id)
+                    ->when($language_id,  fn ($query) => $query
+                    ->whereRelation('options', 'language_id', '=', $language_id))->get();
+    }
 }
-
-
-
