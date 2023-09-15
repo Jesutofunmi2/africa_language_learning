@@ -50,7 +50,7 @@ class TopicResource extends JsonResource
     private function questionQeury()
     {
         $language_id = request()->get('language_id');
-        return $this->questions()->where('id', $this->id)
+        return $this->questions()->where('topic_id', $this->id)
                     ->when($language_id,  fn ($query) => $query
                     ->whereRelation('options', 'language_id', '=', $language_id))->get();
     }
