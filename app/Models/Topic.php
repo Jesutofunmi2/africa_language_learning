@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Question;
+use App\Models\Language;
 use App\Models\Section;
 use App\Models\Answered;
 use App\Traits\UUID;
@@ -22,7 +23,10 @@ class Topic extends Model
         return $this->hasMany(Question::class);
     }
 
-    
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
+    } 
     public function answereds()
     {
         return $this->hasMany(Answered::class);

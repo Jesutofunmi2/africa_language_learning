@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TopicResource extends JsonResource
@@ -49,7 +50,7 @@ class TopicResource extends JsonResource
         private function questionQeury ()
         {
            $language_id = request()->get('language_id');
-           return $this->questions->when( $language_id, fn ($query) => $query->whereRelation('options', 'language_id', '=', $language_id));
+           return $this->questions->when( $language_id,  fn (Builder $query) => $query->whereRelation('options', 'language_id', '=', $language_id));
         }
 
 }
