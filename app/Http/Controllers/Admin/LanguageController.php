@@ -59,6 +59,13 @@ class LanguageController extends Controller
             ->with('success', 'Language updated successfully');
     }
 
+    public function status(Request $request, $id)
+    {
+        $this->service->languageStatus($id);
+        return redirect()->route('admin.language.list', ['page' => $request->page])
+            ->with('success', 'Updated successfully');
+    }
+
     public function destroy(Language $language): RedirectResponse
     {
         $this->service->deleteLanguage($language);

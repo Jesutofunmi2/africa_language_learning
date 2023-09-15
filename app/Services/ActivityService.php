@@ -277,4 +277,21 @@ class ActivityService
 
         return $activities;
     }
+
+    public function languageStatus($id)
+    {
+        $new_language = new Language;
+        $language = Language::whereId($id)->first();
+        if ($language->status == true) {
+            $new_language::whereId($id)->update([
+                'status' => false
+            ]);
+        } else {
+            $new_language::whereId($id)->update([
+                'status' => true
+            ]);
+        }
+
+        return $new_language;
+    }
 }

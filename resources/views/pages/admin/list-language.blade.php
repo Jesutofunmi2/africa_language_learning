@@ -45,6 +45,9 @@
                                 Language Name
                             </th>
                             <th>
+                                Status
+                            </th>
+                            <th>
                                 Image
                             </th>
                             <th>
@@ -66,6 +69,30 @@
                                     </td>
                                     <td>
                                         {{ $language->name }}
+                                    </td>
+                                    <td>
+                                        @if ($language->status == true)
+                                            <form action="{{ route('admin.language.status', $language->id) }}"
+                                                onsubmit="return confirm('Are you sure you want to update Language status ?')"
+                                                method="get">
+                                                @csrf
+                                                @method('get')
+
+                                                <input type="hidden" name="page"
+                                                    value="">
+                                                <button class="btn btn-success" id="online">Online</button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('admin.language.status', $language->id) }}"
+                                                onsubmit="return confirm('Are you sure you want to update Language status ?')"
+                                                method="get">
+                                                @csrf
+                                                @method('get')
+                                                <input type="hidden" name="page"
+                                                    value="">
+                                                <button class="btn btn-danger" type="submit">Offline</button>
+                                            </form>
+                                        @endif
                                     </td>
                                     <td>
                                         <img src="{{ asset($language->image_url) }}" width="40px" height="40px" />

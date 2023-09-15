@@ -15,12 +15,22 @@ class CreateTeacherSurveiesTable extends Migration
     {
         Schema::create('teacher_surveies', function (Blueprint $table) {
             $table->id();
+            $table->string('years');
+            $table->string('hours');
+            $table->string('challenges');
+            $table->string('opinion');
+            $table->string('resources');
+            $table->string('confident');
+            $table->string('method');
+            $table->string('tools');
+            $table->string('strategies');
+            $table->string('familiar');
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations.a
      *
      * @return void
      */

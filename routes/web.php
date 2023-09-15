@@ -70,6 +70,7 @@ Route::prefix('admin')->name('admin.')
                 Route::get('language/{language}', [LanguageController::class, 'show'])->name('language.show');
                 Route::put('language/{language}', [LanguageController::class, 'update'])->name('language.update');
                 Route::delete('language/{language}', [LanguageController::class, 'destroy'])->name('language.destroy');
+                Route::get('languages/status/{id}', [LanguageController::class, 'status'])->name('language.status');
 
                 Route::get('topic/create', [TopicController::class, 'index'])->name('topic.index');
                 Route::post('topic/create', [TopicController::class, 'create'])->name('topic.create');
