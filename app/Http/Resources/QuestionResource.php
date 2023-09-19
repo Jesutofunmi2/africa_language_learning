@@ -27,7 +27,7 @@ class QuestionResource extends JsonResource
               'language' => $this->language,
               'topic' => $this->topic,
             //   'fourite_question' => $this->fourites,
-              'options' => OptionResource::collection($this->options->when($request->language_id, fn($query) => $query->where('language_id', $request->language_id)->inRandomOrder()))
+              'options' => OptionResource::collection($this->options->when($request->language_id, fn($query) => $query->where('language_id', $request->language_id)->inRandomOrder()->get()))
         ];
     }
 }
