@@ -18,7 +18,8 @@ class SingleCourseResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'image_url' => $this->image_url 
+            'image_url' => $this->image_url,
+            'status' => $this->status
         ];
     }
 }
