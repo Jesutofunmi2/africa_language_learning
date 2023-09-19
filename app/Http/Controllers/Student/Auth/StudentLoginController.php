@@ -50,7 +50,7 @@ class StudentLoginController extends Controller
 
         if (!filter_var($data['login_id'], FILTER_VALIDATE_EMAIL)) {
 
-            $student = Student::where('student_id', $data['login_id'])->first();
+            $student = Student::where('student_id', $data['login_id'])->whereRelation('school', 'status','=',true)->first();
             abort_if(is_null($student), 401, 'Incorrect login details');
 
             if (!Hash::check($data['password'], $student->password)) {

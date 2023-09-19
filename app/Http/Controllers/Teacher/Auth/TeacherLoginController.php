@@ -46,7 +46,7 @@ class TeacherLoginController extends Controller
     {
         $data = $request->validated();
 
-        $teacher = Teacher::where('teacher_id', $data['teacher_id'])->first();
+        $teacher = Teacher::where('teacher_id', $data['teacher_id'])->whereRelation('school', 'status','=',true)->first();
 
         abort_if(is_null($teacher), 401, 'Incorrect login details');
 
