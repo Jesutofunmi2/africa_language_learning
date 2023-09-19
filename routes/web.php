@@ -149,6 +149,7 @@ Route::prefix('admin')->name('admin.')
                 Route::get('course/{course}', [CourseController::class, 'show'])->name('course.show');
                 Route::put('course/{course}', [CourseController::class, 'update'])->name('course.update');
                 Route::delete('course/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
+                Route::get('course/status/{id}', [CourseController::class, 'status'])->name('course.status');
 
                 Route::post('logout', [AdminLogoutController::class, 'index'])->name('logout');
             });

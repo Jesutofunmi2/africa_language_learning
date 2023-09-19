@@ -13,7 +13,7 @@ class TeacherSurveyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class TeacherSurveyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'school_id' => ['required', 'integer', 'exists:schools,id'],
+            'teacher_id' => ['required', 'string','exists:teachers,teacher_id'],
+            'years' => ['required', 'string'],
+            'hours' => ['required', 'integer'],
+            'challeges' => ['required', 'string'],
+            'opinion' => ['required', 'string'],
+            'resources' => ['required', 'string'],
+            'confident' => ['required', 'string'],
+            'method' => ['required', 'string'],
+            'tools' => ['required', 'string'],
+            'strategies' => ['required', 'string'],
+            'familiar' => ['required', 'string'],
         ];
     }
 }

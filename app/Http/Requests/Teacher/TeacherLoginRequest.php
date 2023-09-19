@@ -24,7 +24,7 @@ class TeacherLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['email', 'required'],
+            'teacher_id' => ['required'],
             'password' => ['required']
         ];
     }

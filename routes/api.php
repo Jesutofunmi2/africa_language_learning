@@ -25,6 +25,8 @@ use App\Http\Controllers\Teacher\Auth\CreateTeacherController;
 use App\Http\Controllers\Api\TeacherController;
 use App\Http\Controllers\Api\ClassController;
 use App\Http\Controllers\Api\ClassWorkController;
+use App\Http\Controllers\Api\SurveyController;
+use App\Http\Controllers\Api\TeacherSurveyController;
 use App\Models\QuestionAnswered;
 
 /*
@@ -110,6 +112,13 @@ Route::prefix('/v1')
                 // Question Answered
                 Route::post('/questionAnswered', [QuestionAnsweredController::class, 'create'])->name('questionAnswered.create');
                 Route::get('/questionAnswered', [QuestionAnsweredController::class, 'list'])->name('questionAnswered.list');
+
+                //Survey
+                Route::get('/StudentsSurvey', [SurveyController::class, 'getStudentSurvey'])->name('studentSurvey.list');
+                Route::get('/TeachersSurvey', [SurveyController::class, 'getTeacherSurvey'])->name('teacherSurvey.list');
+                Route::post('/createStudentSurvey', [SurveyController::class, 'createStudentSurvey'])->name('studentSurvey.create');
+                Route::post('/create/TeacherSurvey', [SurveyController::class, 'createTeacherSurvey'])->name('teacherSurvey.create');
+
             });
 
         Route::prefix('/activity')

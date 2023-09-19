@@ -26,7 +26,13 @@ class StudentSurveyRequest extends FormRequest
         return [
             'student_id' => ['required', 'string', 'exists:students,student_id'],
             'school_id' => ['required', 'string','exists:schools,id'],
-            'how_interested_are_you_in_learning_nigerian_languages'
+            'interested' => ['required', 'string'],
+            'scale_of_1_5' => ['required', 'integer'],
+            'opportunity' => ['required', 'string'],
+            'ability' => ['required', 'string'],
+            'prefer' => ['required', 'string'],
+            'schools_app' => ['required', 'string'],
+            'motivates' => ['required', 'string'],
         ];
     }
 }

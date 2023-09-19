@@ -50,6 +50,7 @@
                             <th>
                                 Image
                             </th>
+                            <th> Status </th>
                             <th>
                                 Date
                             </th>
@@ -75,6 +76,30 @@
                                     </td>
                                     <td>
                                         <img src="{{ asset($course->image_url) }}" width="40px" height="40px" />
+                                    </td>
+                                    <td>
+                                        @if ($course->status == true)
+                                            <form action="{{ route('admin.course.status', $course->id) }}"
+                                                onsubmit="return confirm('Are you sure you want to update Course status ?')"
+                                                method="get">
+                                                @csrf
+                                                @method('get')
+
+                                                <input type="hidden" name="page"
+                                                    value="">
+                                                <button class="btn btn-success" id="online">Online</button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('admin.course.status', $course->id) }}"
+                                                onsubmit="return confirm('Are you sure you want to update Course status ?')"
+                                                method="get">
+                                                @csrf
+                                                @method('get')
+                                                <input type="hidden" name="page"
+                                                    value="">
+                                                <button class="btn btn-danger" type="submit">Offline</button>
+                                            </form>
+                                        @endif
                                     </td>
                                     <td>
                                         {{ $course->created_at->diffForHumans() }}

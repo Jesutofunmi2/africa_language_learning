@@ -46,6 +46,13 @@ class CourseController extends Controller
             ->with('success', 'Course updated successfully');
     }
 
+    public function status(Request $request, $id)
+    {
+        $this->service->courseStatus($id);
+        return redirect()->route('admin.course.list', ['page' => $request->page])
+            ->with('success', 'Updated successfully');
+    }
+
     public function destroy($courseId): RedirectResponse
     {
 

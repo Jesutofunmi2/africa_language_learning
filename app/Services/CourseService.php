@@ -53,4 +53,21 @@ class CourseService
         Course::where('id',$courseId)->delete();
     }
 
+    public function courseStatus($id)
+    {
+        $new_course = new Course;
+        $course = Course::whereId($id)->first();
+        if ($course->status == true) {
+            $new_course::whereId($id)->update([
+                'status' => false
+            ]);
+        } else {
+            $new_course::whereId($id)->update([
+                'status' => true
+            ]);
+        }
+
+        return $new_course;
+    }
+
 }
