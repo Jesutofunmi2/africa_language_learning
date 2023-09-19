@@ -14,8 +14,8 @@ class AddSchoolIdToTeacherSurveies extends Migration
     public function up()
     {
         Schema::table('teacher_surveies', function (Blueprint $table) {
-            $table->string('teacher_id');
             
+            $table->string('school_id');
         });
     }
 
@@ -27,8 +27,8 @@ class AddSchoolIdToTeacherSurveies extends Migration
     public function down()
     {
         Schema::table('teacher_surveies', function (Blueprint $table) {
-            $table->dropColumn('teacher_id');
             
+            $table->dropColumn('school_id');
         });
     }
 }
