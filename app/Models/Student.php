@@ -69,7 +69,7 @@ class Student extends Authenticatable
 
     public function getFutureAttribute()
     {
-       $time = Carbon::parse($this->attributes['created_at'])->addDays(90);
+       $time = Carbon::parse($this->school->created_at)->addDays(90);
 
        $date = strtotime($time);
        $remaining = $date - time();
