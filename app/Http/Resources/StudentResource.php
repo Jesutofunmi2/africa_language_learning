@@ -25,6 +25,7 @@ class StudentResource extends JsonResource
             'age' => $this->age,
             'country' => $this->country,
             'count_down' => $this->future,
+            'survey_status' => $this->status == 0 ? false: true, 
         ];
     }
 }

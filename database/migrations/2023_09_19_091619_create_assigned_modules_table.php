@@ -15,7 +15,14 @@ class CreateAssignedModulesTable extends Migration
     {
         Schema::create('assigned_modules', function (Blueprint $table) {
             $table->id();
-            
+            $table->bigInteger('class_id');
+            $table->string('teacher_id');
+            $table->integer('school_id');
+            $table->uuid('module');
+            $table->date('deadline');
+            $table->integer('time');
+            $table->integer('no_attempt');
+            $table->boolean('notification')->default(false);
             $table->timestamps();
         });
     }

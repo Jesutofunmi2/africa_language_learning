@@ -13,4 +13,9 @@ class Classes extends Model
     {
         return $this->hasMany(School::class);
     }
+
+    public function assignedModule()
+    {
+        return $this->hasMany(AssignedModules::class);
+    }
 }

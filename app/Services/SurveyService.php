@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\Student;
 use App\Models\StudentSurveies;
 use App\Models\StudentSurvey;
+use App\Models\Teacher;
 use App\Models\TeacherSurveies;
 use App\Models\TeacherSurvey;
 use Illuminate\Support\Facades\DB;
@@ -31,8 +33,25 @@ class SurveyService
             $studentSurvey->prefer = $data['prefer'];
             $studentSurvey->schools_app = $data['schools_app'];
             $studentSurvey->motivates = $data['motivates'];
+
+            $student_update = new Student;
+            
+            $student = Student::where('student_id', $data['student_id'])->first();
+        
+            if ($student->survey_status == 0) {
+                $student_update::where('student_id', $data['student_id'])->update([
+                    'survey_status' => 1
+                ]);
+
+            } else {
+                $student_update::where('student_id', $data['student_id'])->update([
+                    'survey_status' => 0
+                ]);
+            }
+
             $studentSurvey->save();
-        });
+          });
+
         return $studentSurvey;
 
         //@todo we fire other actions after registration
@@ -60,9 +79,27 @@ class SurveyService
             $teacherSurvey->tools = $data['tools'];
             $teacherSurvey->strategies = $data['strategies'];
             $teacherSurvey->familiar = $data['familiar'];
+           
+            $teacher_update = new Teacher;
+            $teacher = Teacher::where('teacher_id', $data['teacher_id'])->first();
+        
+            if ($teacher->survey_status == 0) {
+                $teacher_update::where('teacher_id', $data['teacher_id'])->update([
+                    'survey_status' => 1
+                ]);
+
+            } else {
+                $teacher_update::where('teacher_id', $data['teacher_id'])->update([
+                    'survey_status' => 0
+                ]);
+            }
+
             $teacherSurvey->save();
         });
+
         return $teacherSurvey;
+
+
 
         //@todo we fire other actions after registration
     }
@@ -70,7 +107,7 @@ class SurveyService
 
     public function getStudentSurvey()
     {
-       return StudentSurveies::all();
+        return StudentSurveies::all();
     }
 
     public function getTeacherSurvey()

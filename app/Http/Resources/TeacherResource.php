@@ -23,7 +23,7 @@ class TeacherResource extends JsonResource
             'address' => $this->address,
             'image_url' => $this->image_url,
             'count_down' => $this->future,
-          
+            'survey_status' => $this->status == 0 ? false: true, 
         ];
     }
 }

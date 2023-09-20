@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\QuestionAnsweredController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TopicController;
 use App\Http\Controllers\Api\AnswerController;
+use App\Http\Controllers\Api\AssignedModuleController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\FouriteController;
 use App\Http\Controllers\Api\SectionController;
@@ -118,6 +119,11 @@ Route::prefix('/v1')
                 Route::get('/TeachersSurvey', [SurveyController::class, 'getTeacherSurvey'])->name('teacherSurvey.list');
                 Route::post('/createStudentSurvey', [SurveyController::class, 'createStudentSurvey'])->name('studentSurvey.create');
                 Route::post('/create/TeacherSurvey', [SurveyController::class, 'createTeacherSurvey'])->name('teacherSurvey.create');
+
+                //Assigned Module
+                Route::post('/teacher/assignedModule', [AssignedModuleController::class, 'createdTeacherAssignedModule'])->name('assignedModule.teacher');
+                
+               
 
             });
 

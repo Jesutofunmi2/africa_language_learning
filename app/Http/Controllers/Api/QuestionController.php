@@ -22,9 +22,7 @@ class QuestionController extends Controller
             ->when($topic_id, fn ($query) => $query->where('topic_id', $topic_id))
             ->when(
                 $language_id,
-                fn ($query) => $query->whereRelation('options', 'language_id', '=', $language_id)
-            )
-            ->get();
+                fn ($query) => $query->whereRelation('options', 'language_id', '=', $language_id))->inRandomOrder()->get();
         $data = QuestionResource::collection($question);
 
         return response()->json(

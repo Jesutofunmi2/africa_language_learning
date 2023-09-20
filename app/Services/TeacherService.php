@@ -37,8 +37,7 @@ class TeacherService
             $teacher->address = $data['address']?? null;
             $teacher->save();
 
-         
-
+        
             $teacher_id = $this->teacherId($teacher->name, $teacher->id);
             $teacher->teacher_id = $teacher_id;
             $teacher->save();
