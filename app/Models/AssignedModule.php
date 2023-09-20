@@ -12,7 +12,7 @@ use Laravel\Sanctum\Contracts\HasApiTokens;
 
 class AssignedModule extends Model
 {
-    use  HasFactory, Notifiable, SoftDeletes, UUID {
+    use  HasFactory, Notifiable, UUID {
         HasFactory::factory as traitFactory;
     }
 

@@ -14,6 +14,16 @@ class AssignedModuleResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'school_id' => $this->school_id,
+            'teacher_id' => $this->teacher_id,
+            'class_id' => ClassResource::make($this->class),
+            'module' => $this->module,
+            'deadline' => $this->deadline,
+            'time' => $this->time,
+            'no_attempt' => $this->no_attempt,
+            'notification' => $this->notification
+        ];
     }
 }

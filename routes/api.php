@@ -120,9 +120,11 @@ Route::prefix('/v1')
                 Route::post('/createStudentSurvey', [SurveyController::class, 'createStudentSurvey'])->name('studentSurvey.create');
                 Route::post('/create/TeacherSurvey', [SurveyController::class, 'createTeacherSurvey'])->name('teacherSurvey.create');
 
-                //Assigned Module
+                //Assigned Module Teacher
+                Route::get('/teacher/assignedModule', [AssignedModuleController::class, 'getTeacherAssignedModule'])->name('listAssignedModule.teacher');
+                Route::get('/student/assignedModule', [AssignedModuleController::class, 'getStudentAssignedModule'])->name('listAssignedModule.student');
                 Route::post('/teacher/assignedModule', [AssignedModuleController::class, 'createdTeacherAssignedModule'])->name('assignedModule.teacher');
-                
+                Route::get('/play', [AssignedModuleController::class, 'playTeacherAssignedModule'])->name('playAssignedModule.student');
                
 
             });

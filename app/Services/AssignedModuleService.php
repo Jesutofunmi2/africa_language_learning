@@ -28,4 +28,17 @@ class AssignedModuleService
             $assigned->save();
         });
     }
+
+    public function getTeacherAssignedModules(array $data)
+    {
+        $AssignedModules = AssignedModule::where('school_id', $data['school_id'])->where('teacher_id', $data['teacher_id'])->get();
+
+        return $AssignedModules;
+    }
+    public function getStudentAssignedModules(array $data)
+    {
+        $AssignedModules = AssignedModule::where('school_id', $data['school_id'])->where('class_id', $data['class_id'])->get();
+
+        return $AssignedModules;
+    }
 }
