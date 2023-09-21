@@ -17,7 +17,7 @@ class QuestionController extends Controller
         $language_id = $questionRequest->language_id;
         $topic_id = $questionRequest->topic_id;
 
-        $question = Question::query()->orderBy('created_at', 'asc')
+        $question = Question::query()
             ->where('status', true)
             ->when($topic_id, fn ($query) => $query->where('topic_id', $topic_id))
             ->when(
