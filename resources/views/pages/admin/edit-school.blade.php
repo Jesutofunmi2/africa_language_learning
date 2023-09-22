@@ -37,8 +37,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="lga" class="form-control">
-                                            <option value="{{ old('lga') ?? $school->lga }}" selected>
-                                                {{ $school->lga ?? 'Select LGA' }} </option>
+                                            <option value="{{ $school->lga }}" selected>{{ $school->lga }} </option>
                                             <option value="Abaji">Abaji</option>
                                             <option value="Garki">Garki</option>
                                             <option value="Bwari">Bwari</option>

@@ -39,6 +39,7 @@ class SchoolService
             $school->image_url = $mediaUrl ?? null;
             $school->verification_token = md5($data['email']) . Str::random();
             $school->trial_days = $data['trial_period_in_days'];
+            $school->lga = $data['lga'];
             $school->save();
 
             dispatch(new SendSchoolVerificationMail($school->name, $school->email, $school->verification_token));
