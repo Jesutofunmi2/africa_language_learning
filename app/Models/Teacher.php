@@ -36,6 +36,7 @@ class Teacher extends Model
         'language',
         'password',
         'school_id',
+        'survey_status'
     ];
  
     /**
@@ -71,7 +72,7 @@ class Teacher extends Model
 
     public function getFutureAttribute()
     {
-       $time = Carbon::parse($this->school->created_at)->addDays(90);
+       $time = Carbon::parse($this->school->created_at)->addDays($this->school->trial_days);
 
        $date = strtotime($time);
        $remaining = $date - time();

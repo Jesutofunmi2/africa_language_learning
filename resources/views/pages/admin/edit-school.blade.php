@@ -100,7 +100,21 @@
                                         </span>
                                     @endif
                                 </div>
-
+                              
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input name="trial_period_in_days" type="number" class="form-control"
+                                                placeholder="Trial period in days" value="{{ old('trial_period_in_days')  ?? $school->trial_days }}" required
+                                                autofocus>
+                                        </div>
+                                        @if ($errors->has('trial_period_in_days'))
+                                            <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('trial_period_in_days') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
 
                                 <div class="input-group{{ $errors->has('no_of_pupil') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">

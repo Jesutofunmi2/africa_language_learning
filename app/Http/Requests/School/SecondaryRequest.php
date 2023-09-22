@@ -36,7 +36,8 @@ class SecondaryRequest extends FormRequest
             'state' => ['sometimes', 'string', 'max:254'],
             'lga' => ['sometimes', 'string', 'max:254'],
             'type'=> ['required', 'string'],
-            'how_do_you_see_us' => ['sometimes', 'string']
+            'how_do_you_see_us' => ['sometimes', 'string'],
+            'trial_period_in_days'=> ['integer', 'required'],
         ];
     }
 }

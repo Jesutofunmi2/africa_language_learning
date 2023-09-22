@@ -51,6 +51,7 @@ class School extends Authenticatable implements MustVerifyEmail
         'type',
         'lga',
         'state',
+        'trial_days'
     ];
 
     /**
@@ -79,7 +80,7 @@ class School extends Authenticatable implements MustVerifyEmail
 
     public function getFutureAttribute()
     {
-       $time= Carbon::parse($this->attributes['created_at'])->addDays(90);
+       $time= Carbon::parse($this->attributes['created_at'])->addDays($this->attributes['trial_days']);
 
        $date = strtotime($time);
        $remaining = $date - time();

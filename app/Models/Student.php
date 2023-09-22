@@ -41,6 +41,7 @@ class Student extends Authenticatable
         'marital_status',
         'password',
         'school_id',
+        'survey_status',
     ];
  
     /**
@@ -69,7 +70,7 @@ class Student extends Authenticatable
 
     public function getFutureAttribute()
     {
-       $time = Carbon::parse($this->school->created_at)->addDays(90);
+       $time = Carbon::parse($this->school->created_at)->addDays($this->school->trial_days);
 
        $date = strtotime($time);
        $remaining = $date - time();

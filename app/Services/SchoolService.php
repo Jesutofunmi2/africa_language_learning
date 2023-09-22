@@ -38,6 +38,7 @@ class SchoolService
             $school->no_of_pupil = $data['no_of_pupil'];
             $school->image_url = $mediaUrl ?? null;
             $school->verification_token = md5($data['email']) . Str::random();
+            $school->trial_days = $data['trial_period_in_days'];
             $school->save();
 
             dispatch(new SendSchoolVerificationMail($school->name, $school->email, $school->verification_token));
@@ -113,7 +114,8 @@ class SchoolService
                 'country' => $data['country'] ?? $school->country,
                 'type' => $data['type'] ?? $school->type,
                 'no_of_pupil' => $data['no_of_pupil']?? $school->no_of_pupil,
-                'image_url' => $url ?? $school->image_url
+                'image_url' => $url ?? $school->image_url,
+                'trial_days' => $data['trial_period_in_days'],
             ]);
 
         return $secondary;
