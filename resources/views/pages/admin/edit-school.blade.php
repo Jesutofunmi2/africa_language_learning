@@ -22,7 +22,7 @@
                                         <select name="state" class="form-control">
                                             <option value="{{ old('state') ?? $school->state }}">
                                                 {{ $school->state ?? 'Select State' }}</option>
-                                            <option value="FCT">FCT Abuja</option>
+                                            <option value="FCT" selected>FCT Abuja</option>
 
                                         </select>
                                         <small>Note: don't leave blank, select State </small>
@@ -37,8 +37,8 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="lga" class="form-control">
-                                            <option value="{{ old('lga') ?? $school->lga }}">
-                                                {{ $school->lga ?? 'Select LGA' }}</option>
+                                            <option value="{{ old('lga') ?? $school->lga }}" selected>
+                                                {{ $school->lga ?? 'Select LGA' }} </option>
                                             <option value="Abaji">Abaji</option>
                                             <option value="Garki">Garki</option>
                                             <option value="Bwari">Bwari</option>
