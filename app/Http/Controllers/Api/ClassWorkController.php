@@ -19,11 +19,11 @@ class ClassWorkController extends Controller
     {
         $classwork = $this->classworkService->createClassWork($classworkrequest->validated());
         abort_if(is_null($classwork), 204, 'Invalid Content or Parameter');
-        $data = ClassWorkResource::make($classwork);
+        //$data = ClassWorkResource::make($classwork);
         return response()->json(
             [
                 'message' => 'Created successful.',
-                'data' => $data,
+                //'data' => $data,
             ],
             status: 201
         );

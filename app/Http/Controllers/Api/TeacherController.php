@@ -17,17 +17,16 @@ class TeacherController extends Controller
 
     public function __construct(protected TeacherService $teacherService)
     {
-        // $this->middleware('auth');
     }
     public function createTeacher(TeacherRequest $teacherrequest): JsonResponse
     {
         $teacher = $this->teacherService->updateTeacher($teacherrequest->validated(), $teacherrequest->teacher_id);
         abort_if(is_null($teacher), 204, 'Invalid Content or Parameter');
-        $data = TeacherResource::make($teacher);
+        // $data = TeacherResource::make($teacher);
         return response()->json(
             [
                 'message' => 'Update successful.',
-                'data' => $data,
+                // 'data' => $data,
             ],
             status: 201
         );
@@ -69,11 +68,11 @@ class TeacherController extends Controller
 
         $teacher = $this->teacherService->createTeacher($teacherRequest->validated());
         abort_if(is_null($teacher), 204, 'Invalid Content');
-        $data = TeacherResource::make($teacher);
+       // $data = TeacherResource::make($teacher);
         return response()->json(
             [
                 'message' => 'Registration successful.',
-                'data' => $data,
+               // 'data' => $data,
             ],
             status: 201
         );

@@ -24,11 +24,11 @@ class FouriteController extends Controller
         $fourite = $this->fouriteService->addFourite($fouriteRequest->validated());
         abort_if(is_null($fourite), 400, 'The server cannot or will not process the request due to something that is perceived to be a client error');
 
-        $data = FouriteResource::make($fourite);
+        //$data = FouriteResource::make($fourite);
         return response()->json(
             [
                 'message' => 'Fourite Add Successful.',
-                'data' => $data
+          //      'data' => $data
             ],
             status: 200
         );

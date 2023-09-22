@@ -24,6 +24,7 @@ class AssignedModuleService
             $assigned->no_attempt = $mudoleData['no_attempt'];
             $assigned->time = $mudoleData['time'];
             $assigned->notification = $mudoleData['notification'];
+            $assigned->mark = $mudoleData['mark'];
 
             $assigned->save();
         });
@@ -40,5 +41,10 @@ class AssignedModuleService
         $AssignedModules = AssignedModule::where('school_id', $data['school_id'])->where('class_id', $data['class_id'])->get();
 
         return $AssignedModules;
+    }
+
+    public function deleteAssignedModules(array $data)
+    {
+        AssignedModule::where('school_id', $data['school_id'])->where('teacher_id', $data['teacher_id'])->where('id', $data['id'])->delete();
     }
 }

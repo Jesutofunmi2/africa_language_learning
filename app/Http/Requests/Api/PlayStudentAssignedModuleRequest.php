@@ -24,8 +24,8 @@ class PlayStudentAssignedModuleRequest extends FormRequest
     public function rules()
     {
         return [
-            'module_id' => ['required', 'string', 'exists:topics,id'],
-            'type' => ['required', 'string']
+            'topic_id' => ['required', 'string', 'exists:topics,id'],
+            'language_id' => ['required', 'integer']
         ];
     }
 }

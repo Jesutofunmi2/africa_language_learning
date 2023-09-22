@@ -33,6 +33,7 @@ class AssignedModuleRequest extends FormRequest
             'data.*.time'=>['integer', 'required'],
             'data.*.no_attempt'=>['integer', 'required'],
             'data.*.notification' => ['boolean', 'required'],
+            'data.*.mark' => ['integer', 'required'],
             
         ];
     }

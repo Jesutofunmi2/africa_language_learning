@@ -38,6 +38,11 @@ class Question extends Model
     {
         return $this->hasMany(Option::class);
     }
+
+    public function module()
+    {
+        return $this->belongsTo(AssignedModule::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

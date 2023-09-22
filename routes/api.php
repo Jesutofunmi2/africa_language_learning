@@ -125,7 +125,8 @@ Route::prefix('/v1')
                 Route::get('/student/assignedModule', [AssignedModuleController::class, 'getStudentAssignedModule'])->name('listAssignedModule.student');
                 Route::post('/teacher/assignedModule', [AssignedModuleController::class, 'createdTeacherAssignedModule'])->name('assignedModule.teacher');
                 Route::get('/play', [AssignedModuleController::class, 'playTeacherAssignedModule'])->name('playAssignedModule.student');
-                
+                Route::delete('/delete/assignedModule', [AssignedModuleController::class, 'deleteTeacherAssignedModule'])->name('deleteAssignedModule.student');
+
                
 
             });

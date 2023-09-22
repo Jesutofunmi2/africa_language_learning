@@ -23,11 +23,11 @@ class ClassController extends Controller
         $classes = $this->classService->createClass($classrequest->validated());
 
         abort_if(is_null($classes), 204, 'Invalid Content or Parameter');
-        $data = ClassResource::make($classes);
+        //$data = ClassResource::make($classes);
         return response()->json(
             [
-                'message' => 'Update successful.',
-                'data' => $data,
+                'message' => 'Created successful.',
+                //'data' => $data,
             ],
             status: 201
         );

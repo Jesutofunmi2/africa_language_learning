@@ -23,7 +23,17 @@ class AssignedModuleResource extends JsonResource
             'deadline' => $this->deadline,
             'time' => $this->time,
             'no_attempt' => $this->no_attempt,
-            'notification' => $this->notification
+            'notification' => $this->notification,
+            'mark'=>$this->mark,
+            'questions' => QuestionResource::collection($this->questionQeury()),
         ];
+    }
+
+    private function questionQeury()
+    {
+        $language_id = request()->get('language_id');
+        return $this->questions()->where('topic_id', $this->id)
+                    ->when($language_id,  fn ($query) => $query
+                    ->whereRelation('options', 'language_id', '=', $language_id))->inRandomOrder()->get();
     }
 }

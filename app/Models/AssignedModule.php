@@ -21,6 +21,11 @@ class AssignedModule extends Model
         return $this->belongsTo(Classes::class);
     }
 
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
     // public function fourites()
     // {
     //     return $this->belongsTo(Fourite::class);
