@@ -102,7 +102,7 @@ class SchoolService
             $url = $mediaService->uploadImage($image);
         }
         
-        $school = School::where('id', $schoolId);
+        $school = School::where('id', $schoolId)->first();
         // if user id in array, we create new edition for the user
         $new_school = School::where('id', $schoolId)
             ->update([

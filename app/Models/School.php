@@ -91,7 +91,7 @@ class School extends Authenticatable implements MustVerifyEmail
         return "Trial version: $days_remaining days and $hours_remaining hours left";
        }
        
-       return "expired";
+       return false;
       
     }
 
