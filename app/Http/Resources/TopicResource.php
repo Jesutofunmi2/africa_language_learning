@@ -52,6 +52,6 @@ class TopicResource extends JsonResource
         $language_id = request()->get('language_id');
         return $this->questions()->where('topic_id', $this->id)
                     ->when($language_id,  fn ($query) => $query
-                    ->whereRelation('options', 'language_id', '=', $language_id))->inRandomOrder()->get();
+                    ->whereRelation('options', 'language_id', '=', $language_id))->get();
     }
 }
