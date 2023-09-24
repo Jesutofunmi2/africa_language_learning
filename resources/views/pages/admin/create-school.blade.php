@@ -37,7 +37,7 @@
                                         <select name="lga" class="form-control">
                                             <option value="{{ old('lga') }}">Select LGA</option>
                                             <option value="abaji">Abaji</option>
-                                            <option value="garki">Garki</option>
+                                            <option value="garki">Municapal</option>
                                             <option value="bwari">Bwari</option>
                                             <option value="gwagwalada">Gwagwalada</option>
                                             <option value="kuje">Kuje</option>

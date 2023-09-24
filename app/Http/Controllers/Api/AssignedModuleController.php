@@ -11,6 +11,7 @@ use App\Http\Requests\Api\PlayStudentAssignedModuleRequest;
 use App\Http\Resources\AssignedModuleResource;
 use App\Http\Resources\QuestionResource;
 use App\Http\Resources\TopicResource;
+use App\Models\AssignedModule;
 use App\Models\Question;
 use App\Models\Topic;
 use App\Services\AssignedModuleService;
@@ -20,10 +21,11 @@ use Illuminate\Http\Request;
 class AssignedModuleController extends Controller
 {
     public function __construct(protected AssignedModuleService $assignedModuleService)
-    {}
+    {
+    }
     public function createdTeacherAssignedModule(AssignedModuleRequest $assignedModuleRequest): JsonResponse
     {
-         $this->assignedModuleService->createdTeacherAssignedModule($assignedModuleRequest->validated());
+        $this->assignedModuleService->createdTeacherAssignedModule($assignedModuleRequest->validated());
         return response()->json(
             [
                 'message' => 'Created successful.',
@@ -34,13 +36,13 @@ class AssignedModuleController extends Controller
 
     public function getTeacherAssignedModule(GetAssignedModuleRequest $getAssignedModuleRequest): JsonResponse
     {
-           $modules = $this->assignedModuleService->getTeacherAssignedModules($getAssignedModuleRequest->validated());
-           $data = AssignedModuleResource::collection($modules);
+        $modules = $this->assignedModuleService->getTeacherAssignedModules($getAssignedModuleRequest->validated());
+        $data = AssignedModuleResource::collection($modules);
 
-           return response()->json([
-             'message' => 'Get Successfully',
-             'data' => $data
-           ]);
+        return response()->json([
+            'message' => 'Get Successfully',
+            'data' => $data
+        ]);
     }
 
     public function getStudentAssignedModule(GetStudentAssignedModuleRequest $getStudentAssignedModuleRequest): JsonResponse
@@ -49,23 +51,20 @@ class AssignedModuleController extends Controller
         $data = AssignedModuleResource::collection($modules);
 
         return response()->json([
-          'message' => 'Get Successfully',
-          'data' => $data
+            'message' => 'Get Successfully',
+            'data' => $data
         ]);
     }
 
     public function playTeacherAssignedModule(PlayStudentAssignedModuleRequest $playStudentAssignedModuleRequest)
     {
-        $language_id = $playStudentAssignedModuleRequest->language_id;
-        $topic_id = $playStudentAssignedModuleRequest->topic_id;
-        
-        $question = Question::query()
-        ->where('status', true)
-        ->when($topic_id, fn ($query) => $query->where('topic_id', $topic_id))
-        ->when(
-            $language_id,
-            fn ($query) => $query->whereRelation('options', 'language_id', '=', $language_id))->inRandomOrder()->get();
-        $data = QuestionResource::collection($question);
+        $id =  $playStudentAssignedModuleRequest->id;
+
+        $assignedModule = AssignedModule::find($id);
+        $question = $this->assignedModuleService->playModule($playStudentAssignedModuleRequest->validated());
+        $data = QuestionResource::collection($question)->additional([
+            'assignedModule' => AssignedModuleResource::make($assignedModule)
+        ]);
         return response()->json(
             [
                 'message' => 'Get Question Successful.',
@@ -78,10 +77,10 @@ class AssignedModuleController extends Controller
     public function deleteTeacherAssignedModule(DeleteAssignedModuleRequest $deleteAssignedModuleRequest)
     {
 
-         $this->assignedModuleService->deleteAssignedModules($deleteAssignedModuleRequest->validated());
+        $this->assignedModuleService->deleteAssignedModules($deleteAssignedModuleRequest->validated());
 
         return response()->json([
-          'message' => 'Deleted Successfully',
+            'message' => 'Deleted Successfully',
         ]);
     }
 }

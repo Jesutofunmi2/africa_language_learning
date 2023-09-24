@@ -27,7 +27,7 @@ class TopicResource extends JsonResource
             'type' => $this->type,
             'answered' => $this->answereds->where('student_id', auth()->user()->student_id),
             'media_type' => $this->media_type,
-            'questions' => QuestionResource::collection($this->questionQeury()),
+            'questions' => $request->type == 'standalone' ? "": QuestionResource::collection($this->questionQeury()),
             'question_count' => $this->questionQeury()->count(),
             'percentage' => $this->calculatePercentage(),
             'last_question_answered' => QuestionAnsweredResource::make($this->answereds->where('student_id', auth()->user()->student_id)->sortByDesc('update_at')->first())

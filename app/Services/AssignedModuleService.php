@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\AssignedModule;
+use App\Models\Question;
 use Illuminate\Support\Facades\DB;
 
 class AssignedModuleService
@@ -41,6 +42,22 @@ class AssignedModuleService
         $AssignedModules = AssignedModule::where('school_id', $data['school_id'])->where('class_id', $data['class_id'])->get();
 
         return $AssignedModules;
+    }
+
+    public function playModule(array $data)
+    {
+        $topic_id = $data['topic_id'];
+        $language_id = $data['language_id'];
+
+        $question = Question::query()
+            ->where('status', true)
+            ->when($topic_id, fn ($query) => $query->where('topic_id', $topic_id))
+            ->when(
+                $language_id,
+                fn ($query) => $query->whereRelation('options', 'language_id', '=', $language_id)
+            )->inRandomOrder()->get();
+
+        return $question;
     }
 
     public function deleteAssignedModules(array $data)

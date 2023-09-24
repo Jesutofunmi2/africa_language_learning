@@ -25,7 +25,7 @@ class AssignedModuleResource extends JsonResource
             'no_attempt' => $this->no_attempt,
             'notification' => $this->notification,
             'mark'=>$this->mark,
-            'questions' => QuestionResource::collection($this->questionQeury()),
+            //'questions' => QuestionResource::collection($this->questionQeury()),
         ];
     }
 
