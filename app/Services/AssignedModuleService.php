@@ -24,7 +24,7 @@ class AssignedModuleService
             $assigned->deadline = $mudoleData['deadline'];
             $assigned->no_attempt = $mudoleData['no_attempt'];
             $assigned->time = $mudoleData['time'];
-            $assigned->notification = $mudoleData['notification'];
+            //$assigned->notification = $mudoleData['notification'];
             $assigned->mark = $mudoleData['mark'];
 
             $assigned->save();
