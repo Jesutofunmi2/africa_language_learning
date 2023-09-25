@@ -36,6 +36,7 @@ class Topic extends Model
     {
         return $this->belongsTo(Section::class);
     }
+
     /**
      * The attributes that are mass assignable.
      *

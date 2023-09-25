@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Topic;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AssignedModuleResource extends JsonResource
@@ -25,6 +26,7 @@ class AssignedModuleResource extends JsonResource
             'no_attempt' => $this->no_attempt,
             'notification' => $this->notification,
             'mark'=>$this->mark,
+            'topic' => $this->topicQeury(),
             //'questions' => QuestionResource::collection($this->questionQeury()),
         ];
     }
@@ -35,5 +37,10 @@ class AssignedModuleResource extends JsonResource
         return $this->questions()->where('topic_id', $this->id)
                     ->when($language_id,  fn ($query) => $query
                     ->whereRelation('options', 'language_id', '=', $language_id))->inRandomOrder()->get();
+    }
+
+    private function topicQeury()
+    {
+        return Topic::query()->where('id', $this->module)->get();
     }
 }

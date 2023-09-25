@@ -36,6 +36,8 @@ class AssignedModuleController extends Controller
 
     public function getTeacherAssignedModule(GetAssignedModuleRequest $getAssignedModuleRequest): JsonResponse
     {
+
+        
         $modules = $this->assignedModuleService->getTeacherAssignedModules($getAssignedModuleRequest->validated());
         $data = AssignedModuleResource::collection($modules);
 
