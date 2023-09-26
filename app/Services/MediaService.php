@@ -7,10 +7,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;
 use FFMpeg\FFMpeg;
-
+use Cloudinary\Configuration\Configuration;
 class MediaService
 {
-
     public function uploadImage($image)
     {
         $url = null;
@@ -43,5 +42,10 @@ class MediaService
             $url = Storage::url($url);
         }
         return $url;
+    }
+
+    public function cloudinaryUpload()
+    {
+          
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Services;
 use App\Models\Activity;
 use App\Models\Language;
+use App\Models\QuestionType;
 use App\Models\Topic;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -142,7 +143,45 @@ class ActivityService
     {
         return Language::where('name', '=', $name)->exists();
     }
+
+    public function createQuestionType(array $data): void
+    {
+        $questionType = new QuestionType();
+        $questionType->name = $data['name'];
+        $questionType->topic_id = $data['topic_id'];
+        $questionType->save();
+    }
     
+
+    public function questionTypeNameExists($name)
+    {
+        return QuestionType::where('name', '=', $name)->exists();
+    }
+
+
+    public function showQuestionType($Id): QuestionType
+    {
+        $questionType = QuestionType::whereId($Id)->first();
+
+        return $questionType;
+    }
+
+    public function updateQuestionType(array $data,  $Id): QuestionType
+    {
+
+        $questionTypes = QuestionType::whereId($Id)->first();
+       
+        $questionType = new QuestionType;
+        // if user id in array, we create new edition for the user
+        $questionType::where('id', $Id)
+            ->update([
+                'name' => $data['name']?? $questionTypes->name,
+                'topic_id' => $data['topic_id'] ?? $questionTypes->topic_id
+            ]);
+
+        return $questionType;
+    }
+
     public function createTopic(array $data): void
     {
         $mediaService = new MediaService;
@@ -240,6 +279,11 @@ class ActivityService
     public function deleteLanguage(Language $language): void
     {
         $language->delete();
+    }
+
+    public function deleteQuestionTyp($Id): void
+    {
+        QuestionType::whereId($Id)->delete();
     }
 
     public function deleteTopic(Topic $topic): void

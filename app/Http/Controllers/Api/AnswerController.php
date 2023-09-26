@@ -30,6 +30,8 @@ class AnswerController extends Controller
         if ($question->answered_type == 'puzzle') {
             return $this->puzzle($question, $optionIds, $puzzle);
         }
+
+        
     }
 
     protected function multiple(Question $question, array $optionIds)

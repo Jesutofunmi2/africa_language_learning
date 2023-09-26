@@ -49,7 +49,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="language_id" class="form-control">
-                                            <option value="{{ old('language_id') ?? $question->language->id }}">
+                                            <option value="{{  $question->language->id }}">
                                                 {{ $question->language->name }} </option>
                                             @foreach ($languages as $language)
                                                 <option value="{{ $language->id }}">{{ $language->name }}</option>
@@ -67,7 +67,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="topic_id" class="form-control">
-                                            <option value="{{ old('topic_id') ?? $question->topic->id }}">
+                                            <option value="{{  $question->topic->id }}">
                                                 {{ $question->topic->title }}</option>
                                             @foreach ($topics as $topic)
                                                 <option value="{{ $topic->id }}">{{ $topic->title }}</option>
@@ -85,22 +85,20 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="answered_type" class="form-control">
-                                            <option value="{{ old('answered_type') ?? $question->answered_type }}">
-                                                {{ $question->answered_type }}</option>
-                                            <option value="single">Single</option>
-                                            <option value="multiple">Multiple</option>
-                                            <option value="puzzle">Puzzle</option>
-                                            <option value="text">Text</option>
-
+                                            <option value={{$question->answered_type}}>{{$question->answered_type}}</option>
+                                            @foreach($questionTypes as $questionType)
+                                                    <option value={{$questionType->name}}>{{$questionType->name}}</option>
+                                           @endforeach
                                         </select>
                                         <small>Note: don't leave blank, select Answered Type </small>
                                     </div>
                                     @if ($errors->has('answered_type'))
-                                        <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('answered_type') }}</strong>
-                                        </span>
-                                    @endif
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('answered_type') }}</strong>
+                                    </span>
+                                 @endif
                                 </div>
+
 
 
                                 <label class="col-md-3 col-form-label">{{ __('Media Upload') }}</label>

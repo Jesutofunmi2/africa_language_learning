@@ -214,9 +214,6 @@
                                     </span>
                                 @endif
 
-
-
-
                                 <div class="card-footer ">
                                     <button type="submit" class="btn btn-info btn-round">{{ __('Save') }}</button>
                                     {{-- <button type="" class="btn btn-danger btn-round">{{ __('Cancel') }}</button> --}}

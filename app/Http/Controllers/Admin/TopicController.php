@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateTopicRequest;
 use App\Models\Language;
+use App\Models\QuestionType;
 use App\Models\Section;
 use App\Models\Topic;
 use App\Services\ActivityService;
@@ -23,7 +24,8 @@ class TopicController extends Controller
     {
         $languages = Language::get();
         $sections = Section::all();
-        return view('pages.admin.create-topic', ['languages' => $languages, 'sections' => $sections]);
+        $question_types = QuestionType::all();
+        return view('pages.admin.create-topic', ['languages' => $languages, 'sections' => $sections, 'questionTypes'=> $question_types]);
     }
 
     public function create(CreateTopicRequest $createTopicRequest): RedirectResponse
@@ -44,7 +46,8 @@ class TopicController extends Controller
     {
         $topic = $this->service->showTopic($topicId);
         $sections = Section::all();
-        return view('pages.admin.edit-topic', ['topic' => $topic, 'sections' => $sections]);
+        $question_types = QuestionType::all();
+        return view('pages.admin.edit-topic', ['topic' => $topic, 'sections' => $sections, 'questionTypes'=> $question_types]);
     }
 
     public function update(CreateTopicRequest $request, $topicId): RedirectResponse

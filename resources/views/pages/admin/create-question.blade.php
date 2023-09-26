@@ -104,19 +104,17 @@
 
                                 <div class="row-12">
                                     <div class="form-group">
-                                        <select name="answered_type" class="form-control">
-                                            <option value="{{ old('answered_type') }}">Select Answered Type</option>
-                                            <option value="single">Single</option>
-                                            <option value="multiple">Multiple</option>
-                                            <option value="puzzle">Puzzle</option>
-                                            <option value="text">Text</option>
-
+                                        <select name="question_type" class="form-control">
+                                            <option value="{{ old('question_type') }}">Question Type</option>
+                                            @foreach($questionTypes as $questionType)
+                                                    <option value={{$questionType->name}}>{{$questionType->name}}</option>
+                                           @endforeach
                                         </select>
-                                        <small>Note: don't leave blank, select Answered Type </small>
+                                        <small>Note: don't leave blank, select Question type </small>
                                     </div>
-                                    @if ($errors->has('answered_type'))
+                                    @if ($errors->has('question_type'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('answered_type') }}</strong>
+                                            <strong>{{ $errors->first('question_type') }}</strong>
                                         </span>
                                     @endif
                                 </div>

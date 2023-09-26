@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\QuestionBatchUploadRequest;
 use App\Http\Requests\Media\MediaRequest;
 use App\Imports\ImportQuestion;
 use App\Models\Question;
+use App\Models\QuestionType;
 use App\Services\MediaService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,8 +31,8 @@ class QuestionController extends Controller
     {
         $languages = Language::orderBy('name')->get();
         $topics = Topic::orderBy('title')->get();
-
-        return view('pages.admin.create-question', ['languages' => $languages, 'topics' => $topics]);
+        $question_types = QuestionType::all();
+        return view('pages.admin.create-question', ['languages' => $languages, 'topics' => $topics,'questionTypes'=> $question_types ]);
     }
 
     public function create(CreateQuestionRequest $createQuestionRequest): RedirectResponse
@@ -59,9 +60,10 @@ class QuestionController extends Controller
     {
         $languages = Language::all();
         $topics = Topic::all();
+        $question_types = QuestionType::all();
         $question = $this->service->showQuestion($questionId);
 
-        return view('pages.admin.edit-question', ['question' => $question, 'languages' => $languages, 'topics' => $topics]);
+        return view('pages.admin.edit-question', ['question' => $question, 'languages' => $languages, 'topics' => $topics, 'questionTypes'=> $question_types ]);
     }
 
     public function update(EditQuestionRequest $createquestionrequest, $questionId)

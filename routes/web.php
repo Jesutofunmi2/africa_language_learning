@@ -16,7 +16,7 @@ use App\Http\Controllers\School\Auth\SchoolController;
 use App\Http\Controllers\Admin\AdminActivityController;
 use App\Http\Controllers\Admin\AdminRegisterController;
 use App\Http\Controllers\Admin\AdminDashboardController;
-
+use App\Http\Controllers\Admin\QuestionTpyeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -150,6 +150,14 @@ Route::prefix('admin')->name('admin.')
                 Route::put('course/{course}', [CourseController::class, 'update'])->name('course.update');
                 Route::delete('course/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
                 Route::get('course/status/{id}', [CourseController::class, 'status'])->name('course.status');
+
+                Route::get('question-type/create', [QuestionTpyeController::class, 'index'])->name('question.type.index');
+                Route::post('question-type/create', [QuestionTpyeController::class, 'create'])->name('question.type.create');
+                Route::get('question-types', [QuestionTpyeController::class, 'list'])->name('question.type.list');
+                Route::get('question-type/{Id}', [QuestionTpyeController::class, 'show'])->name('question.type.show');
+                Route::put('question-type/{Id}', [QuestionTpyeController::class, 'update'])->name('question.type.update');
+                Route::delete('question-type/{Id}', [QuestionTpyeController::class, 'destroy'])->name('question.type.destroy');
+    
 
                 Route::post('logout', [AdminLogoutController::class, 'index'])->name('logout');
             });

@@ -15,6 +15,7 @@ use Illuminate\View\View;
 use App\Models\Language;
 use App\Models\Option;
 use App\Models\Question;
+use App\Models\QuestionType;
 use App\Models\SecondarySchool;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -48,6 +49,7 @@ class AdminDashboardController extends Controller
         $teacher = Teacher::count();
         $sections = Section::count();
         $courses = Course::count();
+        $questionType = QuestionType::count();
 
         return view(
             'pages.admin.dashboard',
@@ -62,7 +64,8 @@ class AdminDashboardController extends Controller
                 'options' => $options,
                 'teachers' => $teacher,
                 'sections' => $sections,
-                'courses' => $courses
+                'courses' => $courses,
+                'question_types' => $questionType
             ]
         );
     }

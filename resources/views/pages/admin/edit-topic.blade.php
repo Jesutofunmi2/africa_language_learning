@@ -48,7 +48,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="section_id" class="form-control">
-                                            <option value="{{ old('section_id') }}">{{ $topic->section->title ?? null }}
+                                            <option value={{ $topic->section->title }}>{{ $topic->section->title ?? null }}
                                             </option>
 
                                             @foreach ($sections as $section)
@@ -68,7 +68,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="type" class="form-control">
-                                            <option value="{{ old('type') }}">{{ $topic->type }}</option>
+                                            <option value={{ $topic->type }}>{{ $topic->type }}</option>
                                             <option value="sectional">Sectional</option>
                                             <option value="standalone">StandAlone</option>
 
@@ -85,11 +85,10 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="question_type" class="form-control">
-                                            <option value="{{ old('question_type') }}">Question Type</option>
-                                            <option value="puzzle">Puzzle</option>
-                                            <option value="single">Single</option>
-                                            <option value="multiple">Multiple</option>
-
+                                            <option value={{$topic->question_type}}>{{$topic->question_type}}</option>
+                                            @foreach($questionTypes as $questionType)
+                                                    <option value={{$questionType->name}}>{{$questionType->name}}</option>
+                                           @endforeach
                                         </select>
                                         <small>Note: don't leave blank, select Question type </small>
                                     </div>

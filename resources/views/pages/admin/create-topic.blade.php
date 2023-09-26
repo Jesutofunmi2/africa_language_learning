@@ -64,10 +64,9 @@
                                     <div class="form-group">
                                         <select name="question_type" class="form-control">
                                             <option value="{{ old('question_type') }}">Question Type</option>
-                                            <option value="puzzle">Puzzle</option>
-                                            <option value="single">Single</option>
-                                            <option value="multiple">Multiple</option>
-
+                                            @foreach($questionTypes as $questionType)
+                                                    <option value={{$questionType->name}}>{{$questionType->name}}</option>
+                                           @endforeach
                                         </select>
                                         <small>Note: don't leave blank, select Question type </small>
                                     </div>
