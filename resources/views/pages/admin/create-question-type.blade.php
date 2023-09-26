@@ -10,7 +10,7 @@
                 <div class="col-lg-8 col-md-8 offset-2 mr-auto">
                     <div class="card card-signup text-center">
                         <div class="card-header ">
-                            <h4 class="card-title">{{ __('Create Language') }}</h4>
+                            <h4 class="card-title">{{ __('Create Question Type') }}</h4>
                         </div>
                         <div class="card-body ">
                             <form class="form" method="POST" action="{{ route('admin.question.type.create') }}"
