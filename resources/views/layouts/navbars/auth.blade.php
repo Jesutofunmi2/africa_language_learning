@@ -91,7 +91,12 @@
                     <p>{{ __('Create Option') }}</p>
                 </a>
             </li>
-
+            <li class="{{ $elementActive == 'questionType' ? 'active' : '' }}">
+                <a href="{{ route('admin.question.type.index')}}">
+                    <i class="nc-icon nc-box"></i>
+                    <p>{{ __('Create Question Type') }}</p>
+                </a>
+            </li>
             <li class="{{ $elementActive == 'media' ? 'active' : '' }}">
                 <a href="{{ route('admin.question.media')}}">
                     <i class="nc-icon nc-box"></i>

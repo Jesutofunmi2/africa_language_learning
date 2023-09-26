@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'language',
+    'elementActive' => 'questionType',
 ])
 @section('content')
     <div class="content">
