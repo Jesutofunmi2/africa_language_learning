@@ -28,9 +28,7 @@
                     </div>
                     <div class="card-footer ">
                         <hr>
-                        <div class="stats">
-                            <i class="fa fa-refresh"></i> Update Now
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -56,9 +54,7 @@
                     </div>
                     <div class="card-footer ">
                         <hr>
-                        <div class="stats">
-                            <i class="fa fa-calendar-o"></i> Last day
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -73,7 +69,7 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <a href="#">
+                                    <a href="{{ route('admin.list.student') }}">
                                         <p class="card-category">Students</p>
                                     </a>
                                     <p class="card-title">{{ $students }}
@@ -84,9 +80,7 @@
                     </div>
                     <div class="card-footer ">
                         <hr>
-                        <div class="stats">
-                            <i class="fa fa-clock-o"></i> In the last hour
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -112,9 +106,7 @@
                     </div>
                     <div class="card-footer ">
                         <hr>
-                        <div class="stats">
-                            <i class="fa fa-refresh"></i> Update now
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -143,9 +135,7 @@
                     </div>
                     <div class="card-footer ">
                         <hr>
-                        <div class="stats">
-                            <i class="fa fa-refresh"></i> Update Now
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -171,9 +161,7 @@
                     </div>
                     <div class="card-footer ">
                         <hr>
-                        <div class="stats">
-                            <i class="fa fa-calendar-o"></i> Last day
-                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -199,9 +187,7 @@
                     </div>
                     <div class="card-footer ">
                         <hr>
-                        <div class="stats">
-                            <i class="fa fa-clock-o"></i> In the last hour
-                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -227,9 +213,7 @@
                     </div>
                     <div class="card-footer ">
                         <hr>
-                        <div class="stats">
-                            <i class="fa fa-refresh"></i> Update now
-                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -255,9 +239,7 @@
                     </div>
                     <div class="card-footer ">
                         <hr>
-                        <div class="stats">
-                            <i class="fa fa-refresh"></i> Update now
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -284,9 +266,7 @@
                     </div>
                     <div class="card-footer ">
                         <hr>
-                        <div class="stats">
-                            <i class="fa fa-refresh"></i> Update now
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -313,9 +293,7 @@
                     </div>
                     <div class="card-footer ">
                         <hr>
-                        <div class="stats">
-                            <i class="fa fa-refresh"></i> Update now
-                        </div>
+                      
                     </div>
                 </div>
             </div>

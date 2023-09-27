@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\AdminActivityController;
 use App\Http\Controllers\Admin\AdminRegisterController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\QuestionTpyeController;
+use App\Http\Controllers\Student\Auth\CreateStudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,8 @@ Route::prefix('admin')->name('admin.')
             });
 
             Route::middleware('auth')->group(function () {
+
+                Route::get('/getStudents', [CreateStudentController::class, 'list'])->name('list.student');
 
                 Route::get('register', [AdminRegisterController::class, 'index'])->name('register.get');
                 Route::post('register', [AdminRegisterController::class, 'register'])->name('register.post');

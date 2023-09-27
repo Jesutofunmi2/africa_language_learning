@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\CreateStudentRequest;
 use App\Http\Resources\LoginResource;
 use App\Http\Resources\StudentResource;
+use App\Models\Student;
 use App\Services\TokenService;
 use App\Services\StudentService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CreateStudentController extends Controller
 {
@@ -35,5 +37,12 @@ class CreateStudentController extends Controller
             ],
             status: 201
         );
+    }
+
+    public function list(): View
+    {
+      $students = Student::orderBy('created_at', 'desc')->paginate(40);
+   
+      return view('pages.admin.list-student')->with('students', $students);
     }
 }
