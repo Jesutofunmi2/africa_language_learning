@@ -104,17 +104,17 @@
 
                                 <div class="row-12">
                                     <div class="form-group">
-                                        <select name="question_type" class="form-control">
-                                            <option value="{{ old('question_type') }}">Question Type</option>
+                                        <select name="answered_type" class="form-control">
+                                            <option value="{{ old('answered_type') }}">Question Type</option>
                                             @foreach($questionTypes as $questionType)
                                                     <option value={{$questionType->name}}>{{$questionType->name}}</option>
                                            @endforeach
                                         </select>
                                         <small>Note: don't leave blank, select Question type </small>
                                     </div>
-                                    @if ($errors->has('question_type'))
+                                    @if ($errors->has('answered_type'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('question_type') }}</strong>
+                                            <strong>{{ $errors->first('answered_type') }}</strong>
                                         </span>
                                     @endif
                                 </div>

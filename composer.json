@@ -9,7 +9,7 @@
         "cloudinary-labs/cloudinary-laravel": "^2.0",
         "cloudinary/cloudinary_php": "^2",
         "cyber-duck/laravel-excel": "dev-master",
-        "doctrine/dbal": "^3.6",
+        "doctrine/dbal": "^3.7",
         "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
