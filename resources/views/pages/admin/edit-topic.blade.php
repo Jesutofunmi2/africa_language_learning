@@ -48,7 +48,7 @@
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="section_id" class="form-control">
-                                            <option value={{ $topic->section->title }}>{{ $topic->section->title ?? null }}
+                                            <option value={{ $topic->section->title ?? null}}>{{ $topic->section->title ?? null }}
                                             </option>
 
                                             @foreach ($sections as $section)

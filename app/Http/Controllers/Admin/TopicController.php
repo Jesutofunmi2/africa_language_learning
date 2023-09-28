@@ -46,8 +46,9 @@ class TopicController extends Controller
     {
         $topic = $this->service->showTopic($topicId);
         $sections = Section::all();
-        $question_types = QuestionType::all();
-        return view('pages.admin.edit-topic', ['topic' => $topic, 'sections' => $sections, 'questionTypes'=> $question_types]);
+        $questionTypes = QuestionType::all();
+        
+        return view('pages.admin.edit-topic', ['topic' => $topic, 'sections' => $sections, 'questionTypes'=> $questionTypes]);
     }
 
     public function update(CreateTopicRequest $request, $topicId): RedirectResponse

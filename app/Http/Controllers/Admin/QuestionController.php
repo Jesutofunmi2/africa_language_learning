@@ -60,10 +60,10 @@ class QuestionController extends Controller
     {
         $languages = Language::all();
         $topics = Topic::all();
-        $question_types = QuestionType::all();
+        $questionTypes = QuestionType::all();
         $question = $this->service->showQuestion($questionId);
 
-        return view('pages.admin.edit-question', ['question' => $question, 'languages' => $languages, 'topics' => $topics, 'questionTypes'=> $question_types ]);
+        return view('pages.admin.edit-question', ['question' => $question, 'languages' => $languages, 'topics' => $topics, 'questionTypes'=> $questionTypes ]);
     }
 
     public function update(EditQuestionRequest $createquestionrequest, $questionId)

@@ -28,7 +28,7 @@ class EditQuestionRequest extends FormRequest
             'instruction' => ['sometimes','string'],
             'language_id' => ['integer', 'required', 'exists:languages,id'],
             'topic_id' => ['integer', 'required', 'exists:topics,id'],
-            'answered_type' => ['required','in:text,multiple,single,puzzle'],
+            'answered_type' => ['required','string', 'exists:question_types,name'],
             'media_url' => 'sometimes|mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg',
             'image_url' => ['sometimes','image','mimes:jpeg,png,jpg','max:1024']
         ];
