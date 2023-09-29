@@ -41,4 +41,20 @@ class SectionController extends Controller
             status: 200
         );
     }
+
+    public function listModule(SectionRequest $sectionRequest)
+    {
+        $section = Section::orderBy('created_at', 'asc')
+            ->when($sectionRequest->course_id, fn ($query) => $query->where('course_id', $sectionRequest->course_id))
+            ->has('topics')->paginate(50);
+        $data = SectionResource::collection($section);
+
+        return response()->json(
+            [
+                'message' => 'Get Section Successful.',
+                'data' => $data
+            ],
+            status: 200
+        );
+    }
 }
