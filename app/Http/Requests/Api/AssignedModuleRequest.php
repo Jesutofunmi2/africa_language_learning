@@ -29,7 +29,7 @@ class AssignedModuleRequest extends FormRequest
             'class_id' => ['integer' ,'required','exists:classes,id'],
             'data' => ['required', 'array', 'min:1'],
             'data.*.module'=>['integer', 'required'],
-            'data.*.deadline' => ['date', 'required'],
+            'data.*.deadline' => ['date_format:m/d/Y', 'required'],
             'data.*.time'=>['integer', 'required'],
             'data.*.no_attempt'=>['integer', 'required'],
             //'data.*.notification' => ['boolean', 'required'],
