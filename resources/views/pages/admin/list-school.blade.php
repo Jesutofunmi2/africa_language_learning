@@ -74,7 +74,7 @@
                                         {{ $loop->iteration }}
                                     </td>
                                     <td>
-                                        {{ $school->school_name }}
+                                        {{ $school->name }}
                                     </td>
                                     <td>
                                         {{ $school->phone_number }}
