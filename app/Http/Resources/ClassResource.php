@@ -25,6 +25,6 @@ class ClassResource extends JsonResource
 
     public function languageQuery()
     {
-        return Language::query()->where('id', $this->language_id)->where('status', 1)->get();
+        return Language::query()->where('id', $this->language_id)->where('status', 1)->value('name');
     }
 }
