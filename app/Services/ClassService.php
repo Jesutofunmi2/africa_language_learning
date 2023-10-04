@@ -14,7 +14,7 @@ class ClassService
             $class = new Classes;
             $class->name = $data['class_room_name'];
             $class->school_id = $data['school_id'];
-            $class->teacher_id = $data['teacher_id'];
+            $class->teacher_id = $data['teacher_id'] ?? null;
             $class->language_id = $data['language_id'];
             $class->save();
 
@@ -25,9 +25,16 @@ class ClassService
      }
 
 
-     public function showClass(array $data)
+     public function showClassTeacher(array $data)
      {
         $class = Classes::where('teacher_id',$data['teacher_id'])->where('school_id', $data['school_id'])->get();
+
+        return $class;
+     }
+
+     public function showClassSchool(array $data)
+     {
+        $class = Classes::where('school_id', $data['school_id'])->get();
 
         return $class;
      }

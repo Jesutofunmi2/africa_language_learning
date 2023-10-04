@@ -25,7 +25,7 @@ class ClassRequest extends FormRequest
     {
         return [
             'school_id'=> ['required', 'integer', 'exists:schools,id'],
-            'teacher_id'=> ['required', 'string', 'exists:teachers,teacher_id'],
+            'teacher_id'=> ['sometimes', 'string', 'exists:teachers,teacher_id'],
             'language_id' => ['sometimes','integer', 'exists:languages,id'],
             'class_room_name'=>['sometimes', 'string']
         ];

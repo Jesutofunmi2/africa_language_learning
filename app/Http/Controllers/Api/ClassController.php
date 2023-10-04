@@ -33,9 +33,23 @@ class ClassController extends Controller
         );
     }
 
-    public function show(ClassRequest $classrequest)
+    public function showSchool(ClassRequest $classrequest)
     {
-        $Class = $this->classService->showClass($classrequest->validated());
+        $Class = $this->classService->showClassSchool($classrequest->validated());
+        abort_if(is_null($Class), 204, 'Invalid Content or Parameter');
+        $data = ClassResource::collection($Class);
+        return response()->json(
+            [
+                'message' => 'GET successful.',
+                'data' => $data,
+            ],
+            status: 201
+        );
+    }
+
+    public function showTeacher(ClassRequest $classrequest)
+    {
+        $Class = $this->classService->showClassTeacher($classrequest->validated());
         abort_if(is_null($Class), 204, 'Invalid Content or Parameter');
         $data = ClassResource::collection($Class);
         return response()->json(
