@@ -22,6 +22,7 @@ class StudentResource extends JsonResource
             'language' => $this->language,
             'gendar' => $this->gendar,
             'school' => $this->school,
+            'class' => ClassResource::make($this->class),
             'age' => $this->age,
             'country' => $this->country,
             'count_down' => $this->future,

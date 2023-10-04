@@ -60,6 +60,8 @@
     <!-- Sharrre libray -->
     <script src="../assets/demo/jquery.sharrre.js"></script>
 
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
 
     @stack('scripts')
 

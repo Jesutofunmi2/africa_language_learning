@@ -28,6 +28,7 @@ use App\Http\Controllers\Api\ClassController;
 use App\Http\Controllers\Api\ClassWorkController;
 use App\Http\Controllers\Api\SurveyController;
 use App\Http\Controllers\Api\TeacherSurveyController;
+use App\Http\Controllers\Api\ClassArmController;
 use App\Models\QuestionAnswered;
 
 /*
@@ -104,6 +105,11 @@ Route::prefix('/v1')
                 Route::post('/addClass', [ClassController::class, 'createClass'])->name('createClass');
                 Route::get('/showClass', [ClassController::class, 'show'])->name('showClass');
                 Route::delete('/deleteClass', [ClassController::class, 'delete'])->name('deleteClass');
+
+                 //classarm endpoint
+                 Route::post('/addClassarm', [ClassArmController::class, 'create'])->name('create');
+                 Route::get('/showClassarm', [ClassArmController::class, 'show'])->name('showClassArm');
+                 Route::delete('/deleteClassarm', [ClassArmController::class, 'delete'])->name('deleteClassArm');
 
                 //classwork endpoint
                 Route::post('/addClassWork', [ClassWorkController::class, 'createClassWork'])->name('createClassWork');

@@ -47,6 +47,9 @@
                             <th>
                                 School 
                             </th>
+                           <th>
+                            Class
+                           </th>
                                
                             <th>
                                 Date
@@ -66,6 +69,10 @@
                                     </td>
                                     <td>
                                         {{ $student->school->name ?? '' }}
+                                    </td>
+
+                                    <td>
+                                        {{ $student->class->name ?? null}}
                                     </td>
 
                                     <td>

@@ -70,7 +70,7 @@
                                     </td>
                                    
                                     <td>
-                                        {{ $questionType->topic->title }}
+                                        {{ $questionType->topic->title ?? null}}
                                     </td>
 
                                     <td>

@@ -34,7 +34,8 @@ class CreateStudentRequest extends FormRequest
             'country' => ['sometimes', 'string'],
             'gendar'=> ['required', 'string'],
             'phone_number'=> ['sometimes', 'string'],
-            'age' => 'required|numeric|gt:0'
+            'age' => 'required|numeric|gt:0',
+            'class_id' => ['required', 'integer']
         ];
     }
 
@@ -47,6 +48,7 @@ class CreateStudentRequest extends FormRequest
             'language.required' => 'language is missing',
             'age.required' => 'age is missing or not an integer value',
             'gendar.required' => 'gender is missing',
+            'class_id.required' => 'class id is required'
         ];
     }
 }

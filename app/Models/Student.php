@@ -18,12 +18,20 @@ class Student extends Authenticatable
         HasFactory::factory as traitFactory;
     }
 
-
     public function school()
     {
         return $this->belongsTo(School::class);
     }
-
+    
+    public function class()
+    {
+        return $this->belongsTo(Classes::class);
+    }
+   
+    public function classarm()
+    {
+        return $this->belongsTo(ClassArm::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -42,6 +50,7 @@ class Student extends Authenticatable
         'password',
         'school_id',
         'survey_status',
+        'class_id'
     ];
  
     /**

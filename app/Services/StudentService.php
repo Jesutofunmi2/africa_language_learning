@@ -33,6 +33,7 @@ class StudentService
                 $student->gendar = $data['gendar'];
                 $student->language = $data['language'];
                 $student->age = $data['age']?? null;
+                $student->class_id = $data['class_id'];
                 $student->save();
 
                 $student_id = $this->studentId($student->school_id, $student->id);

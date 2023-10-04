@@ -5,28 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Classes extends Model
+class ClassArm extends Model
 {
     use HasFactory;
-
-    public function school()
-    {
-        return $this->hasMany(School::class);
-    }
-
-    public function assignedModule()
-    {
-        return $this->hasMany(AssignedModules::class);
-    }
 
     public function student()
     {
         return $this->hasMany(Student::class);
     }
 
-    public function classarm()
+    public function class()
     {
-        return $this->hasMany(ClassArm::class);
+        return $this->belongsTo(Classes::class);
     }
 
     public function teacher()

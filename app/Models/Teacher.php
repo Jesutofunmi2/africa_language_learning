@@ -16,7 +16,6 @@ class Teacher extends Model
         HasFactory::factory as traitFactory;
     }
 
-
     public function school()
     {
         return $this->belongsTo(School::class);
