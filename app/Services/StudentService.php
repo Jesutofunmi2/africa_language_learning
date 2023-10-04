@@ -16,7 +16,6 @@ class StudentService
      */
     public function createStudent(array $data): Student
     {
-    
         $student = new Student;
         $phone_number = '08139525526';
         $password = '12345678';
@@ -34,6 +33,7 @@ class StudentService
                 $student->language = $data['language'];
                 $student->age = $data['age']?? null;
                 $student->class_id = $data['class_id'];
+                $student->classarm_id = $data['classarm_id'];
                 $student->save();
 
                 $student_id = $this->studentId($student->school_id, $student->id);
