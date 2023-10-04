@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ClassRequest;
+use App\Http\Requests\Api\GetClassRequest;
 use App\Http\Resources\ClassResource;
 use App\Services\ClassService;
 
@@ -52,6 +53,20 @@ class ClassController extends Controller
         $Class = $this->classService->showClassTeacher($classrequest->validated());
         abort_if(is_null($Class), 204, 'Invalid Content or Parameter');
         $data = ClassResource::collection($Class);
+        return response()->json(
+            [
+                'message' => 'GET successful.',
+                'data' => $data,
+            ],
+            status: 201
+        );
+    }
+
+    public function showSingle(GetClassRequest $getClassrequest)
+    {
+        $class = $this->classService->showSingleClass($getClassrequest->validated());
+        abort_if(is_null($class), 204, 'Invalid Content or Parameter');
+        $data = ClassResource::collection($class);
         return response()->json(
             [
                 'message' => 'GET successful.',

@@ -38,7 +38,12 @@ class ClassService
 
         return $class;
      }
+     public function showSingleClass(array $data)
+     {
+      $class = Classes::where('school_id', $data['school_id'])->where('id', $data['class_id'])->get();
 
+      return $class; 
+     }
      public function deleteClass(array $data)
      {
        $deleteClass = Classes::where('teacher_id', $data['teacher_id'])

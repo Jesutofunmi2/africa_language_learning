@@ -106,6 +106,7 @@ Route::prefix('/v1')
                 Route::get('/showTeacherClasses', [ClassController::class, 'showTeacher'])->name('showClass');
                 Route::get('/showSchoolClasses', [ClassController::class, 'showSchool'])->name('showClass');
                 Route::delete('/deleteClass', [ClassController::class, 'delete'])->name('deleteClass');
+                Route::get('/getSingleClass', [ClassController::class, 'showSingle'])->name('showSingleClass');
 
                  //classarm endpoint
                  Route::post('/addClassarm', [ClassArmController::class, 'create'])->name('create');
