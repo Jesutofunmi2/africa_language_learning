@@ -20,6 +20,11 @@ class Language extends Model
     {
         return $this->hasMany(Option::class);
     }
+
+    public function class()
+    {
+        return $this->hasMany(Classes::class);
+    }
     
     /**
      * The attributes that are mass assignable.

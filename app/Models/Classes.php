@@ -24,6 +24,10 @@ class Classes extends Model
         return $this->hasMany(Student::class);
     }
 
+    public function language()
+    {
+        return $this->hasMany(Language::class); 
+    }
     public function classarm()
     {
         return $this->hasMany(ClassArm::class);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Language;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ClassResource extends JsonResource
@@ -16,9 +17,14 @@ class ClassResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'language_id' => $this->language_id,
+            'language' => $this->languageQuery(),
             'classs_room_name' => $this->name,
             'class_arms' => ClassArmResource::collection($this->classarm)
         ];
+    }
+
+    public function languageQuery()
+    {
+        return Language::query()->where('id', $this->language_id)->where('status', 1)->get();
     }
 }
