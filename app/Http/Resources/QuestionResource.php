@@ -22,7 +22,7 @@ class QuestionResource extends JsonResource
               'next_question_id' => $this->next_question_id,
               'answered_type' => $this->answered_type,
               'media_url' => $this->media_url,
-              'image_url' => $this->image_url,
+              'image_url' => $this->answered_type == 'multiple' ? null : $this->image_url,
               'media_type' => $this->media_type,
               'language' => $this->language,
               'topic' => $this->topic,
