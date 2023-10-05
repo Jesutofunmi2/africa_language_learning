@@ -20,7 +20,7 @@ class OptionResource extends JsonResource
             'hint' => $this->question->answered_type == 'puzzle' ? $this->hint: '',
             'media_url' => $this->media_url,
             'media_type' => $this->media_type,
-            'image_url' => $this->question->answered_type == 'multiple' ? null : $this->image_url,
+            'image_url' =>  $this->image_url,
         ];
     }
 }
