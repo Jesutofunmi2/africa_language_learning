@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ClassRequest;
+use App\Http\Requests\Api\DeleteClassRequest;
 use App\Http\Requests\Api\GetClassRequest;
 use App\Http\Resources\ClassResource;
 use App\Services\ClassService;
@@ -76,9 +77,23 @@ class ClassController extends Controller
         );
     }
 
-    public function delete(ClassRequest $classrequest)
+    public function deleteTeacherClass(DeleteClassRequest $deleteClassRequest)
     {
-        $deleteClass = $this->classService->deleteClass($classrequest->validated());
+        
+        $deleteClass = $this->classService->deleteTeacherClass($deleteClassRequest->validated());
+        abort_if(is_null($deleteClass), 204, 'Invalid Content or Parameter');
+
+        return response()->json(
+            [
+                'message' => 'Delete successful.',
+            ],
+            status: 202
+        );
+    }
+
+    public function deleteSchoolClass(DeleteClassRequest $deleteClassRequest)
+    {
+        $deleteClass = $this->classService->deleteSchoolClass($deleteClassRequest->validated());
         abort_if(is_null($deleteClass), 204, 'Invalid Content or Parameter');
 
         return response()->json(

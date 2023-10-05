@@ -29,6 +29,7 @@ use App\Http\Controllers\Api\ClassWorkController;
 use App\Http\Controllers\Api\SurveyController;
 use App\Http\Controllers\Api\TeacherSurveyController;
 use App\Http\Controllers\Api\ClassArmController;
+use App\Http\Controllers\Api\SchoolController as ApiSchoolController;
 use App\Models\QuestionAnswered;
 
 /*
@@ -105,7 +106,8 @@ Route::prefix('/v1')
                 Route::post('/addClass', [ClassController::class, 'createClass'])->name('createClass');
                 Route::get('/showTeacherClasses', [ClassController::class, 'showTeacher'])->name('showClass');
                 Route::get('/showSchoolClasses', [ClassController::class, 'showSchool'])->name('showClass');
-                Route::delete('/deleteClass', [ClassController::class, 'delete'])->name('deleteClass');
+                Route::delete('/deleteTeacherClass', [ClassController::class, 'deleteTeacherClass'])->name('deleteTeacherClass');
+                Route::delete('/deleteSchoolClass', [ClassController::class, 'deleteSchoolClass'])->name('deleteTeacherClass');
                 Route::get('/getSingleClass', [ClassController::class, 'showSingle'])->name('showSingleClass');
 
                  //classarm endpoint
@@ -139,6 +141,9 @@ Route::prefix('/v1')
                 Route::post('/teacher/assignment/file', [AssignedModuleController::class, 'createAssignmentFile'])->name('assignmentFile.create');    
                 Route::get('/teacher/assignment/file', [AssignedModuleController::class, 'getAssignmentFile'])->name('assignmentFile.show');  
                 Route::delete('/teacher/assignment/file', [AssignedModuleController::class, 'deleteAssignmentFile'])->name('assignmentFile.delete');  
+
+                //School Endpoint
+                Route::get('/getSchools', [ApiSchoolController::class, 'list'])->name('list.school');
 
             });
 

@@ -44,12 +44,21 @@ class ClassService
 
       return $class; 
      }
-     public function deleteClass(array $data)
+     public function deleteTeacherClass(array $data)
      {
        $deleteClass = Classes::where('teacher_id', $data['teacher_id'])
                                ->where('school_id', $data['school_id'])
-                               ->where('name', $data['class_room_name'])->delete();
+                               ->where('language_id', $data['language_id'])
+                               ->where('id', $data['class_id'])->delete();
                                
        return $deleteClass;
      }
+     public function deleteSchoolClass(array $data)
+     {
+       $deleteSchoolClass = Classes::where('id', $data['class_id'])
+                                     ->where('school_id', $data['school_id'])->delete();
+                               
+       return $deleteSchoolClass;
+     }
+
 }
