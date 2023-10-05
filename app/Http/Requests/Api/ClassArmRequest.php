@@ -27,7 +27,7 @@ class ClassArmRequest extends FormRequest
             'school_id'=> ['required', 'integer', 'exists:schools,id'],
             'language_id' => ['sometimes','integer', 'exists:languages,id'],
             'data' => ['required', 'array', 'min:1'],
-            'data.*.name'=>['integer', 'required'],
+            'data.*.name'=>['string', 'required'],
             'class_id' => ['sometimes', 'integer', 'exists:classes,id']
         ];
     }
