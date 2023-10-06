@@ -94,6 +94,7 @@ Route::prefix('/v1')
                 Route::get('/getStudent', [StudentController::class, 'getStudent'])->name('student.show');
                 Route::put('/updateStudent', [StudentController::class, 'update'])->name('student.update');
                 Route::delete('/deleteStudent', [StudentController::class, 'destroy'])->name('student.destroy');
+                Route::post('/assignStudentToClass', [StudentController::class, 'assignStudentToClass'])->name('student.assign');
 
                 //teacher endpoint
                 Route::post('/addTeacher', [TeacherController::class, 'addTeacher'])->name('addTeacher');
@@ -144,6 +145,9 @@ Route::prefix('/v1')
 
                 //School Endpoint
                 Route::get('/getSchools', [ApiSchoolController::class, 'list'])->name('list.school');
+
+                //seesion in year
+                Route::get('/session', [ClassController::class, 'session'])->name('list.session');
 
             });
 

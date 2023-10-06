@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\AssignStudentToClass;
 use App\Http\Requests\Api\SchoolRequest;
 use App\Http\Requests\Api\StudentRequest;
 use App\Http\Requests\School\SecondaryRequest;
@@ -55,13 +56,21 @@ class StudentController extends Controller
     public function update(StudentRequest $studentRequest)
     {
         $student_id = $studentRequest->student_id;
-        $student = $this->studentService->updateStudent($student_id, $studentRequest->validated());
-        //$data = StudentResource::make($student);
-
+         $this->studentService->updateStudent($student_id, $studentRequest->validated());
         return response()->json(
             [
                 'message' => 'Student Updated Successful.',
-                //'data' => $data
+            ],
+            status: 200
+        );
+    }
+
+    public function assignStudentToClass(AssignStudentToClass $assignStudentToClass)
+    {
+        $this->studentService->assignStudentToClass($assignStudentToClass->validated());
+        return response()->json(
+            [
+                'message' => 'Student Class Updated Successful.',
             ],
             status: 200
         );

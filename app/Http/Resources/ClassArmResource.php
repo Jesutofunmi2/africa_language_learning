@@ -17,6 +17,7 @@ class ClassArmResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'class' => $this->studentclass,
         ];
     }
 }

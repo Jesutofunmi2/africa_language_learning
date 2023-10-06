@@ -28,7 +28,7 @@ class Classes extends Model
     {
         return $this->hasMany(Language::class); 
     }
-    public function classarm()
+    public function classarms()
     {
         return $this->hasMany(ClassArm::class);
     }

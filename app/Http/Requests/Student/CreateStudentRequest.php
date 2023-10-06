@@ -36,7 +36,9 @@ class CreateStudentRequest extends FormRequest
             'phone_number'=> ['sometimes', 'string'],
             'age' => 'required|numeric|gt:0',
             'class_id' => ['required', 'integer', 'exists:classes,id'],
-            'classarm_id' => ['required', 'integer', 'exists:class_arms,id']
+            'classarm_id' => ['required', 'integer', 'exists:class_arms,id'],
+            'term' =>['required', 'string'],
+            'session' => ['required', 'string']
         ];
     }
 
@@ -51,6 +53,8 @@ class CreateStudentRequest extends FormRequest
             'gendar.required' => 'gender is missing',
             'class_id.required' => 'class id is required',
             'classarm_id.required' => 'class arm id is required',
+            'term' => 'term is required',
+            'session' => 'session is required'
         ];
     }
 }

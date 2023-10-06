@@ -32,6 +32,11 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(ClassArm::class);
     }
+
+    public function studentclassarm()
+    {
+        return $this->belongsTo(StudentClassArm::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -50,7 +55,7 @@ class Student extends Authenticatable
         'password',
         'school_id',
         'survey_status',
-        'class_id'
+    
     ];
  
     /**

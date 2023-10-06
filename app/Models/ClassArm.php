@@ -14,7 +14,7 @@ class ClassArm extends Model
         return $this->hasMany(Student::class);
     }
 
-    public function class()
+    public function studentclass()
     {
         return $this->belongsTo(Classes::class);
     }

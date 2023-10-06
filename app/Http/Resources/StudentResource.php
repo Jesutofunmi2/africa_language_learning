@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\ClassArm;
 use App\Models\Classes;
+use App\Models\StudentClassArm;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StudentResource extends JsonResource
@@ -24,8 +25,8 @@ class StudentResource extends JsonResource
             'language' => $this->language,
             'gendar' => $this->gendar,
             'school' => $this->school,
-            'class' => ClassResource::make($this->class),
-            'classarm' => $this->classarmQuery(),
+            'class' => $this->classNameQuery(),
+            'classarm' => $this->classarmNameQuery(),
             'age' => $this->age,
             'country' => $this->country,
             'count_down' => $this->future,
@@ -33,13 +34,23 @@ class StudentResource extends JsonResource
         ];
     }
 
-    public function classQuery()
+    public function classarmNameQuery()
     {
-     // return Classes::where('id', $this->class_id)->value('classs_room_name');
+      return ClassArm::where('id', $this->classarmIdQuery())->value('name');
     }
 
-    public function classarmQuery()
+    public function classarmIdQuery()
     {
-      return ClassArm::where('id', $this->classarm_id)->value('name');
+      return StudentClassArm::orderBy('id', 'DESC')->where('student_id', $this->student_id)->value('classarms_id');
     }
+    public function classIdQuery()
+    {
+       return StudentClassArm::orderBy('id', 'DESC')->where('student_id', $this->student_id)->value('classes_id'); 
+    }
+   
+    public function classNameQuery()
+    {
+       return Classes::where('id', $this->classIdQuery())->value('name'); 
+    }
+
 }

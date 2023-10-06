@@ -77,9 +77,24 @@ class ClassController extends Controller
         );
     }
 
+    public function session()
+    {
+        $startingYear = date('Y') ;
+        $endingYear = date('Y') + 3;
+
+        for ($i = $startingYear; $i <= $endingYear; $i++) {
+            return response()->json(
+                [
+                    'message' => 'GET Year successful.',
+                    'data' => $i.'/'.$i+1,
+                ],
+                status: 201
+            );
+        }
+    }
     public function deleteTeacherClass(DeleteClassRequest $deleteClassRequest)
     {
-        
+
         $deleteClass = $this->classService->deleteTeacherClass($deleteClassRequest->validated());
         abort_if(is_null($deleteClass), 204, 'Invalid Content or Parameter');
 
