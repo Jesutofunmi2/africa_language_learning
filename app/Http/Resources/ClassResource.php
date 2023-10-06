@@ -20,7 +20,7 @@ class ClassResource extends JsonResource
             'language' => $this->languageQuery(),
             'language_id' => $this->language_id,
             'classs_room_name' => $this->name,
-            'class_arms' => ClassArmResource::collection($this->classarm)
+            'class_arms' => ClassArmResource::collection($this->classarms)
         ];
     }
 
