@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <a href="{{ route('admin.list.student') }}">
+                                    <a href="{{ route('admin.school.student.list', $school_name[0]['id'] ) }}">
                                         <p class="card-category">Students</p>
                                     </a>
                                     <p class="card-title">{{ $students }}
@@ -128,7 +128,7 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <a href="{{ route('admin.teacher.list') }}">
+                                    <a href="{{ route('admin.school.teacher.list', $school_name[0]['id'] ) }}">
                                         <p class="card-category">Teachers</p>
                                     </a>
                                     <p class="card-title">{{ $teachers }}

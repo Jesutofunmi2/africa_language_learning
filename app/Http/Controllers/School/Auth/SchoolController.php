@@ -82,6 +82,19 @@ class SchoolController extends Controller
     return view('pages.admin.filter-school', ['students' => $students, 'teachers' => $teachers, 'classes'=>$classs, 'class_arms'=> $class_arms, 'school_name'=> $school_name ]);
   }
 
+  public function schoolStudent($schoolId)
+  {
+    $students = Student::where('school_id', $schoolId)->paginate(40);
+   
+    return view('pages.admin.list-school-student', ['students' => $students ]);
+  }
+
+  public function schoolTeacher($schoolId)
+  {
+    $teachers = Teacher::where('school_id', $schoolId)->paginate(40);
+   
+    return view('pages.admin.list-school-teacher', ['teachers' => $teachers ]);
+  }
 
   public function update(School $secondarySchool, SecondaryRequest $request, $schoolId): RedirectResponse
   {
