@@ -120,15 +120,15 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.school.filter.show', $school->id) }}" class="btn btn-primary">Filter</a>
+                                        <a href="{{ route('admin.school.filter.show', $school->id) }}" class="btn btn-primary">Analysic</a>
                                     </td>
-                                    {{-- <td>
+                                    <td>
                                         <form action="{{ route('admin.school.destroy', $school->id) }}" onsubmit="return confirm('Are you sure you want to delete School ?')" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger" type="submit">Delete</button>
                                         </form>
-                                     </td> --}}
+                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
