@@ -31,10 +31,8 @@ class SurveyController extends Controller
         );
     }
 
-
     public function createTeacherSurvey(TeacherSurveyRequest $teacherSurveyRequest)
     { 
-        
         $teacherSurvey = $this->surveyService->createTeacherSurvey($teacherSurveyRequest->validated());
         abort_if(!$teacherSurvey, 204, 'Already Exits');
         // $data = TeacherSurveyResource::make($teacherSurvey);

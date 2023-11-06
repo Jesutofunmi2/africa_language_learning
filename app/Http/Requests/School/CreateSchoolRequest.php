@@ -37,7 +37,7 @@ class CreateSchoolRequest extends FormRequest
             'lga' => ['sometimes', 'string', 'max:254'],
             'type'=> ['required', 'string'],
             'how_do_you_see_us' => ['sometimes', 'string'],
-            'trial_period_in_days'=> ['integer', 'required'],
+            'trial_period_in_days'=> ['integer', 'sometimes'],
         ];
     }
 }

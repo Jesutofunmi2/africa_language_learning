@@ -18,14 +18,17 @@ class SchoolService
      */
     public function createSchool(array $data): School
     {
-       
-
+      
         DB::transaction(function () use (&$school, $data) {
             $school = new School;
             $mediaService = new MediaService;
-            if($data['image_url'] != null )
+            $defaultImage = "https://course-material-dev.s3.us-east-2.amazonaws.com/logoi.png";
+            if(in_array('image_url', $data))
             {
                 $mediaUrl = $mediaService->uploadImage($data['image_url']);
+            }
+            else {
+                $mediaUrl = $defaultImage;
             }
 
             $school->name = $data['name'];
@@ -36,9 +39,9 @@ class SchoolService
             $school->school_name = $data['school_name'];
             $school->phone_number = $data['phone_number'];
             $school->no_of_pupil = $data['no_of_pupil'];
-            $school->image_url = $mediaUrl ?? null;
+            $school->image_url = $mediaUrl ;
             $school->verification_token = md5($data['email']) . Str::random();
-            $school->trial_days = $data['trial_period_in_days'];
+            $school->trial_days = $data['trial_period_in_days'] ;
             $school->lga = $data['lga'];
             $school->save();
 
