@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class StudentSurveies extends Model
 {
     use HasFactory;
+
+    
 }

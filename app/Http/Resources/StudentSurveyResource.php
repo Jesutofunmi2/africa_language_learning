@@ -18,15 +18,14 @@ class StudentSurveyResource extends JsonResource
         return [
             'id' => $this->id,
             'student_id' => $this->student_id,
-            'student_data' => $this->studentData($this->student_id),
+            'student_survey' => $this->studentData($this->student_id),
         ];
     }
-
-
 
     private function studentData ($id){
          
         $student =  Student::where('student_id', $id)->get();
-        return $student;
+        return $student[0]['survey_status'] === 0 ? false: true ;
+        
     }
 }

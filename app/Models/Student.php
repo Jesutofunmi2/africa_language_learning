@@ -98,6 +98,9 @@ class Student extends Authenticatable
        return false;
     }
 
+    public function getSurveyStatusAttribute(){
+         //return $this->survey_status === 0 ? false : true;
+    }
     public static function factory(...$parameters): UserFactory
     {
         return static::traitFactory($parameters);
