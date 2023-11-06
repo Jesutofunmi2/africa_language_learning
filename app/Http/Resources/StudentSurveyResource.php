@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Student;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StudentSurveyResource extends JsonResource
@@ -14,6 +15,18 @@ class StudentSurveyResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'student_id' => $this->student_id,
+            'student_data' => $this->studentData($this->student_id),
+        ];
+    }
+
+
+
+    private function studentData ($id){
+         
+        $student =  Student::where('student_id', $id)->get();
+        return $student;
     }
 }

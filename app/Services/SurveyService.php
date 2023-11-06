@@ -16,7 +16,9 @@ class SurveyService
     public function createStudentSurvey(array $data)
     {
         // dd($data);
+       
         $student = DB::table('students')->where('student_id', $data['student_id'])->where('survey_status',  1)->first();
+        //dd($student);
         if ($student === null) {
 
             DB::transaction(function () use (&$studentSurvey, $data) {
