@@ -20,7 +20,8 @@ class SurveyController extends Controller
     public function createStudentSurvey(StudentSurveyRequest $studentSurveyRequest)
     {
         $studentSurvey = $this->surveyService->createStudentSurvey($studentSurveyRequest->validated());
-        abort_if(!$studentSurvey, 204, 'Already Exits');
+        
+        abort_if(!$studentSurvey, response()->json('Already Exits', 204));
         $data = StudentSurveyResource::make($studentSurvey);
         return response()->json(
             [
@@ -34,7 +35,7 @@ class SurveyController extends Controller
     public function createTeacherSurvey(TeacherSurveyRequest $teacherSurveyRequest)
     { 
         $teacherSurvey = $this->surveyService->createTeacherSurvey($teacherSurveyRequest->validated());
-        abort_if(!$teacherSurvey, 204, 'Already Exits');
+        abort_if(!$teacherSurvey, response()->json('Already Exits', 204));
         // $data = TeacherSurveyResource::make($teacherSurvey);
         return response()->json(
             [
