@@ -17,9 +17,9 @@ class SurveyService
     {
         // dd($data);
        
-        $student = DB::table('students')->where('student_id', $data['student_id'])->where('survey_status',  1)->first();
-        //dd($student);
-        if ($student === null) {
+        // $student = DB::table('students')->where('student_id', $data['student_id'])->where('survey_status',  1)->first();
+        // //dd($student);
+        // if ($student === null) {
 
             DB::transaction(function () use (&$studentSurvey, $data) {
                 $studentSurvey = new StudentSurveies;
@@ -40,24 +40,24 @@ class SurveyService
                         ->where('student_id', $data['student_id'])
                         ->update(['survey_status' => 0]);
                 } else {
-                    DB::table('students')
-                        ->where('student_id', $data['student_id'])
-                        ->update(['survey_status' => 1]);
+                    // DB::table('students')
+                    //     ->where('student_id', $data['student_id'])
+                    //     ->update(['survey_status' => 1]);
                 }
 
                 $studentSurvey->save();
             });
 
             return $studentSurvey;
-        }
+        
 
         //@todo we fire other actions after registration
     }
     public function createTeacherSurvey(array $data)
     {
 
-        $teacher = DB::table('teachers')->where('teacher_id', $data['teacher_id'])->where('survey_status',  1)->first();
-        if ($teacher === null) {
+        // $teacher = DB::table('teachers')->where('teacher_id', $data['teacher_id'])->where('survey_status',  1)->first();
+        // if ($teacher === null) {
             DB::transaction(function () use (&$teacherSurvey, $data) {
                 $teacherSurvey = new TeacherSurveies;
                 $teacherSurvey->school_id = $data['school_id'];
@@ -80,16 +80,16 @@ class SurveyService
                         ->where('teacher_id', $data['teacher_id'])
                         ->update(['survey_status' => 0]);
                 } else {
-                    DB::table('teachers')
-                        ->where('teacher_id', $data['teacher_id'])
-                        ->update(['survey_status' => 1]);
+                    // DB::table('teachers')
+                    //     ->where('teacher_id', $data['teacher_id'])
+                    //     ->update(['survey_status' => 1]);
                 }
 
                 $teacherSurvey->save();
             });
 
             return $teacherSurvey;
-        }
+        
 
         //@todo we fire other actions after registration
     }

@@ -22,11 +22,11 @@ class SurveyController extends Controller
         $studentSurvey = $this->surveyService->createStudentSurvey($studentSurveyRequest->validated());
         
         abort_if(!$studentSurvey, response()->json('Already Exits', 204));
-        $data = StudentSurveyResource::make($studentSurvey);
+        //$data = StudentSurveyResource::make($studentSurvey);
         return response()->json(
             [
                 'message' => 'Create successful.',
-                'data' => $data,
+               // 'data' => $data,
             ],
             status: 201
         );
