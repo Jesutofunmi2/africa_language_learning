@@ -35,10 +35,10 @@ class SurveyService
 
                 $student = Student::query()->where('student_id', $data['student_id'])->first();
 
-                if ($student->survey_status == 1) {
+                if ($student->survey_status == 0) {
                     DB::table('students')
                         ->where('student_id', $data['student_id'])
-                        ->update(['survey_status' => 0]);
+                        ->update(['survey_status' => 1]);
                 } else {
                     // DB::table('students')
                     //     ->where('student_id', $data['student_id'])
@@ -75,10 +75,10 @@ class SurveyService
 
                 $teacher = Teacher::query()->where('teacher_id', $data['teacher_id'])->first();
 
-                if ($teacher->survey_status == 1) {
+                if ($teacher->survey_status == 0) {
                     DB::table('teachers')
                         ->where('teacher_id', $data['teacher_id'])
-                        ->update(['survey_status' => 0]);
+                        ->update(['survey_status' => 1]);
                 } else {
                     // DB::table('teachers')
                     //     ->where('teacher_id', $data['teacher_id'])
