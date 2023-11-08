@@ -119,6 +119,13 @@ class SchoolController extends Controller
       ->with('success', 'Updated successfully');
   }
 
+  public function reset(Request $request, $id){
+    $this->schoolService->schoolPasswordReset($id);
+
+    return redirect()->route('admin.school.list', ['page' => $request->page])
+      ->with('success', 'Reset successfully');
+  }
+
   public function destroy($secondaryId): RedirectResponse
   {
     $this->schoolService->deleteSchool($secondaryId);

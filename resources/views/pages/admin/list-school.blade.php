@@ -129,6 +129,14 @@
                                             <button class="btn btn-danger" type="submit">Delete</button>
                                         </form>
                                      </td>
+
+                                     <td>
+                                        <form action="{{ route('admin.school.reset.password', $school->id) }}" onsubmit="return confirm('Are you sure you want to reset School password ?')" method="get">
+                                            @csrf
+                                            @method('get')
+                                            <button class="btn btn-warning" type="submit">Reset Password</button>
+                                        </form>
+                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>

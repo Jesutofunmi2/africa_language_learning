@@ -149,6 +149,18 @@ class SchoolService
         return $new_school;
     }
 
+    public function schoolPasswordReset($id){
+
+        $school = School::whereId($id)->first();
+       
+        $password = Hash::make('12345678');
+
+        $school::whereId($id)->update([
+            'password' => $password
+        ]);
+
+    }
+
 
     public function deleteSchool($schoolId): void
     {
