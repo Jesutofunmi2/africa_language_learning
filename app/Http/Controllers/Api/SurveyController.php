@@ -21,29 +21,36 @@ class SurveyController extends Controller
     {
         $studentSurvey = $this->surveyService->createStudentSurvey($studentSurveyRequest->validated());
         
-        abort_if(!$studentSurvey, response()->json('Already Exits', 204));
-        //$data = StudentSurveyResource::make($studentSurvey);
+        if($studentSurvey) {
+
+        $data = StudentSurveyResource::make($studentSurvey);
         return response()->json(
             [
                 'message' => 'Create successful.',
-               // 'data' => $data,
+                'data' => $data,
             ],
             status: 201
         );
+    }
+    return response()->json(['message' => 'Already Exits'] );
     }
 
     public function createTeacherSurvey(TeacherSurveyRequest $teacherSurveyRequest)
     { 
         $teacherSurvey = $this->surveyService->createTeacherSurvey($teacherSurveyRequest->validated());
-        abort_if(!$teacherSurvey, response()->json('Already Exits', 204));
-        // $data = TeacherSurveyResource::make($teacherSurvey);
-        return response()->json(
-            [
-                'message' => 'Create successful.',
-               // 'data' => $data,
-            ],
-            status: 201
-        );
+
+        if($teacherSurvey){
+            $data = TeacherSurveyResource::make($teacherSurvey);
+            return response()->json(
+                [
+                    'message' => 'Create successful.',
+                    'data' => $data,
+                ],
+                status: 201
+            );
+        }
+
+       return response()->json(['message' => 'Already Exits']);
     }
 
     public function getStudentSurvey()

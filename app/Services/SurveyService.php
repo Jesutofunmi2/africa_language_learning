@@ -17,9 +17,9 @@ class SurveyService
     {
         // dd($data);
        
-        // $student = DB::table('students')->where('student_id', $data['student_id'])->where('survey_status',  1)->first();
-        // //dd($student);
-        // if ($student === null) {
+        $survey = DB::table('student_surveies')->where('student_id', $data['student_id'])->first();
+        //dd($student);
+        if ($survey === null) {
 
             DB::transaction(function () use (&$studentSurvey, $data) {
                 $studentSurvey = new StudentSurveies;
@@ -49,15 +49,17 @@ class SurveyService
             });
 
             return $studentSurvey;
-        
+        }
 
+        
         //@todo we fire other actions after registration
     }
     public function createTeacherSurvey(array $data)
     {
 
-        // $teacher = DB::table('teachers')->where('teacher_id', $data['teacher_id'])->where('survey_status',  1)->first();
-        // if ($teacher === null) {
+        $survey = DB::table('teacher_surveies')->where('teacher_id', $data['teacher_id'])->first();
+        //dd($student);
+        if ($survey === null) {
             DB::transaction(function () use (&$teacherSurvey, $data) {
                 $teacherSurvey = new TeacherSurveies;
                 $teacherSurvey->school_id = $data['school_id'];
@@ -90,7 +92,7 @@ class SurveyService
 
             return $teacherSurvey;
         
-
+        }
         //@todo we fire other actions after registration
     }
 

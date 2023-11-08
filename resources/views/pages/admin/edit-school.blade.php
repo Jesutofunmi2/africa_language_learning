@@ -19,6 +19,7 @@
                                 @csrf
                                 <div class="row-12">
                                     <div class="form-group">
+                                        <label>State</label>
                                         <select name="state" class="form-control">
                                             <option value="{{ old('state') ?? $school->state }}">
                                                 {{ $school->state ?? 'Select State' }}</option>
@@ -36,6 +37,7 @@
 
                                 <div class="row-12">
                                     <div class="form-group">
+                                        <label>LGA</label>
                                         <select name="lga" class="form-control">
                                             <option value="{{ $school->lga }}" selected>{{ $school->lga }} </option>
                                             <option value="Abaji">Abaji</option>
@@ -54,13 +56,15 @@
                                         </span>
                                     @endif
                                 </div>
-
+                                <label>Admin Name</label>
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                    
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <i class="nc-icon nc-box-2"></i>
                                         </span>
                                     </div>
+                                    
                                     <input name="name" type="text" class="form-control" placeholder="School Name"
                                         value="{{ old('name') ?? $school->name }}" required autofocus>
                                     @if ($errors->has('name'))
@@ -69,6 +73,8 @@
                                         </span>
                                     @endif
                                 </div>
+
+                                <label> School Name</label>
 
                                 <div class="input-group{{ $errors->has('school_name') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
@@ -84,7 +90,7 @@
                                         </span>
                                     @endif
                                 </div>
-
+                                <label>Phone Number</label>
                                 <div class="input-group{{ $errors->has('phone_number') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
@@ -99,6 +105,8 @@
                                         </span>
                                     @endif
                                 </div>
+
+                                <label>Pupils No.</label>
                               
                                 <div class="row">
                                     <div class="col-md-12">
@@ -115,6 +123,8 @@
                                     </div>
                                 </div>
 
+                                <label>Trials Period</label>
+
                                 <div class="input-group{{ $errors->has('no_of_pupil') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
@@ -129,7 +139,7 @@
                                         </span>
                                     @endif
                                 </div>
-
+                                <label>Email</label>
                                 <div class="input-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
@@ -144,6 +154,8 @@
                                         </span>
                                     @endif
                                 </div>
+
+                                <label>School Type</label>
 
                                 <div class="row-12">
                                     <div class="form-group">
@@ -161,7 +173,7 @@
                                         </span>
                                     @endif
                                 </div>
-
+                                <label>Country</label>
                                 <div class="row-12">
                                     <div class="form-group">
                                         <select name="country" class="form-control">
@@ -178,7 +190,7 @@
                                         </span>
                                     @endif
                                 </div>
-
+                                <label>Country</label>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
