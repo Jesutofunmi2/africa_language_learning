@@ -30,7 +30,7 @@ class StudentRequest extends FormRequest
             'country' => ['sometimes', 'string'],
             'language' => ['sometimes', 'string'],
             'age' => ['sometimes', 'integer'],
-            'gendar' => ['sometimes', 'string'],
+            'gender' => ['sometimes', 'string'],
         ];
     }
 }

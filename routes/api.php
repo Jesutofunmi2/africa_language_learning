@@ -93,6 +93,7 @@ Route::prefix('/v1')
                 Route::get('/students', [StudentController::class, 'list'])->name('student.list');
                 Route::get('/getStudent', [StudentController::class, 'getStudent'])->name('student.show');
                 Route::put('/updateStudent', [StudentController::class, 'update'])->name('student.update');
+                Route::post('/createBatchStudent', [StudentController::class, 'createBatchStudent'])->name('student.batchUpload');
                 Route::delete('/deleteStudent', [StudentController::class, 'destroy'])->name('student.destroy');
                 Route::post('/assignStudentToClass', [StudentController::class, 'assignStudentToClass'])->name('student.assign');
 

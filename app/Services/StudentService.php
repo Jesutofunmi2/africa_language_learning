@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\Api\CreateBatchStudent;
 use App\Models\School;
 use App\Models\Student;
 use App\Models\StudentClassArm;
@@ -9,6 +10,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Imports\StudentsImport;
+
 
 class StudentService
 {
@@ -34,17 +37,17 @@ class StudentService
                 $student->password = Hash::make($password); 
                 $student->country = $data['country'];
                 $student->marital_status = $data['marital_status'] ?? null;
-                $student->gendar = $data['gendar'];
+                $student->gendar = $data['gender'];
                 $student->language = $data['language'];
                 $student->age = $data['age']?? null;
             
                 $student->save();
 
-                $student_id = $this->studentId($student->school_id, $student->id);
-                $student->student_id = $student_id;
+                $prefix = $this->getStudentPrefix($data['school_id']);
+                $student->student_id = $prefix.$student->id;
                 $student->save();
 
-                $studentClassArm->student_id = $student_id;
+                $studentClassArm->student_id = $student->student_id;
                 $studentClassArm->classes_id = $data['class_id'];
                 $studentClassArm->classarms_id = $data['classarm_id'];
                 $studentClassArm->term = $data['term'];
@@ -53,6 +56,62 @@ class StudentService
       });
       return $student;
         //@todo we fire other actions after registration
+    }
+
+
+    public function createBatchStudent(array $data, CreateBatchStudent $createBatchStudent)
+    {
+
+        
+       
+        $session = $data['session'];
+        $term = $data['term'];
+        $class_id = $data['class_id'];
+        $school_id = $data['school_id'];
+        $classarm_id = $data['class_arm_id'];
+
+  
+
+        if ($createBatchStudent->hasFile('batch_file')) {
+
+            $prefix = $this->getStudentPrefix($data['school_id']);
+            
+
+            $data = [
+                'session' => $session,
+                'term' => $term,
+                'class_id' => $class_id,
+                'class_arm_id' => $classarm_id,
+                'prefix' => $prefix,
+                'school_id' => $school_id,
+                
+            ];
+  
+            $import = new StudentsImport($data);
+            $import->import($createBatchStudent->file('batch_file'));
+
+    
+
+            $failures[] = [];
+            $row = 0;
+            foreach ($import->failures() as $failure) {
+                $failures[$row]['row'] = $failure->row(); // row that went wrong
+                $failures[$row]['attrib'] = $failure->attribute(); // either heading key (if using heading row concern) or column index
+                $failures[$row]['errors'] = $failure->errors(); // Actual error messages from Laravel validator
+                $row++;
+           }
+
+            $errors = $import->errors();
+
+            return response()->json([
+                'data' => [
+                    'message' => 'Batch Student Registration complete',
+                    'failures' => $failures,
+                    'errors' => $errors,
+                ]
+            ]);
+
+        }
     }
 
     public function assignStudentToClass(array $data)
@@ -99,18 +158,36 @@ class StudentService
        Student::where('student_id' ,$id)->delete();
     }
 
-    protected function studentId($schId, $id)
+    protected function getStudentPrefix($schId)
     {
         $name = School::query()->whereId($schId)->first();
         $letter = mb_substr($name->name, 0, 3);
         $date = Carbon::now()->format('Y');
-        $id = str_pad($id, 2, "0", STR_PAD_LEFT);
-        $student_id = Str::upper($letter).'/'.$date.$id;
-
-        return $student_id;
+        // $id = str_pad($id, 4, "0", STR_PAD_LEFT);
+        return Str::upper($letter).'/'.$date;
     }
     /**
      * Create a admin account.
      */
     
+     public function getNextRegNum( $school_id = 0){
+
+        if($school_id == 0){ 
+            abort(400, "school ID not found, please contact admin");
+        }
+        
+        $school = $school_id;
+
+        $regnum_digit = Student::where('school_id', $school)
+                        ->withTrashed()
+                        ->orderBy('id', 'desc')->first();
+                        
+        if(!empty($regnum_digit)){
+            return $regnum_digit + 1;
+        }else{
+            return 1;
+        }
+
+    }
+
 }

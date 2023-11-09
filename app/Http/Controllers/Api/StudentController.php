@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\AssignStudentToClass;
+use App\Http\Requests\Api\CreateBatchStudent;
 use App\Http\Requests\Api\SchoolRequest;
 use App\Http\Requests\Api\StudentRequest;
 use App\Http\Requests\School\SecondaryRequest;
@@ -56,13 +57,21 @@ class StudentController extends Controller
     public function update(StudentRequest $studentRequest)
     {
         $student_id = $studentRequest->student_id;
-         $this->studentService->updateStudent($student_id, $studentRequest->validated());
+        $this->studentService->updateStudent($student_id, $studentRequest->validated());
         return response()->json(
             [
                 'message' => 'Student Updated Successful.',
             ],
             status: 200
         );
+    }
+
+    public function createBatchStudent(CreateBatchStudent $createBatchStudent)
+    {
+        return $this->studentService->createBatchStudent($createBatchStudent->validated(), $createBatchStudent);
+
+
+       
     }
 
     public function assignStudentToClass(AssignStudentToClass $assignStudentToClass)
