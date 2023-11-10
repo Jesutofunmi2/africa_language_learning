@@ -7,6 +7,7 @@ use App\Models\StudentSurveies;
 use App\Models\StudentSurvey;
 use App\Models\Teacher;
 use App\Models\TeacherSurveies;
+use App\Http\Resources\StudentSurveyResource;
 use App\Models\TeacherSurvey;
 use Illuminate\Support\Facades\DB;
 
@@ -15,14 +16,22 @@ class SurveyService
 
     public function createStudentSurvey(array $data)
     {
-        // dd($data);
-       
-        $survey = DB::table('student_surveies')->where('student_id', $data['student_id'])->first();
+
+        $studentSurvey = new StudentSurveies;
+        $survey = StudentSurveies::where('student_id', $data['student_id'])->first();
+
         //dd($student);
-        if ($survey === null) {
+        if ($survey) {
+            return response()->json(
+                [
+                    'message' => 'Already Exits.',
+                ],
+
+            );
+        } else {
 
             DB::transaction(function () use (&$studentSurvey, $data) {
-                $studentSurvey = new StudentSurveies;
+
                 $studentSurvey->interested = $data['interested'];
                 $studentSurvey->scale_of_1_5 = $data['scale_of_1_5'] ?? null;
                 $studentSurvey->school_id = $data['school_id'];
@@ -32,26 +41,19 @@ class SurveyService
                 $studentSurvey->prefer = $data['prefer'];
                 $studentSurvey->schools_app = $data['schools_app'];
                 $studentSurvey->motivates = $data['motivates'];
-
-                $student = Student::query()->where('student_id', $data['student_id'])->first();
-
-                if ($student->survey_status == 0) {
-                    DB::table('students')
-                        ->where('student_id', $data['student_id'])
-                        ->update(['survey_status' => 1]);
-                } else {
-                    // DB::table('students')
-                    //     ->where('student_id', $data['student_id'])
-                    //     ->update(['survey_status' => 1]);
-                }
-
                 $studentSurvey->save();
             });
-
-            return $studentSurvey;
+            $data =  StudentSurveyResource::make($studentSurvey);
+            return response()->json(
+                [
+                    'message' => 'Create successful.',
+                    'data' => $data,
+                ],
+                status: 201
+            );
         }
 
-        
+
         //@todo we fire other actions after registration
     }
     public function createTeacherSurvey(array $data)
@@ -91,7 +93,6 @@ class SurveyService
             });
 
             return $teacherSurvey;
-        
         }
         //@todo we fire other actions after registration
     }

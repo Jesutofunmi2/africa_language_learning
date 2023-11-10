@@ -19,20 +19,7 @@ class SurveyController extends Controller
 
     public function createStudentSurvey(StudentSurveyRequest $studentSurveyRequest)
     {
-        $studentSurvey = $this->surveyService->createStudentSurvey($studentSurveyRequest->validated());
-        
-        if($studentSurvey) {
-
-        $data = StudentSurveyResource::make($studentSurvey);
-        return response()->json(
-            [
-                'message' => 'Create successful.',
-                'data' => $data,
-            ],
-            status: 201
-        );
-    }
-    return response()->json(['message' => 'Already Exits'] );
+      return $this->surveyService->createStudentSurvey($studentSurveyRequest->validated()); 
     }
 
     public function createTeacherSurvey(TeacherSurveyRequest $teacherSurveyRequest)

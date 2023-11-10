@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\Models\ClassArm;
 use App\Models\Classes;
 use App\Models\StudentClassArm;
+use App\Models\StudentSurveies;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StudentResource extends JsonResource
@@ -30,7 +31,7 @@ class StudentResource extends JsonResource
             'age' => $this->age,
             'country' => $this->country,
             'count_down' => $this->future,
-            'survey_status' => $this->survey_status == 0 ? false: true, 
+            'survey_status' => $this->surveyQuery($this->student_id) == true ? true:false, 
         ];
     }
 
@@ -51,6 +52,11 @@ class StudentResource extends JsonResource
     public function classNameQuery()
     {
        return Classes::where('id', $this->classIdQuery())->value('name'); 
+    }
+
+    public function surveyQuery($id)
+    {
+       return StudentSurveies::where('student_id', $id)->first();
     }
 
 }
