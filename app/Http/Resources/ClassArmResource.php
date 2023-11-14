@@ -19,6 +19,7 @@ class ClassArmResource extends JsonResource
        // return parent::toArray($request);
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'teacher_id' => $this->teacher_id,
             'class' => $this->classNameQuery(),
             'class_arm' => $this->classArmQuery(),
