@@ -51,7 +51,7 @@ class ClassController extends Controller
 
     public function showTeacher(ClassRequest $classrequest)
     {
-        $Class = $this->classService->showClassTeacher($classrequest->validated());
+        $Class = $this->classService->showTeacheClasses($classrequest->validated());
         abort_if(is_null($Class), 204, 'Invalid Content or Parameter');
         $data = ClassResource::collection($Class);
         return response()->json(
@@ -59,7 +59,7 @@ class ClassController extends Controller
                 'message' => 'GET successful.',
                 'data' => $data,
             ],
-            status: 201
+            status: 200
         );
     }
 

@@ -24,10 +24,9 @@ class ClassService
         return $class;
      }
 
-
-     public function showClassTeacher(array $data)
+     public function showTeacheClasses(array $data)
      {
-        $class = Classes::where('teacher_id',$data['teacher_id'])->get();
+        $class = Classes::where('teacher_id',$data['teacher_id'])->where('school_id', $data['school_id'])->get();
 
         return $class;
      }
