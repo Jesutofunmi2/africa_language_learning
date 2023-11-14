@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Classes;
+use App\Models\TeacherClassArm;
 use Illuminate\Support\Facades\DB;
 
 class ClassService
@@ -26,7 +27,8 @@ class ClassService
 
      public function showTeacheClasses(array $data)
      {
-        $class = Classes::where('teacher_id',$data['teacher_id'])->where('school_id', $data['school_id'])->get();
+        $class = TeacherClassArm::where('teacher_id',$data['teacher_id'])->get();
+      
 
         return $class;
      }

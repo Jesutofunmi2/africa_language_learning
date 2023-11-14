@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ClassRequest;
 use App\Http\Requests\Api\DeleteClassRequest;
 use App\Http\Requests\Api\GetClassRequest;
+use App\Http\Resources\ClassArmResource;
 use App\Http\Resources\ClassResource;
 use App\Services\ClassService;
 
@@ -53,7 +54,7 @@ class ClassController extends Controller
     {
         $Class = $this->classService->showTeacheClasses($classrequest->validated());
         abort_if(is_null($Class), 204, 'Invalid Content or Parameter');
-        $data = ClassResource::collection($Class);
+        $data = ClassArmResource::collection($Class);
         return response()->json(
             [
                 'message' => 'GET successful.',
