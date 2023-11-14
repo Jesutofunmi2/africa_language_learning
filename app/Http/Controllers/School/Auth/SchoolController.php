@@ -19,6 +19,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class SchoolController extends Controller
 {
@@ -108,6 +109,58 @@ class SchoolController extends Controller
 
     return redirect()->route('admin.school.list')
       ->with('success', 'School updated successfully');
+  }
+
+  public function search(Request $request)
+  {
+      $outputoption = '';
+      $alloptions  = School::orderBy('created_at', 'desc')->get();
+      Session::put('school_url', request()->fullUrl());
+
+      if ($request->school != '') {
+          $schools = School::where('name', 'LIKE', '%' . $request->school . '%')->orderBy('name', 'desc')->get();
+
+          foreach ($schools  as $index => $schools) {
+              $count = $index + 1;
+              $outputoption .=
+                  '<tr>
+             <td> ' . $count . '</td>
+             <td> ' . $schools->name . '</td>
+             <td> ' . $schools->phone_number. ' </td>
+             <td> ' . $schools->email . ' </td>
+             <td> ' . substr($schools->future, 14) . ' </td>
+             <td><img src="' . asset($schools->image_url) . '" width="40px" height="40px" /></td>
+             <td> ' . $schools->created_at->diffForHumans() . ' </td>
+
+             <td> ' . '
+             <a href="schools/status/' . $schools->id . '" class="btn btn-success">' . 'Status</a>
+              ' . '</td>
+
+              <td> ' . '
+              <a href="schools/' . $schools->id . '" class="btn">' . 'Edit</a>
+              ' . '</td>
+
+              <td> ' . '
+              <a href="#' . $schools->id . '" class="btn btn-primary">' . 'Analytics</a>
+              ' . '</td>
+
+              <td> ' . '
+              <a href="#' . $schools->id . '" class="btn btn-danger">' . 'Delete</a>
+              ' . '</td>
+
+              <td> ' . '
+              <a href="#' . $schools->id . '" class="btn btn-warning">' . 'ResetPassword</a>
+              ' . '</td>
+
+            </tr>';
+          }
+
+          return response($outputoption);
+      } elseif ($request->school == '') {
+          return view('pages.admin.list-school', ['schools' => $alloptions]);
+      }
+
+      return view('pages.admin.list-school', ['schools' => $alloptions]);
   }
 
 

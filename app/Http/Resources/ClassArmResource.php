@@ -20,7 +20,7 @@ class ClassArmResource extends JsonResource
         'id'=> $this->id,
         'name' => $this->name,
         'teacher_id' => $this->teacher_id,
-        'class' => $this->classNameQuery(),
+        'class' =>  $this->classArmQuery(),
         'class_arm' => $this->classArmQuery(),
     ];
 }
@@ -28,10 +28,12 @@ class ClassArmResource extends JsonResource
 public function classArmQuery()
 {
    return ClassArm::where('id', $this->classarms_id)->get('name');
+  
 }
 
 public function classNameQuery()
 {
     return Classes::where('id', $this->classes_id)->get('name'); 
 }
+
 }

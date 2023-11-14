@@ -109,14 +109,15 @@ Route::prefix('admin')->name('admin.')
                 Route::get('school/create', [SchoolController::class, 'index'])->name('school.index');
                 Route::post('school/create', [SchoolController::class, 'create'])->name('school.create');
                 Route::get('schools', [SchoolController::class, 'list'])->name('school.list');
+                Route::get('schools/search', [SchoolController::class, 'search'])->name('schools.search');
                 Route::get('schools/{secondaryId}', [SchoolController::class, 'show'])->name('school.show');
-                Route::get('school/{secondaryId}', [SchoolController::class, 'filter'])->name('school.filter.show');
+                Route::get('school/filter/{secondaryId}', [SchoolController::class, 'filter'])->name('school.filter.show');
                 Route::get('school/students/{schoolId}', [SchoolController::class, 'schoolStudent'])->name('school.student.list');
                 Route::get('school/teachers/{schoolId}', [SchoolController::class, 'schoolTeacher'])->name('school.teacher.list');
                 Route::put('school/{secondaryId}', [SchoolController::class, 'update'])->name('school.update');
                 Route::get('schools/status/{id}', [SchoolController::class, 'status'])->name('school.status');
                 Route::get('schools/password/{Id}', [SchoolController::class, 'reset'])->name('school.reset.password');
-                Route::delete('schools/{secondaryId}', [SchoolController::class, 'destroy'])->name('school.destroy');
+                Route::delete('schools/delete/{secondaryId}', [SchoolController::class, 'destroy'])->name('school.destroy');
 
                 Route::get('teacher/create', [TeacherController::class, 'index'])->name('teacher.index');
                 Route::post('teacher/create', [TeacherController::class, 'create'])->name('teacher.create');

@@ -12,7 +12,7 @@
             <div class="col-2">
                 <form>
                     <div class="input-group no-border">
-                        <input type="text" value="" class="form-control" placeholder="Search...">
+                        <input type="search" class="form-control" placeholder="Search..." name="searchoption" id="searchSchool">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <i class="nc-icon nc-zoom-split"></i>
@@ -66,7 +66,7 @@
                                 Action
                             </th>
                         </thead>
-                        <tbody>
+                        <tbody class="allDataOption">
 
                             @foreach ($schools as $school)
                                 <tr>
@@ -140,10 +140,41 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tbody id="ContentOption" class="searchDataOption">
+
+                        </tbody>
                     </table>
                 </div>
                 {!! $schools->links() !!}
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+    
+        $('#searchSchool').on('keyup', function() {
+            $valueoption = $(this).val();
+            console.log($valueoption);
+
+            if ($valueoption) {
+                $('.searchDataOption').show();
+                $('.allDataOption').hide();
+            } else {
+                $('.searchDataOption').hide();
+                $('.allDataOption').show();
+            }
+
+            $.ajax({
+                type: 'get',
+                url: '{{ route('admin.schools.search') }}',
+                data: {
+                    'school': $valueoption
+                },
+                success: function(data) {
+                    console.log(data)
+                    $('#ContentOption').html(data);
+                }
+            });
+        });
+    </script>
 @endsection
