@@ -20,7 +20,7 @@ class ClassArmResource extends JsonResource
         'id'=> $this->id,
         'name' => $this->name,
         'teacher_id' => $this->teacher_id,
-        'class' =>  $this->classArmQuery(),
+        'class' =>  $this->classNameQuery(),
         'class_arm' => $this->classArmQuery(),
     ];
 }
