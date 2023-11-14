@@ -16,23 +16,22 @@ class ClassArmResource extends JsonResource
      */
     public function toArray($request)
     {
-       // return parent::toArray($request);
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'teacher_id' => $this->teacher_id,
-            'class' => $this->classNameQuery(),
-            'class_arm' => $this->classArmQuery(),
-        ];
-    }
+        'id'=> $this->id,
+        'name' => $this->name,
+        'teacher_id' => $this->teacher_id,
+        'class' => $this->classNameQuery(),
+        'class_arm' => $this->classArmQuery(),
+    ];
+}
 
-   public function classArmQuery()
-   {
-       return ClassArm::where('id', $this->classarms_id)->get('name');
-    }
+public function classArmQuery()
+{
+   return ClassArm::where('id', $this->classarms_id)->get('name');
+}
 
-    public function classNameQuery()
-    {
-        return Classes::where('id', $this->classes_id)->get('name'); 
-    }
+public function classNameQuery()
+{
+    return Classes::where('id', $this->classes_id)->get('name'); 
+}
 }
