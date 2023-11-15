@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\ClassArmStudentsRequest;
 use App\Http\Requests\Api\SchoolRequest;
 use App\Http\Requests\Api\TeacherGetRequest;
 use App\Http\Requests\Api\TeacherRequest;
+use App\Http\Resources\Api\ClassArmStudentsResource;
+use App\Http\Resources\StudentResource;
 use App\Http\Resources\TeacherResource;
+use App\Models\Student;
+use App\Models\StudentClassArm;
 use App\Models\Teacher;
+use App\Models\TeacherClassArm;
 use App\Services\TeacherService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -47,7 +53,6 @@ class TeacherController extends Controller
         );
     }
 
-
     public function list(SchoolRequest $schoolRequest): JsonResponse
     {
         $school_id = $schoolRequest->school_id;
@@ -63,16 +68,38 @@ class TeacherController extends Controller
             status: 200
         );
     }
+
+    public function classarnStudent(ClassArmStudentsRequest $classArmStudentsRequest): JsonResponse
+    {
+        $teacher_id = $classArmStudentsRequest->teacher_id;
+        $class_id = $classArmStudentsRequest->class_id;
+
+        $teacherClassInfo = TeacherClassArm::query()->where('id', $class_id)->where('teacher_id', $teacher_id)->select('classarms_id');
+
+
+        $studentClassarm = StudentClassArm::query()->wherein('classarms_id', $teacherClassInfo)->select('student_id');
+
+        $student = Student::query()->wherein('student_id', $studentClassarm)->get();
+
+        $data = ClassArmStudentsResource::collection($student);
+        return response()->json(
+            [
+                'message' => 'Get ClassArm Students Successful.',
+                'data' => $data
+            ],
+            status: 200
+        );
+    }
+
     public function addTeacher(TeacherRequest $teacherRequest): JsonResponse
     {
-
         $teacher = $this->teacherService->createTeacher($teacherRequest->validated());
         abort_if(is_null($teacher), 204, 'Invalid Content');
-       // $data = TeacherResource::make($teacher);
+        // $data = TeacherResource::make($teacher);
         return response()->json(
             [
                 'message' => 'Registration successful.',
-               // 'data' => $data,
+                // 'data' => $data,
             ],
             status: 201
         );

@@ -103,6 +103,8 @@ Route::prefix('/v1')
                 Route::get('/getTeacher', [TeacherController::class, 'getTeacher'])->name('teacher.show');
                 Route::post('/updateTeacher', [TeacherController::class, 'createTeacher'])->name('createTeacher');
                 Route::delete('/deleteTeacher', [TeacherController::class, 'destroy'])->name('teacher.destroy');
+                //Students in each teacher class arm
+                Route::get('/classarm/students', [TeacherController::class, 'classarnStudent'])->name('classarmStudent.list');
 
                 //classes endpoint
                 Route::post('/addClass', [ClassController::class, 'createClass'])->name('createClass');
