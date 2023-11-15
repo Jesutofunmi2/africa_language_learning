@@ -69,7 +69,7 @@ class TeacherController extends Controller
         );
     }
 
-    public function classarnStudent(ClassArmStudentsRequest $classArmStudentsRequest): JsonResponse
+    public function classarmStudent(ClassArmStudentsRequest $classArmStudentsRequest): JsonResponse
     {
         $teacher_id = $classArmStudentsRequest->teacher_id;
         $class_id = $classArmStudentsRequest->class_id;
