@@ -120,7 +120,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.school.filter.show', $school->id) }}" class="btn btn-primary">Analysic</a>
+                                        <a href="{{ route('admin.school.filter.show', $school->id) }}" class="btn btn-primary">Analytics</a>
                                     </td>
                                     <td>
                                         <form action="{{ route('admin.school.destroy', $school->id) }}" onsubmit="return confirm('Are you sure you want to delete School ?')" method="post">
