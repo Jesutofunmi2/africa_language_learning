@@ -29,7 +29,7 @@ class ClassWorkRequest extends FormRequest
             'teacher_id'=> ['required', 'string', 'exists:teachers,teacher_id'],
             'name' => ['sometimes', 'string'],
             'class_id'=>['required', 'integer', 'exists:teacher_class_arms,id'],
-            'media_url' => ['sometimes', 'mimes:application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg'],
+            'media_url' => ['sometimes', 'mimes:pdf,zip,application/octet-stream,audio/mpeg,mpga,mp3,wav,video/mp4,mp4,video/x-flv,flv,video/quicktime,mov,jpeg,png,jpg'],
         ];
     }
 }
