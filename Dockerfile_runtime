@@ -4,9 +4,11 @@ RUN apk update && apk add \
     build-base \
     freetype-dev \
     jpegoptim optipng pngquant gifsicle \
-    curl
+    curl unzip \
+    libzip-dev
 
-RUN docker-php-ext-install pdo_mysql exif pcntl sockets gd
+
+RUN docker-php-ext-install pdo_mysql exif pcntl sockets gd zip
 RUN addgroup -g 1000 -S www && adduser -u 1000 -S www -G www
 WORKDIR /var/www/
 

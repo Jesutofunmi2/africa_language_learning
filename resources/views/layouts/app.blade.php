@@ -1,21 +1,3 @@
-<!--
-=========================================================
- Paper Dashboard - v2.0.0
-=========================================================
-
- Product Page: https://www.creative-tim.com/product/paper-dashboard
- Copyright 2019 Creative Tim (https://www.creative-tim.com)
- UPDIVISION (https://updivision.com)
- Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard/blob/master/LICENSE)
-
- Coded by Creative Tim
-
-=========================================================
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,11 +6,12 @@ The above copyright notice and this permission notice shall be included in all c
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('paper') }}/img/apple-icon.png">
     <link rel="icon" type="image/png" href="{{ asset('paper') }}/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Extra details for Live View on GitHub Pages -->
-    
+
     <title>
-        {{ __('Laravel Task Dashboard') }}
+        {{ __('Izesan! Admin Dashboard') }}
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
@@ -42,15 +25,18 @@ The above copyright notice and this permission notice shall be included in all c
     <link href="{{ asset('paper') }}/demo/demo.css" rel="stylesheet" />
     <link href="{{ asset('paper') }}/css/calendar.css" rel="stylesheet" />
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+   {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" /> --}}
+
 </head>
 
 <body class="{{ $class }}">
-    
+
     @auth()
         @include('layouts.page_templates.auth')
         @include('layouts.navbars.fixed-plugin')
     @endauth
-    
+
     @guest
         @include('layouts.page_templates.guest')
     @endguest
@@ -73,10 +59,15 @@ The above copyright notice and this permission notice shall be included in all c
     <script src="{{ asset('paper') }}/js/calendar.js"></script>
     <!-- Sharrre libray -->
     <script src="../assets/demo/jquery.sharrre.js"></script>
-    
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+
     @stack('scripts')
 
     @include('layouts.navbars.fixed-plugin-js')
+
+   
 </body>
 
 </html>

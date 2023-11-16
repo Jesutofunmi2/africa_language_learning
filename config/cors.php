@@ -15,11 +15,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'api/v1/*'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['https://izesan.com', 'http://izesan.com', '*'],
 
     'allowed_origins_patterns' => [],
 
@@ -32,3 +32,5 @@ return [
     'supports_credentials' => false,
 
 ];
+
+

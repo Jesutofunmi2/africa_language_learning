@@ -4,16 +4,16 @@
             <nav class="footer-nav">
                 <ul>
                     <li>
-                        <a href="https://www.creative-tim.com" target="_blank">{{ __('Creative Tim') }}</a>
+                        <a href="{{ route('admin.login.get') }}" target="_blank">{{ __('Izesan! School') }}</a>
                     </li>
                     <li>
-                        <a href="https://updivision.com" target="_blank">{{ __('UpDivision') }}</a>
+                        <a href="#" target="_blank">{{ __('Izesan! UWA') }}</a>
                     </li>
                     <li>
-                        <a href="http://blog.creative-tim.com/" target="_blank">{{ __('Blog') }}</a>
+                        <a href="#" target="_blank">{{ __('Izesan! App') }}</a>
                     </li>
                     <li>
-                        <a href="https://www.creative-tim.com/license" target="_blank">{{ __('Licenses') }}</a>
+                        <a href="#" target="_blank"></a>
                     </li>
                 </ul>
             </nav>
@@ -22,7 +22,7 @@
                     ©
                     <script>
                         document.write(new Date().getFullYear())
-                    </script>{{ __(', made with ') }}<i class="fa fa-heart heart"></i>{{ __(' by ') }}<a class="@if(Auth::guest()) text-white @endif" href="https://www.creative-tim.com" target="_blank">{{ __('Creative Tim') }}</a>{{ __(' and ') }}<a class="@if(Auth::guest()) text-white @endif" target="_blank" href="https://updivision.com">{{ __('UPDIVISION') }}</a>
+                    </script>{{ __(', made with ') }}<i class="fa fa-heart heart"></i>{{ __(' by ') }}<a class="@if(Auth::guest()) text-white @endif" href="https://www.izesan.com" target="_blank">{{ __('Izesan!') }}</a>{{ __(' and ') }}<a class="@if(Auth::guest()) text-white @endif" target="_blank" href="https://www.izesan.com">{{ __('Izesan! Dev Team') }}</a>
                 </span>
             </div>
         </div>

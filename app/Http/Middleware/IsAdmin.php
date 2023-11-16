@@ -16,11 +16,11 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->is_admin == 1){
-
+       // dd(auth()->user()->is_admin);
+        if(auth()->user()->is_admin == 0){
             return $next($request);
 
         }
-        return redirect()->route('auth.login')->with('error',"You don't have admin access.");
+        return redirect()->route('admin.login.get')->with('error',"You don't have admin access.");
     }
 }

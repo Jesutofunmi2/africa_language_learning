@@ -8,7 +8,7 @@
                     <span class="navbar-toggler-bar bar3"></span>
                 </button>
             </div>
-            <a class="navbar-brand" href="#pablo">{{ __('Laravel Task') }}</a>
+            <a class="navbar-brand" href="#pablo">{{ __('Izesan! Admin') }}</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -17,9 +17,10 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
+               
                 <li class="nav-item ">
-                    <a href="{{ route('admin.register.get') }}" class="nav-link">
-                    <i class="nc-icon nc-book-bookmark"></i>{{ __('Register') }}
+                    <a href="#" class="nav-link">
+                    <i class="nc-icon nc-book-bookpassword"></i>{{ __('Reset Password') }}
                     </a>
                 </li>
                

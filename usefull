@@ -1,0 +1,4 @@
+git mergetool      git merge code
+
+
+docker-compose exec runtime // getting to docker runtime terminal

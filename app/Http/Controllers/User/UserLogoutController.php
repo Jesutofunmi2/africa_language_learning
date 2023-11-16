@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class UserLogoutController extends Controller
 {
 
-    public function __construct(protected TokenService $service) {}
+    public function __construct(protected \App\Services\TokenService $service) {}
 
    /**
      * Logout token

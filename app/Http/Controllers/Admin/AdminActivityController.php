@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateActivityRequest;
 use App\Http\Requests\EditActivityRequest;
-use App\Http\Services\ActivityService;
+use App\Services\ActivityService;
 use App\Models\Activity;
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -30,11 +30,13 @@ class AdminActivityController extends Controller
      */
     public function index(Request $request): View
     {
-        return view('pages.create-activity');
+        $users = Admin::where('is_admin', true)->get();
+        $types = Activity::TYPES;
+        return view('pages.admin.create-activity',  ['users' => $users, 'types' => $types]);
     }
 
 
-     /**
+    /**
      * Create Activity Method.
      * 
      * This method handles creating of activity.
@@ -47,10 +49,10 @@ class AdminActivityController extends Controller
     {
         $activities_count = Activity::whereDate('date', $request->date)->count();
 
-        if($activities_count >= config('app.max_activities_per_day')) {
+        if ($activities_count >= config('app.max_activities_per_day')) {
             return back()->with('error', 'You can not add more than per day activity set');
         }
-        
+
         $image = $request->image;
 
         $this->service->createActivity($request->validated(), $image);
@@ -70,8 +72,7 @@ class AdminActivityController extends Controller
     public function list(Request $request): View
     {
         $activities = Activity::paginate();
-
-        return view('pages.list-activity')->with('activities', $activities);
+        return view('pages.admin.list-activity')->with('activities', $activities);
     }
 
     /**
@@ -83,15 +84,18 @@ class AdminActivityController extends Controller
      * @return \Illuminate\View\View
      * 
      */
+
     public function show(Activity $activity): View
     {
-        $users = User::where('is_admin', false)->get();
+        $users = Admin::where('is_admin', true)->get();
         $types = Activity::TYPES;
-        
-        return view('pages.edit-activity')->with([
-            'activity' => $activity,
-            'users' => $users,
-            'types' => $types]
+
+        return view('pages.admin.edit-activity')->with(
+            [
+                'activity' => $activity,
+                'users' => $users,
+                'types' => $types
+            ]
         );
     }
 
@@ -109,14 +113,14 @@ class AdminActivityController extends Controller
     {
         $image = null;
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $image = $request->image;
         }
 
         $this->service->updateActivity($activity, $request->validated(), $image);
 
         return redirect()->route('admin.activity.list')
-                ->with('success', 'Activity updated successfully');
+            ->with('success', 'Activity updated successfully');
     }
 
     /**
@@ -128,11 +132,12 @@ class AdminActivityController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * 
      */
+
     public function destroy(Activity $activity): RedirectResponse
     {
         $this->service->deleteActivity($activity);
 
         return redirect()->route('admin.activity.list')
-                ->with('success', 'Activity deleted successfully');
+            ->with('success', 'Activity deleted successfully');
     }
 }
