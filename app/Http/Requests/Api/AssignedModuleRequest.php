@@ -26,13 +26,13 @@ class AssignedModuleRequest extends FormRequest
         return [
             'school_id' => ['integer','required', 'exists:schools,id'],
             'teacher_id'=> ['required', 'string', 'exists:teachers,teacher_id'],
-            'class_id' => ['integer' ,'required','exists:classes,id'],
+            'class_id' => ['integer' ,'required','exists:teacher_class_arms,id'],
             'data' => ['required', 'array', 'min:1'],
             'data.*.module'=>['integer', 'required'],
             'data.*.deadline' => ['date', 'required'],
             'data.*.time'=>['integer', 'required'],
             'data.*.no_attempt'=>['integer', 'required'],
-            //'data.*.notification' => ['boolean', 'required'],
+            'data.*.notification' => ['boolean', 'required'],
             'data.*.mark' => ['integer', 'required'],
         ];
     }
