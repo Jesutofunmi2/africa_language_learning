@@ -44,8 +44,35 @@ class MediaService
         return $url;
     }
 
-    public function cloudinaryUpload()
+    public function uploadDocument($pdf)
     {
-          
+        $url = null;
+        if (!is_null($pdf)) {
+        $ext = $pdf->extension();
+
+        if($ext == 'pdf') {
+
+            $pdfFile = $pdf;
+
+            $path = $pdfFile->store('pdfs', 's3'); 
+            $file_name = 'pdfs/' . Str::random(15) . '.' . $ext;
+
+             $url = Storage::put($file_name, (string) $path);
+             $url = Storage::url($file_name);
+         } else {
+
+            $ext = $pdf->extension();
+
+            $manager = new ImageManager(array('driver' => 'gd'));
+            $image = $manager->make($pdf);
+            $image->encode(null, 90);
+
+            $file_name = 'images/' . Str::random(15) . '.' . $ext;
+
+            $url = Storage::put($file_name, (string) $image);
+            $url = Storage::url($file_name);
+          }
+        }
+        return $url;
     }
 }

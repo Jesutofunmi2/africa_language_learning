@@ -13,7 +13,7 @@ class ClassWorksService
             $classwork = new ClassWork;
             $mediaService = new MediaService;
             if ($data['media_url'] != null) {
-                $mediaUrl = $mediaService->uploadImage($data['media_url']);
+                $mediaUrl = $mediaService->uploadDocument($data['media_url']);
             }
 
             $classwork->name = $data['name'];
