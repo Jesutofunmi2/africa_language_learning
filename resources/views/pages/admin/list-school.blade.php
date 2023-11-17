@@ -44,10 +44,10 @@
                                 S/N
                             </th>
                             <th>
-                                School Name
+                                Name
                             </th>
                             <th>
-                                School Number
+                                 Number
                             </th>
                             <th>
                                 Email
