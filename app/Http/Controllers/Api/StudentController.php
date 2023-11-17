@@ -9,9 +9,11 @@ use App\Http\Requests\Api\SchoolRequest;
 use App\Http\Requests\Api\StudentRequest;
 use App\Http\Requests\School\SecondaryRequest;
 use App\Http\Resources\StudentResource;
+use App\Models\School;
 use App\Models\Student;
 use App\Services\StudentService;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class StudentController extends Controller
 {
@@ -69,9 +71,6 @@ class StudentController extends Controller
     public function createBatchStudent(CreateBatchStudent $createBatchStudent)
     {
         return $this->studentService->createBatchStudent($createBatchStudent->validated(), $createBatchStudent);
-
-
-       
     }
 
     public function assignStudentToClass(AssignStudentToClass $assignStudentToClass)
@@ -85,6 +84,20 @@ class StudentController extends Controller
         );
     }
 
+    public function studentsPdfDownload(SchoolRequest $schoolRequest)
+    {
+        $school_id = $schoolRequest->school_id;
+
+        $students = Student::where('school_id', $school_id)->select('first_name', 'last_name', 'student_id', 'gendar')->get()->toArray();
+        $schools = School::where('id', $school_id)->select('school_name', 'image_url', 'lga', 'email')->get()->toArray();
+      //  dd($schools);
+     
+        $pdf = PDF::loadView('pages.admin.students-pdf', compact('students', 'schools'));
+
+        return $pdf->download('students.pdf');
+    }
+
+
     public function destroy(StudentRequest $studentRequest)
     {
         $student_id = $studentRequest->student_id;
@@ -93,7 +106,6 @@ class StudentController extends Controller
         return response()->json(
             [
                 'message' => 'Student Deleted Successful.',
-                //'data' => $data
             ],
             status: 200
         );

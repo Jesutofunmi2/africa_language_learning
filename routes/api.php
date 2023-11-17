@@ -96,6 +96,7 @@ Route::prefix('/v1')
                 Route::post('/createBatchStudent', [StudentController::class, 'createBatchStudent'])->name('student.batchUpload');
                 Route::delete('/deleteStudent', [StudentController::class, 'destroy'])->name('student.destroy');
                 Route::post('/assignStudentToClass', [StudentController::class, 'assignStudentToClass'])->name('student.assign');
+                Route::get('/studentsPdf', [StudentController::class,'studentsPdfDownload'])->name('students.pdf');
 
                 //teacher endpoint
                 Route::post('/addTeacher', [TeacherController::class, 'addTeacher'])->name('addTeacher');
