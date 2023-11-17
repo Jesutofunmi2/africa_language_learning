@@ -14,6 +14,8 @@ use App\Models\Student;
 use App\Services\StudentService;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
@@ -21,6 +23,7 @@ class StudentController extends Controller
     public function __construct(protected StudentService $studentService)
     {
         // $this->middleware('auth');
+
     }
 
     // Get student by school Id
@@ -87,14 +90,19 @@ class StudentController extends Controller
     public function studentsPdfDownload(SchoolRequest $schoolRequest)
     {
         $school_id = $schoolRequest->school_id;
+        $url = null;
 
         $students = Student::where('school_id', $school_id)->select('first_name', 'last_name', 'student_id', 'gendar')->get()->toArray();
         $schools = School::where('id', $school_id)->select('school_name', 'image_url', 'lga', 'email')->get()->toArray();
-      //  dd($schools);
-     
+
         $pdf = PDF::loadView('pages.admin.students-pdf', compact('students', 'schools'));
 
-        return $pdf->download('students.pdf');
+        $file_path = 'downloads/' . Str::random(15) . '.' . 'pdf';
+
+        $url = Storage::put($file_path,  $pdf->output());
+        $url = Storage::url($file_path);
+
+        return $url;
     }
 
 
