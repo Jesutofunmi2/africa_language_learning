@@ -141,7 +141,7 @@ class SchoolController extends Controller
               ' . '</td>
 
               <td> ' . '
-              <a href="#' . $schools->id . '" class="btn btn-primary">' . 'Analytics</a>
+              <a href="school/filter/' . $schools->id . '" class="btn btn-primary">' . 'Analytics</a>
               ' . '</td>
 
               <td> ' . '
