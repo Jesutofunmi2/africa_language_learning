@@ -95,14 +95,30 @@ class StudentController extends Controller
         $students = Student::where('school_id', $school_id)->select('first_name', 'last_name', 'student_id', 'gendar')->get()->toArray();
         $schools = School::where('id', $school_id)->select('school_name', 'image_url', 'lga', 'email')->get()->toArray();
 
-        $pdf = PDF::loadView('pages.admin.students-pdf', compact('students', 'schools'));
 
-        $file_path = 'downloads/' . Str::random(15) . '.' . 'pdf';
+        if (!empty($students)) {
+            $pdf = PDF::loadView('pages.admin.students-pdf', compact('students', 'schools'));
 
-        $url = Storage::put($file_path,  $pdf->output());
-        $url = Storage::url($file_path);
+            $file_path = 'downloads/' . Str::random(15) . '.' . 'pdf';
 
-        return $url;
+            $url = Storage::put($file_path,  $pdf->output());
+            $url = Storage::url($file_path);
+
+            return response()->json(
+                [
+                    'message' => 'Get Students Record Successful.',
+                    'url' => $url
+                ],
+                status: 200
+            );
+        }
+
+        return response()->json(
+            [
+                'message' => 'Student Records is Empty.',
+            ],
+            status: 200
+        );
     }
 
 
